@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\THEngine">
+      <UniqueIdentifier>{64a9da4a-5cbc-4668-95d8-38768d9a9a12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Common">
+      <UniqueIdentifier>{bf522910-69dc-4e58-9a08-233af7aeab6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Platform">
+      <UniqueIdentifier>{b0bdbea2-4df9-455d-9388-3dcd9d759686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Math">
+      <UniqueIdentifier>{2d983ee0-3cc1-440a-9e66-c9f0b9e582bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Core">
+      <UniqueIdentifier>{87b6929a-1b73-490f-a270-d1f8f4d5985d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine">
+      <UniqueIdentifier>{67c3a512-26c3-4130-a316-7ac95d15d8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Core">
+      <UniqueIdentifier>{073c810d-894d-4dfd-a21b-8d34b3e4b3a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Common">
+      <UniqueIdentifier>{bcbe6e70-86cc-4546-aff6-de34e8e24333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Platform">
+      <UniqueIdentifier>{1b282bbe-484b-403d-a0e6-d1f2f7c7a03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Math">
+      <UniqueIdentifier>{03d2e5d4-bd51-4080-b4b6-fbf1576d0536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scene">
+      <UniqueIdentifier>{6a2e79de-efe2-4788-b9e0-d76014578525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene">
+      <UniqueIdentifier>{1dce69fc-b94b-4c36-ba34-1642efd261c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Renderer">
+      <UniqueIdentifier>{737c3a2f-4ef6-41b7-ab46-e37a0638a0ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Renderer">
+      <UniqueIdentifier>{27aa410f-7f04-4924-bf5f-0a3e5bfef9b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Asset">
+      <UniqueIdentifier>{89b12fe1-1b36-419b-9599-94f4abfe9eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Asset">
+      <UniqueIdentifier>{235aa84a-361f-4a9a-93b1-1e2da241b8cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\UI">
+      <UniqueIdentifier>{5a91fc05-228a-4d62-87b4-728e0eafcbaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\UI">
+      <UniqueIdentifier>{d4507570-3cc3-48da-9cd4-69770c241929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scene\Title">
+      <UniqueIdentifier>{74876f8c-5bac-4935-b4b2-cdab7a01272f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene\Title">
+      <UniqueIdentifier>{942e1867-e621-4e2a-83ff-9c725fe56214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scene\Game">
+      <UniqueIdentifier>{82a1233d-a15b-4218-8aab-a9b5b49f31a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene\Game">
+      <UniqueIdentifier>{1de96ede-ab6c-4162-ba9f-0a8347710143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\STGCore">
+      <UniqueIdentifier>{6039e895-fb02-4e6c-be07-cdb351fcd7b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore">
+      <UniqueIdentifier>{56c0db66-9658-4a6c-82b2-1e11ac661e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Player">
+      <UniqueIdentifier>{6a5e3a6c-2a2e-4370-a501-4af2f0cae9ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Player">
+      <UniqueIdentifier>{74743960-7933-4aac-8d66-44e6b1e2595c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Stage">
+      <UniqueIdentifier>{646e73e6-657e-4eee-8cdb-a6415f080866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Stage">
+      <UniqueIdentifier>{b62e219c-9746-46c1-9c98-cab0d79e81b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\STGCore\Enemy">
+      <UniqueIdentifier>{73d899f2-82f9-4bb4-8bfd-88d833f5c3fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore\Enemy">
+      <UniqueIdentifier>{e174590b-f123-4ea0-b524-f3005c6e2113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Enemy">
+      <UniqueIdentifier>{dabdb494-100e-4056-849f-3b093b695e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Enemy\Stage01">
+      <UniqueIdentifier>{ad3f7ab8-f4ae-4e2b-9063-ee7dfcfdc419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Enemy">
+      <UniqueIdentifier>{4c7c7acf-db43-41ab-9545-1e40bcbb9b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Enemy\Stage01">
+      <UniqueIdentifier>{53fa1574-0bbf-4655-913e-88246e0da8a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\STGCore\Bullet">
+      <UniqueIdentifier>{e5e17759-8349-4db2-b70f-27ecc82299c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore\Bullet">
+      <UniqueIdentifier>{c62cf325-31a1-49bf-a839-a02c03653898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\STGCore\Effect">
+      <UniqueIdentifier>{9c84e424-4b6e-4e21-9472-a651b47c06f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore\Effect">
+      <UniqueIdentifier>{c3a712f3-e884-45a4-a0e4-03d3edd488b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\THEngine\Platform\External">
+      <UniqueIdentifier>{24f388b8-e988-48c3-a64f-2a8f8b881dee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Platform\External">
+      <UniqueIdentifier>{bf990464-dfb9-45c5-9556-b0342cb174b1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THXYY.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THCommon.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THLogger.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THObject.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THString.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THGame.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THLayer.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THScene.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Math\MathUtil.cpp">
+      <Filter>源文件\THEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THApplication.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THGameObject.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THSprite.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THAssetManager.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THShader.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THTexture.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THCamera.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THImage.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THFont.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\UI\THEventSystem.cpp">
+      <Filter>源文件\THEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Title\Title.cpp">
+      <Filter>源文件\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Title\TitleMenu.cpp">
+      <Filter>源文件\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StgCore\STGEngine.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\GameScene.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\ScoreNumber.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\PowerNumber.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\PointNumber.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\GrazeNumber.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Math\Matrix.cpp">
+      <Filter>源文件\THEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Player.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player\Reimu.cpp">
+      <Filter>源文件\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\STGLayer.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THInput.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Stage.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\PlayerCenter.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THEngineObject.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THScheduler.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THFrameTimer.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stage\Stage01.cpp">
+      <Filter>源文件\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Enemy\Enemy.cpp">
+      <Filter>源文件\STGCore\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Enemy\BlueFairy01.cpp">
+      <Filter>源文件\STGCore\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\API.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy\Stage01\Enemy01_001.cpp">
+      <Filter>源文件\Enemy\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Global.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Bullet\Bullet.cpp">
+      <Filter>源文件\STGCore\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Bullet\LinDan.cpp">
+      <Filter>源文件\STGCore\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Effect\BulletFog.cpp">
+      <Filter>源文件\STGCore\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THAudio.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THSound.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THExceptionManager.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\External\CWaveFile.cpp">
+      <Filter>源文件\THEngine\Platform\External</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Common\THException.cpp">
+      <Filter>源文件\THEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\STGResources.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\THXYY.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THCommon.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THDefine.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THList.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THLogger.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THObject.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THString.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THGame.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THLayer.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THScene.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\MathUtil.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THApplication.h">
+      <Filter>头文件\THEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\THEngine.h">
+      <Filter>头文件\THEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THGameObject.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THRenderer.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THRenderQueue.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THSprite.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THAssetManager.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THShader.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THTexture.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THCamera.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THImage.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THFont.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\UI\THEventSystem.h">
+      <Filter>头文件\THEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\UI\THEvents.h">
+      <Filter>头文件\THEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\UI\THMenu.h">
+      <Filter>头文件\THEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Title\TitleMenu.h">
+      <Filter>头文件\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Title\Title.h">
+      <Filter>头文件\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THMap.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StgCore\STGEngine.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\STGCore.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\GameScene.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\ScoreNumber.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\PowerNumber.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\PointNumber.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\GrazeNumber.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\Matrix.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Player.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\Reimu.h">
+      <Filter>头文件\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\STGLayer.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THInput.h">
+      <Filter>头文件\THEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Stage.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\PlayerCenter.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THEngineObject.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THScheduler.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THFrameTimer.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage\Stage01.h">
+      <Filter>头文件\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Enemy\Enemy.h">
+      <Filter>头文件\STGCore\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Enemy\BlueFairy01.h">
+      <Filter>头文件\STGCore\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\API.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy\Stage01\Enemy01_001.h">
+      <Filter>头文件\Enemy\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Global.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Bullet\Bullet.h">
+      <Filter>头文件\STGCore\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Bullet\LinDan.h">
+      <Filter>头文件\STGCore\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Effect\BulletFog.h">
+      <Filter>头文件\STGCore\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THAudio.h">
+      <Filter>头文件\THEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THSound.h">
+      <Filter>头文件\THEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THException.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THExceptionManager.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\External\CWaveFile.h">
+      <Filter>头文件\THEngine\Platform\External</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\STGResources.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="THXYY.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\sprite.fx" />
+  </ItemGroup>
+</Project>
