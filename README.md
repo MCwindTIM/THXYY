@@ -1,3 +1,3 @@
 # THXYY
 
-This game is under developing.
+This game is under development.
