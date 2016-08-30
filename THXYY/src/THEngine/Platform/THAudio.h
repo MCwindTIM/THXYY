@@ -16,7 +16,7 @@ namespace THEngine
 
 		ArrayList<Sound*> soundList;
 
-		int volume = 50;    //Range from 0 to 100
+		int volume = 40;    //Range from 0 to 100
 
 	private:
 		Audio();
@@ -37,6 +37,8 @@ namespace THEngine
 		{
 			soundList.Remove(sound);
 		}
+
+		inline void SetVolume(int volume) { this->volume = volume; }
 	};
 }
 

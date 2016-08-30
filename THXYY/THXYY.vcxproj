@@ -66,6 +66,7 @@
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;dxerr.lib;dinput8.lib;dsound.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -92,6 +93,8 @@
     <ClCompile Include="src\Player\Reimu.cpp" />
     <ClCompile Include="src\Scene\Game\GameScene.cpp" />
     <ClCompile Include="src\Scene\Game\GrazeNumber.cpp" />
+    <ClCompile Include="src\Scene\Game\PauseMenu.cpp" />
+    <ClCompile Include="src\Scene\Game\PauseMenuItem.cpp" />
     <ClCompile Include="src\Scene\Game\PointNumber.cpp" />
     <ClCompile Include="src\Scene\Game\PowerNumber.cpp" />
     <ClCompile Include="src\Scene\Game\ScoreNumber.cpp" />
@@ -129,6 +132,7 @@
     <ClCompile Include="src\THEngine\Core\THGame.cpp" />
     <ClCompile Include="src\THEngine\Core\THLayer.cpp" />
     <ClCompile Include="src\THEngine\Core\THGameObject.cpp" />
+    <ClCompile Include="src\THEngine\Core\THRenderObject.cpp" />
     <ClCompile Include="src\THEngine\Core\THScene.cpp" />
     <ClCompile Include="src\THEngine\Core\THSprite.cpp" />
     <ClCompile Include="src\THEngine\Math\MathUtil.cpp" />
@@ -140,7 +144,14 @@
     <ClCompile Include="src\THEngine\Platform\THSound.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp" />
+    <ClCompile Include="src\THEngine\Tween\THConcreteTween.cpp" />
+    <ClCompile Include="src\THEngine\Tween\THConcreteTweener.cpp" />
+    <ClCompile Include="src\THEngine\Tween\THTween.cpp" />
+    <ClCompile Include="src\THEngine\Tween\THTweener.cpp" />
+    <ClCompile Include="src\THEngine\Tween\THTweenManager.cpp" />
     <ClCompile Include="src\THEngine\UI\THEventSystem.cpp" />
+    <ClCompile Include="src\THEngine\UI\THMenu.cpp" />
+    <ClCompile Include="src\THEngine\UI\THMenuItem.cpp" />
     <ClCompile Include="src\THXYY.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +159,8 @@
     <ClInclude Include="src\Player\Reimu.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
     <ClInclude Include="src\Scene\Game\GrazeNumber.h" />
+    <ClInclude Include="src\Scene\Game\PauseMenu.h" />
+    <ClInclude Include="src\Scene\Game\PauseMenuItem.h" />
     <ClInclude Include="src\Scene\Game\PointNumber.h" />
     <ClInclude Include="src\Scene\Game\PowerNumber.h" />
     <ClInclude Include="src\Scene\Game\ScoreNumber.h" />
@@ -189,6 +202,7 @@
     <ClInclude Include="src\THEngine\Core\THGame.h" />
     <ClInclude Include="src\THEngine\Core\THLayer.h" />
     <ClInclude Include="src\THEngine\Core\THGameObject.h" />
+    <ClInclude Include="src\THEngine\Core\THRenderObject.h" />
     <ClInclude Include="src\THEngine\Core\THScene.h" />
     <ClInclude Include="src\THEngine\Core\THSprite.h" />
     <ClInclude Include="src\THEngine\Math\MathUtil.h" />
@@ -201,9 +215,15 @@
     <ClInclude Include="src\THEngine\Renderer\THRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderQueue.h" />
     <ClInclude Include="src\THEngine\THEngine.h" />
+    <ClInclude Include="src\THEngine\Tween\THConcreteTween.h" />
+    <ClInclude Include="src\THEngine\Tween\THConcreteTweener.h" />
+    <ClInclude Include="src\THEngine\Tween\THTween.h" />
+    <ClInclude Include="src\THEngine\Tween\THTweener.h" />
+    <ClInclude Include="src\THEngine\Tween\THTweenManager.h" />
     <ClInclude Include="src\THEngine\UI\THEvents.h" />
     <ClInclude Include="src\THEngine\UI\THEventSystem.h" />
     <ClInclude Include="src\THEngine\UI\THMenu.h" />
+    <ClInclude Include="src\THEngine\UI\THMenuItem.h" />
     <ClInclude Include="src\THXYY.h" />
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,13 @@ namespace THEngine
 		return angle * PI / 180.0f;
 	}
 
+	int Random(int a, int b)
+	{
+		int temp = rand();
+		temp %= b - a + 1;
+		return (int)temp + a;
+	}
+
 	Vector2f Rotate2D(Vector2f pos, float angle)
 	{
 		Vector2f ret;

@@ -13,6 +13,11 @@ namespace THEngine
 
 	}
 
+	Object* Object::Clone()
+	{
+		return nullptr;
+	}
+
 	void Object::Retain()
 	{
 		refCount++;

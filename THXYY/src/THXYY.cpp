@@ -1,6 +1,7 @@
 #include "THXYY.h"
 #include "Scene\Title\Title.h"
 #include "resource.h"
+#include <time.h>
 
 THXYY::THXYY()
 {
@@ -34,6 +35,14 @@ int THXYY::CreateGame(int width, int height, bool fullScreen)
 		return -1;
 	}
 
+	auto global = Global::GetInstance();
+	if (!global->LoadTextures())
+	{
+		return -1;
+	}
+
+	srand(time(NULL));
+
 	Title* title = new Title();
 	SetScene(title);
 
@@ -43,6 +52,8 @@ int THXYY::CreateGame(int width, int height, bool fullScreen)
 void THXYY::OnShutdown()
 {
 	TH_SAFE_RELEASE(engine);
+
+	delete Global::GetInstance();
 
 	Game::OnShutdown();
 }

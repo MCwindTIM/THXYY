@@ -12,7 +12,6 @@ Sprite::Sprite()
 	color = Vector3f(1.0f, 1.0f, 1.0f);
 	pivot = Vector2f(0.5f, 0.5f);
 	rotation = 0;
-	scaleX = scaleY = 1.0f;
 
 	speed = 0;
 	angle = 0;
@@ -37,6 +36,8 @@ void Sprite::SendToRenderQueue()
 
 void Sprite::Update()
 {
+	RenderObject::Update();
+
 	ax = acSpeed * cos(acAngle / 180.0f * PI);
 	ay = acSpeed * sin(acAngle / 180.0f * PI);
 	vx = speed * cos(angle / 180.0f * PI);

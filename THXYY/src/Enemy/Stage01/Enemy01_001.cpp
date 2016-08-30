@@ -28,7 +28,7 @@ void Enemy01_001::Update()
 		engine->ShootBullet(bullet);
 	}
 
-	if (frame == 5)
+	if (frame == 25)
 	{
 		frame = 0;
 	}

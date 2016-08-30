@@ -110,7 +110,7 @@ void SpriteRenderer::Render(GameObject* obj)
 
 	D3DXMATRIX temp;
 
-	D3DXMatrixScaling(&temp, sprite->scaleX, sprite->scaleY, 1.0f);
+	D3DXMatrixScaling(&temp, sprite->GetScaleX(), sprite->GetScaleY(), 1.0f);
 	transform *= temp;
 
 	D3DXMatrixRotationZ(&temp, ToRad(sprite->rotation));

@@ -133,6 +133,12 @@
     <Filter Include="源文件\THEngine\Platform\External">
       <UniqueIdentifier>{bf990464-dfb9-45c5-9556-b0342cb174b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\THEngine\Tween">
+      <UniqueIdentifier>{2295133a-5d7c-4d79-86af-fdd7aebf5ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Tween">
+      <UniqueIdentifier>{1fc2ae9c-b250-4265-98e6-ebdb90b8b1d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -299,6 +305,36 @@
     </ClCompile>
     <ClCompile Include="src\STGCore\STGResources.cpp">
       <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\PauseMenu.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THRenderObject.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Tween\THTweener.cpp">
+      <Filter>源文件\THEngine\Tween</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Tween\THTweenManager.cpp">
+      <Filter>源文件\THEngine\Tween</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Tween\THTween.cpp">
+      <Filter>源文件\THEngine\Tween</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Tween\THConcreteTweener.cpp">
+      <Filter>源文件\THEngine\Tween</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\PauseMenuItem.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\UI\THMenu.cpp">
+      <Filter>源文件\THEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\UI\THMenuItem.cpp">
+      <Filter>源文件\THEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Tween\THConcreteTween.cpp">
+      <Filter>源文件\THEngine\Tween</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -484,6 +520,33 @@
     </ClInclude>
     <ClInclude Include="src\STGCore\STGResources.h">
       <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\PauseMenu.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Tween\THTweener.h">
+      <Filter>头文件\THEngine\Tween</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THRenderObject.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Tween\THTweenManager.h">
+      <Filter>头文件\THEngine\Tween</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Tween\THTween.h">
+      <Filter>头文件\THEngine\Tween</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Tween\THConcreteTweener.h">
+      <Filter>头文件\THEngine\Tween</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\PauseMenuItem.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\UI\THMenuItem.h">
+      <Filter>头文件\THEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Tween\THConcreteTween.h">
+      <Filter>头文件\THEngine\Tween</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

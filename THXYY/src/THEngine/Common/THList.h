@@ -320,11 +320,11 @@ namespace THEngine
 	class ArrayList : public List<T>
 	{
 	private:
-		T* elements;
-		int size;
-		int capacity;
-		int baseSize;
-		ArrayListIterator<T>* iter;
+		T* elements = nullptr;
+		int size = 0;
+		int capacity = 0;
+		int baseSize = 100;
+		ArrayListIterator<T>* iter = nullptr;
 
 		typedef bool CompareFunc(T a, T b);
 
@@ -345,11 +345,12 @@ namespace THEngine
 	public:
 		ArrayList()
 		{
-			elements = NULL;
-			size = 0;
-			capacity = 0;
-			baseSize = 100;
-			iter = NULL;
+
+		}
+
+		ArrayList(int baseSize)
+		{
+			this->baseSize = baseSize;
 		}
 
 		virtual ~ArrayList()
@@ -453,7 +454,7 @@ namespace THEngine
 		}
 
 
-		void Sort(int begin, int end, CompareFunc compare)
+		inline void Sort(int begin, int end, CompareFunc compare)
 		{
 			std::sort(elements + begin, elements + end, compare);
 		}
@@ -466,6 +467,11 @@ namespace THEngine
 			}
 			iter = new ArrayListIterator<T>(this);
 			return iter;
+		}
+
+		inline void SetBaseSize(int baseSize)
+		{
+			this->baseSize = baseSize;
 		}
 
 		friend class ArrayListIterator<T>;

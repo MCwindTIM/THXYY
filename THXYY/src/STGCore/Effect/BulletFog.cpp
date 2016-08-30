@@ -68,8 +68,8 @@ void BulletFog::Update()
 	}
 	else
 	{
-		scaleX -= 0.5f / (LIFE_TIME - ARISE_TIME);
-		scaleY -= 0.5f / (LIFE_TIME - ARISE_TIME);
+		SetScaleX(GetScaleX() - 0.5f / (LIFE_TIME - ARISE_TIME));
+		SetScaleY(GetScaleY() - 0.5f / (LIFE_TIME - ARISE_TIME));
 	}
 
 	if (frame == LIFE_TIME)

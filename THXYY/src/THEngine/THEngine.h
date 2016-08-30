@@ -4,6 +4,10 @@
 #include "Common\THCommon.h"
 #include "Core\THGame.h"
 #include "Core\THScene.h"
+#include "Tween\THTween.h"
+#include "Tween\THConcreteTween.h"
 #include "UI\THEventSystem.h"
+#include "UI\THMenu.h"
+#include "UI\THMenuItem.h"
 
 #endif

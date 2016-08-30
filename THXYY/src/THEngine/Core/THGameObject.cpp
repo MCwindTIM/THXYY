@@ -33,6 +33,10 @@ void GameObject::Update()
 	while (iter->HasNext())
 	{
 		auto obj = iter->Next();
+		if (obj->IsPaused())
+		{
+			continue;
+		}
 		if (obj->needRemove)
 		{
 			obj->OnDestroy();
@@ -57,7 +61,13 @@ void GameObject::SendToRenderQueue()
 
 void GameObject::OnDestroy()
 {
-
+	auto iter = children.GetIterator();
+	while (iter->HasNext())
+	{
+		auto child = iter->Next();
+		child->OnDestroy();
+		iter->Remove();
+	}
 }
 
 void GameObject::RemoveChild(GameObject* child)

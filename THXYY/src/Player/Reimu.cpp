@@ -12,7 +12,7 @@ Reimu::Reimu()
 	SetTexture(manager->CreateTextureFromFile("res/player/reimu.png"));
 
 	SetHiSpeed(4.5f);
-	SetLowSpeed(1.5f);
+	SetLowSpeed(2.0f);
 }
 
 Reimu::~Reimu()

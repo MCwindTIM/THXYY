@@ -16,12 +16,17 @@ namespace THEngine
 		GameObject rootNode;
 		Camera* camera;
 
+		bool activated = false;
+
 	public:
 		Layer();
 		Layer(int left, int top, int wdith, int height);
 		virtual ~Layer();
 		virtual void Update() override;
 		virtual void Draw() override;
+
+		virtual void OnActivate();
+		virtual void OnDestroy();
 
 		void AddChild(GameObject* obj);
 

@@ -23,6 +23,10 @@ GameScene::GameScene()
 	stgLayer->SetOrder(10);
 	AddLayer(stgLayer);
 
+	pauseMenu = new PauseMenu();
+	pauseMenu->SetOrder(5);
+	AddLayer(pauseMenu);
+
 	Sprite* background = new Sprite();
 	background->SetTexture(texGameBg);
 	background->SetPivot(Vector2f(0.0f, 0.0f));
@@ -107,17 +111,30 @@ void GameScene::OnLoad()
 {
 	Scene::OnLoad();
 
+	auto eventSystem = EventSystem::GetInstance();
+	eventSystem->RegisterKeyDownListener(this);
+
 	auto engine = STGEngine::GetInstance();
 
 	engine->OnLoad();
 
-	Stage01* stage = new Stage01();
+	auto global = Global::GetInstance();
+	Stage* stage = nullptr;
+
+	switch (global->stageEnum)
+	{
+	case Global::STAGE_01:
+		stage = new Stage01();
+	}
+	
 	engine->LoadStage(stage);
 }
 
 void GameScene::OnSceneChanged()
 {
 	Scene::OnSceneChanged();
+
+	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 
 	auto engine = STGEngine::GetInstance();
 	engine->SetGameScene(nullptr);
@@ -347,5 +364,22 @@ void GameScene::DrawGraze()
 		temp /= 10;
 	}
 	delete grazeSprite;
+}
+
+void GameScene::OnKeyDown(EngineObject* sender, int key)
+{
+	if (key == VK_ESCAPE)
+	{
+		if (stgLayer->IsPaused() == false)
+		{
+			stgLayer->Pause();
+			pauseMenu->DoPause();
+		}
+		else
+		{
+			stgLayer->Resume();
+			pauseMenu->DoResume();
+		}
+	}
 }
 

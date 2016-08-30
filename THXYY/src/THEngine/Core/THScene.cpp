@@ -23,7 +23,14 @@ void Scene::Update()
 	while (iter->HasNext())
 	{
 		Layer* curLayer = iter->Next();
-		curLayer->Update();
+		if (curLayer->IsPaused() == false)
+		{
+			if (curLayer->activated == false)
+			{
+				curLayer->OnActivate();
+			}
+			curLayer->Update();
+		}
 	}
 }
 
@@ -44,5 +51,11 @@ void Scene::OnLoad()
 
 void Scene::OnSceneChanged()
 {
-
+	auto iter = layers.GetIterator();
+	while (iter->HasNext())
+	{
+		Layer* curLayer = iter->Next();
+		curLayer->OnDestroy();
+		iter->Remove();
+	}
 }

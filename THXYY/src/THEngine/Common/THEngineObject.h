@@ -9,7 +9,8 @@ namespace THEngine
 	class EngineObject : public Object
 	{
 	protected:
-		Scheduler* scheduler;
+		Scheduler* scheduler = nullptr;
+		bool paused = false;
 
 	public:
 		EngineObject();
@@ -19,6 +20,10 @@ namespace THEngine
 		virtual void Draw() = 0;
 
 		inline Scheduler* GetScheduler() { return scheduler; }
+
+		inline bool IsPaused() { return paused; }
+		inline void Pause() { paused = true; }
+		inline void Resume() { paused = false; }
 	};
 }
 

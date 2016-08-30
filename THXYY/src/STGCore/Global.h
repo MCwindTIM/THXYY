@@ -1,7 +1,11 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-class Global
+#include <THEngine.h>
+
+using namespace THEngine;
+
+class Global : public Object
 {
 public:
 	enum StageEnum
@@ -15,8 +19,21 @@ public:
 		STAGE_EX
 	};
 
+private:
+	static Global* instance;
+
 public:
-	static StageEnum stageEnum;
+	StageEnum stageEnum;
+
+	Texture* texBlack = nullptr;
+
+public:
+	Global();
+	virtual ~Global();
+
+	static Global* GetInstance();
+
+	bool LoadTextures();
 };
 
 #endif

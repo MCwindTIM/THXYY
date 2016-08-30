@@ -42,6 +42,14 @@ void EventSystem::OnKeyDown(int key)
 
 void EventSystem::RegisterKeyDownListener(IKeyDownListener* listener)
 {
+	
+	for (auto iter = keyDownListeners.begin(); iter != keyDownListeners.end(); ++iter)
+	{
+		if (*iter == listener)
+		{
+			return;
+		}
+	}
 	keyDownListeners.push_back(listener);
 }
 

@@ -1,0 +1,80 @@
+﻿生成启动时间为 2016/8/30 21:58:59。
+     1>项目“E:\VS 2013 program\THXYY\THXYY\THXYY.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /wd4244 /analyze- /errorReport:prompt src\THEngine\UI\THMenu.cpp
+         THMenu.cpp
+       Link:
+         D:\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\VS 2013 program\THXYY\Debug\THXYY.exe" /INCREMENTAL:NO /NOLOGO d3d9.lib d3dx9.lib dxguid.lib dxerr.lib dinput8.lib dsound.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\VS 2013 program\THXYY\Debug\THXYY.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\VS 2013 program\THXYY\Debug\THXYY.lib" /MACHINE:X86 /PROFILE /LTCG Debug\THXYY.res
+         Debug\Enemy01_001.obj
+         Debug\main.obj
+         Debug\Reimu.obj
+         Debug\GameScene.obj
+         Debug\GrazeNumber.obj
+         Debug\PauseMenu.obj
+         Debug\PauseMenuItem.obj
+         Debug\PointNumber.obj
+         Debug\PowerNumber.obj
+         Debug\ScoreNumber.obj
+         Debug\STGLayer.obj
+         Debug\Title.obj
+         Debug\TitleMenu.obj
+         Debug\Stage01.obj
+         Debug\API.obj
+         Debug\Bullet.obj
+         Debug\LinDan.obj
+         Debug\BulletFog.obj
+         Debug\BlueFairy01.obj
+         Debug\Enemy.obj
+         Debug\Global.obj
+         Debug\Player.obj
+         Debug\PlayerCenter.obj
+         Debug\Stage.obj
+         Debug\STGEngine.obj
+         Debug\STGResources.obj
+         Debug\THAssetManager.obj
+         Debug\THImage.obj
+         Debug\THShader.obj
+         Debug\THTexture.obj
+         Debug\THCommon.obj
+         Debug\THEngineObject.obj
+         Debug\THException.obj
+         Debug\THExceptionManager.obj
+         Debug\THFrameTimer.obj
+         Debug\THLogger.obj
+         Debug\THObject.obj
+         Debug\THScheduler.obj
+         Debug\THString.obj
+         Debug\THCamera.obj
+         Debug\THFont.obj
+         Debug\THGame.obj
+         Debug\THLayer.obj
+         Debug\THGameObject.obj
+         Debug\THRenderObject.obj
+         Debug\THScene.obj
+         Debug\THSprite.obj
+         Debug\MathUtil.obj
+         Debug\Matrix.obj
+         Debug\CWaveFile.obj
+         Debug\THAudio.obj
+         Debug\THInput.obj
+         Debug\THApplication.obj
+         Debug\THSound.obj
+         Debug\THRenderer.obj
+         Debug\THRenderQueue.obj
+         Debug\THConcreteTween.obj
+         Debug\THConcreteTweener.obj
+         Debug\THTween.obj
+         Debug\THTweener.obj
+         Debug\THTweenManager.obj
+         Debug\THEventSystem.obj
+         Debug\THMenu.obj
+         Debug\THMenuItem.obj
+         Debug\THXYY.obj
+         正在生成代码
+         已完成代码的生成
+         THXYY.vcxproj -> E:\VS 2013 program\THXYY\Debug\THXYY.exe
+     1>已完成生成项目“E:\VS 2013 program\THXYY\THXYY\THXYY.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:02.26

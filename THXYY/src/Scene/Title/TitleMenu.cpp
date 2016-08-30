@@ -77,7 +77,8 @@ void TitleMenu::OnKeyDown(EngineObject* sender, int key)
 			Player* player = new Reimu();
 			engine->SetPlayer(player);
 
-			Global::stageEnum = Global::STAGE_01;
+			auto global = Global::GetInstance();
+			global->stageEnum = Global::STAGE_01;
 
 			GameScene* scene = new GameScene();
 			Game::GetInstance()->LoadScene(scene);

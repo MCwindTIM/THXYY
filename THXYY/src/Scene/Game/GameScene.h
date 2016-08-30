@@ -5,16 +5,18 @@
 #include "ScoreNumber.h"
 #include "PowerNumber.h"
 #include "STGLayer.h"
+#include "PauseMenu.h"
 
 using namespace THEngine;
 
-class GameScene : public Scene
+class GameScene : public Scene, public IKeyDownListener
 {
 private:
 	const float SCORE_LEFT = 492.0f;
 	const float POWER_LEFT = 530.0f;
 
 	STGLayer* stgLayer;
+	PauseMenu* pauseMenu = nullptr;
 
 	Layer* baseLayer;
 	Texture* texGameBg;
@@ -37,6 +39,8 @@ public:
 
 	virtual void OnLoad() override;
 	virtual void OnSceneChanged() override;
+
+	virtual void OnKeyDown(EngineObject* sender, int key) override;
 
 	void UpdateScore();
 	void UpdateLifeAndBomb();

@@ -14,6 +14,8 @@ namespace THEngine
 	public:
 		Object();
 		virtual ~Object();
+
+		virtual Object* Clone();
 		
 		virtual void Retain() final;
 		virtual void Release() final;
