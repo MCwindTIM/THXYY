@@ -67,7 +67,13 @@ namespace THEngine
 		}
 	}
 
-	void Menu::OnKeyDown(EngineObject* sender, int key)
+	void Menu::Click(int index)
+	{
+		itemList.Get(index)->OnClick();
+		OnMenuItemClicked(index);
+	}
+
+	bool Menu::OnKeyDown(EngineObject* sender, int key)
 	{
 		switch (key)
 		{
@@ -77,7 +83,7 @@ namespace THEngine
 				if (itemList.Get(i)->selectable)
 				{
 					Select(i);
-					return;
+					return true;
 				}
 			}
 			break;
@@ -87,16 +93,17 @@ namespace THEngine
 				if (itemList.Get(i)->selectable)
 				{
 					Select(i);
-					return;
+					return true;
 				}
 			}
 			break;
 		case VK_RETURN:
 		case 'z':
 		case 'Z':
-			itemList.Get(currentSelection)->OnClick();
-			OnMenuItemClicked(currentSelection);
-			break;
+			Click(currentSelection);
+			return true;
 		}
+
+		return false;
 	}
 }

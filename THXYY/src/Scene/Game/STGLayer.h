@@ -12,6 +12,8 @@ public:
 	virtual ~STGLayer();
 
 	virtual void Update() override;
+
+	virtual void OnDestroy() override;
 };
 
 #endif

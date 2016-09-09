@@ -6,7 +6,7 @@ namespace THEngine
 	class IKeyDownListener
 	{
 	public:
-		virtual void OnKeyDown(EngineObject* sender, int key) = 0;
+		virtual bool OnKeyDown(EngineObject* sender, int key) = 0;
 	};
 }
 

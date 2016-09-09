@@ -99,8 +99,10 @@
     <ClCompile Include="src\Scene\Game\PowerNumber.cpp" />
     <ClCompile Include="src\Scene\Game\ScoreNumber.cpp" />
     <ClCompile Include="src\Scene\Game\STGLayer.cpp" />
+    <ClCompile Include="src\Scene\Game\YesNoMenu.cpp" />
     <ClCompile Include="src\Scene\Title\Title.cpp" />
     <ClCompile Include="src\Scene\Title\TitleMenu.cpp" />
+    <ClCompile Include="src\Scene\Title\TitleMenuItem.cpp" />
     <ClCompile Include="src\Stage\Stage01.cpp" />
     <ClCompile Include="src\STGCore\API.cpp" />
     <ClCompile Include="src\STGCore\Bullet\Bullet.cpp" />
@@ -165,8 +167,10 @@
     <ClInclude Include="src\Scene\Game\PowerNumber.h" />
     <ClInclude Include="src\Scene\Game\ScoreNumber.h" />
     <ClInclude Include="src\Scene\Game\STGLayer.h" />
+    <ClInclude Include="src\Scene\Game\YesNoMenu.h" />
     <ClInclude Include="src\Scene\Title\Title.h" />
     <ClInclude Include="src\Scene\Title\TitleMenu.h" />
+    <ClInclude Include="src\Scene\Title\TitleMenuItem.h" />
     <ClInclude Include="src\Stage\Stage01.h" />
     <ClInclude Include="src\STGCore\API.h" />
     <ClInclude Include="src\STGCore\Bullet\Bullet.h" />

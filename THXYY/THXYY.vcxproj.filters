@@ -336,6 +336,12 @@
     <ClCompile Include="src\THEngine\Tween\THConcreteTween.cpp">
       <Filter>源文件\THEngine\Tween</Filter>
     </ClCompile>
+    <ClCompile Include="src\Scene\Game\YesNoMenu.cpp">
+      <Filter>源文件\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Title\TitleMenuItem.cpp">
+      <Filter>源文件\Scene\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -547,6 +553,12 @@
     </ClInclude>
     <ClInclude Include="src\THEngine\Tween\THConcreteTween.h">
       <Filter>头文件\THEngine\Tween</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\YesNoMenu.h">
+      <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Title\TitleMenuItem.h">
+      <Filter>头文件\Scene\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

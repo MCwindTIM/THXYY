@@ -19,11 +19,20 @@ public:
 		STAGE_EX
 	};
 
+	enum PlayerEnum
+	{
+		REIMU,
+		MARISA,
+		AYA,
+		REISEN
+	};
+
 private:
 	static Global* instance;
 
 public:
 	StageEnum stageEnum;
+	PlayerEnum playerEnum;
 
 	Texture* texBlack = nullptr;
 

@@ -239,9 +239,6 @@ void Player::Hitten()
 void Player::Biu()
 {
 	state = DYING;
-
-	auto engine = STGEngine::GetInstance();
-	auto life = engine->GetLife();
 }
 
 bool Player::IsDamageable()

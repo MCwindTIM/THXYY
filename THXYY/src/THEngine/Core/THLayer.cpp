@@ -46,6 +46,8 @@ void Layer::SetCamera(Camera* camera)
 
 void Layer::Update()
 {
+	EngineObject::Update();
+
 	rootNode.Update();
 }
 

@@ -22,7 +22,7 @@ namespace THEngine
 		Menu(int left, int top, int width, int height);
 		virtual ~Menu();
 
-		virtual void OnKeyDown(EngineObject* sender, int key) override;
+		virtual bool OnKeyDown(EngineObject* sender, int key) override;
 
 		virtual void OnActivate() override;
 		virtual void OnDestroy() override;
@@ -30,6 +30,8 @@ namespace THEngine
 		virtual void OnMenuItemClicked(int item);
 
 		inline void Select(int index) { Select(index, true); }
+
+		void Click(int index);
 
 		void Select(int index, bool playSound);
 

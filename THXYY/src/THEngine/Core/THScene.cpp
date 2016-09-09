@@ -19,6 +19,8 @@ void Scene::AddLayer(Layer* layer)
 
 void Scene::Update()
 {
+	EngineObject::Update();
+
 	auto iter = layers.GetIterator();
 	while (iter->HasNext())
 	{

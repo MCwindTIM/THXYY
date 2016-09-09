@@ -14,7 +14,7 @@ bool LinDan::Hit(float xPlayer, float yPlayer, float radius)
 	playerCenter = playerCenter - Vector2f(bullet->GetPosition().x, bullet->GetPosition().y - 3);
 	playerCenter = Rotate2D(playerCenter, -bullet->GetRotation());
 
-	return (fabs(playerCenter.x) < 2 + radius) && (fabs(playerCenter.y) < 2 + radius);
+	return (fabs(playerCenter.x) < 1.0f + radius) && (fabs(playerCenter.y) < 1.0f + radius);
 }
 
 Rect LinDanRed::GetTexRect()

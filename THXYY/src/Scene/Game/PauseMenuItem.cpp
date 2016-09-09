@@ -26,11 +26,16 @@ PauseMenuItem::PauseMenuItem(Type type)
 		SetTexRect(Rect(256, 384, 0, 64));
 		SetColor(Vector3f(1.0f, 1.0f, 1.0f));
 		break;
+	case REALLY:
+		SetTexRect(Rect(256, 448, 192, 256));
+		SetColor(Vector3f(1.0f, 1.0f, 1.0f));
+		break;
 	case RESUME:
 		SetTexRect(Rect(0, 128, 64, 128));
 		break;
 	case CONTINUE:
 		SetTexRect(Rect(128, 256, 64, 128));
+		SetSelectable(false);
 		break;
 	case RETURN_TO_TITLE:
 		SetTexRect(Rect(256, 384, 64, 128));
@@ -40,15 +45,13 @@ PauseMenuItem::PauseMenuItem(Type type)
 		break;
 	case SAVE_REPLAY:
 		SetTexRect(Rect(192, 448, 128, 192));
+		SetSelectable(false);
 		break;
 	case NO:
 		SetTexRect(Rect(0, 128, 192, 256));
 		break;
 	case YES:
 		SetTexRect(Rect(128, 256, 192, 256));
-		break;
-	case REALLY:
-		SetTexRect(Rect(256, 448, 192, 256));
 		break;
 	}
 }

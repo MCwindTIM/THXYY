@@ -104,6 +104,8 @@ namespace THEngine
 
 		inline int GetHeight() { return height; }
 
+		inline Scene* GetScene() { return scene; }
+
 		void SendToRenderQueue(RenderQueueType type, GameObject* obj);
 	};
 }

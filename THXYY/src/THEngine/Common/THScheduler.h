@@ -17,6 +17,8 @@ namespace THEngine
 		virtual ~Scheduler();
 
 		void Update();
+
+		inline void AddTimer(FrameTimer* timer) { frameTimerList.Add(timer); }
 	};
 }
 

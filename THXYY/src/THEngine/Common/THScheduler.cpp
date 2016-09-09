@@ -24,7 +24,7 @@ namespace THEngine
 				timer->frameLeft--;
 				if (timer->frameLeft == 0)
 				{
-					timer->Exec();
+					timer->run();
 					iter->Remove();
 				}
 			}

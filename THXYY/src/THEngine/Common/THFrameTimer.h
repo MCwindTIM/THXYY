@@ -2,6 +2,7 @@
 #define THFRAMETIMER_H
 
 #include "THObject.h"
+#include <functional>
 
 namespace THEngine
 {
@@ -15,7 +16,7 @@ namespace THEngine
 		FrameTimer();
 		virtual ~FrameTimer();
 
-		virtual void Exec() = 0;
+		std::function<void()> run = [](){};
 
 		inline void Pause() { paused = true; }
 		inline void Resume() { paused = false; }

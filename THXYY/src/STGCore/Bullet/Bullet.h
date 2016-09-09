@@ -61,7 +61,7 @@ protected:
 	BulletColor bulletColor;
 
 	bool dirSame;                //朝向与运动方向相同
-	bool autoDelete;             //出屏即消
+	bool autoDelete = true;             //出屏即消
 
 public:
 	Bullet();

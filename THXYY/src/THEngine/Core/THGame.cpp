@@ -135,6 +135,8 @@ int Game::Run()
 void Game::Update()
 {
 	input->Update();
+	eventSystem->Update();
+
 	if (scene->IsPaused() == false)
 	{
 		scene->Update();

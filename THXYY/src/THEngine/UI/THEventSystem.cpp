@@ -30,30 +30,59 @@ EventSystem* EventSystem::GetInstance()
 	return instance;
 }
 
+void EventSystem::Update()
+{
+	auto iter = keyDownListeners.GetIterator();
+	while (iter->HasNext())
+	{
+		auto info = iter->Next();
+		if (info->needRemove)
+		{
+			iter->Remove();
+		}
+	}
+}
+
 void EventSystem::OnKeyDown(int key)
 {
-	auto iter = keyDownListeners.begin();
-	for (; iter != keyDownListeners.end(); iter++)
+	auto iter = keyDownListeners.GetIterator();
+	while (iter->HasNext())
 	{
-		auto listener = *iter;
-		listener->OnKeyDown(nullptr, key);
+		auto info = iter->Next();
+		if (info->listener->OnKeyDown(nullptr, key))
+		{
+			break;
+		}
 	}
 }
 
 void EventSystem::RegisterKeyDownListener(IKeyDownListener* listener)
 {
-	
-	for (auto iter = keyDownListeners.begin(); iter != keyDownListeners.end(); ++iter)
+	auto iter = keyDownListeners.GetIterator();
+	while (iter->HasNext())
 	{
-		if (*iter == listener)
+		auto info = iter->Next();
+		if (info->listener == listener)
 		{
 			return;
 		}
 	}
-	keyDownListeners.push_back(listener);
+	auto info = new ListenerInfo<IKeyDownListener*>();
+	info->listener = listener;
+	keyDownListeners.Add(info);
 }
 
 void EventSystem::UnRegisterKeyDownListener(IKeyDownListener* listener)
 {
-	keyDownListeners.remove(listener);
+	auto iter = keyDownListeners.GetIterator();
+	while (iter->HasNext())
+	{
+		auto info = iter->Next();
+		if (info->listener == listener)
+		{
+			info->needRemove = true;
+			return;
+		}
+	}
 }
+

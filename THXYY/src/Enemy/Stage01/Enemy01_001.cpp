@@ -20,12 +20,24 @@ void Enemy01_001::Update()
 
 	if (frame == 1)
 	{
-		Bullet* bullet = new Bullet();
-		bullet->SetType(Bullet::LINDAN_RED);
-		bullet->SetPosition(position.x, position.y);
-		bullet->SetSpeed(3);
-		bullet->SetAngle(-90);
-		engine->ShootBullet(bullet);
+		for (int i = 0; i < 4; i++)
+		{
+			int xOffset = Random(-50, 50);
+			int yOffset = Random(-50, 50);
+
+			float angle = Random(0, 17);
+
+			for (int i = 0; i < 20; i++)
+			{
+				Bullet* bullet = new Bullet();
+				bullet->SetType(Bullet::LINDAN_RED);
+				bullet->SetPosition(position.x + xOffset, position.y + yOffset);
+				bullet->SetSpeed(2);
+				bullet->SetAngle(18 * i + angle);
+				engine->ShootBullet(bullet);
+			}
+		}
+		
 	}
 
 	if (frame == 25)

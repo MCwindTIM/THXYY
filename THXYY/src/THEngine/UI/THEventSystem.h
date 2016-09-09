@@ -13,8 +13,18 @@ namespace THEngine
 		EventSystem();
 		static EventSystem* instance;
 
+	private:
+		template<class T>
+		class ListenerInfo : public Object
+		{
+		public:
+			T listener;
+			bool needRemove = false;
+		};
+
+
 	protected:
-		std::list<IKeyDownListener*> keyDownListeners;
+		LinkedList<ListenerInfo<IKeyDownListener*>*> keyDownListeners;
 
 	public:
 		~EventSystem();
@@ -22,6 +32,8 @@ namespace THEngine
 		static EventSystem* Create();
 
 		static EventSystem* GetInstance();
+
+		void Update();
 
 		void OnKeyDown(int key);
 

@@ -29,6 +29,8 @@ void GameObject::Visit()
 
 void GameObject::Update()
 {
+	EngineObject::Update();
+
 	Iterator<GameObject*>* iter = children.GetIterator();
 	while (iter->HasNext())
 	{

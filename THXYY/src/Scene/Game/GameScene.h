@@ -6,6 +6,7 @@
 #include "PowerNumber.h"
 #include "STGLayer.h"
 #include "PauseMenu.h"
+#include "YesNoMenu.h"
 
 using namespace THEngine;
 
@@ -15,10 +16,16 @@ private:
 	const float SCORE_LEFT = 492.0f;
 	const float POWER_LEFT = 530.0f;
 
-	STGLayer* stgLayer;
 	PauseMenu* pauseMenu = nullptr;
+	YesNoMenu* yesNoMenu = nullptr;
 
-	Layer* baseLayer;
+	STGLayer* stgLayer = nullptr;
+	Layer* baseLayer = nullptr;
+	Layer* blackLayer = nullptr;
+	Layer* blackSTGLayer = nullptr;
+
+	Sprite* blackSTG = nullptr;
+
 	Texture* texGameBg;
 	Texture* texGameBg2;
 
@@ -40,7 +47,7 @@ public:
 	virtual void OnLoad() override;
 	virtual void OnSceneChanged() override;
 
-	virtual void OnKeyDown(EngineObject* sender, int key) override;
+	virtual bool OnKeyDown(EngineObject* sender, int key) override;
 
 	void UpdateScore();
 	void UpdateLifeAndBomb();
@@ -50,7 +57,13 @@ public:
 	void CreateScorePanel();
 	void CreatePowerPanel();
 
+	void ReturnToTitle();
+	void STGFadeOut(int time);
+	void STGFadeIn(int time);
+
 	inline STGLayer* GetSTGLayer() { return stgLayer; }
+	inline PauseMenu* GetPauseMenu() { return pauseMenu; }
+	inline YesNoMenu* GetYesNoMenu() { return yesNoMenu; }
 };
 
 #endif

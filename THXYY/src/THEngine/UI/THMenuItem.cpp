@@ -24,7 +24,7 @@ namespace THEngine
 				twinkleCounter = 0;
 				isTwinkling = false;
 
-				if (shineEnabled)
+				if (selected && shineEnabled)
 				{
 					TweenSequence* sequence = new TweenSequence();
 					sequence->AddTween(new ColorTo(shineColor, shineTime, Tweener::EASE_OUT));
@@ -96,6 +96,8 @@ namespace THEngine
 
 	void MenuItem::OnDeselect()
 	{
+		selected = false;
+
 		if (tweenShine)
 		{
 			KillTween(tweenShine);
@@ -103,5 +105,11 @@ namespace THEngine
 		}
 
 		SetColor(colorUnselected);
+	}
+
+	void MenuItem::SetSelectable(bool selectable)
+	{
+		this->selectable = selectable;
+		SetColor(colorUnselectable);
 	}
 }

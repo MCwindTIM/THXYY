@@ -1,8 +1,8 @@
 #include "GameScene.h"
+#include "../Title/Title.h"
 #include "../../STGCore/STGCore.h"
 #include "PointNumber.h"
 #include "GrazeNumber.h"
-#include "../../Stage/Stage01.h"
 
 using namespace THEngine;
 
@@ -23,9 +23,21 @@ GameScene::GameScene()
 	stgLayer->SetOrder(10);
 	AddLayer(stgLayer);
 
+	blackLayer = new Layer();
+	blackLayer->SetOrder(0);
+	AddLayer(blackLayer);
+
+	blackSTGLayer = new Layer(32,16,384,448);
+	blackLayer->SetOrder(1);
+	AddLayer(blackSTGLayer);
+
 	pauseMenu = new PauseMenu();
 	pauseMenu->SetOrder(5);
 	AddLayer(pauseMenu);
+
+	yesNoMenu = new YesNoMenu();
+	yesNoMenu->SetOrder(4);
+	AddLayer(yesNoMenu);
 
 	Sprite* background = new Sprite();
 	background->SetTexture(texGameBg);
@@ -117,17 +129,6 @@ void GameScene::OnLoad()
 	auto engine = STGEngine::GetInstance();
 
 	engine->OnLoad();
-
-	auto global = Global::GetInstance();
-	Stage* stage = nullptr;
-
-	switch (global->stageEnum)
-	{
-	case Global::STAGE_01:
-		stage = new Stage01();
-	}
-	
-	engine->LoadStage(stage);
 }
 
 void GameScene::OnSceneChanged()
@@ -366,7 +367,44 @@ void GameScene::DrawGraze()
 	delete grazeSprite;
 }
 
-void GameScene::OnKeyDown(EngineObject* sender, int key)
+void GameScene::ReturnToTitle()
+{
+	Sprite* black = new Sprite();
+	black->SetTexture(Global::GetInstance()->texBlack);
+	black->SetPosition(Vector3f(0.0f, 0.0f, 1.0f));
+	black->SetPivot(Vector2f(0.0f, 0.0f));
+	black->SetAlpha(0.0f);
+	black->AddTween(new FadeTo(1.0f, 60, Tweener::EASE_OUT));
+	blackLayer->AddChild(black);
+
+	Scheduler* scheduler = GetScheduler();
+	FrameTimer* timer = new FrameTimer();
+	timer->SetFrame(60);
+	timer->run = [](){Game::GetInstance()->LoadScene(new Title()); };
+	scheduler->AddTimer(timer);
+}
+
+void GameScene::STGFadeIn(int time)
+{
+	if (blackSTG)
+	{
+		blackSTG->AddTween(new FadeOut(time, Tweener::EASE_OUT));
+		blackSTG = nullptr;
+	}
+}
+
+void GameScene::STGFadeOut(int time)
+{
+	blackSTG = new Sprite();
+	blackSTG->SetTexture(Global::GetInstance()->texBlack);
+	blackSTG->SetPosition(Vector3f(0.0f, 0.0f, 1.0f));
+	blackSTG->SetPivot(Vector2f(0.0f, 0.0f));
+	blackSTG->SetAlpha(0.0f);
+	blackSTG->AddTween(new FadeTo(1.0f, time, Tweener::EASE_OUT));
+	blackSTGLayer->AddChild(blackSTG);
+}
+
+bool GameScene::OnKeyDown(EngineObject* sender, int key)
 {
 	if (key == VK_ESCAPE)
 	{
@@ -374,12 +412,10 @@ void GameScene::OnKeyDown(EngineObject* sender, int key)
 		{
 			stgLayer->Pause();
 			pauseMenu->DoPause();
-		}
-		else
-		{
-			stgLayer->Resume();
-			pauseMenu->DoResume();
+			return true;
 		}
 	}
+
+	return false;
 }
 

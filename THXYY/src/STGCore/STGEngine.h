@@ -46,6 +46,8 @@ private:
 	int maxPoint;
 	int graze;
 
+	bool gameOver = false;
+
 	LinkedList<Enemy*> enemyList;
 	LinkedList<Bullet*> bulletList;
 
@@ -55,7 +57,7 @@ private:
 
 	GameScene* gameScene;
 
-	Stage* stage;
+	Stage* stage = nullptr;
 
 	StageEnum stageEnum;
 
@@ -94,12 +96,6 @@ public:
 	inline void SetGraze(int graze) { this->graze = graze; }
 	inline int GetGraze() { return graze; }
 
-	inline void SetPlayer(Player* player)
-	{
-		TH_SAFE_RELEASE(this->player);
-		this->player = player;
-		this->player->Retain();
-	}
 	inline Player* GetPlayer() { return player; }
 
 	inline void SetGameScene(GameScene* scene)
@@ -110,6 +106,8 @@ public:
 
 	inline void SetStageEnum(StageEnum stageEnum) { this->stageEnum = stageEnum; }
 	inline StageEnum GetStageEnum() { return stageEnum; }
+
+	inline bool IsGameOver() { return gameOver; }
 
 	void AddEnemy(Enemy* enemy);
 	void AddBullet(Bullet* bullet);
@@ -133,6 +131,12 @@ public:
 	void Update();
 
 	void Init();
+
+	void Start();
+
+	void Clear();
+
+	void Restart();
 
 	void Shutdown();
 

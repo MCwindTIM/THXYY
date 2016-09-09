@@ -48,6 +48,7 @@ namespace THEngine
 		virtual void OnClick();
 		virtual void OnDeselect();
 
+		void SetSelectable(bool selectable);
 
 		friend class Menu;
 	};
