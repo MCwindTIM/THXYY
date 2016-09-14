@@ -60,6 +60,9 @@ namespace THEngine
 		inline void SetAngle(float angle) { this->angle = angle; }
 		inline float GetAngle() { return angle; }
 
+		inline void SetAcSpeed(float acSpeed) { this->acSpeed = acSpeed; }
+		inline float GetAcSpeed() { return acSpeed; }
+
 		friend class SpriteRenderer;
 
 		inline void SetFlipX(bool flipX) { this->flipX = flipX; }
@@ -70,6 +73,8 @@ namespace THEngine
 		inline void SetScale(float x, float y) { SetScaleX(x); SetScaleY(y); }
 		inline float GetScaleX() { return scale.x; }
 		inline float GetScaleY() { return scale.y; }
+
+		friend class Rotate2D;
 	};
 }
 

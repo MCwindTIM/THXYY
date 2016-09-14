@@ -33,6 +33,11 @@ namespace THEngine
 		return angle;
 	}
 
+	float RadToDegree(float rad)
+	{
+		return rad * 180.0f / PI;
+	}
+
 	float ToRad(float angle)
 	{
 		return angle * PI / 180.0f;
@@ -45,7 +50,7 @@ namespace THEngine
 		return (int)temp + a;
 	}
 
-	Vector2f Rotate2D(Vector2f pos, float angle)
+	Vector2f VecRotate2D(Vector2f pos, float angle)
 	{
 		Vector2f ret;
 		float rad = ToRad(angle);

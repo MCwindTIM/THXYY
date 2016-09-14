@@ -138,6 +138,8 @@ void PauseMenu::DoRestart()
 		scene->GetYesNoMenu()->Clear();
 	};
 	scheduler->AddTimer(timer);
+
+	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 }
 
 void PauseMenu::ReturnToTitle()

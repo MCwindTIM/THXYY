@@ -16,7 +16,7 @@ namespace THEngine
 
 		ArrayList<Sound*> soundList;
 
-		int volume = 40;    //Range from 0 to 100
+		int volume = 20;    //Range from 0 to 100
 
 	private:
 		Audio();

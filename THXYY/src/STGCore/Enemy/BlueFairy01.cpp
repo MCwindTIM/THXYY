@@ -12,6 +12,10 @@ BlueFairy01::BlueFairy01()
 	motionState = STATIC;
 
 	frameForAnim = 0;
+
+	hitRange = 8.0f;
+
+	enemyColor = BLUE;
 }
 
 BlueFairy01::~BlueFairy01()

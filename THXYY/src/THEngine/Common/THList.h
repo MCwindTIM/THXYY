@@ -456,7 +456,7 @@ namespace THEngine
 
 		inline void Sort(int begin, int end, CompareFunc compare)
 		{
-			std::sort(elements + begin, elements + end, compare);
+			std::stable_sort(elements + begin, elements + end, compare);
 		}
 
 		virtual Iterator<T>* GetIterator() override

@@ -1,6 +1,7 @@
 #include "THConcreteTween.h"
 #include "THConcreteTweener.h"
 #include "../Core/THRenderObject.h"
+#include "../Core/THSprite.h"
 
 namespace THEngine
 {
@@ -116,6 +117,51 @@ namespace THEngine
 
 		TH_SAFE_RELEASE(tweener);
 		tweener = new Vector3fTweener(&object->color, object->color, color, duration, type);
+		tweener->Retain();
+	}
+
+	///////////////////////////////////////////////////////////
+	ScaleTo::ScaleTo(Vector3f scale, int duration, Tweener::Type type)
+	{
+		this->scale = scale;
+		this->duration = duration;
+		this->type = type;
+	}
+
+	ScaleTo::~ScaleTo()
+	{
+
+	}
+
+	void ScaleTo::OnStart()
+	{
+		TweenUnit::OnStart();
+
+		TH_SAFE_RELEASE(tweener);
+		tweener = new Vector3fTweener(&object->scale, object->scale, scale, duration, type);
+		tweener->Retain();
+	}
+
+	///////////////////////////////////////////////////////////
+	Rotate2D::Rotate2D(float rotation, int duration, Tweener::Type type)
+	{
+		this->rotation = rotation;
+		this->duration = duration;
+		this->type = type;
+	}
+
+	Rotate2D::~Rotate2D()
+	{
+
+	}
+
+	void Rotate2D::OnStart()
+	{
+		TweenUnit::OnStart();
+
+		TH_SAFE_RELEASE(tweener);
+		tweener = new FloatTweener(&((Sprite*)object)->rotation, ((Sprite*)object)->rotation,
+			((Sprite*)object)->rotation + rotation, duration, type);
 		tweener->Retain();
 	}
 }

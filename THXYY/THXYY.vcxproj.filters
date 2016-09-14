@@ -94,9 +94,6 @@
     <Filter Include="源文件\Stage">
       <UniqueIdentifier>{646e73e6-657e-4eee-8cdb-a6415f080866}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Stage">
-      <UniqueIdentifier>{b62e219c-9746-46c1-9c98-cab0d79e81b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\STGCore\Enemy">
       <UniqueIdentifier>{73d899f2-82f9-4bb4-8bfd-88d833f5c3fc}</UniqueIdentifier>
     </Filter>
@@ -138,6 +135,15 @@
     </Filter>
     <Filter Include="源文件\THEngine\Tween">
       <UniqueIdentifier>{1fc2ae9c-b250-4265-98e6-ebdb90b8b1d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Stage">
+      <UniqueIdentifier>{b62e219c-9746-46c1-9c98-cab0d79e81b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore\Item">
+      <UniqueIdentifier>{836df9b3-3a1b-439f-9ec9-8d9a0c2c9bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\STGCore\Item">
+      <UniqueIdentifier>{6f9940f4-9f09-4b0a-b771-275bbef00f3f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +347,21 @@
     </ClCompile>
     <ClCompile Include="src\Scene\Title\TitleMenuItem.cpp">
       <Filter>源文件\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\PlayerBullet.cpp">
+      <Filter>源文件\STGCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player\ReimuBullet.cpp">
+      <Filter>源文件\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Item\Item.cpp">
+      <Filter>源文件\STGCore\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Item\PowerItemSmall.cpp">
+      <Filter>源文件\STGCore\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Item\ScoreItem.cpp">
+      <Filter>源文件\STGCore\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,6 +580,21 @@
     </ClInclude>
     <ClInclude Include="src\Scene\Title\TitleMenuItem.h">
       <Filter>头文件\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\PlayerBullet.h">
+      <Filter>头文件\STGCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\ReimuBullet.h">
+      <Filter>头文件\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Item\Item.h">
+      <Filter>头文件\STGCore\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Item\PowerItemSmall.h">
+      <Filter>头文件\STGCore\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Item\ScoreItem.h">
+      <Filter>头文件\STGCore\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

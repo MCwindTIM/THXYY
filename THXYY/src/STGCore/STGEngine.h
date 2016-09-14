@@ -4,10 +4,12 @@
 #include <THEngine.h>
 #include "Player.h"
 #include "Stage.h"
+#include "PlayerBullet.h"
 #include "../Scene/Game/GameScene.h"
 #include "STGResources.h"
 #include "Enemy\Enemy.h"
 #include "Bullet\Bullet.h"
+#include "Item\Item.h"
 
 using namespace THEngine;
 
@@ -50,6 +52,9 @@ private:
 
 	LinkedList<Enemy*> enemyList;
 	LinkedList<Bullet*> bulletList;
+	LinkedList<Sprite*> effectList;
+	LinkedList<PlayerBullet*> playerBulletList;
+	LinkedList<Item*> itemList;
 
 	STGResources* stgResources;
 
@@ -107,10 +112,18 @@ public:
 	inline void SetStageEnum(StageEnum stageEnum) { this->stageEnum = stageEnum; }
 	inline StageEnum GetStageEnum() { return stageEnum; }
 
+	inline LinkedList<Enemy*>* GetEnemyList() { return &enemyList; }
+	inline LinkedList<PlayerBullet*>* GetPlayerBulletList() { return &playerBulletList; }
+
 	inline bool IsGameOver() { return gameOver; }
 
 	void AddEnemy(Enemy* enemy);
 	void AddBullet(Bullet* bullet);
+	void AddEffect(Sprite* effect);
+	void AddItem(Item* item);
+
+	void ShootPlayerBullet(PlayerBullet* playerBullet);
+
 	inline void AddObject(Sprite* object)
 	{
 		gameScene->GetSTGLayer()->AddChild(object);
@@ -129,6 +142,8 @@ public:
 	void ShootBullet(Bullet* bullet, bool hasFog, int sound);
 
 	void Update();
+
+	void UpdateList();
 
 	void Init();
 

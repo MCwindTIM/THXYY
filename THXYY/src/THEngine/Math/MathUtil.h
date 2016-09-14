@@ -10,10 +10,11 @@ namespace THEngine
 
 	float ToAngle(float x, float y);
 	float ToRad(float angle);
+	float RadToDegree(float rad);
 
 	int Random(int a, int b);  //返回[a,b]范围的随机整数
 
-	Vector2f Rotate2D(Vector2f pos, float angle);
+	Vector2f VecRotate2D(Vector2f pos, float angle);
 }
 
 #endif

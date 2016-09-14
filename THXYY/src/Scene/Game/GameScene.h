@@ -4,6 +4,8 @@
 #include <THEngine.h>
 #include "ScoreNumber.h"
 #include "PowerNumber.h"
+#include "PointNumber.h"
+#include "GrazeNumber.h"
 #include "STGLayer.h"
 #include "PauseMenu.h"
 #include "YesNoMenu.h"
@@ -34,6 +36,9 @@ private:
 
 	Sprite* lifeSprite[8];
 	Sprite* bombSprite[8];
+
+	ArrayList<PointNumber*> pointSpriteList;
+	ArrayList<GrazeNumber*> grazeSpriteList;
 
 	PowerNumber* powerSprite[6];
 

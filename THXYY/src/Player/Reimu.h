@@ -7,6 +7,7 @@ class Reimu : public Player
 {
 private:
 	int frame;
+	int frame_fire = 0;
 
 	MotionState prevState;
 

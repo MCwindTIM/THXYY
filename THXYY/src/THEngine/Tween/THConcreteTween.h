@@ -78,6 +78,36 @@ namespace THEngine
 
 		virtual void OnStart() override;
 	};
+
+	/////////////////////////////////////////////////////
+	class ScaleTo : public TweenUnit
+	{
+	protected:
+		Vector3f scale;
+		int duration;
+		Tweener::Type type;
+
+	public:
+		ScaleTo(Vector3f scale, int duration, Tweener::Type type);
+		virtual ~ScaleTo();
+
+		virtual void OnStart() override;
+	};
+
+	/////////////////////////////////////////////////////
+	class Rotate2D : public TweenUnit
+	{
+	protected:
+		float rotation;
+		int duration;
+		Tweener::Type type;
+
+	public:
+		Rotate2D(float rotation, int duration, Tweener::Type type);
+		virtual ~Rotate2D();
+
+		virtual void OnStart() override;
+	};
 }
 
 #endif

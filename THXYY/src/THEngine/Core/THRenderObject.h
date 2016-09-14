@@ -61,6 +61,7 @@ namespace THEngine
 		friend class FadeTo;
 		friend class FadeOut;
 		friend class ColorTo;
+		friend class ScaleTo;
 	};
 }
 

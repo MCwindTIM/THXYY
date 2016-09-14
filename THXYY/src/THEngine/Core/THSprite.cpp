@@ -38,14 +38,12 @@ void Sprite::Update()
 {
 	RenderObject::Update();
 
-	ax = acSpeed * cos(acAngle / 180.0f * PI);
-	ay = acSpeed * sin(acAngle / 180.0f * PI);
+	speed += acSpeed;
+	angle += acAngle;
 	vx = speed * cos(angle / 180.0f * PI);
 	vy = speed * sin(angle / 180.0f * PI);
 	vx += ax;
 	vy += ay;
-	speed = sqrt(vx*vx + vy*vy);
-	angle = ToAngle(vx, vy);
 	position.x += vx;
 	position.y += vy;
 }

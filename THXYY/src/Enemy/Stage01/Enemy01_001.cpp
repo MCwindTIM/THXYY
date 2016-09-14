@@ -3,6 +3,10 @@
 Enemy01_001::Enemy01_001()
 {
 	frame = 0;
+	life = 10;
+
+	SetItem(POWER_SMALL, 8);
+	SetItem(SCORE, 8);
 }
 
 Enemy01_001::~Enemy01_001()
@@ -18,30 +22,34 @@ void Enemy01_001::Update()
 
 	frame++;
 
-	if (frame == 1)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			int xOffset = Random(-50, 50);
-			int yOffset = Random(-50, 50);
-
-			float angle = Random(0, 17);
-
-			for (int i = 0; i < 20; i++)
-			{
-				Bullet* bullet = new Bullet();
-				bullet->SetType(Bullet::LINDAN_RED);
-				bullet->SetPosition(position.x + xOffset, position.y + yOffset);
-				bullet->SetSpeed(2);
-				bullet->SetAngle(18 * i + angle);
-				engine->ShootBullet(bullet);
-			}
-		}
-		
-	}
-
-	if (frame == 25)
+	if (frame == 2)
 	{
 		frame = 0;
+
+		shootAngle += acShootAngle;
+
+		for (int i = 0; i < 5; i++)
+		{
+			Bullet* bullet = new Bullet();
+			bullet->SetType(Bullet::LINDAN_RED);
+			bullet->SetPosition(position.x, position.y);
+			bullet->SetSpeed(2.5);
+			bullet->SetAngle(72 * i + shootAngle);
+			engine->ShootBullet(bullet, true, 2);
+		}
+		
+		acShootAngle += 0.08f;
 	}
+
+	/*if (frame == 50)
+	{
+		frame = 0;
+
+		Bullet* bullet = new Bullet();
+		bullet->SetType(Bullet::LINDAN_RED);
+		bullet->SetPosition(position.x, position.y);
+		bullet->SetSpeed(2.5);
+		bullet->SetAngle(0);
+		engine->ShootBullet(bullet);
+	}*/
 }

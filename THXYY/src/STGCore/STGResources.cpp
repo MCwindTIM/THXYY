@@ -45,6 +45,25 @@ bool STGResources::LoadTexTures()
 	{
 		return false;
 	}
+
+	texReimu = manager->CreateTextureFromFile("res/player/reimu.png");
+	if (texReimu == nullptr)
+	{
+		return false;
+	}
+
+	texEffBase = manager->CreateTextureFromFile("res/bullet/eff_base.png");
+	if (texEffBase == nullptr)
+	{
+		return false;
+	}
+
+	texPointLight = manager->CreateTextureFromFile("res/effect/point_light.png");
+	if (texPointLight == nullptr)
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -55,10 +74,16 @@ void STGResources::UnloadTextures()
 	manager->DestroyTexture(texPlayerCenter);
 	manager->DestroyTexture(texEnemy01);
 	manager->DestroyTexture(texBullet01);
+	manager->DestroyTexture(texReimu);
+	manager->DestroyTexture(texEffBase);
+	manager->DestroyTexture(texPointLight);
 
 	texPlayerCenter = nullptr;
 	texEnemy01 = nullptr;
 	texBullet01 = nullptr;
+	texReimu = nullptr;
+	texEffBase = nullptr;
+	texPointLight = nullptr;
 }
 
 bool STGResources::LoadSounds()
@@ -67,6 +92,18 @@ bool STGResources::LoadSounds()
 
 	soundShoot1 = audio->CreateSound("sound/se_tan00.wav");
 	if (soundShoot1 == nullptr)
+	{
+		return false;
+	}
+
+	soundShoot2 = audio->CreateSound("sound/se_tan01.wav");
+	if (soundShoot2 == nullptr)
+	{
+		return false;
+	}
+
+	soundShoot3 = audio->CreateSound("sound/se_tan02.wav");
+	if (soundShoot3 == nullptr)
 	{
 		return false;
 	}
@@ -85,9 +122,13 @@ void STGResources::UnloadSounds()
 	auto audio = Audio::GetInstance();
 
 	audio->DestroySound(soundShoot1);
+	audio->DestroySound(soundShoot2);
+	audio->DestroySound(soundShoot3);
 	audio->DestroySound(soundBiu);
 
 	soundShoot1 = nullptr;
+	soundShoot2 = nullptr;
+	soundShoot3 = nullptr;
 	soundBiu = nullptr;
 }
 

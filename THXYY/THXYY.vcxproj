@@ -91,6 +91,7 @@
     <ClCompile Include="src\Enemy\Stage01\Enemy01_001.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player\Reimu.cpp" />
+    <ClCompile Include="src\Player\ReimuBullet.cpp" />
     <ClCompile Include="src\Scene\Game\GameScene.cpp" />
     <ClCompile Include="src\Scene\Game\GrazeNumber.cpp" />
     <ClCompile Include="src\Scene\Game\PauseMenu.cpp" />
@@ -111,7 +112,11 @@
     <ClCompile Include="src\STGCore\Enemy\BlueFairy01.cpp" />
     <ClCompile Include="src\STGCore\Enemy\Enemy.cpp" />
     <ClCompile Include="src\STGCore\Global.cpp" />
+    <ClCompile Include="src\STGCore\Item\Item.cpp" />
+    <ClCompile Include="src\STGCore\Item\PowerItemSmall.cpp" />
+    <ClCompile Include="src\STGCore\Item\ScoreItem.cpp" />
     <ClCompile Include="src\STGCore\Player.cpp" />
+    <ClCompile Include="src\STGCore\PlayerBullet.cpp" />
     <ClCompile Include="src\STGCore\PlayerCenter.cpp" />
     <ClCompile Include="src\STGCore\Stage.cpp" />
     <ClCompile Include="src\StgCore\STGEngine.cpp" />
@@ -159,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="src\Enemy\Stage01\Enemy01_001.h" />
     <ClInclude Include="src\Player\Reimu.h" />
+    <ClInclude Include="src\Player\ReimuBullet.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
     <ClInclude Include="src\Scene\Game\GrazeNumber.h" />
     <ClInclude Include="src\Scene\Game\PauseMenu.h" />
@@ -179,7 +185,11 @@
     <ClInclude Include="src\STGCore\Enemy\BlueFairy01.h" />
     <ClInclude Include="src\STGCore\Enemy\Enemy.h" />
     <ClInclude Include="src\STGCore\Global.h" />
+    <ClInclude Include="src\STGCore\Item\Item.h" />
+    <ClInclude Include="src\STGCore\Item\PowerItemSmall.h" />
+    <ClInclude Include="src\STGCore\Item\ScoreItem.h" />
     <ClInclude Include="src\STGCore\Player.h" />
+    <ClInclude Include="src\STGCore\PlayerBullet.h" />
     <ClInclude Include="src\STGCore\PlayerCenter.h" />
     <ClInclude Include="src\STGCore\Stage.h" />
     <ClInclude Include="src\STGCore\STGCore.h" />

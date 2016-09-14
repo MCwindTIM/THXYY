@@ -65,7 +65,7 @@ namespace THEngine
 		inline void ClearBuffer()
 		{
 			device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
-				D3DCOLOR_ARGB(255, 255, 0, 0), 1, 0);
+				D3DCOLOR_ARGB(255, 0, 0, 0), 1, 0);
 		}
 
 		inline void ClearDepthBuffer()

@@ -15,8 +15,13 @@ public:
 	Texture* texPlayerCenter;
 	Texture* texEnemy01;
 	Texture* texBullet01;
+	Texture* texReimu;
+	Texture* texEffBase;
+	Texture* texPointLight;
 
 	Sound* soundShoot1 = nullptr;
+	Sound* soundShoot2 = nullptr;
+	Sound* soundShoot3 = nullptr;
 	Sound* soundBiu = nullptr;
 
 private:

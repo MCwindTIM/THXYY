@@ -144,6 +144,8 @@ int Application::InitDeviceContext()
 		return -1;
 	}
 
+	device->SetRenderState(D3DRS_ZENABLE, true);
+	device->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
 	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	device->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	device->SetRenderState(D3DRS_LIGHTING, false);
@@ -386,7 +388,7 @@ void Application::SetViewport(int left, int top, int width, int height)
 	viewport.Width = width;
 	viewport.Height = height;
 	viewport.MinZ = 0;
-	viewport.MaxZ = TH_MAX_Z;
+	viewport.MaxZ = 1;
 
 	device->SetViewport(&viewport);
 }

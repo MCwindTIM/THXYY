@@ -1,8 +1,6 @@
 #include "GameScene.h"
 #include "../Title/Title.h"
 #include "../../STGCore/STGCore.h"
-#include "PointNumber.h"
-#include "GrazeNumber.h"
 
 using namespace THEngine;
 
@@ -323,20 +321,26 @@ void GameScene::DrawMaxPoint()
 	STGEngine* engine = STGEngine::GetInstance();
 	int maxPoint = engine->GetMaxPoint();
 
-	PointNumber* pointSprite = new PointNumber();
-	pointSprite->SetTexture(texGameBg2);
-	pointSprite->SetPivot(Vector2f(0.0f, 0.0f));
+	auto iter = pointSpriteList.GetIterator();
+	while (iter->HasNext())
+	{
+		iter->Next()->MarkDestroy();
+	}
+
+	pointSpriteList.Clear();
 
 	int temp = maxPoint;
 	for (int i = 0; temp > 0; i++)
 	{
+		PointNumber* pointSprite = new PointNumber();
+		pointSprite->SetTexture(texGameBg2);
+		pointSprite->SetPivot(Vector2f(0.0f, 0.0f));
 		pointSprite->SetNumber(temp % 10);
 		pointSprite->SetPosition(Vector3f(POWER_LEFT + 87.0f - 13.0f * i, 252.0f, 1.0f));
-		pointSprite->Update();
-		pointSprite->Draw();
+		baseLayer->AddChild(pointSprite);
+		pointSpriteList.Add(pointSprite);
 		temp /= 10;
 	}
-	delete pointSprite;
 }
 
 void GameScene::DrawGraze()
@@ -344,27 +348,36 @@ void GameScene::DrawGraze()
 	STGEngine* engine = STGEngine::GetInstance();
 	int graze = engine->GetGraze();
 
-	GrazeNumber* grazeSprite = new GrazeNumber();
-	grazeSprite->SetTexture(texGameBg2);
-	grazeSprite->SetPivot(Vector2f(0.0f, 0.0f));
+	auto iter = grazeSpriteList.GetIterator();
+	while (iter->HasNext())
+	{
+		iter->Next()->MarkDestroy();
+	}
+
+	grazeSpriteList.Clear();
 
 	int temp = graze;
 	if (temp == 0)
 	{
+		GrazeNumber* grazeSprite = new GrazeNumber();
+		grazeSprite->SetTexture(texGameBg2);
+		grazeSprite->SetPivot(Vector2f(0.0f, 0.0f));
 		grazeSprite->SetNumber(0);
 		grazeSprite->SetPosition(Vector3f(POWER_LEFT + 87.0f, 228.0f, 1.0f));
-		grazeSprite->Update();
-		grazeSprite->Draw();
+		baseLayer->AddChild(grazeSprite);
+		grazeSpriteList.Add(grazeSprite);
 	}
 	else for (int i = 0; temp > 0; i++)
 	{
+		GrazeNumber* grazeSprite = new GrazeNumber();
+		grazeSprite->SetTexture(texGameBg2);
+		grazeSprite->SetPivot(Vector2f(0.0f, 0.0f));
 		grazeSprite->SetNumber(temp % 10);
 		grazeSprite->SetPosition(Vector3f(POWER_LEFT + 87.0f - 13.0f * i, 228.0f, 1.0f));
-		grazeSprite->Update();
-		grazeSprite->Draw();
+		baseLayer->AddChild(grazeSprite);
+		grazeSpriteList.Add(grazeSprite);
 		temp /= 10;
 	}
-	delete grazeSprite;
 }
 
 void GameScene::ReturnToTitle()

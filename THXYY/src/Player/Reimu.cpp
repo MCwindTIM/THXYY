@@ -1,15 +1,17 @@
 #include "Reimu.h"
+#include "ReimuBullet.h"
 
 static const int ANIM_INTERVAL = 5;
 static const int TURN_INTERVAL = 2;
 
 Reimu::Reimu()
 {
-	auto manager = AssetManager::GetInstance();
+	auto stgResources = STGResources::GetInstance();
 
 	frame = 0;
+	frame_fire = 0;
 
-	SetTexture(manager->CreateTextureFromFile("res/player/reimu.png"));
+	SetTexture(stgResources->texReimu);
 
 	SetHiSpeed(4.5f);
 	SetLowSpeed(2.0f);
@@ -17,8 +19,7 @@ Reimu::Reimu()
 
 Reimu::~Reimu()
 {
-	auto manager = AssetManager::GetInstance();
-	manager->DestroyTexture(texture);
+
 }
 
 void Reimu::Update()
@@ -80,7 +81,24 @@ void Reimu::Update()
 
 void Reimu::Fire()
 {
+	auto engine = STGEngine::GetInstance();
 
+	if (frame_fire == 0)
+	{
+		ReimuBullet* bullet1 = new ReimuBullet();
+		bullet1->SetPosition(position.x - 7.0f, position.y);
+		engine->ShootPlayerBullet(bullet1);
+
+		ReimuBullet* bullet2 = new ReimuBullet();
+		bullet2->SetPosition(position.x + 7.0f, position.y);
+		engine->ShootPlayerBullet(bullet2);
+	}
+
+	frame_fire++;
+	if (frame_fire == 3)
+	{
+		frame_fire = 0;
+	}
 }
 
 void Reimu::Bomb()

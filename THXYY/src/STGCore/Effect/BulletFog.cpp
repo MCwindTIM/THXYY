@@ -3,7 +3,7 @@
 #include "../STGEngine.h"
 
 static const int LIFE_TIME = 15;
-static const int ARISE_TIME = 8;
+static const int ARISE_TIME = 15;
 static const float INITIAL_ALPHA = 0.0f;
 
 BulletFog::BulletFog(Bullet* bullet)
@@ -18,6 +18,7 @@ BulletFog::BulletFog(Bullet* bullet)
 	SetPosition(Vector3f(bullet->GetPosition().x, bullet->GetPosition().y, 2.0f));
 
 	SetAlpha(INITIAL_ALPHA);
+	SetScale(2.0f, 2.0f);
 
 	switch (bullet->GetBulletColor())
 	{
@@ -62,15 +63,13 @@ void BulletFog::Update()
 
 	frame++;
 
-	if (frame <= ARISE_TIME)
+	if (frame < ARISE_TIME)
 	{
 		alpha += (1.0f - INITIAL_ALPHA) / ARISE_TIME;
 	}
-	else
-	{
-		SetScaleX(GetScaleX() - 0.5f / (LIFE_TIME - ARISE_TIME));
-		SetScaleY(GetScaleY() - 0.5f / (LIFE_TIME - ARISE_TIME));
-	}
+
+	SetScaleX(GetScaleX() - 1.5f / LIFE_TIME);
+	SetScaleY(GetScaleY() - 1.5f / LIFE_TIME);
 
 	if (frame == LIFE_TIME)
 	{

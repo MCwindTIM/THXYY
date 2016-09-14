@@ -37,6 +37,8 @@ namespace THEngine
 
 		inline void MarkDestroy() { needRemove = true; }
 
+		inline bool NeedRemove() { return needRemove; }
+
 		friend class Layer;
 		friend class RenderQueue;
 	};

@@ -23,7 +23,7 @@ void Stage01::OnLoad()
 	auto engine = STGEngine::GetInstance();
 
 	Enemy01_001* enemy = new Enemy01_001();
-	enemy->SetPosition(192, 360);
+	enemy->SetPosition(192, 280);
 	engine->AddEnemy(enemy);
 }
 

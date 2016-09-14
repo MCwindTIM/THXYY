@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "STGEngine.h"
+#include "Item\PowerItemSmall.h"
 
 static const int DYING_TIME = 12;
 static const int SHRINK_TIME = 3;
@@ -239,6 +240,51 @@ void Player::Hitten()
 void Player::Biu()
 {
 	state = DYING;
+
+	auto engine = STGEngine::GetInstance();
+	auto stgResources = STGResources::GetInstance();
+
+	for (int i = 0; i < 20; i++)
+	{
+		Sprite* light = new Sprite();
+		light->SetTexture(stgResources->texPointLight);
+		light->SetTexRect(Rect(96, 128, 0, 32));
+		light->SetPosition(position);
+
+		float scale = Random(25, 75) / 100.0f;
+		light->SetScale(scale, scale);
+		light->AddTween(new ScaleTo(Vector3f(0, 0, 1), 40, Tweener::SIMPLE));
+
+		float lightAngle = ToRad(Random(0, 360));
+		float distance = Random(0, 120);
+		light->AddTween(new MoveTo(Vector3f(position.x + cos(lightAngle)*distance,
+			position.y + sin(lightAngle)*distance, position.z), 40, Tweener::EASE_OUT));
+		light->AddTween(new FadeOut(40, Tweener::EASE_OUT));
+
+		engine->AddEffect(light);
+	}
+
+	for (int i = 0; i < 9; i++)
+	{
+		float itemAngle = ToRad(30 + 15 * i);
+		float distance = 80;
+
+		PowerItemSmall* item = new PowerItemSmall();
+		item->SetPosition(position.x, position.y);
+		item->AddTween(new MoveBy(Vector3f(distance*cos(itemAngle),
+			distance*sin(itemAngle), 0), 40, Tweener::EASE_OUT));
+		item->AddTween(new Rotate2D(720.0f, 40, Tweener::EASE_OUT));
+		engine->AddItem(item);
+	}
+
+	if (engine->GetPower() < 50)
+	{
+		engine->SetPower(0);
+	}
+	else
+	{
+		engine->SetPower(engine->GetPower() - 50);
+	}
 }
 
 bool Player::IsDamageable()

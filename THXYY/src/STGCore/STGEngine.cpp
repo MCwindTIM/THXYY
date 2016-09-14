@@ -99,10 +99,30 @@ void STGEngine::Clear()
 		iter2->Next()->MarkDestroy();
 	}
 
+	auto iter3 = effectList.GetIterator();
+	while (iter3->HasNext())
+	{
+		iter3->Next()->MarkDestroy();
+	}
+
+	auto iter4 = playerBulletList.GetIterator();
+	while (iter4->HasNext())
+	{
+		iter4->Next()->MarkDestroy();
+	}
+
+	auto iter5 = itemList.GetIterator();
+	while (iter5->HasNext())
+	{
+		iter5->Next()->MarkDestroy();
+	}
+
 	player->MarkDestroy();
 
 	enemyList.Clear();
 	bulletList.Clear();
+	effectList.Clear();
+	playerBulletList.Clear();
 
 	TH_SAFE_RELEASE(player);
 	TH_SAFE_RELEASE(stage);
@@ -123,9 +143,59 @@ void STGEngine::Shutdown()
 
 void STGEngine::Update()
 {
+	UpdateList();
+
 	if (stage)
 	{
 		stage->Update();
+	}
+}
+
+void STGEngine::UpdateList()
+{
+	auto iter = enemyList.GetIterator();
+	while (iter->HasNext())
+	{
+		if (iter->Next()->NeedRemove())
+		{
+			iter->Remove();
+		}
+	}
+
+	auto iter2 = bulletList.GetIterator();
+	while (iter2->HasNext())
+	{
+		if (iter2->Next()->NeedRemove())
+		{
+			iter2->Remove();
+		}
+	}
+
+	auto iter3 = effectList.GetIterator();
+	while (iter3->HasNext())
+	{
+		if (iter3->Next()->NeedRemove())
+		{
+			iter3->Remove();
+		}
+	}
+
+	auto iter4 = playerBulletList.GetIterator();
+	while (iter4->HasNext())
+	{
+		if (iter4->Next()->NeedRemove())
+		{
+			iter4->Remove();
+		}
+	}
+
+	auto iter5 = itemList.GetIterator();
+	while (iter5->HasNext())
+	{
+		if (iter5->Next()->NeedRemove())
+		{
+			iter5->Remove();
+		}
 	}
 }
 
@@ -155,6 +225,24 @@ void STGEngine::AddBullet(Bullet* bullet)
 	gameScene->GetSTGLayer()->AddChild(bullet);
 }
 
+void STGEngine::AddEffect(Sprite* effect)
+{
+	effectList.Add(effect);
+	gameScene->GetSTGLayer()->AddChild(effect);
+}
+
+void STGEngine::AddItem(Item* item)
+{
+	itemList.Add(item);
+	gameScene->GetSTGLayer()->AddChild(item);
+}
+
+void STGEngine::ShootPlayerBullet(PlayerBullet* playerBullet)
+{
+	playerBulletList.Add(playerBullet);
+	gameScene->GetSTGLayer()->AddChild(playerBullet);
+}
+
 void STGEngine::ShootBullet(Bullet* bullet, bool hasFog, int sound)
 {
 	auto stgResources = STGResources::GetInstance();
@@ -162,7 +250,7 @@ void STGEngine::ShootBullet(Bullet* bullet, bool hasFog, int sound)
 	if (hasFog)
 	{
 		BulletFog* fog = new BulletFog(bullet);
-		AddObject(fog);
+		AddEffect(fog);
 	}
 	else
 	{
@@ -175,6 +263,12 @@ void STGEngine::ShootBullet(Bullet* bullet, bool hasFog, int sound)
 		{
 		case 1:
 			stgResources->soundShoot1->Play();
+			break;
+		case 2:
+			stgResources->soundShoot2->Play();
+			break;
+		case 3:
+			stgResources->soundShoot3->Play();
 			break;
 		default:
 			break;
