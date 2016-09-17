@@ -378,6 +378,9 @@
     <ClCompile Include="src\Scene\Game\STGParticleLayer.cpp">
       <Filter>源文件\Scene\Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THMusic.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -628,6 +631,9 @@
     </ClInclude>
     <ClInclude Include="src\Scene\Game\STGParticleLayer.h">
       <Filter>头文件\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THMusic.h">
+      <Filter>头文件\THEngine\Platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

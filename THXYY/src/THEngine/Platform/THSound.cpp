@@ -9,18 +9,31 @@ namespace THEngine
 
 	Sound::~Sound()
 	{
-		TH_SAFE_RELEASE(buffer);
+		if (sourceVoice)
+		{
+			sourceVoice->DestroyVoice();
+			sourceVoice = nullptr;
+		}
+
+		TH_SAFE_DELETE(callback);
+
+		if (buffer.pAudioData)
+		{
+			delete[] buffer.pAudioData;
+		}
 	}
 
 	void Sound::Play()
 	{
-		DWORD status;
-		buffer->GetStatus(&status);
-		if (status & DSBSTATUS_PLAYING)
+		XAUDIO2_VOICE_STATE state;
+		sourceVoice->GetState(&state);
+		if (state.BuffersQueued > 0)
 		{
-			buffer->SetCurrentPosition(0);
+			sourceVoice->Stop();
+			sourceVoice->FlushSourceBuffers();
 		}
-		buffer->Play(0, 0, 0);
+		sourceVoice->SubmitSourceBuffer(&buffer);
+		sourceVoice->Start(0);
 	}
 }
 

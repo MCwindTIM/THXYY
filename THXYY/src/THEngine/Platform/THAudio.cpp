@@ -13,8 +13,14 @@ namespace THEngine
 
 	Audio::~Audio()
 	{
-		//soundList.Clear();
-		TH_SAFE_RELEASE(dsound);
+		soundList.Clear();
+		if (masterVoice)
+		{
+			masterVoice->DestroyVoice();
+		}
+		TH_SAFE_RELEASE(xaudio);
+
+		CoUninitialize();
 	}
 
 	Audio* Audio::GetInstance()
@@ -35,10 +41,15 @@ namespace THEngine
 	{
 		HRESULT hr;
 
-		if (FAILED(hr = DirectSoundCreate(NULL, &dsound, NULL)))
+		if (FAILED(CoInitializeEx(NULL, COINIT_MULTITHREADED)))
+		{
+			return false;
+		}
+
+		if (FAILED(hr = XAudio2Create(&xaudio, 0, XAUDIO2_DEFAULT_PROCESSOR)))
 			return false;
 
-		if (FAILED(hr = dsound->SetCooperativeLevel(Application::GetInstance()->hWnd, DSSCL_PRIORITY)))
+		if (FAILED(hr = xaudio->CreateMasteringVoice(&masterVoice)))
 			return false;
 
 		return true;
@@ -92,14 +103,9 @@ namespace THEngine
 			return nullptr;
 		}
 
-		DSBUFFERDESC desc;
-		ZeroMemory(&desc, sizeof(desc));
-		desc.dwBufferBytes = wave.GetSize();
-		desc.dwSize = sizeof(DSBUFFERDESC);
-		desc.lpwfxFormat = wave.GetFormat();
-		desc.dwFlags = DSBCAPS_STATIC | DSBCAPS_CTRLVOLUME;
+		sound->callback = new Sound::SoundCallback(sound);
 
-		if (FAILED(dsound->CreateSoundBuffer(&desc, &sound->buffer, NULL)))
+		if (FAILED(xaudio->CreateSourceVoice(&sound->sourceVoice, wave.GetFormat(), 0, 2.0f, sound->callback)))
 		{
 			Exception* exception = new Exception("无法创建音频缓存。");
 			exceptionManager->PushException(exception);
@@ -107,25 +113,21 @@ namespace THEngine
 			return nullptr;
 		}
 
-		IDirectSoundBuffer* buffer = sound->buffer;
-		VOID* lockedBuffer;
-		DWORD lockedBufferSize;
-		if (FAILED(buffer->Lock(0, wave.GetSize(), &lockedBuffer, &lockedBufferSize, NULL, NULL, 0)))
-		{
-			Exception* exception = new Exception("无法向音频缓存写入数据。");
-			exceptionManager->PushException(exception);
-			delete sound;
-			return nullptr;
-		}
+		XAUDIO2_BUFFER* buffer = &sound->buffer;
+		ZeroMemory(buffer, sizeof(XAUDIO2_BUFFER));
+		buffer->Flags = XAUDIO2_END_OF_STREAM;
+		buffer->pAudioData = new BYTE[wave.GetSize()];
 
 		DWORD readSize;
-		if (FAILED(wave.Read((BYTE*)lockedBuffer, lockedBufferSize, &readSize)))
+		if (FAILED(wave.Read((BYTE*)buffer->pAudioData, wave.GetSize(), &readSize)))
 		{
 			Exception* exception = new Exception("无法解析文件。文件可能已损坏。");
 			exceptionManager->PushException(exception);
 			delete sound;
 			return nullptr;
 		}
+
+		buffer->AudioBytes = readSize;
 
 		return sound;
 	}

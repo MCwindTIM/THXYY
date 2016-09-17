@@ -12,9 +12,8 @@ DxErr.lib;在附加包含目录和附加库目录中加上directx sdk中的include和lib目录。*/
 #define DXUTWAVEFILE_H
 
 #include <Windows.h>
-#include <mmreg.h>
+//#include <mmreg.h>
 #include <mmsystem.h>
-#include <dsound.h>
 #include <DxErr.h>
 
 #ifndef SAFE_DELETE

@@ -115,12 +115,20 @@ void STGEngine::Clear()
 		iter5->Next()->MarkDestroy();
 	}
 
+	auto iter6 = particleList.GetIterator();
+	while (iter6->HasNext())
+	{
+		iter6->Next()->MarkDestroy();
+	}
+
 	player->MarkDestroy();
 
 	enemyList.Clear();
 	bulletList.Clear();
 	effectList.Clear();
 	playerBulletList.Clear();
+	itemList.Clear();
+	particleList.Clear();
 
 	TH_SAFE_RELEASE(player);
 	TH_SAFE_RELEASE(stage);
@@ -193,6 +201,15 @@ void STGEngine::UpdateList()
 			iter5->Remove();
 		}
 	}
+
+	auto iter6 = particleList.GetIterator();
+	while (iter6->HasNext())
+	{
+		if (iter6->Next()->NeedRemove())
+		{
+			iter6->Remove();
+		}
+	}
 }
 
 void STGEngine::LoadStage(Stage* stage)
@@ -235,6 +252,7 @@ void STGEngine::AddItem(Item* item)
 
 void STGEngine::AddParticle(Particle3D* particle)
 {
+	particleList.Add(particle);
 	gameScene->GetSTGParticleLayer()->AddChild(particle);
 }
 

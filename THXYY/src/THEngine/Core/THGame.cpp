@@ -119,8 +119,6 @@ int Game::Run()
 {
 	while (!app->NeedQuit())
 	{
-		app->DealWithMessage();
-
 		if (app->IsDeviceLost())
 		{
 			if (app->NeedResetDevice())
@@ -161,6 +159,8 @@ int Game::Run()
 				nextScene = nullptr;
 			}
 		}
+
+		app->DealWithMessage();
 	}
 
 	int returnCode = app->GetReturnCode();

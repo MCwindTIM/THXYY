@@ -55,6 +55,7 @@ private:
 	LinkedList<Sprite*> effectList;
 	LinkedList<PlayerBullet*> playerBulletList;
 	LinkedList<Item*> itemList;
+	LinkedList<Particle3D*> particleList;
 
 	STGResources* stgResources;
 

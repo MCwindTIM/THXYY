@@ -139,6 +139,7 @@ void PauseMenu::DoRestart()
 		engine->Restart();
 		scene->STGFadeIn(60);
 		scene->GetSTGLayer()->Resume();
+		scene->GetSTGParticleLayer()->Resume();
 		Clear();
 		Resume();
 		scene->GetYesNoMenu()->Clear();

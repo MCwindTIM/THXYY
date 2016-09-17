@@ -2,7 +2,7 @@
 #define THAUDIO_H
 
 #include "../Common/THCommon.h"
-#include <dsound.h>
+#include <xaudio2.h>
 #include "THSound.h"
 
 namespace THEngine
@@ -12,19 +12,18 @@ namespace THEngine
 	private:
 		static Audio* instance;
 
-		IDirectSound* dsound = nullptr;
+		IXAudio2* xaudio = nullptr;
+		IXAudio2MasteringVoice* masterVoice = nullptr;
 
 		ArrayList<Sound*> soundList;
 
-		int volume = 20;    //Range from 0 to 100
+		int volume = 10;    //Range from 0 to 100
 
 	private:
 		Audio();
 		bool Init();
 
 		Sound* LoadWav(String filePath);
-
-		
 
 	public:
 		virtual ~Audio();
