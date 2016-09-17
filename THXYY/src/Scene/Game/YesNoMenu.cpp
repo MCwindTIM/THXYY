@@ -1,9 +1,13 @@
 #include "YesNoMenu.h"
 #include "GameScene.h"
+#include "../../STGCore/STGResources.h"
 
 YesNoMenu::YesNoMenu() : Menu(32, 16, 384, 448)
 {
+	auto stgResources = STGResources::GetInstance();
 
+	SetSoundOK(stgResources->soundMenuOK);
+	SetSoundSelect(stgResources->soundMenuSelect);
 }
 
 YesNoMenu::~YesNoMenu()

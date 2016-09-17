@@ -7,6 +7,8 @@ namespace THEngine
 	{
 		tweenManager = new TweenManager();
 		tweenManager->Retain();
+
+		D3DXQuaternionIdentity(&rotation3D);
 	}
 
 	RenderObject::~RenderObject()

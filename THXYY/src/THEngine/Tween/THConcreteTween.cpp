@@ -5,6 +5,26 @@
 
 namespace THEngine
 {
+	Delay::Delay(int duration)
+	{
+		this->duration = duration;
+	}
+
+	Delay::~Delay()
+	{
+
+	}
+
+	void Delay::OnStart()
+	{
+		TweenUnit::OnStart();
+
+		TH_SAFE_RELEASE(tweener);
+		tweener = new EmptyTweener(duration);
+		tweener->Retain();
+	}
+
+	/////////////////////////////////////////////////////
 	MoveTo::MoveTo(Vector3f  position, int duration, Tweener::Type type)
 	{
 		this->position = position;

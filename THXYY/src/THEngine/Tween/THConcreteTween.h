@@ -5,6 +5,20 @@
 
 namespace THEngine
 {
+
+	class Delay : public TweenUnit
+	{
+	protected:
+		int duration;
+
+	public:
+		Delay(int duration);
+		virtual ~Delay();
+
+		virtual void OnStart() override;
+	};
+
+	/////////////////////////////////////////////////////
 	class MoveTo : public TweenUnit
 	{
 	protected:

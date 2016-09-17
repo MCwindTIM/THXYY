@@ -5,6 +5,9 @@
 
 class Stage01 : public Stage
 {
+private:
+	int frame = 0;
+
 public:
 	Stage01();
 	virtual ~Stage01();

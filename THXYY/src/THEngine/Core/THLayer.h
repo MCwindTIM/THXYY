@@ -14,7 +14,7 @@ namespace THEngine
 		int left, top;
 		int order;          
 		GameObject rootNode;
-		Camera* camera;
+		Camera* camera = nullptr;
 
 		bool activated = false;
 

@@ -73,6 +73,16 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		return -1;
 	}
 
+	particle3DRenderer = Particle3DRenderer::Create();
+	if (particle3DRenderer == nullptr)
+	{
+		auto exception = exceptionManager->GetException();
+		auto newException = new Exception((String)"创建Particle3DRenderer失败。原因是：\n" + exception->GetInfo());
+		exceptionManager->PushException(newException);
+		return -1;
+	}
+	particle3DRenderer->Retain();
+
 	defaultFont = Font::CreateFontFromFile("res/font/font-fps-opensans.png","res/font/font-fps-opensans.txt");
 	if (defaultFont == nullptr)
 	{
@@ -111,25 +121,61 @@ int Game::Run()
 	{
 		app->DealWithMessage();
 
-		CalcFPS();
-		Update();
-		Draw();
-		
-		if (nextScene)
+		if (app->IsDeviceLost())
 		{
-			if (scene)
+			if (app->NeedResetDevice())
 			{
-				scene->OnSceneChanged();
+				app->OnLostDevice();
+				app->OnResetDevice();
 			}
-			SetScene(nextScene);
-			nextScene->OnLoad();
-			nextScene = nullptr;
+		}
+
+		if (app->IsMinimized())
+		{
+			if (enterBackground == false)
+			{
+				OnEnterBackground();
+				enterBackground = true;
+			}
+		}
+		else if (enterBackground)
+		{
+			OnReturnToForeground();
+			enterBackground = false;
+		}
+
+		if(enterBackground == false)
+		{
+			CalcFPS();
+			Update();
+			Draw();
+
+			if (nextScene)
+			{
+				if (scene)
+				{
+					scene->OnSceneChanged();
+				}
+				SetScene(nextScene);
+				nextScene->OnLoad();
+				nextScene = nullptr;
+			}
 		}
 	}
 
 	int returnCode = app->GetReturnCode();
 	Shutdown();
 	return returnCode;
+}
+
+void Game::OnEnterBackground()
+{
+
+}
+
+void Game::OnReturnToForeground()
+{
+
 }
 
 void Game::Update()
@@ -160,7 +206,7 @@ void Game::Draw()
 	}
 
 	app->EndRender();
-
+	
 	app->SwapBuffers();
 }
 
@@ -227,6 +273,7 @@ void Game::Shutdown()
 
 	TH_SAFE_RELEASE(spriteQueue);
 	TH_SAFE_RELEASE(spriteRenderer);
+	TH_SAFE_RELEASE(particle3DRenderer);
 	
 	TH_SAFE_RELEASE(eventSystem);
 	TH_SAFE_RELEASE(defaultFont);

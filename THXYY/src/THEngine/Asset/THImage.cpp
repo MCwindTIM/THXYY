@@ -15,6 +15,14 @@ Image::Image()
 	data = nullptr;
 }
 
+Image::Image(int width, int height)
+{
+	this->width = width;
+	this->height = height;
+
+	data = new unsigned char[width * height * 4];
+}
+
 Image::~Image()
 {
 	if (data)

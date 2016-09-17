@@ -5,6 +5,7 @@
 #include "../Core/THLayer.h"
 #include "THEventSystem.h"
 #include "THMenuItem.h"
+#include "../Platform/THSound.h"
 
 namespace THEngine
 {
@@ -16,6 +17,7 @@ namespace THEngine
 		int currentSelection = -1;
 
 		Sound* soundSelect = nullptr;
+		Sound* soundOK = nullptr;
 
 	public:
 		Menu();
@@ -36,6 +38,9 @@ namespace THEngine
 		void Select(int index, bool playSound);
 
 		void SetSelection(int index);
+
+		inline void SetSoundSelect(Sound* sound) { soundSelect = sound; }
+		inline void SetSoundOK(Sound* sound) { soundOK = sound; }
 
 		inline int GetItemCount() { return itemList.Size(); }
 		inline MenuItem* GetMenuItem(int index) { return itemList.Get(index); }

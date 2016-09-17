@@ -22,7 +22,7 @@ namespace THEngine
 
 	protected:
 		int duration;
-		int elapsed;
+		int elapsed = 0;
 		Type type = SIMPLE;
 
 	private:

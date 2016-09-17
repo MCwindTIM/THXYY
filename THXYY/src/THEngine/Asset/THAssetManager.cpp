@@ -48,6 +48,8 @@ Shader* AssetManager::CreateShaderFromFile(String filePath)
 		return nullptr;
 	}
 
+	shader->path = filePath;
+
 	shaderList.Add(shader);
 
 	return shader;
@@ -127,4 +129,36 @@ Texture* AssetManager::CreateTextureFromFile(String filePath)
 void AssetManager::DestroyTexture(Texture* texture)
 {
 	textureList.Remove(texture);
+}
+
+void AssetManager::OnLostDevice()
+{
+	auto iter = textureList.GetIterator();
+	while (iter->HasNext())
+	{
+		iter->Next()->OnLostDevice();
+	}
+
+	auto iter2 = shaderList.GetIterator();
+	while (iter2->HasNext())
+	{
+		iter2->Next()->OnLostDevice();
+	}
+}
+
+void AssetManager::OnResetDevice()
+{
+	device = Application::GetInstance()->GetDevice();
+
+	auto iter = textureList.GetIterator();
+	while (iter->HasNext())
+	{
+		iter->Next()->OnResetDevice();
+	}
+
+	auto iter2 = shaderList.GetIterator();
+	while (iter2->HasNext())
+	{
+		iter2->Next()->OnResetDevice();
+	}
 }

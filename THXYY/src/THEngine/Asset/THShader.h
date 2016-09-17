@@ -13,6 +13,7 @@ namespace THEngine
 	protected:
 		ID3DXEffect* effect;
 		UINT passNum;
+		String path;
 
 	public:
 		Shader();
@@ -50,6 +51,9 @@ namespace THEngine
 		{
 			effect->SetMatrix(name, value);
 		}
+
+		void OnLostDevice();
+		void OnResetDevice();
 
 		friend class AssetManager;
 	};

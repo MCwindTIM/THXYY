@@ -7,6 +7,11 @@ static const int FADE_TIME = 30;
 PauseMenu::PauseMenu() : Menu(32, 16, 384, 448)
 {
 	PauseMenuItem::texPauseMenu = AssetManager::GetInstance()->CreateTextureFromFile("res/menu/pause_menu.png");
+
+	auto stgResources = STGResources::GetInstance();
+
+	SetSoundOK(stgResources->soundMenuOK);
+	SetSoundSelect(stgResources->soundMenuSelect);
 }
 
 PauseMenu::~PauseMenu()
@@ -115,6 +120,7 @@ void PauseMenu::DoResume()
 	ClearItems();
 
 	((GameScene*)Game::GetInstance()->GetScene())->GetSTGLayer()->Resume();
+	((GameScene*)Game::GetInstance()->GetScene())->GetSTGParticleLayer()->Resume();
 
 	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 }

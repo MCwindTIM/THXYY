@@ -2,6 +2,22 @@
 
 namespace THEngine
 {
+	EmptyTweener::EmptyTweener(int duration)
+	{
+		this->duration = duration;
+	}
+
+	EmptyTweener::~EmptyTweener()
+	{
+
+	}
+
+	void EmptyTweener::Update()
+	{
+		Tweener::Update();
+	}
+
+	////////////////////////////////////////////
 	FloatTweener::FloatTweener(float* valueToChange, float initValue, float finalValue, int duration, Type type)
 	{
 		this->valueToChange = valueToChange;

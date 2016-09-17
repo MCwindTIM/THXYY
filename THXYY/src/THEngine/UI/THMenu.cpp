@@ -71,6 +71,11 @@ namespace THEngine
 	{
 		itemList.Get(index)->OnClick();
 		OnMenuItemClicked(index);
+
+		if (soundOK)
+		{
+			soundOK->Play();
+		}
 	}
 
 	bool Menu::OnKeyDown(EngineObject* sender, int key)

@@ -9,11 +9,13 @@ namespace THEngine
 	class RenderObject : public GameObject
 	{
 	protected:
-		Vector3f position;
+		Vector3f position = Vector3f(0.0f, 0.0f, 0.0f);
 		Vector3f color = Vector3f(1.0f, 1.0f, 1.0f);
 		float alpha = 1.0f;
 
 		Vector3f scale = Vector3f(1.0f, 1.0f, 1.0f);
+
+		D3DXQUATERNION rotation3D;
 
 		TweenManager* tweenManager = nullptr;
 

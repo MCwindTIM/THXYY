@@ -63,6 +63,61 @@ void Bullet::Update()
 	}
 }
 
+void Bullet::OnDie()
+{
+	MarkDestroy();
+
+	auto engine = STGEngine::GetInstance();
+	auto stgResources = STGResources::GetInstance();
+
+	Particle3D* effect[1];
+	for (int i = 0; i < 1; i++)
+	{
+		int effectLife = 40;
+
+		effect[i] = new Particle3D();
+		effect[i]->SetTexture(stgResources->texFourAngleStar);
+		effect[i]->SetPosition(position);
+		effect[i]->SetLife(effectLife);
+
+		switch (bulletColor)
+		{
+		case RED:
+			effect[i]->SetTexRect(Rect(0, 32, 0, 32));
+			break;
+		case PURPLE:
+			effect[i]->SetTexRect(Rect(32, 64, 0, 32));
+			break;
+		case BLUE:
+			effect[i]->SetTexRect(Rect(64, 96, 0, 32));
+			break;
+		case TEAL:
+			effect[i]->SetTexRect(Rect(96, 128, 0, 32));
+			break;
+		}
+
+		float effectAngle = ToRad(Random(0, 359));
+		float dist = Random(0, 20);
+
+		float effectScale = Random(20, 50) / 100.0f;
+		effect[i]->SetScale(Vector3f(effectScale, effectScale, 1));
+
+		effect[i]->SetRotatingAxis(Vector3f(Random(0, 100), Random(0, 100), Random(0, 100)));
+		effect[i]->SetRotatingSpeed(Random(50, 100) / 10.0f);
+		effect[i]->SetAlpha(0.6f);
+
+		TweenSequence* sequence = new TweenSequence();
+		sequence->AddTween(new Delay(effectLife / 2));
+		sequence->AddTween(new ScaleTo(Vector3f(0, 0, 1), 30, Tweener::SIMPLE));
+		effect[i]->AddTween(sequence);
+
+		effect[i]->AddTween(new MoveBy(Vector3f(dist*cos(effectAngle), dist*sin(effectAngle), 0),
+			effectLife, Tweener::EASE_OUT));
+
+		engine->AddParticle(effect[i]);
+	}
+}
+
 void Bullet::SetType(Type type)
 {
 	switch (type)

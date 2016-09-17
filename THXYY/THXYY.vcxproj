@@ -100,7 +100,10 @@
     <ClCompile Include="src\Scene\Game\PowerNumber.cpp" />
     <ClCompile Include="src\Scene\Game\ScoreNumber.cpp" />
     <ClCompile Include="src\Scene\Game\STGLayer.cpp" />
+    <ClCompile Include="src\Scene\Game\STGParticleLayer.cpp" />
     <ClCompile Include="src\Scene\Game\YesNoMenu.cpp" />
+    <ClCompile Include="src\Scene\Title\ParticleLayer.cpp" />
+    <ClCompile Include="src\Scene\Title\SakuraParticle.cpp" />
     <ClCompile Include="src\Scene\Title\Title.cpp" />
     <ClCompile Include="src\Scene\Title\TitleMenu.cpp" />
     <ClCompile Include="src\Scene\Title\TitleMenuItem.cpp" />
@@ -139,6 +142,7 @@
     <ClCompile Include="src\THEngine\Core\THGame.cpp" />
     <ClCompile Include="src\THEngine\Core\THLayer.cpp" />
     <ClCompile Include="src\THEngine\Core\THGameObject.cpp" />
+    <ClCompile Include="src\THEngine\Core\THParticle3D.cpp" />
     <ClCompile Include="src\THEngine\Core\THRenderObject.cpp" />
     <ClCompile Include="src\THEngine\Core\THScene.cpp" />
     <ClCompile Include="src\THEngine\Core\THSprite.cpp" />
@@ -149,7 +153,8 @@
     <ClCompile Include="src\THEngine\Platform\THInput.cpp" />
     <ClCompile Include="src\THEngine\Platform\THApplication.cpp" />
     <ClCompile Include="src\THEngine\Platform\THSound.cpp" />
-    <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp" />
     <ClCompile Include="src\THEngine\Tween\THConcreteTween.cpp" />
     <ClCompile Include="src\THEngine\Tween\THConcreteTweener.cpp" />
@@ -173,10 +178,13 @@
     <ClInclude Include="src\Scene\Game\PowerNumber.h" />
     <ClInclude Include="src\Scene\Game\ScoreNumber.h" />
     <ClInclude Include="src\Scene\Game\STGLayer.h" />
+    <ClInclude Include="src\Scene\Game\STGParticleLayer.h" />
     <ClInclude Include="src\Scene\Game\YesNoMenu.h" />
+    <ClInclude Include="src\Scene\Title\SakuraParticle.h" />
     <ClInclude Include="src\Scene\Title\Title.h" />
     <ClInclude Include="src\Scene\Title\TitleMenu.h" />
     <ClInclude Include="src\Scene\Title\TitleMenuItem.h" />
+    <ClInclude Include="src\Scene\Title\ParticleLayer.h" />
     <ClInclude Include="src\Stage\Stage01.h" />
     <ClInclude Include="src\STGCore\API.h" />
     <ClInclude Include="src\STGCore\Bullet\Bullet.h" />
@@ -216,6 +224,7 @@
     <ClInclude Include="src\THEngine\Core\THGame.h" />
     <ClInclude Include="src\THEngine\Core\THLayer.h" />
     <ClInclude Include="src\THEngine\Core\THGameObject.h" />
+    <ClInclude Include="src\THEngine\Core\THParticle3D.h" />
     <ClInclude Include="src\THEngine\Core\THRenderObject.h" />
     <ClInclude Include="src\THEngine\Core\THScene.h" />
     <ClInclude Include="src\THEngine\Core\THSprite.h" />
@@ -226,8 +235,10 @@
     <ClInclude Include="src\THEngine\Platform\THInput.h" />
     <ClInclude Include="src\THEngine\Platform\THApplication.h" />
     <ClInclude Include="src\THEngine\Platform\THSound.h" />
+    <ClInclude Include="src\THEngine\Renderer\THParticle3DRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderQueue.h" />
+    <ClInclude Include="src\THEngine\Renderer\THSpriteRenderer.h" />
     <ClInclude Include="src\THEngine\THEngine.h" />
     <ClInclude Include="src\THEngine\Tween\THConcreteTween.h" />
     <ClInclude Include="src\THEngine\Tween\THConcreteTweener.h" />

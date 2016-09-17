@@ -18,11 +18,20 @@ public:
 	Texture* texReimu;
 	Texture* texEffBase;
 	Texture* texPointLight;
+	Texture* texFourAngleStar = nullptr;
 
 	Sound* soundShoot1 = nullptr;
 	Sound* soundShoot2 = nullptr;
 	Sound* soundShoot3 = nullptr;
 	Sound* soundBiu = nullptr;
+	Sound* soundMenuOK = nullptr;
+	Sound* soundMenuSelect = nullptr;
+	Sound* soundItem = nullptr;
+	Sound* soundDamage00 = nullptr;
+	Sound* soundDamage01 = nullptr;
+	Sound* soundEnemyDie00 = nullptr;
+	Sound* soundEnemyDie01 = nullptr;
+	Sound* soundPlayerShoot = nullptr;
 
 private:
 	STGResources();

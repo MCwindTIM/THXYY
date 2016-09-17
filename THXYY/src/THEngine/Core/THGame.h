@@ -8,7 +8,8 @@
 #include "THScene.h"
 #include "THFont.h"
 #include "THSprite.h"
-#include "../Renderer/THRenderer.h"
+#include "../Renderer/THSpriteRenderer.h"
+#include "../Renderer/THParticle3DRenderer.h"
 #include "../Asset/THAssetManager.h"
 #include "../UI/THEventSystem.h"
 
@@ -25,6 +26,8 @@ namespace THEngine
 		int width, height;
 		bool fullScreen;
 
+		bool enterBackground = false;
+
 		float fps;
 		int frameCount;
 		bool showFPS;
@@ -39,6 +42,8 @@ namespace THEngine
 		RenderQueue* spriteQueue;
 
 		SpriteRenderer* spriteRenderer;
+
+		Particle3DRenderer* particle3DRenderer = nullptr;
 
 		AssetManager* assetManager;
 
@@ -68,6 +73,8 @@ namespace THEngine
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void OnShutdown();
+		virtual void OnEnterBackground();
+		virtual void OnReturnToForeground();
 
 		int Run();
 
@@ -93,6 +100,11 @@ namespace THEngine
 		inline SpriteRenderer* GetSpriteRenderer()
 		{
 			return spriteRenderer;
+		}
+
+		inline Particle3DRenderer* GetParticle3DRenderer()
+		{
+			return particle3DRenderer;
 		}
 
 		inline AssetManager* GetAssetManager()

@@ -70,7 +70,7 @@ void Item::Update()
 		dist = hitRange + player->GetHiSpeedItemRange();
 		if (difX*difX + difY*difY < dist*dist)
 		{
-			OnGot();
+			GoToPlayer();
 		}
 	}
 	else
@@ -87,6 +87,11 @@ void Item::Update()
 		gotFromHigh = true;
 		GoToPlayer();
 	}
+
+	if (position.y < -32 || position.y > 480)
+	{
+		MarkDestroy();
+	}
 }
 
 void Item::GoToPlayer()
@@ -97,5 +102,8 @@ void Item::GoToPlayer()
 
 void Item::OnGot()
 {
+	auto stgResources = STGResources::GetInstance();
+	stgResources->soundItem->Play();
+
 	MarkDestroy();
 }

@@ -54,6 +54,40 @@ void Enemy::OnDie()
 
 	DropItems();
 
+	stgResources->soundEnemyDie00->Play();
+
+	Particle3D* effect[10];
+	for (int i = 0; i < 10; i++)
+	{
+		int effectLife = 40;
+
+		effect[i] = new Particle3D();
+		effect[i]->SetTexture(stgResources->texFourAngleStar);
+		effect[i]->SetPosition(position);
+		effect[i]->SetLife(effectLife);
+		effect[i]->SetTexRect(Rect(96, 128, 32, 64));
+
+		float effectAngle = ToRad(Random(0, 359));
+		float dist = Random(0, 60);
+
+		float effectScale = Random(4, 14) / 10.0f;
+		effect[i]->SetScale(Vector3f(effectScale, effectScale, 1));
+
+		effect[i]->SetRotatingAxis(Vector3f(Random(0, 100), Random(0, 100), Random(0, 100)));
+		effect[i]->SetRotatingSpeed(Random(50, 100) / 10.0f);
+		effect[i]->SetAlpha(0.6f);
+
+		TweenSequence* sequence = new TweenSequence();
+		sequence->AddTween(new Delay(effectLife / 2));
+		sequence->AddTween(new ScaleTo(Vector3f(0, 0, 1), 30, Tweener::SIMPLE));
+		effect[i]->AddTween(sequence);
+
+		effect[i]->AddTween(new MoveBy(Vector3f(dist*cos(effectAngle), dist*sin(effectAngle), 0),
+			effectLife, Tweener::EASE_OUT));
+
+		engine->AddParticle(effect[i]);
+	}
+
 	switch (enemyColor)
 	{
 	case BLUE:
@@ -66,6 +100,11 @@ void Enemy::OnDie()
 		dieEffect->AddTween(new FadeOut(12, Tweener::SIMPLE));
 		engine->AddEffect(dieEffect);
 
+		for (int i = 0; i < 10; i++)
+		{
+			effect[i]->SetTexRect(Rect(64, 96, 0, 32));
+		}
+
 		break;
 	}
 	case RED:
@@ -77,6 +116,12 @@ void Enemy::OnDie()
 		dieEffect->AddTween(new ScaleTo(Vector3f(2.0f, 2.0f, 1.0f), 10, Tweener::SIMPLE));
 		dieEffect->AddTween(new FadeOut(10, Tweener::SIMPLE));
 		engine->AddEffect(dieEffect);
+
+		for (int i = 0; i < 10; i++)
+		{
+			effect[i]->SetTexRect(Rect(0, 32, 0, 32));
+		}
+
 		break;
 	}
 	case GREEN:
@@ -88,6 +133,12 @@ void Enemy::OnDie()
 		dieEffect->AddTween(new ScaleTo(Vector3f(2.0f, 2.0f, 1.0f), 10, Tweener::SIMPLE));
 		dieEffect->AddTween(new FadeOut(10, Tweener::SIMPLE));
 		engine->AddEffect(dieEffect);
+
+		for (int i = 0; i < 10; i++)
+		{
+			effect[i]->SetTexRect(Rect(0, 32, 32, 64));
+		}
+
 		break;
 	}
 	case YELLOW:
@@ -99,6 +150,12 @@ void Enemy::OnDie()
 		dieEffect->AddTween(new ScaleTo(Vector3f(2.0f, 2.0f, 1.0f), 10, Tweener::SIMPLE));
 		dieEffect->AddTween(new FadeOut(10, Tweener::SIMPLE));
 		engine->AddEffect(dieEffect);
+
+		for (int i = 0; i < 10; i++)
+		{
+			effect[i]->SetTexRect(Rect(32, 64, 32, 64));
+		}
+
 		break;
 	}
 		
@@ -113,6 +170,8 @@ void Enemy::OnDestroy()
 void Enemy::OnHitten(float damage)
 {
 	life -= damage;
+
+	STGResources::GetInstance()->soundDamage01->Play();
 }
 
 void Enemy::DropItems()

@@ -40,16 +40,4 @@ void Enemy01_001::Update()
 		
 		acShootAngle += 0.08f;
 	}
-
-	/*if (frame == 50)
-	{
-		frame = 0;
-
-		Bullet* bullet = new Bullet();
-		bullet->SetType(Bullet::LINDAN_RED);
-		bullet->SetPosition(position.x, position.y);
-		bullet->SetSpeed(2.5);
-		bullet->SetAngle(0);
-		engine->ShootBullet(bullet);
-	}*/
 }

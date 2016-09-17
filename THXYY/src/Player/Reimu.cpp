@@ -85,6 +85,8 @@ void Reimu::Fire()
 
 	if (frame_fire == 0)
 	{
+		STGResources::GetInstance()->soundPlayerShoot->Play();
+
 		ReimuBullet* bullet1 = new ReimuBullet();
 		bullet1->SetPosition(position.x - 7.0f, position.y);
 		engine->ShootPlayerBullet(bullet1);

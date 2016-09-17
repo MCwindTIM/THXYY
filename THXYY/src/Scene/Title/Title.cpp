@@ -28,6 +28,10 @@ Title::Title()
 	black->AddTween(new FadeTo(0.0f, 80, Tweener::EASE_OUT));
 	blackLayer->AddChild(black);
 	AddLayer(blackLayer);
+
+	particleLayer = new ParticleLayer();
+	particleLayer->SetOrder(20);
+	AddLayer(particleLayer);
 }
 
 Title::~Title()

@@ -10,9 +10,11 @@ Layer::Layer()
 	this->width = Game::GetInstance()->GetWidth();
 	this->height = Game::GetInstance()->GetHeight();
 
-	this->camera = new Camera2D;
-	camera->Retain();
-	((Camera2D*)camera)->SetViewRect(Rect(0, width, height, 0));
+	Camera2D* camera2D = new Camera2D();
+	camera2D->SetWidth(width);
+	camera2D->SetHeight(height);
+	camera2D->SetPosition(Vector3f(width / 2, height / 2, 0));
+	SetCamera(camera2D);
 }
 
 Layer::Layer(int left, int top, int width, int height)
@@ -22,9 +24,11 @@ Layer::Layer(int left, int top, int width, int height)
 	this->width = width;
 	this->height = height;
 
-	this->camera = new Camera2D;
-	camera->Retain();
-	((Camera2D*)camera)->SetViewRect(Rect(0, width, height, 0));
+	Camera2D* camera2D = new Camera2D();
+	camera2D->SetWidth(width);
+	camera2D->SetHeight(height);
+	camera2D->SetPosition(Vector3f(width / 2, height / 2, 0));
+	SetCamera(camera2D);
 }
 
 Layer::~Layer()
@@ -53,12 +57,30 @@ void Layer::Update()
 
 void Layer::Draw()
 {
-	Application::GetInstance()->SetViewport(left, top, width, height);
+	auto app = Application::GetInstance();
+	app->SetViewport(left, top, width, height);
 
 	Camera2D* camera2D;
+	Camera3D* camera3D;
 	if (camera2D = dynamic_cast<Camera2D*>(camera)){
-		Rect rect = camera2D->GetViewRect();
-		Application::GetInstance()->SetOrtho(rect.left, rect.bottom, rect.Width(), -rect.Height(), 0, TH_MAX_Z);
+		Vector3f pos = camera2D->GetPosition();
+		app->SetOrtho(pos.x - camera2D->GetWidth() / 2, pos.y - camera2D->GetHeight() / 2,
+			camera2D->GetWidth(), camera2D->GetHeight(), 0, TH_MAX_Z);
+
+		D3DXMATRIX matrix;
+		D3DXMatrixIdentity(&matrix);
+		app->SetViewTransform(&matrix);
+	}
+	else if (camera3D = dynamic_cast<Camera3D*>(camera))
+	{
+		D3DXMATRIX matrix;
+		D3DXMatrixPerspectiveFovLH(&matrix, ToRad(camera3D->fov), (float)width / height, 0.1f, 10000.0f);
+		app->SetProjectionTransform(&matrix);
+
+		D3DXMatrixLookAtLH(&matrix, &D3DXVECTOR3(camera3D->position.x, camera3D->position.y, camera3D->position.z),
+			&D3DXVECTOR3(camera3D->lookAt.x, camera3D->lookAt.y, camera3D->lookAt.z), 
+			&D3DXVECTOR3(camera3D->up.x, camera3D->up.y, camera3D->up.z));
+		app->SetViewTransform(&matrix);
 	}
 
 	rootNode.Visit();

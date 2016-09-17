@@ -39,6 +39,7 @@ namespace THEngine
 		Vector3f operator +(Vector3f a);
 		Vector3f operator -(Vector3f a);
 		Vector3f operator -();
+		Vector3f operator *(float a);
 		bool operator ==(Vector3f a);
 		bool operator !=(Vector3f a);
 
@@ -46,7 +47,7 @@ namespace THEngine
 		static float Dot(Vector3f a, Vector3f b);
 	};
 
-	Vector3f operator *(Vector3f v, float a);
+	Vector3f operator*(float a, Vector3f v);
 
 	class Vector4f
 	{

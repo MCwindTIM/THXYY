@@ -46,9 +46,6 @@
     <Filter Include="头文件\Scene">
       <UniqueIdentifier>{6a2e79de-efe2-4788-b9e0-d76014578525}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Scene">
-      <UniqueIdentifier>{1dce69fc-b94b-4c36-ba34-1642efd261c4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\THEngine\Renderer">
       <UniqueIdentifier>{737c3a2f-4ef6-41b7-ab46-e37a0638a0ef}</UniqueIdentifier>
     </Filter>
@@ -70,14 +67,8 @@
     <Filter Include="头文件\Scene\Title">
       <UniqueIdentifier>{74876f8c-5bac-4935-b4b2-cdab7a01272f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Scene\Title">
-      <UniqueIdentifier>{942e1867-e621-4e2a-83ff-9c725fe56214}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Scene\Game">
       <UniqueIdentifier>{82a1233d-a15b-4218-8aab-a9b5b49f31a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Scene\Game">
-      <UniqueIdentifier>{1de96ede-ab6c-4162-ba9f-0a8347710143}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\STGCore">
       <UniqueIdentifier>{6039e895-fb02-4e6c-be07-cdb351fcd7b8}</UniqueIdentifier>
@@ -145,6 +136,15 @@
     <Filter Include="头文件\STGCore\Item">
       <UniqueIdentifier>{6f9940f4-9f09-4b0a-b771-275bbef00f3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Scene">
+      <UniqueIdentifier>{1dce69fc-b94b-4c36-ba34-1642efd261c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene\Title">
+      <UniqueIdentifier>{942e1867-e621-4e2a-83ff-9c725fe56214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene\Game">
+      <UniqueIdentifier>{1de96ede-ab6c-4162-ba9f-0a8347710143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -182,9 +182,6 @@
     </ClCompile>
     <ClCompile Include="src\THEngine\Core\THGameObject.cpp">
       <Filter>源文件\THEngine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp">
-      <Filter>源文件\THEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp">
       <Filter>源文件\THEngine\Renderer</Filter>
@@ -362,6 +359,24 @@
     </ClCompile>
     <ClCompile Include="src\STGCore\Item\ScoreItem.cpp">
       <Filter>源文件\STGCore\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THParticle3D.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Title\ParticleLayer.cpp">
+      <Filter>源文件\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Title\SakuraParticle.cpp">
+      <Filter>源文件\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Game\STGParticleLayer.cpp">
+      <Filter>源文件\Scene\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -595,6 +610,24 @@
     </ClInclude>
     <ClInclude Include="src\STGCore\Item\ScoreItem.h">
       <Filter>头文件\STGCore\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THParticle3D.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THSpriteRenderer.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THParticle3DRenderer.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Title\ParticleLayer.h">
+      <Filter>头文件\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Title\SakuraParticle.h">
+      <Filter>头文件\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Game\STGParticleLayer.h">
+      <Filter>头文件\Scene\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

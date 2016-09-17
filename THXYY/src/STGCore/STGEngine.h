@@ -121,6 +121,7 @@ public:
 	void AddBullet(Bullet* bullet);
 	void AddEffect(Sprite* effect);
 	void AddItem(Item* item);
+	void AddParticle(Particle3D* particle);
 
 	void ShootPlayerBullet(PlayerBullet* playerBullet);
 
@@ -160,6 +161,8 @@ public:
 	void OnLoad();
 
 	void GameOver();
+
+	void RemoveAllBullet();
 
 	friend class API;
 };

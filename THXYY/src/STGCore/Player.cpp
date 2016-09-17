@@ -244,7 +244,9 @@ void Player::Biu()
 	auto engine = STGEngine::GetInstance();
 	auto stgResources = STGResources::GetInstance();
 
-	for (int i = 0; i < 20; i++)
+	engine->RemoveAllBullet();
+
+	for (int i = 0; i < 30; i++)
 	{
 		Sprite* light = new Sprite();
 		light->SetTexture(stgResources->texPointLight);
@@ -263,6 +265,14 @@ void Player::Biu()
 
 		engine->AddEffect(light);
 	}
+
+	Sprite* dieEffect = new Sprite();
+	dieEffect->SetPosition(position);
+	dieEffect->SetTexture(stgResources->texEffBase);
+	dieEffect->SetTexRect(Rect(128, 192, 16, 80));
+	dieEffect->AddTween(new ScaleTo(Vector3f(2.0f, 2.0f, 1.0f), 10, Tweener::SIMPLE));
+	dieEffect->AddTween(new FadeOut(10, Tweener::SIMPLE));
+	engine->AddEffect(dieEffect);
 
 	for (int i = 0; i < 9; i++)
 	{

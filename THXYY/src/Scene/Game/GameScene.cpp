@@ -21,6 +21,10 @@ GameScene::GameScene()
 	stgLayer->SetOrder(10);
 	AddLayer(stgLayer);
 
+	stgParticleLayer = new STGParticleLayer();
+	stgParticleLayer->SetOrder(15);
+	AddLayer(stgParticleLayer);
+
 	blackLayer = new Layer();
 	blackLayer->SetOrder(0);
 	AddLayer(blackLayer);
@@ -424,6 +428,7 @@ bool GameScene::OnKeyDown(EngineObject* sender, int key)
 		if (stgLayer->IsPaused() == false)
 		{
 			stgLayer->Pause();
+			stgParticleLayer->Pause();
 			pauseMenu->DoPause();
 			return true;
 		}

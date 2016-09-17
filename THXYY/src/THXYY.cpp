@@ -34,6 +34,10 @@ int THXYY::CreateGame(int width, int height, bool fullScreen)
 	{
 		return -1;
 	}
+	if (!stgResources->LoadTexTures())
+	{
+		return -1;
+	}
 
 	auto global = Global::GetInstance();
 	if (!global->LoadTextures())

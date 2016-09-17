@@ -31,6 +31,9 @@ namespace THEngine
 
 		Texture* CreateTextureFromFile(String filePath);
 		void DestroyTexture(Texture* texture);
+
+		void OnLostDevice();
+		void OnResetDevice();
 	};
 }
 

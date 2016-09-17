@@ -52,7 +52,7 @@ bool STGResources::LoadTexTures()
 		return false;
 	}
 
-	texEffBase = manager->CreateTextureFromFile("res/bullet/eff_base.png");
+	texEffBase = manager->CreateTextureFromFile("res/effect/eff_base.png");
 	if (texEffBase == nullptr)
 	{
 		return false;
@@ -60,6 +60,12 @@ bool STGResources::LoadTexTures()
 
 	texPointLight = manager->CreateTextureFromFile("res/effect/point_light.png");
 	if (texPointLight == nullptr)
+	{
+		return false;
+	}
+
+	texFourAngleStar = manager->CreateTextureFromFile("res/effect/four_angle_star.png");
+	if (texFourAngleStar == nullptr)
 	{
 		return false;
 	}
@@ -77,6 +83,7 @@ void STGResources::UnloadTextures()
 	manager->DestroyTexture(texReimu);
 	manager->DestroyTexture(texEffBase);
 	manager->DestroyTexture(texPointLight);
+	manager->DestroyTexture(texFourAngleStar);
 
 	texPlayerCenter = nullptr;
 	texEnemy01 = nullptr;
@@ -84,6 +91,7 @@ void STGResources::UnloadTextures()
 	texReimu = nullptr;
 	texEffBase = nullptr;
 	texPointLight = nullptr;
+	texFourAngleStar = nullptr;
 }
 
 bool STGResources::LoadSounds()
@@ -114,6 +122,54 @@ bool STGResources::LoadSounds()
 		return false;
 	}
 
+	soundMenuOK = audio->CreateSound("sound/se_ok00.wav");
+	if (soundMenuOK == nullptr)
+	{
+		return false;
+	}
+
+	soundMenuSelect = audio->CreateSound("sound/se_select00.wav");
+	if (soundMenuSelect == nullptr)
+	{
+		return false;
+	}
+
+	soundItem = audio->CreateSound("sound/se_item00.wav");
+	if (soundItem == nullptr)
+	{
+		return false;
+	}
+
+	soundDamage00 = audio->CreateSound("sound/se_damage00.wav");
+	if (soundItem == nullptr)
+	{
+		return false;
+	}
+
+	soundDamage01 = audio->CreateSound("sound/se_damage01.wav");
+	if (soundItem == nullptr)
+	{
+		return false;
+	}
+
+	soundEnemyDie00 = audio->CreateSound("sound/se_enep00.wav");
+	if (soundItem == nullptr)
+	{
+		return false;
+	}
+
+	soundEnemyDie01 = audio->CreateSound("sound/se_enep01.wav");
+	if (soundItem == nullptr)
+	{
+		return false;
+	}
+
+	soundPlayerShoot = audio->CreateSound("sound/se_plst00.wav");
+	if (soundItem == nullptr)
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -125,10 +181,26 @@ void STGResources::UnloadSounds()
 	audio->DestroySound(soundShoot2);
 	audio->DestroySound(soundShoot3);
 	audio->DestroySound(soundBiu);
+	audio->DestroySound(soundMenuOK);
+	audio->DestroySound(soundMenuSelect);
+	audio->DestroySound(soundItem);
+	audio->DestroySound(soundDamage00);
+	audio->DestroySound(soundDamage01);
+	audio->DestroySound(soundEnemyDie00);
+	audio->DestroySound(soundEnemyDie01);
+	audio->DestroySound(soundPlayerShoot);
 
 	soundShoot1 = nullptr;
 	soundShoot2 = nullptr;
 	soundShoot3 = nullptr;
 	soundBiu = nullptr;
+	soundMenuOK = nullptr;
+	soundMenuSelect = nullptr;
+	soundItem = nullptr;
+	soundDamage00 = nullptr;
+	soundDamage01 = nullptr;
+	soundEnemyDie00 = nullptr;
+	soundEnemyDie01 = nullptr;
+	soundPlayerShoot = nullptr;
 }
 

@@ -14,6 +14,8 @@ namespace THEngine
 		int imageWidth, imageHeight;
 		float xScale, yScale;
 
+		Image* texImage = nullptr;
+
 	public:
 		Texture();
 		virtual ~Texture();
@@ -24,6 +26,9 @@ namespace THEngine
 		inline int GetImageHeight() { return imageHeight; }
 
 		int SaveToFile(String path);
+
+		void OnLostDevice();
+		void OnResetDevice();
 
 		friend class AssetManager;
 		friend class Shader;

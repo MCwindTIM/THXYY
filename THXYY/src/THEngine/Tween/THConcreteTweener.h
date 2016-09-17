@@ -5,6 +5,16 @@
 
 namespace THEngine
 {
+	class EmptyTweener : public Tweener
+	{
+	public:
+		EmptyTweener(int duration);
+		virtual ~EmptyTweener();
+
+		virtual void Update() override;
+	};
+
+	///////////////////////////////////////////////
 	class FloatTweener : public Tweener
 	{
 	protected:

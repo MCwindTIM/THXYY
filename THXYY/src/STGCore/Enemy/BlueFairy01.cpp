@@ -9,6 +9,8 @@ BlueFairy01::BlueFairy01()
 
 	SetTexture(STGResources->texEnemy01);
 
+	SetTexRect(Rect(0, 32, 256, 288));
+
 	motionState = STATIC;
 
 	frameForAnim = 0;

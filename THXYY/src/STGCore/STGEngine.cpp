@@ -48,8 +48,6 @@ STGEngine* STGEngine::Create()
 
 void STGEngine::Init()
 {
-	stgResources->LoadTexTures();
-
 	gameOver = false;
 }
 
@@ -137,8 +135,6 @@ void STGEngine::Restart()
 void STGEngine::Shutdown()
 {
 	Clear();
-
-	stgResources->UnloadTextures();
 }
 
 void STGEngine::Update()
@@ -237,6 +233,11 @@ void STGEngine::AddItem(Item* item)
 	gameScene->GetSTGLayer()->AddChild(item);
 }
 
+void STGEngine::AddParticle(Particle3D* particle)
+{
+	gameScene->GetSTGParticleLayer()->AddChild(particle);
+}
+
 void STGEngine::ShootPlayerBullet(PlayerBullet* playerBullet)
 {
 	playerBulletList.Add(playerBullet);
@@ -283,4 +284,13 @@ void STGEngine::GameOver()
 	scene->GetSTGLayer()->Pause();
 
 	gameOver = true;
+}
+
+void STGEngine::RemoveAllBullet()
+{
+	auto iter = bulletList.GetIterator();
+	while (iter->HasNext())
+	{
+		iter->Next()->OnDie();
+	}
 }

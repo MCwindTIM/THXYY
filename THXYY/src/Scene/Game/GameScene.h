@@ -7,6 +7,7 @@
 #include "PointNumber.h"
 #include "GrazeNumber.h"
 #include "STGLayer.h"
+#include "STGParticleLayer.h"
 #include "PauseMenu.h"
 #include "YesNoMenu.h"
 
@@ -22,6 +23,7 @@ private:
 	YesNoMenu* yesNoMenu = nullptr;
 
 	STGLayer* stgLayer = nullptr;
+	STGParticleLayer* stgParticleLayer = nullptr;
 	Layer* baseLayer = nullptr;
 	Layer* blackLayer = nullptr;
 	Layer* blackSTGLayer = nullptr;
@@ -67,6 +69,7 @@ public:
 	void STGFadeIn(int time);
 
 	inline STGLayer* GetSTGLayer() { return stgLayer; }
+	inline STGParticleLayer* GetSTGParticleLayer() { return stgParticleLayer; }
 	inline PauseMenu* GetPauseMenu() { return pauseMenu; }
 	inline YesNoMenu* GetYesNoMenu() { return yesNoMenu; }
 };

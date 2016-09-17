@@ -2,6 +2,7 @@
 #define TITLE_H
 
 #include <THEngine.h>
+#include "ParticleLayer.h"
 
 using namespace THEngine;
 
@@ -13,6 +14,8 @@ private:
 
 	Layer* blackLayer = nullptr;
 	Sprite* black = nullptr;
+
+	ParticleLayer* particleLayer = nullptr;
 
 public:
 	Title();

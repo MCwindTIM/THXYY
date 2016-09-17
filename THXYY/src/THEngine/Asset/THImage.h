@@ -17,6 +17,7 @@ namespace THEngine
 
 	public:
 		Image();
+		Image(int width, int height);
 		virtual ~Image();
 
 		static Image* Load(String filePath);

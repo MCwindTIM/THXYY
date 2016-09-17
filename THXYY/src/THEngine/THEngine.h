@@ -4,6 +4,7 @@
 #include "Common\THCommon.h"
 #include "Core\THGame.h"
 #include "Core\THScene.h"
+#include "Core\THParticle3D.h"
 #include "Tween\THTween.h"
 #include "Tween\THConcreteTween.h"
 #include "UI\THEventSystem.h"

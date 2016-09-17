@@ -1,5 +1,6 @@
 #include "THApplication.h"
 #include "../UI/THEventSystem.h"
+#include "../Asset/THAssetManager.h"
 
 using namespace THEngine;
 
@@ -144,6 +145,13 @@ int Application::InitDeviceContext()
 		return -1;
 	}
 
+	ResetDeviceState();
+
+	return TH_SUCCESS;
+}
+
+void Application::ResetDeviceState()
+{
 	device->SetRenderState(D3DRS_ZENABLE, true);
 	device->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
 	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
@@ -160,8 +168,6 @@ int Application::InitDeviceContext()
 
 	device->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
 	device->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
-
-	return TH_SUCCESS;
 }
 
 int Application::CreateDevice()
@@ -431,6 +437,39 @@ void Application::PrintScreen()
 
 	D3DXSaveSurfaceToFile(path.GetBuffer(), D3DXIFF_JPG, surface, NULL, NULL);
 	surface->Release();
+}
+
+bool Application::IsDeviceLost()
+{
+	return device->TestCooperativeLevel() == D3DERR_DEVICENOTRESET;
+}
+
+bool Application::NeedResetDevice()
+{
+	return device->TestCooperativeLevel() == D3DERR_DEVICENOTRESET;
+}
+
+void Application::OnLostDevice()
+{
+	AssetManager::GetInstance()->OnLostDevice();
+}
+
+void Application::OnResetDevice()
+{
+	device->Reset(&d3dpp);	
+
+	ResetDeviceState();
+
+	AssetManager::GetInstance()->OnResetDevice();
+}
+
+bool Application::IsMinimized()
+{
+	if (IsIconic(hWnd))
+	{
+		return true;
+	}
+	return false;
 }
 
 LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

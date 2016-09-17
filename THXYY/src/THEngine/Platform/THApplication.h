@@ -58,6 +58,20 @@ namespace THEngine
 
 		void PrintScreen();
 
+		bool IsDeviceLost();
+
+		bool NeedResetDevice();
+
+		void OnLostDevice();
+
+		void OnResetDevice();
+
+		void ResetDeviceState();
+
+		bool IsMinimized();
+
+		inline IDirect3DDevice9* GetDevice() { return device; }
+
 		inline bool NeedQuit() { return needQuit; }
 
 		inline int GetReturnCode() { return returnCode; }
@@ -73,9 +87,9 @@ namespace THEngine
 			device->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 0, 0, 0), 1, 0);
 		}
 
-		inline void SwapBuffers()
+		inline bool SwapBuffers()
 		{
-			device->Present(NULL, NULL, NULL, NULL);
+			return (!FAILED(device->Present(NULL, NULL, NULL, NULL)));
 		}
 
 		inline void BeginRender()
@@ -112,6 +126,7 @@ namespace THEngine
 
 		friend class AssetManager;
 		friend class SpriteRenderer;
+		friend class Particle3DRenderer;
 		friend class Input;
 		friend class Audio;
 	};

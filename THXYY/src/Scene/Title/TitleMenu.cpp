@@ -51,6 +51,11 @@ TitleMenu::TitleMenu() : Menu(464, 216, 128, 248)
 	menuItem = new TitleMenuItem(TitleMenuItem::QUIT);
 	menuItem->SetPosition(Vector3f(64, 16, 0));
 	AddMenuItem(menuItem);
+
+	auto stgResources = STGResources::GetInstance();
+
+	SetSoundOK(stgResources->soundMenuOK);
+	SetSoundSelect(stgResources->soundMenuSelect);
 }
 
 TitleMenu::~TitleMenu()

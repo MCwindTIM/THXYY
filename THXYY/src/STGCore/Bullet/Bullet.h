@@ -86,6 +86,8 @@ public:
 	void SetType(Type type);
 
 	virtual void Update() override;
+
+	void OnDie();
 };
 
 #endif
