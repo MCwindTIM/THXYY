@@ -127,6 +127,7 @@ namespace THEngine
 		friend class AssetManager;
 		friend class SpriteRenderer;
 		friend class Particle3DRenderer;
+		friend class MeshRenderer;
 		friend class Input;
 		friend class Audio;
 	};

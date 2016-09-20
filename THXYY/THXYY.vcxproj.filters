@@ -145,6 +145,21 @@
     <Filter Include="源文件\Scene\Game">
       <UniqueIdentifier>{1de96ede-ab6c-4162-ba9f-0a8347710143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\THEngine\Core\3D">
+      <UniqueIdentifier>{fd3aaac3-aa9b-4e87-bd2a-6fb80557f0b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Core\3D">
+      <UniqueIdentifier>{e0fb20f2-1279-4f90-84d0-04aea1ef669a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fx">
+      <UniqueIdentifier>{81cc9162-9593-4a72-a432-8f5fde24c198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Stage\Stage01">
+      <UniqueIdentifier>{e2eb73a5-cb23-491c-affe-f5c5a3a9c0b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Stage\Stage01">
+      <UniqueIdentifier>{c431ddba-06f4-4114-82ec-f3590c8bb1e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -264,9 +279,6 @@
     <ClCompile Include="src\THEngine\Common\THFrameTimer.cpp">
       <Filter>源文件\THEngine\Common</Filter>
     </ClCompile>
-    <ClCompile Include="src\Stage\Stage01.cpp">
-      <Filter>源文件\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="src\STGCore\Enemy\Enemy.cpp">
       <Filter>源文件\STGCore\Enemy</Filter>
     </ClCompile>
@@ -363,9 +375,6 @@
     <ClCompile Include="src\THEngine\Core\THParticle3D.cpp">
       <Filter>源文件\THEngine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp">
-      <Filter>源文件\THEngine\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp">
       <Filter>源文件\THEngine\Renderer</Filter>
     </ClCompile>
@@ -380,6 +389,18 @@
     </ClCompile>
     <ClCompile Include="src\THEngine\Platform\THMusic.cpp">
       <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\3D\THMesh.cpp">
+      <Filter>源文件\THEngine\Core\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THMeshRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stage\Stage01\Stage01.cpp">
+      <Filter>源文件\Stage\Stage01</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -521,9 +542,6 @@
     <ClInclude Include="src\THEngine\Common\THFrameTimer.h">
       <Filter>头文件\THEngine\Common</Filter>
     </ClInclude>
-    <ClInclude Include="src\Stage\Stage01.h">
-      <Filter>头文件\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="src\STGCore\Enemy\Enemy.h">
       <Filter>头文件\STGCore\Enemy</Filter>
     </ClInclude>
@@ -635,6 +653,15 @@
     <ClInclude Include="src\THEngine\Platform\THMusic.h">
       <Filter>头文件\THEngine\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="src\THEngine\Core\3D\THMesh.h">
+      <Filter>头文件\THEngine\Core\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THMeshRenderer.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage\Stage01\Stage01.h">
+      <Filter>头文件\Stage\Stage01</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="THXYY.rc">
@@ -642,6 +669,11 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fx\sprite.fx" />
+    <None Include="fx\sprite.fx">
+      <Filter>fx</Filter>
+    </None>
+    <None Include="fx\mesh.fx">
+      <Filter>fx</Filter>
+    </None>
   </ItemGroup>
 </Project>

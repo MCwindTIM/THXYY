@@ -2,7 +2,7 @@
 #include "Global.h"
 #include "Effect\BulletFog.h"
 #include "../Player/Reimu.h"
-#include "../Stage/Stage01.h"
+#include "../Stage/Stage01/Stage01.h"
 
 using namespace THEngine;
 
@@ -121,6 +121,12 @@ void STGEngine::Clear()
 		iter6->Next()->MarkDestroy();
 	}
 
+	auto iter7 = backgroundList.GetIterator();
+	while (iter7->HasNext())
+	{
+		iter7->Next()->MarkDestroy();
+	}
+
 	player->MarkDestroy();
 
 	enemyList.Clear();
@@ -129,6 +135,7 @@ void STGEngine::Clear()
 	playerBulletList.Clear();
 	itemList.Clear();
 	particleList.Clear();
+	backgroundList.Clear();
 
 	TH_SAFE_RELEASE(player);
 	TH_SAFE_RELEASE(stage);
@@ -210,6 +217,15 @@ void STGEngine::UpdateList()
 			iter6->Remove();
 		}
 	}
+
+	auto iter7 = backgroundList.GetIterator();
+	while (iter7->HasNext())
+	{
+		if (iter7->Next()->NeedRemove())
+		{
+			iter7->Remove();
+		}
+	}
 }
 
 void STGEngine::LoadStage(Stage* stage)
@@ -256,6 +272,12 @@ void STGEngine::AddParticle(Particle3D* particle)
 	gameScene->GetSTGParticleLayer()->AddChild(particle);
 }
 
+void STGEngine::AddBackgroundObject(RenderObject* object)
+{
+	backgroundList.Add(object);
+	gameScene->GetBackgroundLayer()->AddChild(object);
+}
+
 void STGEngine::ShootPlayerBullet(PlayerBullet* playerBullet)
 {
 	playerBulletList.Add(playerBullet);
@@ -293,6 +315,16 @@ void STGEngine::ShootBullet(Bullet* bullet, bool hasFog, int sound)
 			break;
 		}
 	}
+}
+
+void STGEngine::SetBackgroundCamera(Camera* camera)
+{
+	gameScene->GetBackgroundLayer()->SetCamera(camera);
+}
+
+Camera* STGEngine::GetBackgroundCamera()
+{
+	return gameScene->GetBackgroundLayer()->GetCamera();
 }
 
 void STGEngine::GameOver()

@@ -56,6 +56,7 @@ private:
 	LinkedList<PlayerBullet*> playerBulletList;
 	LinkedList<Item*> itemList;
 	LinkedList<Particle3D*> particleList;
+	LinkedList<RenderObject*> backgroundList;
 
 	STGResources* stgResources;
 
@@ -123,6 +124,7 @@ public:
 	void AddEffect(Sprite* effect);
 	void AddItem(Item* item);
 	void AddParticle(Particle3D* particle);
+	void AddBackgroundObject(RenderObject* object);
 
 	void ShootPlayerBullet(PlayerBullet* playerBullet);
 
@@ -142,6 +144,9 @@ public:
 	}
 
 	void ShootBullet(Bullet* bullet, bool hasFog, int sound);
+
+	void SetBackgroundCamera(Camera* camera);
+	Camera* GetBackgroundCamera();
 
 	void Update();
 

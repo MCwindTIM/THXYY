@@ -27,7 +27,7 @@ namespace THEngine
 
 	void ExceptionManager::PushException(Exception* exception)
 	{
-		TH_SAFE_RELEASE(exception);
+		TH_SAFE_RELEASE(this->exception);
 		this->exception = exception;
 		this->exception->Retain();
 	}

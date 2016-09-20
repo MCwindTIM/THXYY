@@ -27,6 +27,7 @@ private:
 	Layer* baseLayer = nullptr;
 	Layer* blackLayer = nullptr;
 	Layer* blackSTGLayer = nullptr;
+	Layer* backgroundLayer = nullptr;
 
 	Sprite* blackSTG = nullptr;
 
@@ -70,6 +71,7 @@ public:
 
 	inline STGLayer* GetSTGLayer() { return stgLayer; }
 	inline STGParticleLayer* GetSTGParticleLayer() { return stgParticleLayer; }
+	inline Layer* GetBackgroundLayer() { return backgroundLayer; }
 	inline PauseMenu* GetPauseMenu() { return pauseMenu; }
 	inline YesNoMenu* GetYesNoMenu() { return yesNoMenu; }
 };

@@ -5,6 +5,7 @@
 #include "Core\THGame.h"
 #include "Core\THScene.h"
 #include "Core\THParticle3D.h"
+#include "Core\3D\THMesh.h"
 #include "Tween\THTween.h"
 #include "Tween\THConcreteTween.h"
 #include "UI\THEventSystem.h"

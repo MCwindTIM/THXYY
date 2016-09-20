@@ -10,6 +10,7 @@
 #include "THSprite.h"
 #include "../Renderer/THSpriteRenderer.h"
 #include "../Renderer/THParticle3DRenderer.h"
+#include "../Renderer/THMeshRenderer.h"
 #include "../Asset/THAssetManager.h"
 #include "../UI/THEventSystem.h"
 
@@ -40,10 +41,13 @@ namespace THEngine
 		Scene* nextScene;
 
 		RenderQueue* spriteQueue;
+		RenderQueue* normalQueue = nullptr;
 
 		SpriteRenderer* spriteRenderer;
 
 		Particle3DRenderer* particle3DRenderer = nullptr;
+
+		MeshRenderer* meshRenderer = nullptr;
 
 		AssetManager* assetManager;
 
@@ -64,12 +68,14 @@ namespace THEngine
 	public:
 		enum RenderQueueType
 		{
-			SPRITE
+			SPRITE,
+			NORMAL
 		};
 
 	public:
 		Game();
 		virtual ~Game();
+
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void OnShutdown();
@@ -105,6 +111,11 @@ namespace THEngine
 		inline Particle3DRenderer* GetParticle3DRenderer()
 		{
 			return particle3DRenderer;
+		}
+
+		inline MeshRenderer* GetMeshRenderer()
+		{
+			return meshRenderer;
 		}
 
 		inline AssetManager* GetAssetManager()

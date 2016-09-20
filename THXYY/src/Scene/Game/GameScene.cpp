@@ -33,6 +33,10 @@ GameScene::GameScene()
 	blackLayer->SetOrder(1);
 	AddLayer(blackSTGLayer);
 
+	backgroundLayer = new Layer(32, 16, 384, 448);
+	backgroundLayer->SetOrder(50);
+	AddLayer(backgroundLayer);
+
 	pauseMenu = new PauseMenu();
 	pauseMenu->SetOrder(5);
 	AddLayer(pauseMenu);

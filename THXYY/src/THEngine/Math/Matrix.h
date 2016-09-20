@@ -3,17 +3,16 @@
 
 namespace THEngine
 {
-	class Vector2f;
-	class Vector3f;
-	class Vector4f;
+	struct Vector2f;
+	struct Vector3f;
+	struct Vector4f;
 	class Matrix;
 
-	class Vector2f
+	struct Vector2f
 	{
-	public:
 		float x;
 		float y;
-	public:
+
 		Vector2f();
 		Vector2f(float x, float y);
 		float Norm();
@@ -25,13 +24,12 @@ namespace THEngine
 		bool operator !=(Vector2f a);
 	};
 
-	class Vector3f
+	struct Vector3f
 	{
-	public:
 		float x;
 		float y;
 		float z;
-	public:
+
 		Vector3f();
 		Vector3f(float a1, float a2, float a3);
 		float Norm();
@@ -49,7 +47,7 @@ namespace THEngine
 
 	Vector3f operator*(float a, Vector3f v);
 
-	class Vector4f
+	struct Vector4f
 	{
 	public:
 		float _data[4];

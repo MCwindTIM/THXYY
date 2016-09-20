@@ -62,6 +62,9 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 	spriteQueue = new SpriteRenderQueue();
 	spriteQueue->Retain();
 
+	normalQueue = new NormalRenderQueue();
+	normalQueue->Retain();
+
 	eventSystem = EventSystem::Create();
 
 	spriteRenderer = SpriteRenderer::Create(app);
@@ -82,6 +85,17 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		return -1;
 	}
 	particle3DRenderer->Retain();
+
+
+	meshRenderer = MeshRenderer::Create();
+	if (meshRenderer == nullptr)
+	{
+		auto exception = exceptionManager->GetException();
+		auto newException = new Exception((String)"创建MeshRenderer失败。原因是：\n" + exception->GetInfo());
+		exceptionManager->PushException(newException);
+		return -1;
+	}
+	meshRenderer->Retain();
 
 	defaultFont = Font::CreateFontFromFile("res/font/font-fps-opensans.png","res/font/font-fps-opensans.txt");
 	if (defaultFont == nullptr)
@@ -226,6 +240,9 @@ void Game::Render()
 {
 	spriteQueue->Render();
 	spriteQueue->Clear();
+
+	normalQueue->Render();
+	normalQueue->Clear();
 }
 
 
@@ -235,6 +252,10 @@ void Game::SendToRenderQueue(RenderQueueType type, GameObject* obj)
 	{
 	case SPRITE:
 		spriteQueue->Add(obj);
+		break;
+	case NORMAL:
+		normalQueue->Add(obj);
+		break;
 	}
 }
 
@@ -272,8 +293,10 @@ void Game::Shutdown()
 	TH_SAFE_RELEASE(scene);
 
 	TH_SAFE_RELEASE(spriteQueue);
+	TH_SAFE_RELEASE(normalQueue);
 	TH_SAFE_RELEASE(spriteRenderer);
 	TH_SAFE_RELEASE(particle3DRenderer);
+	TH_SAFE_RELEASE(meshRenderer);
 	
 	TH_SAFE_RELEASE(eventSystem);
 	TH_SAFE_RELEASE(defaultFont);

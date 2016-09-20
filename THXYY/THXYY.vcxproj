@@ -107,7 +107,7 @@
     <ClCompile Include="src\Scene\Title\Title.cpp" />
     <ClCompile Include="src\Scene\Title\TitleMenu.cpp" />
     <ClCompile Include="src\Scene\Title\TitleMenuItem.cpp" />
-    <ClCompile Include="src\Stage\Stage01.cpp" />
+    <ClCompile Include="src\Stage\Stage01\Stage01.cpp" />
     <ClCompile Include="src\STGCore\API.cpp" />
     <ClCompile Include="src\STGCore\Bullet\Bullet.cpp" />
     <ClCompile Include="src\STGCore\Bullet\LinDan.cpp" />
@@ -137,6 +137,7 @@
     <ClCompile Include="src\THEngine\Common\THObject.cpp" />
     <ClCompile Include="src\THEngine\Common\THScheduler.cpp" />
     <ClCompile Include="src\THEngine\Common\THString.cpp" />
+    <ClCompile Include="src\THEngine\Core\3D\THMesh.cpp" />
     <ClCompile Include="src\THEngine\Core\THCamera.cpp" />
     <ClCompile Include="src\THEngine\Core\THFont.cpp" />
     <ClCompile Include="src\THEngine\Core\THGame.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="src\THEngine\Platform\THApplication.cpp" />
     <ClCompile Include="src\THEngine\Platform\THMusic.cpp" />
     <ClCompile Include="src\THEngine\Platform\THSound.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THMeshRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp" />
@@ -186,7 +188,7 @@
     <ClInclude Include="src\Scene\Title\TitleMenu.h" />
     <ClInclude Include="src\Scene\Title\TitleMenuItem.h" />
     <ClInclude Include="src\Scene\Title\ParticleLayer.h" />
-    <ClInclude Include="src\Stage\Stage01.h" />
+    <ClInclude Include="src\Stage\Stage01\Stage01.h" />
     <ClInclude Include="src\STGCore\API.h" />
     <ClInclude Include="src\STGCore\Bullet\Bullet.h" />
     <ClInclude Include="src\STGCore\Bullet\LinDan.h" />
@@ -220,6 +222,7 @@
     <ClInclude Include="src\THEngine\Common\THObject.h" />
     <ClInclude Include="src\THEngine\Common\THScheduler.h" />
     <ClInclude Include="src\THEngine\Common\THString.h" />
+    <ClInclude Include="src\THEngine\Core\3D\THMesh.h" />
     <ClInclude Include="src\THEngine\Core\THCamera.h" />
     <ClInclude Include="src\THEngine\Core\THFont.h" />
     <ClInclude Include="src\THEngine\Core\THGame.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="src\THEngine\Platform\THApplication.h" />
     <ClInclude Include="src\THEngine\Platform\THMusic.h" />
     <ClInclude Include="src\THEngine\Platform\THSound.h" />
+    <ClInclude Include="src\THEngine\Renderer\THMeshRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THParticle3DRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderQueue.h" />
@@ -258,6 +262,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fx\sprite.fx">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\mesh.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExcludedFromBuild>
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

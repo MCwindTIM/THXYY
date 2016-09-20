@@ -24,6 +24,13 @@ namespace THEngine
 
 		static bool Compare(GameObject* sprite1, GameObject* sprite2);
 	};
+
+	class NormalRenderQueue : public RenderQueue
+	{
+	public:
+		NormalRenderQueue();
+		virtual ~NormalRenderQueue();
+	};
 }
 
 #endif

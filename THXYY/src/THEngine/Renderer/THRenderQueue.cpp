@@ -48,3 +48,14 @@ void SpriteRenderQueue::Add(GameObject* obj)
 {
 	objList.Add(obj);
 }
+
+/////////////////////////////////////////////
+NormalRenderQueue::NormalRenderQueue()
+{
+
+}
+
+NormalRenderQueue::~NormalRenderQueue()
+{
+
+}
