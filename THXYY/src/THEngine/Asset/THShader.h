@@ -42,6 +42,11 @@ namespace THEngine
 			effect->SetInt(name, value);
 		}
 
+		inline void SetBoolean(char* name, bool value)
+		{
+			effect->SetBool(name, value);
+		}
+
 		inline void SetFloatArray(char* name, float* value, int count)
 		{
 			effect->SetFloatArray(name, value, count);
@@ -50,6 +55,11 @@ namespace THEngine
 		inline void SetMatrix(char* name, D3DXMATRIX* value)
 		{
 			effect->SetMatrix(name, value);
+		}
+
+		inline void SetValue(char* name, void* value, int size)
+		{
+			effect->SetValue(name, value, size);
 		}
 
 		void OnLostDevice();

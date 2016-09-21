@@ -402,6 +402,9 @@
     <ClCompile Include="src\Stage\Stage01\Stage01.cpp">
       <Filter>源文件\Stage\Stage01</Filter>
     </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THRenderState.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -661,6 +664,9 @@
     </ClInclude>
     <ClInclude Include="src\Stage\Stage01\Stage01.h">
       <Filter>头文件\Stage\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THRenderState.h">
+      <Filter>头文件\THEngine\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

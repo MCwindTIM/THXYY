@@ -17,6 +17,10 @@ public:
 	virtual void Update() override;
 	virtual void UpdateBackground() override;
 	virtual void OnLoad() override;
+
+	void SetupCamera();
+	void SetupFog();
+	void InitBackgroundObjects();
 };
 
 #endif

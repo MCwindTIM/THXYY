@@ -40,11 +40,58 @@ void Stage01::OnLoad()
 	texRoad = assetManager->CreateTextureFromFile("res/background/stage01/road.jpg");
 	texRoad->SaveToFile("test.png");
 
+	SetupCamera();
+	SetupFog();
+	InitBackgroundObjects();
+}
+
+void Stage01::UpdateBackground()
+{
+	Stage::UpdateBackground();
+
+	auto engine = STGEngine::GetInstance();
+	auto camera = engine->GetBackgroundCamera();
+
+	Vector3f pos = camera->GetPosition();
+	float z = pos.z;
+	z += 2;
+	if (z > -8000)
+	{
+		z -= 2000;
+	}
+	pos.z = z;
+
+	camera->SetPosition(pos);
+}
+
+void Stage01::SetupCamera()
+{
+	auto engine = STGEngine::GetInstance();
+
 	Camera3D* camera = new Camera3D();
 	camera->SetPosition(Vector3f(0, 50, -10000));
 	camera->SetUp(Vector3f(0, 1, 0));
 	camera->SetLookAt(Vector3f(0, 50, 10000));
 	engine->SetBackgroundCamera(camera);
+}
+
+void Stage01::SetupFog()
+{
+	auto scene = (GameScene*)(Game::GetInstance()->GetScene());
+	auto backgroundLayer = scene->GetBackgroundLayer();
+
+	backgroundLayer->EnableFog(true);
+
+	Fog fog;
+	fog.fogColor = Vector4f(0, 0, 0, 0);
+	fog.fogStart = 50;
+	fog.fogEnd = 400;
+	backgroundLayer->SetFog(fog);
+}
+
+void Stage01::InitBackgroundObjects()
+{
+	auto engine = STGEngine::GetInstance();
 
 	Mesh* road = new Mesh();
 	road->InitVertexBuffer(4);
@@ -65,23 +112,4 @@ void Stage01::OnLoad()
 	road->SetMaterial(roadMaterial);
 
 	engine->AddBackgroundObject(road);
-}
-
-void Stage01::UpdateBackground()
-{
-	Stage::UpdateBackground();
-
-	auto engine = STGEngine::GetInstance();
-	auto camera = engine->GetBackgroundCamera();
-
-	Vector3f pos = camera->GetPosition();
-	float z = pos.z;
-	z += 2;
-	if (z > -8000)
-	{
-		z -= 2000;
-	}
-	pos.z = z;
-
-	camera->SetPosition(pos);
 }

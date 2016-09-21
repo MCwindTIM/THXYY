@@ -2,6 +2,7 @@
 #define THAPPLICATION_H
 
 #include "../Common/THCommon.h"
+#include "../Core/THRenderState.h"
 
 namespace THEngine
 {
@@ -26,7 +27,7 @@ namespace THEngine
 		IDirect3DDevice9* device;
 		D3DPRESENT_PARAMETERS d3dpp;
 
-		D3DXMATRIX world, projection, view;
+		RenderState renderState;
 
 		static Application* instance;
 
@@ -72,6 +73,8 @@ namespace THEngine
 
 		inline IDirect3DDevice9* GetDevice() { return device; }
 
+		inline RenderState* GetRenderState() { return &renderState; }
+
 		inline bool NeedQuit() { return needQuit; }
 
 		inline int GetReturnCode() { return returnCode; }
@@ -109,19 +112,16 @@ namespace THEngine
 
 		inline void SetWorldTransform(D3DXMATRIX* world)
 		{
-			this->world = *world; 
-			device->SetTransform(D3DTS_WORLD, &this->world);
+			renderState.world = *world; 
 		}
 
 		inline void SetProjectionTransform(D3DXMATRIX* projection) 
 		{ 
-			this->projection = *projection; 
-			device->SetTransform(D3DTS_PROJECTION, &this->projection);
+			renderState.projection = *projection; 
 		}
 
 		inline void SetViewTransform(D3DXMATRIX* view) { 
-			this->view = *view; 
-			device->SetTransform(D3DTS_VIEW, &this->view);
+			renderState.view = *view; 
 		}
 
 		friend class AssetManager;

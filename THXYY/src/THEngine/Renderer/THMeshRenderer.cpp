@@ -70,18 +70,25 @@ namespace THEngine
 		argb[2] = mesh->color.y;
 		argb[3] = mesh->color.z;
 
-		D3DXMATRIX mv = app->world * app->view;
+		auto renderState = app->GetRenderState();
+
+		D3DXMATRIX mv = renderState->world * renderState->view;
 		D3DXMATRIX normalMatrix;
+		D3DXMATRIX invProjection;
 		D3DXMatrixInverse(&normalMatrix, nullptr, &mv);
 		D3DXMatrixTranspose(&normalMatrix, &normalMatrix);
+		D3DXMatrixInverse(&invProjection, nullptr, &renderState->projection);
 
 		meshShader->Begin();
 
 		meshShader->SetFloatArray("argb", argb, 4);
 		meshShader->SetTexture("tex", material.texture);
+		meshShader->SetBoolean("fogEnable", renderState->fogEnable);
+		meshShader->SetValue("fog", &renderState->fog, sizeof(Fog));
 		meshShader->SetMatrix("mvMatrix", &mv);
 		meshShader->SetMatrix("normalMatrix", &normalMatrix);
-		meshShader->SetMatrix("projection", &app->projection);
+		meshShader->SetMatrix("projection", &renderState->projection);
+		meshShader->SetMatrix("invProjection", &invProjection);
 
 		meshShader->BeginPass(0);
 		if (mesh->mesh)

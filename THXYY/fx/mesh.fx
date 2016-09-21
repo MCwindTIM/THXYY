@@ -1,6 +1,23 @@
-matrix mvMatrix, normalMatrix, projection;
+struct PointLight
+{
+	float3 position;
+	float4 ambient;
+	float4 diffuse;
+	float4 specular;
+};
+
+struct Fog
+{
+	float4 color;
+	float start;
+	float end;
+};
+
+matrix mvMatrix, normalMatrix, projection, invProjection;
 texture tex;
 float4 argb;
+bool fogEnable;
+Fog fog;
 
 sampler TextureSampler = sampler_state
 { 
@@ -21,7 +38,8 @@ struct VertexIn
 
 struct VertexOut
 {
-    float4 position : POSITION;
+    float4 sv_position : POSITION;
+	float4 position : TEXCOORD2;
 	float3 normal : TEXCOORD1;
 	float2 texCoord : TEXCOORD0;
 };
@@ -35,6 +53,7 @@ VertexOut VSFunc(VertexIn input)
 	output.position = mul(output.position, mvMatrix);
 
 	output.position = mul(output.position, projection);
+	output.sv_position = output.position;
 
 	output.texCoord = input.texCoord;
 
@@ -58,6 +77,15 @@ float4 PSFunc(VertexOut input) : COLOR
 	color = tex2D(TextureSampler, uv.xy);
 	color.xyz *= argb.yzw;
 	color.w *= argb.x;
+
+	if (fogEnable)
+	{
+		float3 posInView = (mul(input.position, invProjection)).xyz;
+		float distToCamera = length(posInView);
+		float fogLerp = saturate((distToCamera - fog.start) / (fog.end - fog.start));
+		color = lerp(color, fog.color, fogLerp);
+	}
+
 	return color;
 }
 

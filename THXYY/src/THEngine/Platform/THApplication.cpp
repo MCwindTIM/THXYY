@@ -15,10 +15,6 @@ Application::Application()
 
 	needQuit = false;
 
-	D3DXMatrixIdentity(&world);
-	D3DXMatrixIdentity(&projection);
-	D3DXMatrixIdentity(&view);
-
 	instance = this;
 }
 
@@ -327,7 +323,7 @@ void Application::GetMultiSampleType(D3DDEVTYPE deviceType,
 		D3DMULTISAMPLE_16_SAMPLES
 	};
 
-	*multiSampleType = D3DMULTISAMPLE_4_SAMPLES;
+	*multiSampleType = D3DMULTISAMPLE_16_SAMPLES;
 	DWORD qualityLevels;
 
 	for (int i = *multiSampleType; i > 0; i--)
@@ -337,7 +333,6 @@ void Application::GetMultiSampleType(D3DDEVTYPE deviceType,
 		if (!FAILED(hr))
 		{
 			*multiSampleType = multiSampleTypes[i];
-			*multiSampleType = D3DMULTISAMPLE_NONE;
 			if (*multiSampleType == D3DMULTISAMPLE_NONE)
 			{
 				*qualityLevel = 0;

@@ -85,9 +85,20 @@ void Layer::Draw()
 
 	rootNode.Visit();
 
+	SetupRenderState();
+
 	Game::GetInstance()->Render();
 
 	Application::GetInstance()->ClearDepthBuffer();
+}
+
+void Layer::SetupRenderState()
+{
+	auto app = Application::GetInstance();
+	auto renderState = app->GetRenderState();
+
+	renderState->fogEnable = this->fogEnable;
+	renderState->fog = this->fog;
 }
 
 void Layer::DestroyObjectImmediately(GameObject* obj)

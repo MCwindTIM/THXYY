@@ -94,8 +94,6 @@ void Particle3DRenderer::Render(RenderObject* obj)
 	argb[2] = particle->color.y;
 	argb[3] = particle->color.z;
 
-	spriteShader->Begin();
-
 	D3DXMATRIX transform;
 	D3DXMatrixIdentity(&transform);
 
@@ -124,13 +122,17 @@ void Particle3DRenderer::Render(RenderObject* obj)
 	device->SetFVF(D3DFVF_XYZ | D3DFVF_TEX1);
 	device->SetStreamSource(0, vb, 0, sizeof(ParticleVertex));
 
+	auto renderState = app->GetRenderState();
+
+	spriteShader->Begin();
+
 	spriteShader->SetFloatArray("argb", argb, 4);
 	spriteShader->SetTexture("tex", particle->texture);
 	spriteShader->SetInt("texWidth", texWidth);
 	spriteShader->SetInt("texHeight", texHeight);
-	spriteShader->SetMatrix("world", &app->world);
-	spriteShader->SetMatrix("projection", &app->projection);
-	spriteShader->SetMatrix("view", &app->view);
+	spriteShader->SetMatrix("world", &renderState->world);
+	spriteShader->SetMatrix("projection", &renderState->projection);
+	spriteShader->SetMatrix("view", &renderState->view);
 
 	spriteShader->BeginPass(0);
 	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);

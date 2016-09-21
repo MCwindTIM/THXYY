@@ -145,6 +145,7 @@
     <ClCompile Include="src\THEngine\Core\THGameObject.cpp" />
     <ClCompile Include="src\THEngine\Core\THParticle3D.cpp" />
     <ClCompile Include="src\THEngine\Core\THRenderObject.cpp" />
+    <ClCompile Include="src\THEngine\Core\THRenderState.cpp" />
     <ClCompile Include="src\THEngine\Core\THScene.cpp" />
     <ClCompile Include="src\THEngine\Core\THSprite.cpp" />
     <ClCompile Include="src\THEngine\Math\MathUtil.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="src\THEngine\Core\THGameObject.h" />
     <ClInclude Include="src\THEngine\Core\THParticle3D.h" />
     <ClInclude Include="src\THEngine\Core\THRenderObject.h" />
+    <ClInclude Include="src\THEngine\Core\THRenderState.h" />
     <ClInclude Include="src\THEngine\Core\THScene.h" />
     <ClInclude Include="src\THEngine\Core\THSprite.h" />
     <ClInclude Include="src\THEngine\Math\MathUtil.h" />
