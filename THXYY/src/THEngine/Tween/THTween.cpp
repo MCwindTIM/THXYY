@@ -7,9 +7,21 @@ namespace THEngine
 
 	}
 
+	Tween::Tween(const Tween& tween) : Object(tween)
+	{
+		object = tween.object;
+		onFinished = tween.onFinished;
+		looped = tween.looped;
+	}
+
 	Tween::~Tween()
 	{
 		
+	}
+
+	Object* Tween::Clone()
+	{
+		return new Tween(*this);
 	}
 
 	void Tween::Update()
@@ -59,9 +71,19 @@ namespace THEngine
 
 	}
 
+	TweenUnit::TweenUnit(const TweenUnit& tweenUnit) : Tween(tweenUnit)
+	{
+
+	}
+
 	TweenUnit::~TweenUnit()
 	{
 		TH_SAFE_RELEASE(tweener);
+	}
+
+	Object* TweenUnit::Clone()
+	{
+		return new TweenUnit(*this);
 	}
 
 	void TweenUnit::DoTween()
@@ -96,9 +118,24 @@ namespace THEngine
 		tweenList.SetBaseSize(5);
 	}
 
+	TweenSequence::TweenSequence(const TweenSequence& sequence) : Tween(sequence)
+	{
+		auto iter = const_cast<TweenSequence&>(sequence).tweenList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto tween = iter->Next();
+			AddTween((Tween*)tween->Clone());
+		}
+	}
+
 	TweenSequence::~TweenSequence()
 	{
 
+	}
+
+	Object* TweenSequence::Clone()
+	{
+		return new TweenSequence(*this);
 	}
 
 	void TweenSequence::DoTween()

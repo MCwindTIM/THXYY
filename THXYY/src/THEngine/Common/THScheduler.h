@@ -14,6 +14,7 @@ namespace THEngine
 
 	public:
 		Scheduler();
+		Scheduler(const Scheduler& scheduler);
 		virtual ~Scheduler();
 
 		void Update();

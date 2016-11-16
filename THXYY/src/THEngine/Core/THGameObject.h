@@ -13,7 +13,6 @@ namespace THEngine
 	{
 	protected:
 		LinkedList<GameObject*> children;
-		String tag;
 		bool needRemove;
 
 	protected:
@@ -31,7 +30,6 @@ namespace THEngine
 		virtual void OnDestroy();
 
 		void AddChild(GameObject* obj);
-		GameObject* FindChildren(String tag);
 
 		void RemoveChild(GameObject* child);
 

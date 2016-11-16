@@ -13,11 +13,22 @@ struct Fog
 	float end;
 };
 
-matrix mvMatrix, normalMatrix, projection, invProjection;
+struct Material
+{
+    float4 ambient;
+	float4 diffuse;
+	float4 specular;
+	float4 emissive;
+	float power;
+};
+
+matrix mvMatrix, normalMatrix, projection;
 texture tex;
 float4 argb;
 bool fogEnable;
+bool hasTexture;
 Fog fog;
+Material material;
 
 sampler TextureSampler = sampler_state
 { 
@@ -39,7 +50,7 @@ struct VertexIn
 struct VertexOut
 {
     float4 sv_position : POSITION;
-	float4 position : TEXCOORD2;
+	float4 positionInView : TEXCOORD2;
 	float3 normal : TEXCOORD1;
 	float2 texCoord : TEXCOORD0;
 };
@@ -48,12 +59,12 @@ VertexOut VSFunc(VertexIn input)
 {
 	VertexOut output;
 
-	output.position.xyz = input.position;
-	output.position.w = 1.0f;
-	output.position = mul(output.position, mvMatrix);
+	output.sv_position.xyz = input.position;
+	output.sv_position.w = 1.0f;
+	output.sv_position = mul(output.sv_position, mvMatrix);
 
-	output.position = mul(output.position, projection);
-	output.sv_position = output.position;
+	output.positionInView = output.sv_position;
+	output.sv_position = mul(output.sv_position, projection);
 
 	output.texCoord = input.texCoord;
 
@@ -74,13 +85,16 @@ float4 PSFunc(VertexOut input) : COLOR
 	float4 color;
 	float2 uv = input.texCoord;
 
-	color = tex2D(TextureSampler, uv.xy);
+	if(hasTexture)
+	{
+	    color = tex2D(TextureSampler, uv.xy);
+	}
 	color.xyz *= argb.yzw;
 	color.w *= argb.x;
 
 	if (fogEnable)
 	{
-		float3 posInView = (mul(input.position, invProjection)).xyz;
+		float3 posInView = (input.positionInView).xyz;
 		float distToCamera = length(posInView);
 		float fogLerp = saturate((distToCamera - fog.start) / (fog.end - fog.start));
 		color = lerp(color, fog.color, fogLerp);

@@ -13,6 +13,8 @@ Stage01::~Stage01()
 	auto assetManager = AssetManager::GetInstance();
 
 	assetManager->DestroyTexture(texRoad);
+
+	TH_SAFE_RELEASE(house);
 }
 
 void Stage01::Update()
@@ -37,8 +39,13 @@ void Stage01::OnLoad()
 	auto assetManager = AssetManager::GetInstance();
 	auto engine = STGEngine::GetInstance();
 
-	texRoad = assetManager->CreateTextureFromFile("res/background/stage01/road.jpg");
-	texRoad->SaveToFile("test.png");
+	texRoad = assetManager->CreateTextureFromFile("res/background/stage01/road.jpg", true);
+	house = Mesh::CreateMeshFromFile("res/model/house/house.x");
+	if (house == nullptr)
+	{
+		THMessageBox(ExceptionManager::GetInstance()->GetException()->GetInfo());
+	}
+	house->Retain();
 
 	SetupCamera();
 	SetupFog();
@@ -55,7 +62,7 @@ void Stage01::UpdateBackground()
 	Vector3f pos = camera->GetPosition();
 	float z = pos.z;
 	z += 2;
-	if (z > -8000)
+	if (z > 2000)
 	{
 		z -= 2000;
 	}
@@ -69,9 +76,9 @@ void Stage01::SetupCamera()
 	auto engine = STGEngine::GetInstance();
 
 	Camera3D* camera = new Camera3D();
-	camera->SetPosition(Vector3f(0, 50, -10000));
+	camera->SetPosition(Vector3f(600, 500, 0));
 	camera->SetUp(Vector3f(0, 1, 0));
-	camera->SetLookAt(Vector3f(0, 50, 10000));
+	camera->SetLookAt(Vector3f(600, 500, 10000));
 	engine->SetBackgroundCamera(camera);
 }
 
@@ -84,8 +91,8 @@ void Stage01::SetupFog()
 
 	Fog fog;
 	fog.fogColor = Vector4f(0, 0, 0, 0);
-	fog.fogStart = 50;
-	fog.fogEnd = 400;
+	fog.fogStart = 200;
+	fog.fogEnd = 1500;
 	backgroundLayer->SetFog(fog);
 }
 
@@ -104,7 +111,7 @@ void Stage01::InitBackgroundObjects()
 	};
 
 	road->SetVertexData(meshVertices);
-	road->SetDrawType(Mesh::TRIANGLE_STRIP);
+	road->SetPrimitiveType(Mesh::TRIANGLE_STRIP);
 
 	Material roadMaterial;
 	roadMaterial.texture = texRoad;
@@ -112,4 +119,8 @@ void Stage01::InitBackgroundObjects()
 	road->SetMaterial(roadMaterial);
 
 	engine->AddBackgroundObject(road);
+
+	Mesh* houseLeft = (Mesh*)house->Clone();
+	houseLeft->SetPosition(Vector3f(0, 395, 1000));
+	engine->AddBackgroundObject(houseLeft);
 }

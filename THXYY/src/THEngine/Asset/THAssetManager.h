@@ -30,6 +30,7 @@ namespace THEngine
 		void DestroyShader(Shader* shader);
 
 		Texture* CreateTextureFromFile(String filePath);
+		Texture* CreateTextureFromFile(String filePath, bool useMipmap);
 		void DestroyTexture(Texture* texture);
 
 		void OnLostDevice();

@@ -34,7 +34,7 @@ String::String(const String& str)
 
 String::~String()
 {
-	if (length > 0)
+	if (buffer)
 	{
 		delete[] buffer;
 	}

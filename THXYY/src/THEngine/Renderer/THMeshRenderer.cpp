@@ -74,30 +74,30 @@ namespace THEngine
 
 		D3DXMATRIX mv = renderState->world * renderState->view;
 		D3DXMATRIX normalMatrix;
-		D3DXMATRIX invProjection;
 		D3DXMatrixInverse(&normalMatrix, nullptr, &mv);
 		D3DXMatrixTranspose(&normalMatrix, &normalMatrix);
-		D3DXMatrixInverse(&invProjection, nullptr, &renderState->projection);
 
 		meshShader->Begin();
 
 		meshShader->SetFloatArray("argb", argb, 4);
-		meshShader->SetTexture("tex", material.texture);
 		meshShader->SetBoolean("fogEnable", renderState->fogEnable);
 		meshShader->SetValue("fog", &renderState->fog, sizeof(Fog));
 		meshShader->SetMatrix("mvMatrix", &mv);
 		meshShader->SetMatrix("normalMatrix", &normalMatrix);
 		meshShader->SetMatrix("projection", &renderState->projection);
-		meshShader->SetMatrix("invProjection", &invProjection);
 
-		meshShader->BeginPass(0);
+		
 		if (mesh->mesh)
 		{
-			mesh->mesh->DrawSubset(0);
+			DrawD3DMesh(mesh->mesh);
 		}
 		else
 		{
-			switch (mesh->drawType)
+			meshShader->SetTexture("tex", material.texture);
+			meshShader->SetBoolean("hasTexture", true);
+
+			meshShader->BeginPass(0);
+			switch (mesh->primitiveType)
 			{
 			case Mesh::TRIANGLE_LIST:
 				app->GetDevice()->DrawPrimitive(D3DPT_TRIANGLELIST, 0, mesh->vertexCount / 3);
@@ -107,10 +107,31 @@ namespace THEngine
 				app->GetDevice()->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, mesh->vertexCount - 2);
 				break;
 			}
+			meshShader->EndPass();
 		}
-		meshShader->EndPass();
-
+		
 		meshShader->End();
+	}
 
+	void MeshRenderer::DrawD3DMesh(Mesh::D3DMesh* mesh)
+	{
+		for (int i = 0; i < mesh->numMaterials; i++)
+		{
+			Material& mat = mesh->materialList[i];
+			if (mat.texture)
+			{
+				meshShader->SetTexture("tex", mat.texture);
+				meshShader->SetBoolean("hasTexture", true);
+			}
+			else
+			{
+				meshShader->SetBoolean("hasTexture", false);
+			}
+			meshShader->SetValue("material", &mat, sizeof(Material) - sizeof(Texture*));
+
+			meshShader->BeginPass(0);
+			mesh->mesh->DrawSubset(i);
+			meshShader->EndPass();
+		}
 	}
 }

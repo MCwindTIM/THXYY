@@ -13,6 +13,7 @@ namespace THEngine
 
 	public:
 		Object();
+		Object(const Object& object);
 		virtual ~Object();
 
 		virtual Object* Clone();

@@ -21,7 +21,10 @@ namespace THEngine
 
 	public:
 		RenderObject();
+		RenderObject(const RenderObject& object);
 		virtual ~RenderObject();
+
+		virtual Object* Clone() override;
 
 		virtual void Update() override;
 

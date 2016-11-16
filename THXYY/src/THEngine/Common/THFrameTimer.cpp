@@ -12,4 +12,9 @@ namespace THEngine
 	{
 
 	}
+
+	Object* FrameTimer::Clone()
+	{
+		return new FrameTimer(*this);
+	}
 }

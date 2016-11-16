@@ -14,6 +14,7 @@ namespace THEngine
 
 	public:
 		EngineObject();
+		EngineObject(const EngineObject& engineObject);
 		virtual ~EngineObject();
 
 		virtual void Update() = 0;

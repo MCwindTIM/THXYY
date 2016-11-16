@@ -8,6 +8,16 @@ namespace THEngine
 
 	}
 
+	TweenManager::TweenManager(const TweenManager& tweenManager) : Object(tweenManager)
+	{
+		auto iter = const_cast<TweenManager&>(tweenManager).tweenList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto tween = iter->Next();
+			AddTween((Tween*)tween->Clone());
+		}
+	}
+
 	TweenManager::~TweenManager()
 	{
 

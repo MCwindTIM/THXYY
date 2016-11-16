@@ -9,9 +9,11 @@ namespace THEngine
 	class Material
 	{
 	public:
-		Vector3f ambient = Vector3f(0, 0, 0);
-		Vector3f diffuse = Vector3f(0, 0, 0);
-		Vector3f specular = Vector3f(0, 0, 0);
+		Vector4f ambient = Vector4f(0, 0, 0, 0);
+		Vector4f diffuse = Vector4f(0, 0, 0, 0);
+		Vector4f specular = Vector4f(0, 0, 0, 0);
+		Vector4f emissive = Vector4f(0, 0, 0, 0);
+		float power = 0.0f;
 		Texture* texture = nullptr;
 	};
 
@@ -28,37 +30,67 @@ namespace THEngine
 	class Mesh : public RenderObject
 	{
 	public:
-		enum DrawType
+		enum PrimitiveType
 		{
 			TRIANGLE_LIST,
 			TRIANGLE_STRIP 
+		};
+
+	private:
+		class D3DMesh : public Object
+		{
+		private:
+			ID3DXMesh* mesh = nullptr;
+			int numMaterials = 0;
+			Material* materialList = nullptr;
+			bool isCloned = false;
+
+		public:
+			D3DMesh();
+			D3DMesh(const D3DMesh& d3dMesh);
+			virtual ~D3DMesh();
+
+			static D3DMesh* LoadMesh(String filePath);
+
+			virtual Object* Clone() override;
+
+			friend class MeshRenderer;
 		};
 
 	protected:
 		int vertexCount = 0;
 
 		Material material;
-		DrawType drawType = TRIANGLE_LIST;
+		PrimitiveType primitiveType = TRIANGLE_LIST;
 
-		ID3DXMesh* mesh = nullptr;
+		D3DMesh* mesh = nullptr;
 		IDirect3DVertexBuffer9* vertexBuffer = nullptr;
 		IDirect3DIndexBuffer9* indexBuffer = nullptr;
 
+	private:
+		bool LoadFromX(String filePath);
+
 	public:
 		Mesh();
+		Mesh(const Mesh& mesh);
 		virtual ~Mesh();
 
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void SendToRenderQueue() override;
+		virtual Object* Clone() override;
 
 		inline void SetMaterial(Material material) { this->material = material; }
 
-		inline void SetDrawType(DrawType drawType) { this->drawType = drawType; }
+		inline void SetPrimitiveType(PrimitiveType primitiveType) { this->primitiveType = primitiveType; }
 
 		void InitVertexBuffer(int size);
 
 		void SetVertexData(void* data);
+
+		static Mesh* CreateMeshFromFile(String filePath);
+
+	
 
 		friend class MeshRenderer;
 	};

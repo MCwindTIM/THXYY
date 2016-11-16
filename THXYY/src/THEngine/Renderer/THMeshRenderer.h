@@ -18,6 +18,9 @@ namespace THEngine
 	protected:
 		void CalcWorldTransform(Mesh* mesh);
 
+	private:
+		void DrawD3DMesh(Mesh::D3DMesh* mesh);
+
 	public:
 		MeshRenderer();
 		virtual ~MeshRenderer();

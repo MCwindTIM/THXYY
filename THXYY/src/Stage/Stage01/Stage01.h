@@ -10,6 +10,8 @@ private:
 
 	int frame = 0;
 
+	Mesh* house = nullptr;
+
 public:
 	Stage01();
 	virtual ~Stage01();

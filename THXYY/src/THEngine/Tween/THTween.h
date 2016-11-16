@@ -22,7 +22,10 @@ namespace THEngine
 
 	public:
 		Tween();
+		Tween(const Tween& tween);
 		virtual ~Tween();
+
+		virtual Object* Clone() override;
 
 		virtual void Update();
 
@@ -51,7 +54,10 @@ namespace THEngine
 
 	public:
 		TweenUnit();
+		TweenUnit(const TweenUnit& tweenUnit);
 		virtual ~TweenUnit();
+
+		virtual Object* Clone() override;
 
 		virtual void DoTween() override;
 		virtual void OnReset() override;
@@ -66,7 +72,10 @@ namespace THEngine
 
 	public:
 		TweenSequence();
+		TweenSequence(const TweenSequence& sequence);
 		virtual ~TweenSequence();
+
+		virtual Object* Clone() override;
 
 		virtual void DoTween() override;
 		virtual void OnStart() override;

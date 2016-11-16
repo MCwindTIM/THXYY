@@ -7,6 +7,16 @@ namespace THEngine
 
 	}
 
+	Scheduler::Scheduler(const Scheduler& scheduler) : Object(scheduler)
+	{
+		auto iter = const_cast<Scheduler&>(scheduler).frameTimerList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto timer = iter->Next();
+			AddTimer((FrameTimer*)timer->Clone());
+		}
+	}
+
 	Scheduler::~Scheduler()
 	{
 

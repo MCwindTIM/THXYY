@@ -15,6 +15,7 @@ namespace THEngine
 		
 	public:
 		TweenManager();
+		TweenManager(const TweenManager& tweenManager);
 		virtual ~TweenManager();
 
 		void Update();

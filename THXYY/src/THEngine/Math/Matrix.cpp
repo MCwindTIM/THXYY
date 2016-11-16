@@ -128,7 +128,7 @@ namespace THEngine
 		return ret;
 	}
 
-	Vector3f Vector3f::operator +(Vector3f a)
+	Vector3f Vector3f::operator +(const Vector3f& a)
 	{
 		Vector3f v;
 		v.x = this->x + a.x;
@@ -137,7 +137,7 @@ namespace THEngine
 		return v;
 	}
 
-	Vector3f Vector3f::operator -(Vector3f a)
+	Vector3f Vector3f::operator -(const Vector3f& a)
 	{
 		Vector3f v;
 		v.x = this->x - a.x;
@@ -155,7 +155,7 @@ namespace THEngine
 		return v;
 	}
 
-	bool Vector3f::operator ==(Vector3f a)
+	bool Vector3f::operator ==(const Vector3f& a)
 	{
 		float ex = fabs(x - a.x);
 		float ey = fabs(y - a.y);
@@ -163,7 +163,7 @@ namespace THEngine
 		return ex < 1e-4 && ey < 1e-4 &&ez < 1e-4;
 	}
 
-	bool Vector3f::operator !=(Vector3f a)
+	bool Vector3f::operator !=(const Vector3f& a)
 	{
 		return !(*this == a);
 	}
@@ -182,7 +182,7 @@ namespace THEngine
 		_data[3] = a4;
 	}
 
-	Vector4f Vector4f::operator *(Matrix a)
+	Vector4f Vector4f::operator *(const Matrix& a)
 	{
 		Vector4f ret;
 		int i, j;
@@ -196,7 +196,7 @@ namespace THEngine
 		return ret;
 	}
 
-	float Vector4f::operator [](int index)
+	float& Vector4f::operator [](const int& index)
 	{
 		return _data[index];
 	}

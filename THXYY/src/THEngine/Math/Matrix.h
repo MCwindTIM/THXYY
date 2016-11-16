@@ -34,12 +34,12 @@ namespace THEngine
 		Vector3f(float a1, float a2, float a3);
 		float Norm();
 		Vector3f Normalize();
-		Vector3f operator +(Vector3f a);
-		Vector3f operator -(Vector3f a);
+		Vector3f operator +(const Vector3f& a);
+		Vector3f operator -(const Vector3f& a);
 		Vector3f operator -();
 		Vector3f operator *(float a);
-		bool operator ==(Vector3f a);
-		bool operator !=(Vector3f a);
+		bool operator ==(const Vector3f& a);
+		bool operator !=(const Vector3f& a);
 
 		static Vector3f Cross(Vector3f a, Vector3f b);
 		static float Dot(Vector3f a, Vector3f b);
@@ -55,9 +55,9 @@ namespace THEngine
 		Vector4f();
 		Vector4f(float a1, float a2, float a3, float a4);
 
-		Vector4f operator *(Matrix a);
+		Vector4f operator *(const Matrix& a);
 
-		float operator[](int index);
+		float& operator[](const int& index);
 	};
 
 	class Matrix

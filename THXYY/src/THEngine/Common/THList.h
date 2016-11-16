@@ -85,6 +85,30 @@ namespace THEngine
 			iter = NULL;
 		}
 
+		LinkedList(const LinkedList<T>& list) 
+		{
+			head = new ListNode<T>();
+			head->prior = NULL;
+			head->next = nullptr;
+
+			ListNode<T>* p = head;
+			ListNode<T>* q = list.head;
+			while (q->next)
+			{
+				q = q->next;
+				p->next = new ListNode<T>();
+				p->next->prior = p;
+				p = p->next;
+				p->obj = q->obj;
+				p->obj->Retain();
+				p->next = nullptr;
+			}
+
+			rear = p;
+			size = list.size;
+			iter = nullptr;
+		}
+
 		virtual ~LinkedList()
 		{
 			auto iter = GetIterator();
@@ -346,6 +370,21 @@ namespace THEngine
 		ArrayList()
 		{
 
+		}
+
+		ArrayList(const ArrayList<T>& list)
+		{
+			size = list.size;
+			capacity = list.capacity;
+			baseSize = list.baseSize;
+			iter = nullptr;
+			elements = new T[list.capacity];
+
+			for (int i = 0; i < size; i++)
+			{
+				elements[i] = list.elements[i];
+				elements[i]->Retain();
+			}
 		}
 
 		ArrayList(int baseSize)

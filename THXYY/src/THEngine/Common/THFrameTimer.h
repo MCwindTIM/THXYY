@@ -18,6 +18,8 @@ namespace THEngine
 
 		std::function<void()> run = [](){};
 
+		virtual Object* Clone() override;
+
 		inline void Pause() { paused = true; }
 		inline void Resume() { paused = false; }
 		inline bool IsPaused() { return paused; }

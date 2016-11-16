@@ -11,9 +11,26 @@ namespace THEngine
 		D3DXQuaternionIdentity(&rotation3D);
 	}
 
+	RenderObject::RenderObject(const RenderObject& object) : GameObject(object)
+	{
+		position = object.position;
+		color = object.color;
+		alpha = object.alpha;
+		scale = object.scale;
+		rotation3D = object.rotation3D;
+
+		tweenManager = new TweenManager(*object.tweenManager);
+		tweenManager->Retain();
+	}
+
 	RenderObject::~RenderObject()
 	{
 		TH_SAFE_RELEASE(tweenManager);
+	}
+
+	Object* RenderObject::Clone()
+	{
+		return new RenderObject(*this);
 	}
 
 	void RenderObject::Update()

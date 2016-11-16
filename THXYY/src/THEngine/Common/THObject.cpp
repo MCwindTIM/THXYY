@@ -1,9 +1,15 @@
 #include "THObject.h"
 #include "THDefine.h"
+#include <typeinfo>
 
 namespace THEngine
 {
 	Object::Object()
+	{
+		refCount = 0;
+	}
+
+	Object::Object(const Object& object)
 	{
 		refCount = 0;
 	}

@@ -9,6 +9,13 @@ namespace THEngine
 		scheduler->Retain();
 	}
 
+	EngineObject::EngineObject(const EngineObject& engineObject) : Object(engineObject)
+	{
+		paused = engineObject.paused;
+		scheduler = new Scheduler(*engineObject.scheduler);
+		scheduler->Retain();
+	}
+
 	EngineObject::~EngineObject()
 	{
 		TH_SAFE_RELEASE(scheduler);
