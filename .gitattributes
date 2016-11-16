@@ -1,2 +1,3 @@
-THXYY/src/* linguist-vendored
-THXYY/src/THEngine/External/* linguist-vendored=false
+* linguist-vendored
+THXYY/src/* linguist-vendored=false
+THXYY/src/THEngine/EXternal/* linguist-vendored
