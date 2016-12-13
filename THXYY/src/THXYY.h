@@ -15,7 +15,7 @@ public:
 	THXYY();
 	virtual ~THXYY();
 
-	int CreateGame(int width, int height, bool fullScreen);
+	bool CreateGame(int width, int height, bool fullScreen);
 
 	virtual void OnShutdown() override;
 };

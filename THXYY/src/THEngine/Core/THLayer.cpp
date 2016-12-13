@@ -99,6 +99,20 @@ void Layer::SetupRenderState()
 
 	renderState->fogEnable = this->fogEnable;
 	renderState->fog = this->fog;
+
+	renderState->lightingEnable = lightingEnable;
+
+	auto iter = lights.GetIterator();
+	while (iter->HasNext())
+	{
+		auto light = iter->Next();
+		switch (light->GetType())
+		{
+		case Light::DIRECTIONAL:
+			renderState->directionalLights.Add((DirectionalLight*)light);
+			break;
+		}
+	}
 }
 
 void Layer::DestroyObjectImmediately(GameObject* obj)

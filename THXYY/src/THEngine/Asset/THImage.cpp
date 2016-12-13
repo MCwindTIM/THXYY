@@ -3,9 +3,15 @@
 #include "../External/libpng/png.h"
 #include <stdlib.h>
 
-#pragma comment(lib,"./src/THEngine/Lib/libjpeg/jpeg.lib")
-#pragma comment(lib,"./src/THEngine/Lib/libpng/libpng16.lib")
-#pragma comment(lib,"./src/THEngine/Lib/libpng/zlib.lib")
+#ifdef _DEBUG
+#pragma comment(lib,"libjpeg/jpeg.lib")
+#pragma comment(lib,"libpng/libpng16-debug.lib")
+#pragma comment(lib,"libpng/zlib-debug.lib")
+#else
+#pragma comment(lib,"libjpeg/jpeg.lib")
+#pragma comment(lib,"libpng/libpng16-release.lib")
+#pragma comment(lib,"libpng/zlib-release.lib")
+#endif
 
 using namespace THEngine;
 
@@ -41,7 +47,7 @@ Image* Image::Load(String filePath)
 
 	if (ext == "jpg")
 	{
-		if (TH_FAILED(image->LoadJPG(filePath.ToStdString().c_str())))
+		if (image->LoadJPG(filePath.ToStdString().c_str()) == false)
 		{
 			auto exception = exceptionManager->GetException();
 			String message;
@@ -63,7 +69,7 @@ Image* Image::Load(String filePath)
 	}
 	else if (ext == "png")
 	{
-		if (TH_FAILED(image->LoadPNG(filePath.ToStdString().c_str())))
+		if (image->LoadPNG(filePath.ToStdString().c_str()) == false)
 		{
 			auto exception = exceptionManager->GetException();
 			String message;
@@ -93,7 +99,7 @@ Image* Image::Load(String filePath)
 	return image;
 }
 
-int Image::LoadJPG(const char* filePath)
+bool Image::LoadJPG(const char* filePath)
 {
 	auto exceptionManager = ExceptionManager::GetInstance();
 
@@ -104,7 +110,7 @@ int Image::LoadJPG(const char* filePath)
 	if ((infile = fopen(filePath, "rb")) == NULL)
 	{
 		exceptionManager->PushException(new Exception("无法打开文件。"));
-		return -1;
+		return false;
 	}
 
 	cinfo.err = jpeg_std_error(&error);
@@ -142,10 +148,10 @@ int Image::LoadJPG(const char* filePath)
 	jpeg_destroy_decompress(&cinfo);
 	fclose(infile);
 
-	return TH_SUCCESS;
+	return true;
 }
 
-int Image::LoadPNG(const char* filePath)
+bool Image::LoadPNG(const char* filePath)
 {
 	auto exceptionManager = ExceptionManager::GetInstance();
 
@@ -156,7 +162,7 @@ int Image::LoadPNG(const char* filePath)
 	if ((infile = fopen(filePath, "rb")) == NULL)
 	{
 		exceptionManager->PushException(new Exception("无法打开文件。"));
-		return -1;
+		return false;
 	}
 
 	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
@@ -169,7 +175,7 @@ int Image::LoadPNG(const char* filePath)
 		fclose(infile);
 		/* If we get here, we had a problem reading the file */
 		exceptionManager->PushException(new Exception("无法读取文件内容。文件可能已损坏。"));
-		return -1;
+		return false;
 	}
 
 	png_init_io(png_ptr, infile);
@@ -211,10 +217,10 @@ int Image::LoadPNG(const char* filePath)
 	default:
 		png_destroy_read_struct(&png_ptr, &info_ptr, 0);
 		fclose(infile);
-		return -1;
+		return false;
 	}
 	png_destroy_read_struct(&png_ptr, &info_ptr, 0);
 	fclose(infile);
 
-	return TH_SUCCESS;
+	return true;
 }

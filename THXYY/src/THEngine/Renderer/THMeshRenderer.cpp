@@ -52,7 +52,22 @@ namespace THEngine
 		transform *= temp;
 
 		Application::GetInstance()->SetWorldTransform(&transform);
+	}
 
+	void MeshRenderer::SetupRenderState()
+	{
+		auto app = Application::GetInstance();
+		auto device = app->GetDevice();
+		auto renderState = app->GetRenderState();
+
+		if (renderState->lightingEnable)
+		{
+			device->SetRenderState(D3DRS_LIGHTING, true);
+		}
+		else
+		{
+			device->SetRenderState(D3DRS_LIGHTING, false);
+		}
 	}
 
 	void MeshRenderer::Render(RenderObject* object)

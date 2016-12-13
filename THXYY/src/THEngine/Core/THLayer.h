@@ -5,6 +5,7 @@
 #include "THGameObject.h"
 #include "THCamera.h"
 #include "../Platform/THApplication.h"
+#include "3D\THLight.h"
 
 namespace THEngine
 {
@@ -22,6 +23,10 @@ namespace THEngine
 		bool fogEnable = false;
 		Fog fog;
 
+		LinkedList<Light*> lights;
+
+		bool lightingEnable = false;
+
 	protected:
 		void SetupRenderState();
 
@@ -37,6 +42,10 @@ namespace THEngine
 
 		void AddChild(GameObject* obj);
 
+		inline void AddLight(Light* light) { lights.Add(light); }
+
+		inline void RemoveLight(Light* light) { lights.Remove(light); }
+
 		inline Camera* GetCamera() { return camera; }
 
 		void SetCamera(Camera* camera);
@@ -44,6 +53,8 @@ namespace THEngine
 		inline void SetOrder(int order) { this->order = order; }
 
 		inline void EnableFog(bool fogEnable) { this->fogEnable = fogEnable; }
+
+		inline void EnableLighting(bool lightingEnable) { this->lightingEnable = lightingEnable; }
 		
 		inline void SetFog(Fog fog) { this->fog = fog; }
 

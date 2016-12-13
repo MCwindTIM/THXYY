@@ -13,36 +13,36 @@ THXYY::~THXYY()
 	TH_SAFE_RELEASE(engine);
 }
 
-int THXYY::CreateGame(int width, int height, bool fullScreen)
+bool THXYY::CreateGame(int width, int height, bool fullScreen)
 {
 	auto exceptionManager = ExceptionManager::GetInstance();
 
-	if (TH_FAILED(Game::CreateGame(width, height, fullScreen, "THXYY", IDI_THXYY, IDI_SMALL)))
+	if (Game::CreateGame(width, height, fullScreen, "THXYY", IDI_THXYY, IDI_SMALL) == false)
 	{
-		return -1;
+		return false;
 	}
 
 	engine = STGEngine::Create();
 	if (engine == nullptr)
 	{
-		return -1;
+		return false;
 	}
 	engine->Retain();
 
 	auto stgResources = STGResources::GetInstance();
 	if (!stgResources->LoadSounds())
 	{
-		return -1;
+		return false;
 	}
 	if (!stgResources->LoadTexTures())
 	{
-		return -1;
+		return false;
 	}
 
 	auto global = Global::GetInstance();
 	if (!global->LoadTextures())
 	{
-		return -1;
+		return false;
 	}
 
 	srand(time(NULL));
@@ -50,7 +50,7 @@ int THXYY::CreateGame(int width, int height, bool fullScreen)
 	Title* title = new Title();
 	SetScene(title);
 
-	return TH_SUCCESS;
+	return true;
 }
 
 void THXYY::OnShutdown()

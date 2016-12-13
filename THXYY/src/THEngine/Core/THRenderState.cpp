@@ -13,4 +13,9 @@ namespace THEngine
 	{
 
 	}
+
+	void RenderState::Clear()
+	{
+		directionalLights.Clear();
+	}
 }

@@ -34,13 +34,13 @@ namespace THEngine
 	private:
 		static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-		int RegisterGameClass();
-		int CreateGameWindow();
-		int InitDeviceContext();
+		bool RegisterGameClass();
+		bool CreateGameWindow();
+		bool InitDeviceContext();
 		void GetDeviceInfo(D3DDEVTYPE* deviceType, int* vertexProcessingType);
 		void GetMultiSampleType(D3DDEVTYPE deviceType, D3DMULTISAMPLE_TYPE* multiSampleType, DWORD* qualityLevel);
-		int CheckDeviceCaps(D3DDEVTYPE deviceType);
-		int CreateDevice();
+		bool CheckDeviceCaps(D3DDEVTYPE deviceType);
+		bool CreateDevice();
 
 		void OnKeyDown(int key);
 
@@ -50,7 +50,7 @@ namespace THEngine
 
 		static Application* GetInstance();
 
-		int Init(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon);
+		bool Init(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon);
 		void DealWithMessage();
 
 		void SetOrtho(float left, float bottom, float width, float height, float znear, float zfar);

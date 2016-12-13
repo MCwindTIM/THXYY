@@ -35,7 +35,7 @@ namespace THEngine
 			tweenManager->KillTween(tween);
 		}
 
-		inline void SetPosition(Vector3f position)
+		inline void SetPosition(const Vector3f& position)
 		{
 			this->position = position;
 		}
@@ -45,7 +45,7 @@ namespace THEngine
 			return position;
 		}
 
-		inline void SetColor(Vector3f color)
+		inline void SetColor(const Vector3f& color)
 		{
 			this->color = color;
 		}
@@ -60,6 +60,8 @@ namespace THEngine
 
 		inline void SetScale(Vector3f scale) { this->scale = scale; }
 		inline Vector3f GetScale() { return scale; }
+
+		void SetRotationByAxis(const Vector3f& axis, float rotation);
 
 		friend class MoveTo;
 		friend class MoveBy;

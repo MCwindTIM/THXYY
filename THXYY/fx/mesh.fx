@@ -1,10 +1,4 @@
-struct PointLight
-{
-	float3 position;
-	float4 ambient;
-	float4 diffuse;
-	float4 specular;
-};
+#include "lighting.fx"
 
 struct Fog
 {

@@ -3,6 +3,7 @@
 
 #include "../Common/THCommon.h"
 #include "../Math/Matrix.h"
+#include "3D\THLight.h"
 
 namespace THEngine
 {
@@ -19,12 +20,17 @@ namespace THEngine
 		bool fogEnable = false;
 		Fog fog;
 
+		bool lightingEnable = false;
+
 		D3DXMATRIX world, projection, view;
+
+		ArrayList<DirectionalLight*> directionalLights;
 
 	public:
 		RenderState();
 		virtual ~RenderState();
-		
+
+		void Clear();
 	};
 }
 

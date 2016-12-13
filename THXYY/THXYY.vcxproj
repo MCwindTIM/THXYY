@@ -42,11 +42,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>E:\VS 2013 program\THXYY\THXYY\src\THEngine;D:\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)/src/THEngine;$(DXSDK_DIR)/Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)/src/THEngine;$(DXSDK_DIR)/Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -64,7 +66,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;dxerr.lib;dinput8.lib;xaudio2.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <Profile>true</Profile>
     </Link>
@@ -137,6 +139,7 @@
     <ClCompile Include="src\THEngine\Common\THObject.cpp" />
     <ClCompile Include="src\THEngine\Common\THScheduler.cpp" />
     <ClCompile Include="src\THEngine\Common\THString.cpp" />
+    <ClCompile Include="src\THEngine\Core\3D\THLight.cpp" />
     <ClCompile Include="src\THEngine\Core\3D\THMesh.cpp" />
     <ClCompile Include="src\THEngine\Core\THCamera.cpp" />
     <ClCompile Include="src\THEngine\Core\THFont.cpp" />
@@ -223,6 +226,7 @@
     <ClInclude Include="src\THEngine\Common\THObject.h" />
     <ClInclude Include="src\THEngine\Common\THScheduler.h" />
     <ClInclude Include="src\THEngine\Common\THString.h" />
+    <ClInclude Include="src\THEngine\Core\3D\THLight.h" />
     <ClInclude Include="src\THEngine\Core\3D\THMesh.h" />
     <ClInclude Include="src\THEngine\Core\THCamera.h" />
     <ClInclude Include="src\THEngine\Core\THFont.h" />
@@ -271,6 +275,11 @@
     <None Include="fx\mesh.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\lighting.fx">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

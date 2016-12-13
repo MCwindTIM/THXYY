@@ -14,11 +14,6 @@
 #define TH_SAFE_DELETE(object)  \
 	if(object) { delete object; object = NULL; }
 
-
-#define TH_SUCCESS                0
-
-#define TH_FAILED(status)         (status < 0)
-
 #define TH_INSTANCEOF(instance,classname) (typeid(instance) == typeid(classname))
 
 #define  TH_MAX_FLOAT        FLT_MAX

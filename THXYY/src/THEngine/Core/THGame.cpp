@@ -40,7 +40,7 @@ Game* Game::GetInstance()
 	return instance;
 }
 
-int Game::CreateGame(int width, int height, bool fullScreen, String title, 
+bool Game::CreateGame(int width, int height, bool fullScreen, String title, 
 	int bigIcon, int smallIcon)
 {
 	this->width = width;
@@ -51,9 +51,9 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 	exceptionManager = ExceptionManager::GetInstance();
 
 	app = new Application();
-	if(TH_FAILED(app->Init(width,height,fullScreen,title,bigIcon,smallIcon)))
+	if(app->Init(width,height,fullScreen,title,bigIcon,smallIcon) == false)
 	{
-		return -1;
+		return false;
 	}
 	app->Retain();
 
@@ -73,7 +73,7 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		auto exception = exceptionManager->GetException();
 		auto newException = new Exception((String)"创建SpriteRenderer失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
-		return -1;
+		return false;
 	}
 
 	particle3DRenderer = Particle3DRenderer::Create();
@@ -82,7 +82,7 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		auto exception = exceptionManager->GetException();
 		auto newException = new Exception((String)"创建Particle3DRenderer失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
-		return -1;
+		return false;
 	}
 	particle3DRenderer->Retain();
 
@@ -93,7 +93,7 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		auto exception = exceptionManager->GetException();
 		auto newException = new Exception((String)"创建MeshRenderer失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
-		return -1;
+		return false;
 	}
 	meshRenderer->Retain();
 
@@ -103,7 +103,7 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		auto exception = exceptionManager->GetException();
 		auto newException = new Exception((String)"创建defaultFont失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
-		return -1;
+		return false;
 	}
 
 	input = Input::Create(app);
@@ -112,7 +112,7 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		auto exception = exceptionManager->GetException();
 		auto newException = new Exception((String)"初始化DirectInput失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
-		return -1;
+		return false;
 	}
 	input->Retain();
 
@@ -122,11 +122,11 @@ int Game::CreateGame(int width, int height, bool fullScreen, String title,
 		auto exception = exceptionManager->GetException();
 		auto newException = new Exception((String)"初始化DirectSound失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
-		return -1;
+		return false;
 	}
 	audio->Retain();
 
-	return TH_SUCCESS;
+	return true;
 }
 
 int Game::Run()
@@ -197,7 +197,7 @@ void Game::Update()
 	input->Update();
 	eventSystem->Update();
 
-	if (scene->IsPaused() == false)
+	if (scene && scene->IsPaused() == false)
 	{
 		scene->Update();
 	}

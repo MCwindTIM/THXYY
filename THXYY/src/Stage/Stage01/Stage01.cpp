@@ -61,10 +61,10 @@ void Stage01::UpdateBackground()
 
 	Vector3f pos = camera->GetPosition();
 	float z = pos.z;
-	z += 2;
-	if (z > 2000)
+	z += 5;
+	if (z > 4000)
 	{
-		z -= 2000;
+		z -= 3000;
 	}
 	pos.z = z;
 
@@ -76,9 +76,10 @@ void Stage01::SetupCamera()
 	auto engine = STGEngine::GetInstance();
 
 	Camera3D* camera = new Camera3D();
-	camera->SetPosition(Vector3f(600, 500, 0));
+	camera->SetPosition(Vector3f(0, 500, 0));
 	camera->SetUp(Vector3f(0, 1, 0));
-	camera->SetLookAt(Vector3f(600, 500, 10000));
+	camera->SetLookAt(Vector3f(0, 500, 10000));
+	camera->SetFov(65.0f);
 	engine->SetBackgroundCamera(camera);
 }
 
@@ -90,9 +91,9 @@ void Stage01::SetupFog()
 	backgroundLayer->EnableFog(true);
 
 	Fog fog;
-	fog.fogColor = Vector4f(0, 0, 0, 0);
-	fog.fogStart = 200;
-	fog.fogEnd = 1500;
+	fog.fogColor = Vector4f(0, 0, 0, 1);
+	fog.fogStart = 100;
+	fog.fogEnd = 3000;
 	backgroundLayer->SetFog(fog);
 }
 
@@ -120,7 +121,30 @@ void Stage01::InitBackgroundObjects()
 
 	engine->AddBackgroundObject(road);
 
-	Mesh* houseLeft = (Mesh*)house->Clone();
-	houseLeft->SetPosition(Vector3f(0, 395, 1000));
-	engine->AddBackgroundObject(houseLeft);
+	CreateHouses();
+}
+
+void Stage01::CreateHouses()
+{
+	auto engine = STGEngine::GetInstance();
+
+	Mesh* houseLeft1 = (Mesh*)house->Clone();
+	houseLeft1->SetPosition(Vector3f(-800, 395, 1000));
+	engine->AddBackgroundObject(houseLeft1);
+
+	Mesh* houseRight1 = (Mesh*)house->Clone();
+	houseRight1->SetPosition(Vector3f(800, 395, 1000));
+	houseRight1->SetRotationByAxis(Vector3f(0, 1, 0), 180);
+	engine->AddBackgroundObject(houseRight1);
+
+	for (int i = 0; i < 5; i++)
+	{
+		Mesh* houseLeft2 = (Mesh*)houseLeft1->Clone();
+		houseLeft2->SetPosition(Vector3f(-800, 395, 1000 + 1500 * i));
+		engine->AddBackgroundObject(houseLeft2);
+
+		Mesh* houseRight2 = (Mesh*)houseRight1->Clone();
+		houseRight2->SetPosition(Vector3f(800, 395, 1000 + 1500 * i));
+		engine->AddBackgroundObject(houseRight2);
+	}	
 }

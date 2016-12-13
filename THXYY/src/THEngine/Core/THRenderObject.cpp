@@ -44,4 +44,9 @@ namespace THEngine
 		tween->Bind(this);
 		tweenManager->AddTween(tween);
 	}
+
+	void RenderObject::SetRotationByAxis(const Vector3f& axis, float rotation)
+	{
+		D3DXQuaternionRotationAxis(&rotation3D, &D3DXVECTOR3(axis.x, axis.y, axis.z), ToRad(rotation));
+	}
 }

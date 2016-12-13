@@ -21,6 +21,8 @@ namespace THEngine
 	private:
 		void DrawD3DMesh(Mesh::D3DMesh* mesh);
 
+		void SetupRenderState();
+
 	public:
 		MeshRenderer();
 		virtual ~MeshRenderer();

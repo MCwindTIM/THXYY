@@ -26,7 +26,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//_CrtSetBreakAlloc(1915);
 
 	THXYY game;
-	if (TH_FAILED(game.CreateGame(640, 480, false)))
+	if (game.CreateGame(640, 480, false) == false)
 	{
 		String error = ExceptionManager::GetInstance()->GetException()->GetInfo();
 		String message = (String)"糟糕，游戏好像被隙间了。原因是：\n" + error;

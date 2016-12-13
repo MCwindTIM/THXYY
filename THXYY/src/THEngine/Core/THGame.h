@@ -93,7 +93,7 @@ namespace THEngine
 
 		static Game* GetInstance();
 
-		int CreateGame(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon);
+		bool CreateGame(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon);
 
 		void SetScene(Scene* scene);
 

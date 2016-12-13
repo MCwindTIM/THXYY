@@ -25,7 +25,7 @@ namespace THEngine
 		inline int GetImageWidth() { return imageWidth; }
 		inline int GetImageHeight() { return imageHeight; }
 
-		int SaveToFile(String path);
+		bool SaveToFile(String path);
 
 		void OnLostDevice();
 		void OnResetDevice();

@@ -31,11 +31,11 @@ Application* Application::GetInstance()
 	return instance;
 }
 
-int Application::Init(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon)
+bool Application::Init(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon)
 {
 	auto exceptionManager = ExceptionManager::GetInstance();
 
-	int status;
+	bool status;
 
 	this->width = width;
 	this->height = height;
@@ -47,31 +47,31 @@ int Application::Init(int width, int height, bool fullScreen, String title, int 
 	hInstance = (HINSTANCE)GetModuleHandle(NULL);
 
 	status = RegisterGameClass();
-	if (TH_FAILED(status))
+	if (status == false)
 	{
 		exceptionManager->PushException(new Exception("注册窗口类失败。"));
 		return status;
 	}
 
 	status = CreateGameWindow();
-	if (TH_FAILED(status))
+	if (status == false)
 	{
 		exceptionManager->PushException(new Exception("创建窗口失败。"));
 		return status;
 	}
 
 	status = InitDeviceContext();
-	if (TH_FAILED(status))
+	if (status == false)
 	{
 		auto exception = exceptionManager->GetException();
 		exceptionManager->PushException(new Exception((String)"初始化Direct3D失败。原因是：\n" + exception->GetInfo()));
 		return status;
 	}
 
-	return TH_SUCCESS;
+	return true;
 }
 
-int Application::RegisterGameClass()
+bool Application::RegisterGameClass()
 {
 	WNDCLASSEX wcex;
 
@@ -91,12 +91,12 @@ int Application::RegisterGameClass()
 
 	if (RegisterClassEx(&wcex) == 0)
 	{
-		return -1;
+		return false;
 	}
-	return TH_SUCCESS;
+	return true;
 }
 
-int Application::CreateGameWindow()
+bool Application::CreateGameWindow()
 {
 	UINT windowStyle = WS_OVERLAPPEDWINDOW;
 	windowStyle &= ~(WS_THICKFRAME | WS_MAXIMIZEBOX);            //固定窗口大小
@@ -106,7 +106,7 @@ int Application::CreateGameWindow()
 
 	if (!hWnd)
 	{
-		return -1;
+		return false;
 	}
 
 	ShowWindow(hWnd, SW_SHOW);
@@ -124,10 +124,10 @@ int Application::CreateGameWindow()
 	MoveWindow(hWnd, (screen_width - width) / 2, (screen_height - height) / 2, width + windowRect.right - windowRect.left - clientRect.right - clientRect.left,
 		height + windowRect.bottom - windowRect.top - clientRect.bottom - clientRect.top, TRUE);
 
-	return TH_SUCCESS;
+	return true;
 }
 
-int Application::InitDeviceContext()
+bool Application::InitDeviceContext()
 {
 	SYSTEMTIME time;
 	GetLocalTime(&time);
@@ -136,14 +136,14 @@ int Application::InitDeviceContext()
 
 	d3d = Direct3DCreate9(D3D_SDK_VERSION);
 
-	if (TH_FAILED(CreateDevice()))
+	if (CreateDevice() == false)
 	{
-		return -1;
+		return false;
 	}
 
 	ResetDeviceState();
 
-	return TH_SUCCESS;
+	return true;
 }
 
 void Application::ResetDeviceState()
@@ -166,7 +166,7 @@ void Application::ResetDeviceState()
 	device->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
 }
 
-int Application::CreateDevice()
+bool Application::CreateDevice()
 {
 	HRESULT hr;
 
@@ -195,9 +195,9 @@ int Application::CreateDevice()
 	GetMultiSampleType(deviceType, &multiSampleType, &qualityLevel);
 
 	//检查设备能力
-	if (TH_FAILED(CheckDeviceCaps(deviceType)))
+	if (CheckDeviceCaps(deviceType) == false)
 	{
-		return -1;
+		return false;
 	}
 
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
@@ -221,11 +221,11 @@ int Application::CreateDevice()
 
 	if (FAILED(hr))
 	{
-		return -1;
+		return false;
 	}
 
 	THLog("Direct3D成功初始化。");
-	return TH_SUCCESS;
+	return true;
 }
 
 void Application::GetDeviceInfo(D3DDEVTYPE* deviceType, int* vertexProcessingType)
@@ -259,7 +259,7 @@ void Application::GetDeviceInfo(D3DDEVTYPE* deviceType, int* vertexProcessingTyp
 	}
 }
 
-int Application::CheckDeviceCaps(D3DDEVTYPE deviceType)
+bool Application::CheckDeviceCaps(D3DDEVTYPE deviceType)
 {
 	auto exceptionManager = ExceptionManager::GetInstance();
 
@@ -278,7 +278,7 @@ int Application::CheckDeviceCaps(D3DDEVTYPE deviceType)
 		exceptionManager->PushException(new Exception((String)"当前显卡支持的顶点着色器版本过低。\n"
 			"当前支持版本：" + mainVSVersion + "." + subVSVersion
 			+ "   最低需要版本：2.0"));
-		return -1;
+		return false;
 	}
 
 	if (mainPSVersion < 2)
@@ -286,7 +286,7 @@ int Application::CheckDeviceCaps(D3DDEVTYPE deviceType)
 		exceptionManager->PushException(new Exception((String)"当前显卡支持的像素着色器版本过低。\n"
 			"当前支持版本：" + mainPSVersion + "." + subPSVersion
 			+ "   最低需要版本：2.0"));
-		return -1;
+		return false;
 	}
 
 	THLog("**********************设备信息**********************");
@@ -294,7 +294,7 @@ int Application::CheckDeviceCaps(D3DDEVTYPE deviceType)
 	THLog((String)"像素着色器版本：" + mainPSVersion + "." + subPSVersion);
 	THLog("****************************************************");
 
-	return TH_SUCCESS;
+	return true;
 }
 
 void Application::GetMultiSampleType(D3DDEVTYPE deviceType, 

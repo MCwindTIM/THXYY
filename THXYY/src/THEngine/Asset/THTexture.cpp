@@ -13,7 +13,7 @@ Texture::~Texture()
 	TH_SAFE_RELEASE(texture);
 }
 
-int Texture::SaveToFile(String path)
+bool Texture::SaveToFile(String path)
 {
 	IDirect3DSurface9* surface;
 	texture->GetSurfaceLevel(0, &surface);
@@ -35,11 +35,11 @@ int Texture::SaveToFile(String path)
 	else
 	{
 		THMessageBox((String)"无法将纹理存储为文件。不支持的文件格式：" + ext);
-		return -1;
+		return false;
 	}
 
 	D3DXSaveSurfaceToFile(path.GetBuffer(), format, surface, nullptr, nullptr);
-	return TH_SUCCESS;
+	return true;
 }
 
 void Texture::OnLostDevice()

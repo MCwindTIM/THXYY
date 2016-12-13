@@ -23,6 +23,8 @@ public:
 	void SetupCamera();
 	void SetupFog();
 	void InitBackgroundObjects();
+
+	void CreateHouses();
 };
 
 #endif

@@ -43,6 +43,7 @@ void Scene::Draw()
 	{
 		Layer* curLayer = iter->Next();
 		curLayer->Draw();
+		Application::GetInstance()->GetRenderState()->Clear();
 	}
 }
 

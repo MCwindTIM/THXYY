@@ -42,7 +42,7 @@ namespace THEngine
 		Vector3f lookAt;
 		Vector3f up;
 		
-		float fov = 90.0f;
+		float fov = 60.0f;
 
 	public:
 		Camera3D();
@@ -53,6 +53,9 @@ namespace THEngine
 
 		inline void SetUp(Vector3f up) { this->up = up; }
 		inline Vector3f GetUp() { return up; }
+
+		inline void SetFov(float fov) { this->fov = fov; }
+		inline float GetFov() { return fov; }
 
 		friend class Layer;
 	};

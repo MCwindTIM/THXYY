@@ -12,8 +12,8 @@ namespace THEngine
 		unsigned char* data;
 
 	private:
-		int LoadJPG(const char* filePath);
-		int LoadPNG(const char* filePath);
+		bool LoadJPG(const char* filePath);
+		bool LoadPNG(const char* filePath);
 
 	public:
 		Image();

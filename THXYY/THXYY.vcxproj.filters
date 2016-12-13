@@ -405,6 +405,9 @@
     <ClCompile Include="src\THEngine\Core\THRenderState.cpp">
       <Filter>源文件\THEngine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\THEngine\Core\3D\THLight.cpp">
+      <Filter>源文件\THEngine\Core\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -668,6 +671,9 @@
     <ClInclude Include="src\THEngine\Core\THRenderState.h">
       <Filter>头文件\THEngine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\THEngine\Core\3D\THLight.h">
+      <Filter>头文件\THEngine\Core\3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="THXYY.rc">
@@ -679,6 +685,9 @@
       <Filter>fx</Filter>
     </None>
     <None Include="fx\mesh.fx">
+      <Filter>fx</Filter>
+    </None>
+    <None Include="fx\lighting.fx">
       <Filter>fx</Filter>
     </None>
   </ItemGroup>
