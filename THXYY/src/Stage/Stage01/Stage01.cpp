@@ -1,5 +1,6 @@
 #include "Stage01.h"
 #include "../Enemy/Stage01/Enemy01_001.h"
+#include "../Enemy/Stage01/Enemy01_002.h"
 
 Texture* Stage01::texRoad = nullptr;
 
@@ -29,8 +30,12 @@ void Stage01::Update()
 	{
 		Enemy01_001* enemy = new Enemy01_001();
 		enemy->SetPosition(-30, 420);
-		enemy->AddTween(new MoveTo(Vector3f(192, 280,enemy->GetPosition().z),180,Tweener::EASE_OUT));
+		enemy->AddTween(new MoveTo(Vector3f(192, 280, enemy->GetPosition().z), 180, Tweener::EASE_OUT));
 		engine->AddEnemy(enemy);
+
+		Enemy01_002* enemy2 = new Enemy01_002();
+		enemy2->AddTween(new MoveTo(Vector3f(192, 300, enemy->GetPosition().z), 240, Tweener::EASE_OUT));
+		engine->AddEnemy(enemy2);
 	}
 }
 

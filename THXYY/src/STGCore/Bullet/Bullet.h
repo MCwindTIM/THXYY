@@ -9,6 +9,18 @@ class Bullet;
 
 class BulletDelegate : public Object
 {
+protected:
+	Bullet* bullet;
+
+public:
+	BulletDelegate(Bullet* bullet);
+	virtual ~BulletDelegate();
+
+	virtual bool Hit(float xPlayer, float yPlayer, float radius) = 0;
+};
+
+class Bullet : public Sprite
+{
 public:
 	enum BulletColor
 	{
@@ -22,37 +34,17 @@ public:
 		BRIGHT_GREY
 	};
 
-protected:
-	Bullet* bullet;
-
-public:
-	BulletDelegate(Bullet* bullet);
-	virtual ~BulletDelegate();
-
-	virtual bool Hit(float xPlayer, float yPlayer, float radius) = 0;
-	virtual Rect GetTexRect() = 0;
-	virtual Texture* GetTexture() = 0;
-	virtual BulletColor GetBulletColor() = 0;
-};
-
-class Bullet : public Sprite
-{
-public:
-	typedef BulletDelegate::BulletColor BulletColor;
-	static const BulletColor RED = BulletColor::RED;
-	static const BulletColor PURPLE = BulletColor::PURPLE;
-	static const BulletColor BLUE = BulletColor::BLUE;
-	static const BulletColor TEAL = BulletColor::TEAL;
-	static const BulletColor GREEN = BulletColor::GREEN;
-	static const BulletColor YELLOW = BulletColor::YELLOW;
-	static const BulletColor GREY = BulletColor::GREY;
-	static const BulletColor BRIGHT_GREY = BulletColor::BRIGHT_GREY;
-
 	enum Type
 	{
 		NONE = 0,
 		LINDAN_RED = 1,
-		LINDAN_PURPLE = 2
+		LINDAN_PURPLE = 2,
+		LINDAN_BLUE = 3,
+		LINDAN_TEAL = 4,
+		LINDAN_GREEN = 5,
+		LINDAN_YELLOW = 6,
+		LINDAN_ORANGE = 7,
+		LINDAN_GREY = 8
 	};
 
 protected:

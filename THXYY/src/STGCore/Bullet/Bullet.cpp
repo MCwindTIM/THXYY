@@ -1,5 +1,5 @@
 #include "Bullet.h"
-#include "LinDan.h"
+#include "BulletDelegate.h"
 #include "../STGEngine.h"
 
 BulletDelegate::BulletDelegate(Bullet* bullet)
@@ -120,18 +120,67 @@ void Bullet::OnDie()
 
 void Bullet::SetType(Type type)
 {
+	auto stgResources = STGResources::GetInstance();
+
+	TH_SAFE_RELEASE(bulletDelegate);
+
 	switch (type)
 	{
 	case LINDAN_RED:
-		bulletDelegate = new LinDanRed(this);
+		bulletDelegate = new LinDan(this);
 		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(32, 48, 16, 32));
+		SetBulletColor(RED);
 		break;
-	}
-
-	if (bulletDelegate)
-	{
-		SetTexture(bulletDelegate->GetTexture());
-		SetTexRect(bulletDelegate->GetTexRect());
-		SetBulletColor(bulletDelegate->GetBulletColor());
+	case LINDAN_PURPLE:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(64, 80, 16, 32));
+		SetBulletColor(PURPLE);
+		break;
+	case LINDAN_BLUE:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(96, 112, 16, 32));
+		SetBulletColor(BLUE);
+		break;
+	case LINDAN_TEAL:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(128, 144, 16, 32));
+		SetBulletColor(TEAL);
+		break;
+	case LINDAN_GREEN:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(160, 176, 16, 32));
+		SetBulletColor(GREEN);
+		break;
+	case LINDAN_YELLOW:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(192, 208, 16, 32));
+		SetBulletColor(YELLOW);
+		break;
+	case LINDAN_ORANGE:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(224, 240, 16, 32));
+		SetBulletColor(YELLOW);
+		break;
+	case LINDAN_GREY:
+		bulletDelegate = new LinDan(this);
+		bulletDelegate->Retain();
+		SetTexture(stgResources->texBullet01);
+		SetTexRect(Rect(240, 256, 16, 32));
+		SetBulletColor(BRIGHT_GREY);
+		break;
 	}
 }

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Stage.h"
 #include "Enemy\Enemy.h"
-#include "Enemy\BlueFairy01.h"
+#include "Enemy\Fairy.h"
 #include "Global.h"
 
 #endif

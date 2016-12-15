@@ -31,7 +31,7 @@ void Enemy01_001::Update()
 		for (int i = 0; i < 5; i++)
 		{
 			Bullet* bullet = new Bullet();
-			bullet->SetType(Bullet::LINDAN_RED);
+			bullet->SetType(Bullet::LINDAN_BLUE);
 			bullet->SetPosition(position.x, position.y);
 			bullet->SetSpeed(2.5);
 			bullet->SetAngle(72 * i + shootAngle);
