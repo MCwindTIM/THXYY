@@ -15,6 +15,9 @@ public:
 	Texture* texPlayerCenter;
 	Texture* texEnemy01;
 	Texture* texBullet01;
+	Texture* texBullet02 = nullptr;
+	Texture* texBullet03 = nullptr;
+	Texture* texBullet04 = nullptr;
 	Texture* texReimu;
 	Texture* texEffBase;
 	Texture* texPointLight;

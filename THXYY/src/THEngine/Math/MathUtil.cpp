@@ -50,7 +50,7 @@ namespace THEngine
 		return (int)temp + a;
 	}
 
-	Vector2f VecRotate2D(Vector2f pos, float angle)
+	Vector2f VecRotate2D(const Vector2f& pos, float angle)
 	{
 		Vector2f ret;
 		float rad = ToRad(angle);

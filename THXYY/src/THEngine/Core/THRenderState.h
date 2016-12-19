@@ -24,6 +24,8 @@ namespace THEngine
 
 		D3DXMATRIX world, projection, view;
 
+		D3DVIEWPORT9 viewport;
+
 		ArrayList<DirectionalLight*> directionalLights;
 
 	public:

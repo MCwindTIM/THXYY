@@ -1,8 +1,6 @@
 #include "Fairy.h"
 #include "../STGResources.h"
 
-static const int ANIM_INTERVAL = 6;
-
 Fairy::Fairy()
 {
 	auto STGResources = STGResources::GetInstance();
@@ -10,8 +8,6 @@ Fairy::Fairy()
 	SetTexture(STGResources->texEnemy01);
 
 	motionState = STATIC;
-
-	frameForAnim = 0;
 
 	hitRange = 8.0f;
 }
@@ -25,52 +21,39 @@ void Fairy::Update()
 {
 	Enemy::Update();
 
-	frameForAnim++;
+	int left;
 
-	if (fabs(speed) < 1e-2)
+	switch (motionState)
 	{
-		if (motionState == LEFT || motionState == RIGHT)
-		{
-
-		}
-		motionState = STATIC;
-
-		int left = frameForAnim / ANIM_INTERVAL * 32;
-
-		SetTexRect(Rect(left, left + 32, texRect.top, texRect.bottom));
-
-		if (frameForAnim >= 4 * ANIM_INTERVAL)
-		{
-			frameForAnim = 0;
-		}
+	case STATIC:
+		left = frameForAnim / ANIM_INTERVAL * 32;
+		break;
+	case STATIC_TO_LEFT:
+		left = frameForAnim / ANIM_INTERVAL * 32 + 128;
+		SetFlipX(true);
+		break;
+	case STATIC_TO_RIGHT:
+		left = frameForAnim / ANIM_INTERVAL * 32 + 128;
+		break;
+	case LEFT_TO_STATIC:
+		left = 224 - frameForAnim / ANIM_INTERVAL * 32;
+		SetFlipX(true);
+		break;
+	case RIGHT_TO_STATIC:
+		left = 224 - frameForAnim / ANIM_INTERVAL * 32;
+		break;
+	case LEFT:
+		left = frameForAnim / ANIM_INTERVAL * 32 + 256;
+		SetFlipX(true);
+		break;
+	case RIGHT:
+		left = frameForAnim / ANIM_INTERVAL * 32 + 256;
+		break;
+	default:
+		break;
 	}
-
-	else
-	{
-		if (vx < 0)
-		{
-			SetFlipX(true);
-		}
-		else
-		{
-			SetFlipX(false);
-		}
-		if (motionState == STATIC)
-		{
-			frameForAnim = 0;
-
-			motionState = LEFT;
-		}
-
-		if (frameForAnim >= 8 * ANIM_INTERVAL)
-		{
-			frameForAnim = 4 * ANIM_INTERVAL;
-		}
-
-		int left = frameForAnim / ANIM_INTERVAL * 32 + 128;
-
-		SetTexRect(Rect(left, left + 32, texRect.top, texRect.bottom));
-	}
+	
+	SetTexRect(Rect(left, left + 32, texRect.top, texRect.bottom));
 }
 
 /////////////////////////////////////////////////////////

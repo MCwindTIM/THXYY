@@ -64,6 +64,4 @@ PauseMenuItem::~PauseMenuItem()
 void PauseMenuItem::Update()
 {
 	MenuItem::Update();
-
-
 }

@@ -49,6 +49,7 @@ void SpriteRenderer::Render(RenderObject* obj)
 	auto sprite = dynamic_cast<Sprite*>(obj);
 	ASSERT(sprite != nullptr);
 
+	auto game = Game::GetInstance();
 	auto app = Application::GetInstance();
 
 	const int texWidth = sprite->texture->GetWidth();
@@ -71,21 +72,23 @@ void SpriteRenderer::Render(RenderObject* obj)
 		right = width / texWidth;
 		bottom = height / texHeight;
 	}
+
+	float x = -width * sprite->pivot.x;
+	float y = -height * sprite->pivot.y;
+	float z = sprite->position.z;
+
 	left += 0.5 / texWidth;
 	right += 0.5 / texWidth;
 	top += 0.5 / texHeight;
 	bottom += 0.5 / texHeight;
 	
-	float x = -width * sprite->pivot.x;
-	float y = -height * sprite->pivot.y;
-	float z = sprite->position.z;
-
 	SpriteVertex* vertices;
 	vb->Lock(0, 0, (void**)&vertices, D3DLOCK_DISCARD);
 	vertices[0] = SpriteVertex(x, y, z, left, bottom);
 	vertices[1] = SpriteVertex(x + width, y, z, right, bottom);
 	vertices[2] = SpriteVertex(x, y + height, z, left, top);
 	vertices[3] = SpriteVertex(x + width, y + height, z, right, top);
+
 	vb->Unlock();
 
 	float argb[4];
@@ -114,7 +117,14 @@ void SpriteRenderer::Render(RenderObject* obj)
 	D3DXMatrixRotationZ(&temp, ToRad(sprite->rotation));
 	transform *= temp;
 
-	D3DXMatrixTranslation(&temp, floor(0.5f + sprite->position.x), floor(0.5f + sprite->position.y), 0.0f);
+	if (sprite->pixelAlign)
+	{
+		D3DXMatrixTranslation(&temp, floor(sprite->position.x + 0.5f), floor(sprite->position.y + 0.5f), 0.0f);
+	}
+	else
+	{
+		D3DXMatrixTranslation(&temp, sprite->position.x, sprite->position.y, 0.0f);
+	}
 	transform *= temp;
 
 	app->SetWorldTransform(&transform);
@@ -128,11 +138,14 @@ void SpriteRenderer::Render(RenderObject* obj)
 
 	spriteShader->SetFloatArray("argb", argb, 4);
 	spriteShader->SetTexture("tex", sprite->texture);
-	spriteShader->SetInt("texWidth", texWidth);
-	spriteShader->SetInt("texHeight", texHeight);
+	spriteShader->SetInt("screenWidth", game->GetWidth());
+	spriteShader->SetInt("screenHeight", game->GetHeight());
+	spriteShader->SetInt("viewportWidth", renderState->viewport.Width);
+	spriteShader->SetInt("viewportHeight", renderState->viewport.Height);
 	spriteShader->SetMatrix("world", &renderState->world);
 	spriteShader->SetMatrix("projection", &renderState->projection);
 	spriteShader->SetMatrix("view", &renderState->view);
+	spriteShader->SetBoolean("pixelAlign", sprite->pixelAlign);
 
 	spriteShader->BeginPass(0);
 	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);

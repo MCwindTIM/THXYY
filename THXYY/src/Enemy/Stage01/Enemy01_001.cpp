@@ -22,7 +22,7 @@ void Enemy01_001::Update()
 
 	frame++;
 
-	if (frame == 2)
+	/*if (frame == 2)
 	{
 		frame = 0;
 
@@ -31,7 +31,7 @@ void Enemy01_001::Update()
 		for (int i = 0; i < 5; i++)
 		{
 			Bullet* bullet = new Bullet();
-			bullet->SetType(Bullet::LINDAN_BLUE);
+			bullet->SetType(Bullet::ARROW_TEAL);
 			bullet->SetPosition(position.x, position.y);
 			bullet->SetSpeed(2.5);
 			bullet->SetAngle(72 * i + shootAngle);
@@ -39,5 +39,5 @@ void Enemy01_001::Update()
 		}
 		
 		acShootAngle += 0.08f;
-	}
+	}*/
 }

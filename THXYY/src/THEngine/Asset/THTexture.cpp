@@ -10,7 +10,12 @@ Texture::Texture()
 
 Texture::~Texture()
 {
+#ifdef _DEBUG
+	THLog((String)" Õ∑≈Œ∆¿Ì" + name);
+#endif
+
 	TH_SAFE_RELEASE(texture);
+	TH_SAFE_RELEASE(texImage);
 }
 
 bool Texture::SaveToFile(String path)

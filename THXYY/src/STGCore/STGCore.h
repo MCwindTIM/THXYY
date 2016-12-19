@@ -6,6 +6,7 @@
 #include "Stage.h"
 #include "Enemy\Enemy.h"
 #include "Enemy\Fairy.h"
+#include "Enemy\ButterFly.h"
 #include "Global.h"
 
 #endif

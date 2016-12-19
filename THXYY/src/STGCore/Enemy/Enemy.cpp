@@ -15,7 +15,11 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	prevX = position.x;
+
 	Sprite::Update();
+
+	UpdateMotionState();
 
 	auto engine = STGEngine::GetInstance();
 
@@ -43,6 +47,107 @@ void Enemy::Update()
 		OnDie();
 		MarkDestroy();
 	}
+}
+
+void Enemy::UpdateMotionState()
+{
+	frameForAnim++;
+
+	if (fabs(position.x - prevX) < 1e-2)
+	{
+		switch (prevMotionState)
+		{
+		case LEFT:
+			motionState = LEFT_TO_STATIC;
+			frameForAnim = 0;
+			break;
+		case RIGHT:
+			motionState = RIGHT_TO_STATIC;
+			frameForAnim = 0;
+			break;
+		case STATIC_TO_LEFT:
+			motionState = LEFT_TO_STATIC;
+			frameForAnim = 4 * ANIM_INTERVAL - frameForAnim;
+		case STATIC_TO_RIGHT:
+			motionState = RIGHT_TO_STATIC;
+			frameForAnim = 4 * ANIM_INTERVAL - frameForAnim;
+		case LEFT_TO_STATIC:
+		case RIGHT_TO_STATIC:
+			if (frameForAnim >= 4 * ANIM_INTERVAL)
+			{
+				motionState = STATIC;
+				frameForAnim = 0;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if (position.x - prevX > 0)
+	{
+		switch (prevMotionState)
+		{
+		case STATIC:
+		case LEFT_TO_STATIC:
+			motionState = STATIC_TO_RIGHT;
+			frameForAnim = 0;
+			break;
+		case LEFT:
+			motionState = RIGHT;
+			break;
+		case STATIC_TO_LEFT:
+			motionState = STATIC_TO_RIGHT;
+			break;
+		case RIGHT_TO_STATIC:
+			motionState = STATIC_TO_RIGHT;
+			frameForAnim = 4 * ANIM_INTERVAL - frameForAnim;
+		case STATIC_TO_RIGHT:
+			if (frameForAnim >= 4 * ANIM_INTERVAL)
+			{
+				motionState = RIGHT;
+				frameForAnim = 0;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else 
+	{
+		switch (prevMotionState)
+		{
+		case STATIC:
+		case RIGHT_TO_STATIC:
+			motionState = STATIC_TO_LEFT;
+			frameForAnim = 0;
+			break;
+		case RIGHT:
+			motionState = LEFT;
+			break;
+		case STATIC_TO_RIGHT:
+			motionState = STATIC_TO_LEFT;
+			break;
+		case LEFT_TO_STATIC:
+			motionState = STATIC_TO_LEFT;
+			frameForAnim = 4 * ANIM_INTERVAL - frameForAnim;
+		case STATIC_TO_LEFT:
+			if (frameForAnim >= 4 * ANIM_INTERVAL)
+			{
+				motionState = LEFT;
+				frameForAnim = 0;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (frameForAnim >= 4 * ANIM_INTERVAL)
+	{
+		frameForAnim = 0;
+	}
+
+	prevMotionState = motionState;
 }
 
 void Enemy::OnDie()

@@ -5,18 +5,6 @@
 
 class Fairy : public Enemy
 {
-private:
-	enum MotionState
-	{
-		STATIC,
-		LEFT,
-		RIGHT
-	};
-
-	MotionState motionState;
-
-	int frameForAnim;
-
 public:
 	Fairy();
 	virtual ~Fairy();

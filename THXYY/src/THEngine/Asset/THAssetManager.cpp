@@ -139,7 +139,13 @@ Texture* AssetManager::CreateTextureFromFile(String filePath, bool useMipmap)
 		TH_SAFE_RELEASE(image);
 	}
 
+	texture->name = filePath;
+
 	textureList.Add(texture);
+
+#ifdef _DEBUG
+	THLog((String)"成功加载纹理" + filePath);
+#endif
 
 	return texture;
 }

@@ -1,9 +1,6 @@
 #include "Reimu.h"
 #include "ReimuBullet.h"
 
-static const int ANIM_INTERVAL = 5;
-static const int TURN_INTERVAL = 2;
-
 Reimu::Reimu()
 {
 	auto stgResources = STGResources::GetInstance();
@@ -15,6 +12,7 @@ Reimu::Reimu()
 
 	SetHiSpeed(4.5f);
 	SetLowSpeed(2.0f);
+	SetRadius(3.0f);
 }
 
 Reimu::~Reimu()

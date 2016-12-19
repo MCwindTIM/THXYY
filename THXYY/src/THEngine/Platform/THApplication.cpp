@@ -383,15 +383,14 @@ void Application::SetOrtho(float left, float bottom, float width, float height, 
 
 void Application::SetViewport(int left, int top, int width, int height)
 {
-	D3DVIEWPORT9 viewport;
-	viewport.X = left;
-	viewport.Y = top;
-	viewport.Width = width;
-	viewport.Height = height;
-	viewport.MinZ = 0;
-	viewport.MaxZ = 1;
+	renderState.viewport.X = left;
+	renderState.viewport.Y = top;
+	renderState.viewport.Width = width;
+	renderState.viewport.Height = height;
+	renderState.viewport.MinZ = 0;
+	renderState.viewport.MaxZ = 1;
 
-	device->SetViewport(&viewport);
+	device->SetViewport(&renderState.viewport);
 }
 
 void Application::OnKeyDown(int key)

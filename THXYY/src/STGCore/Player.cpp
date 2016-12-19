@@ -129,6 +129,9 @@ void Player::Update()
 
 	Sprite::Update();
 
+	position.x = floor(position.x + 0.5f);
+	position.y = floor(position.y + 0.5f);
+
 	if (position.x < 8.0f)
 	{
 		position.x = 8.0f;
@@ -161,6 +164,8 @@ void Player::Move()
 		if (isHiSpeed)
 		{
 			center = new PlayerCenter();
+			float centerScale = GetRadius() / 3.0f;
+			center->SetScale(centerScale, centerScale);
 			scene->GetSTGLayer()->AddChild(center);
 		}
 		SetSpeed(GetLowSpeed());

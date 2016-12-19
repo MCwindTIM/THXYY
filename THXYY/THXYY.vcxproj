@@ -92,6 +92,7 @@
   <ItemGroup>
     <ClCompile Include="src\Enemy\Stage01\Enemy01_001.cpp" />
     <ClCompile Include="src\Enemy\Stage01\Enemy01_002.cpp" />
+    <ClCompile Include="src\Enemy\Stage01\Enemy01_003.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player\Reimu.cpp" />
     <ClCompile Include="src\Player\ReimuBullet.cpp" />
@@ -115,6 +116,7 @@
     <ClCompile Include="src\STGCore\Bullet\Bullet.cpp" />
     <ClCompile Include="src\STGCore\Bullet\BulletDelegate.cpp" />
     <ClCompile Include="src\STGCore\Effect\BulletFog.cpp" />
+    <ClCompile Include="src\STGCore\Enemy\ButterFly.cpp" />
     <ClCompile Include="src\STGCore\Enemy\Fairy.cpp" />
     <ClCompile Include="src\STGCore\Enemy\Enemy.cpp" />
     <ClCompile Include="src\STGCore\Global.cpp" />
@@ -177,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="src\Enemy\Stage01\Enemy01_001.h" />
     <ClInclude Include="src\Enemy\Stage01\Enemy01_002.h" />
+    <ClInclude Include="src\Enemy\Stage01\Enemy01_003.h" />
     <ClInclude Include="src\Player\Reimu.h" />
     <ClInclude Include="src\Player\ReimuBullet.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
@@ -199,6 +202,7 @@
     <ClInclude Include="src\STGCore\Bullet\Bullet.h" />
     <ClInclude Include="src\STGCore\Bullet\BulletDelegate.h" />
     <ClInclude Include="src\STGCore\Effect\BulletFog.h" />
+    <ClInclude Include="src\STGCore\Enemy\ButterFly.h" />
     <ClInclude Include="src\STGCore\Enemy\Fairy.h" />
     <ClInclude Include="src\STGCore\Enemy\Enemy.h" />
     <ClInclude Include="src\STGCore\Global.h" />

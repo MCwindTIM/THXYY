@@ -30,6 +30,9 @@ public:
 		REINTERING                  //MISS后重新登场
 	};
 
+	static const int ANIM_INTERVAL = 5;
+	static const int TURN_INTERVAL = 2;
+
 private:
 	PlayerCenter* center;
 	int frame_counter;              //决死帧计数器

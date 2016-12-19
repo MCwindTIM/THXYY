@@ -33,6 +33,8 @@ namespace THEngine
 		bool flipX;
 		bool flipY;
 
+		bool pixelAlign = false;
+
 	private:
 		virtual void SendToRenderQueue() override final;
 
@@ -73,6 +75,8 @@ namespace THEngine
 		inline void SetScale(float x, float y) { SetScaleX(x); SetScaleY(y); }
 		inline float GetScaleX() { return scale.x; }
 		inline float GetScaleY() { return scale.y; }
+
+		inline void SetPixelAlign(bool pixelAlign) { this->pixelAlign = pixelAlign; }
 
 		friend class Rotate2D;
 	};

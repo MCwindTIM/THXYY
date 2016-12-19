@@ -28,6 +28,8 @@ bool STGResources::LoadTexTures()
 {
 	auto manager = AssetManager::GetInstance();
 
+	THLog("加载STG纹理。。。");
+
 	texPlayerCenter = manager->CreateTextureFromFile("res/player/center.png");
 	if (texPlayerCenter == nullptr)
 	{
@@ -40,8 +42,26 @@ bool STGResources::LoadTexTures()
 		return false;
 	}
 
-	texBullet01 = manager->CreateTextureFromFile("res/bullet/etama.png");
+	texBullet01 = manager->CreateTextureFromFile("res/bullet/bullet1.png");
 	if (texBullet01 == nullptr)
+	{
+		return false;
+	}
+
+	texBullet02 = manager->CreateTextureFromFile("res/bullet/bullet2.png");
+	if (texBullet02 == nullptr)
+	{
+		return false;
+	}
+
+	texBullet03 = manager->CreateTextureFromFile("res/bullet/bullet3.png");
+	if (texBullet03 == nullptr)
+	{
+		return false;
+	}
+
+	texBullet04 = manager->CreateTextureFromFile("res/bullet/bullet4.png");
+	if (texBullet04 == nullptr)
 	{
 		return false;
 	}
@@ -70,6 +90,8 @@ bool STGResources::LoadTexTures()
 		return false;
 	}
 
+	THLog("加载STG纹理成功。");
+
 	return true;
 }
 
@@ -77,9 +99,14 @@ void STGResources::UnloadTextures()
 {
 	auto manager = AssetManager::GetInstance();
 
+	THLog("释放STG纹理。");
+
 	manager->DestroyTexture(texPlayerCenter);
 	manager->DestroyTexture(texEnemy01);
 	manager->DestroyTexture(texBullet01);
+	manager->DestroyTexture(texBullet02);
+	manager->DestroyTexture(texBullet03);
+	manager->DestroyTexture(texBullet04);
 	manager->DestroyTexture(texReimu);
 	manager->DestroyTexture(texEffBase);
 	manager->DestroyTexture(texPointLight);
@@ -88,6 +115,9 @@ void STGResources::UnloadTextures()
 	texPlayerCenter = nullptr;
 	texEnemy01 = nullptr;
 	texBullet01 = nullptr;
+	texBullet02 = nullptr;
+	texBullet03 = nullptr;
+	texBullet04 = nullptr;
 	texReimu = nullptr;
 	texEffBase = nullptr;
 	texPointLight = nullptr;

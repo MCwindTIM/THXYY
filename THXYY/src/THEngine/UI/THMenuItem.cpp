@@ -5,6 +5,7 @@ namespace THEngine
 	MenuItem::MenuItem()
 	{
 		SetColor(colorUnselected);
+		SetPixelAlign(true);
 	}
 
 	MenuItem::~MenuItem()

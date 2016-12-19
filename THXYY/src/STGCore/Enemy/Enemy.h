@@ -22,6 +22,23 @@ public:
 		SCORE
 	};
 
+	enum MotionState
+	{
+		STATIC,
+		LEFT,
+		RIGHT,
+		STATIC_TO_LEFT,
+		STATIC_TO_RIGHT,
+		LEFT_TO_STATIC,
+		RIGHT_TO_STATIC
+	};
+
+	static const int ANIM_INTERVAL = 6;
+
+private:
+	MotionState prevMotionState = STATIC;
+	float prevX;
+
 protected:
 	float life;
 	int score;
@@ -31,6 +48,12 @@ protected:
 	int powerItemSmallNum = 0;
 	int scoreItemNum = 0;
 
+	int frameForAnim = 0;
+
+	MotionState motionState = STATIC;
+	
+private:
+	void UpdateMotionState();
 
 public:
 	Enemy();

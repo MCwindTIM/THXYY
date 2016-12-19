@@ -13,7 +13,7 @@ BulletFog::BulletFog(Bullet* bullet)
 	this->bullet = bullet;
 	this->bullet->Retain();
 
-	SetTexture(texManager->texBullet01);
+	SetTexture(texManager->texBullet02);
 
 	SetPosition(Vector3f(bullet->GetPosition().x, bullet->GetPosition().y, 2.0f));
 
@@ -22,29 +22,29 @@ BulletFog::BulletFog(Bullet* bullet)
 
 	switch (bullet->GetBulletColor())
 	{
-	case Bullet::GREY:
-		SetTexRect(Rect(1, 31, 209, 239));
-		break;
 	case Bullet::RED:
-		SetTexRect(Rect(33, 63, 209, 239));
+		SetTexRect(Rect(0, 32, 160, 192));
 		break;
 	case Bullet::PURPLE:
-		SetTexRect(Rect(65, 95, 209, 239));
+		SetTexRect(Rect(32, 64, 160, 192));
 		break;
 	case Bullet::BLUE:
-		SetTexRect(Rect(97, 127, 209, 239));
+		SetTexRect(Rect(64, 96, 160, 192));
 		break;
 	case Bullet::TEAL:
-		SetTexRect(Rect(129, 159, 209, 239));
+		SetTexRect(Rect(96, 128, 160, 192));
 		break;
 	case Bullet::GREEN:
-		SetTexRect(Rect(161, 191, 209, 239));
+		SetTexRect(Rect(128, 160, 160, 192));
 		break;
 	case Bullet::YELLOW:
-		SetTexRect(Rect(193, 223, 209, 239));
+		SetTexRect(Rect(160, 192, 160, 192));
 		break;
-	case Bullet::BRIGHT_GREY:
-		SetTexRect(Rect(225, 255, 209, 239));
+	case Bullet::ORANGE:
+		SetTexRect(Rect(192, 224, 160, 192));
+		break;
+	case Bullet::GREY:
+		SetTexRect(Rect(224, 256, 160, 192));
 		break;
 	default:
 		SetTexRect(Rect(0, 0, 0, 0));

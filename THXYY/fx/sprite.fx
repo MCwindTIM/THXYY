@@ -2,7 +2,9 @@ matrix world, projection, view;
 
 texture tex;
 float4 argb;
-int texWidth, texHeight;
+int screenWidth, screenHeight;
+int viewportWidth, viewportHeight;
+bool pixelAlign;
 
 sampler TextureSampler = sampler_state
 { 
@@ -30,16 +32,16 @@ VertexOut VSFunc(VertexIn input)
 {
 	VertexOut output;
 	matrix transform;
-
+	
 	transform = mul(world, view);
-
+		
 	output.position.xyz = input.position;
 	output.position.w = 1.0f;
 	output.position = mul(output.position, transform);
-
+	
 	output.position = mul(output.position, projection);
-
 	output.texCoord = input.texCoord;
+	
 	return output;
 }
 

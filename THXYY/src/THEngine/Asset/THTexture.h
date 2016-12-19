@@ -16,6 +16,8 @@ namespace THEngine
 
 		Image* texImage = nullptr;
 
+		String name;
+
 	public:
 		Texture();
 		virtual ~Texture();
@@ -24,6 +26,7 @@ namespace THEngine
 		inline int GetHeight() { return height; }
 		inline int GetImageWidth() { return imageWidth; }
 		inline int GetImageHeight() { return imageHeight; }
+		inline String GetName() { return name; }
 
 		bool SaveToFile(String path);
 

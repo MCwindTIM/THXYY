@@ -411,6 +411,12 @@
     <ClCompile Include="src\STGCore\Bullet\BulletDelegate.cpp">
       <Filter>源文件\STGCore\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="src\STGCore\Enemy\ButterFly.cpp">
+      <Filter>源文件\STGCore\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy\Stage01\Enemy01_003.cpp">
+      <Filter>源文件\Enemy\Stage01</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -679,6 +685,12 @@
     </ClInclude>
     <ClInclude Include="src\STGCore\Bullet\BulletDelegate.h">
       <Filter>头文件\STGCore\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Enemy\ButterFly.h">
+      <Filter>头文件\STGCore\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy\Stage01\Enemy01_003.h">
+      <Filter>头文件\Enemy\Stage01</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
