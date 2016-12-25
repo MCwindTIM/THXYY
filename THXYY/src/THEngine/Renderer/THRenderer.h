@@ -8,15 +8,13 @@
 
 namespace THEngine
 {
-	class RenderObject;
-
 	class Renderer : public Object
 	{
 	protected:
 		IDirect3DDevice9* device;
 
 	public:
-		virtual void Render(RenderObject* obj) = 0;
+		virtual void Render(GameObject* obj) = 0;
 	};
 }
 

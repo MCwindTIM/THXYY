@@ -17,7 +17,9 @@ namespace THEngine
 
 		ArrayList<Sound*> soundList;
 
-		int volume = 10;    //Range from 0 to 100
+		ArrayList<Sound*> playList;
+
+		int volume = 20;    //Range from 0 to 100
 
 	private:
 		Audio();
@@ -38,6 +40,10 @@ namespace THEngine
 		}
 
 		inline void SetVolume(int volume) { this->volume = volume; }
+
+		void Play(Sound* sound);
+
+		void Update();
 	};
 }
 

@@ -1,7 +1,7 @@
 #ifndef THMESH_H
 #define THMESH_H
 
-#include "../THRenderObject.h"
+#include "../THGameObject.h"
 #include "../../Asset/THTexture.h"
 
 namespace THEngine
@@ -27,7 +27,7 @@ namespace THEngine
 			x(x), y(y), z(z), nx(nx), ny(ny), nz(nz), u(u), v(v) {}
 	};
 
-	class Mesh : public RenderObject
+	class Mesh : public GameObject
 	{
 	public:
 		enum PrimitiveType

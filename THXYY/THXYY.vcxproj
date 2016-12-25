@@ -95,6 +95,7 @@
     <ClCompile Include="src\Enemy\Stage01\Enemy01_003.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player\Reimu.cpp" />
+    <ClCompile Include="src\Player\ReimuBomb1.cpp" />
     <ClCompile Include="src\Player\ReimuBullet.cpp" />
     <ClCompile Include="src\Scene\Game\GameScene.cpp" />
     <ClCompile Include="src\Scene\Game\GrazeNumber.cpp" />
@@ -115,6 +116,7 @@
     <ClCompile Include="src\STGCore\API.cpp" />
     <ClCompile Include="src\STGCore\Bullet\Bullet.cpp" />
     <ClCompile Include="src\STGCore\Bullet\BulletDelegate.cpp" />
+    <ClCompile Include="src\STGCore\Bullet\Laser.cpp" />
     <ClCompile Include="src\STGCore\Effect\BulletFog.cpp" />
     <ClCompile Include="src\STGCore\Enemy\ButterFly.cpp" />
     <ClCompile Include="src\STGCore\Enemy\Fairy.cpp" />
@@ -131,6 +133,7 @@
     <ClCompile Include="src\STGCore\STGResources.cpp" />
     <ClCompile Include="src\THEngine\Asset\THAssetManager.cpp" />
     <ClCompile Include="src\THEngine\Asset\THImage.cpp" />
+    <ClCompile Include="src\THEngine\Asset\THRenderTexture.cpp" />
     <ClCompile Include="src\THEngine\Asset\THShader.cpp" />
     <ClCompile Include="src\THEngine\Asset\THTexture.cpp" />
     <ClCompile Include="src\THEngine\Common\THCommon.cpp" />
@@ -144,13 +147,13 @@
     <ClCompile Include="src\THEngine\Common\THString.cpp" />
     <ClCompile Include="src\THEngine\Core\3D\THLight.cpp" />
     <ClCompile Include="src\THEngine\Core\3D\THMesh.cpp" />
+    <ClCompile Include="src\THEngine\Core\THDataStack.cpp" />
     <ClCompile Include="src\THEngine\Core\THCamera.cpp" />
     <ClCompile Include="src\THEngine\Core\THFont.cpp" />
     <ClCompile Include="src\THEngine\Core\THGame.cpp" />
     <ClCompile Include="src\THEngine\Core\THLayer.cpp" />
     <ClCompile Include="src\THEngine\Core\THGameObject.cpp" />
     <ClCompile Include="src\THEngine\Core\THParticle3D.cpp" />
-    <ClCompile Include="src\THEngine\Core\THRenderObject.cpp" />
     <ClCompile Include="src\THEngine\Core\THRenderState.cpp" />
     <ClCompile Include="src\THEngine\Core\THScene.cpp" />
     <ClCompile Include="src\THEngine\Core\THSprite.cpp" />
@@ -181,6 +184,7 @@
     <ClInclude Include="src\Enemy\Stage01\Enemy01_002.h" />
     <ClInclude Include="src\Enemy\Stage01\Enemy01_003.h" />
     <ClInclude Include="src\Player\Reimu.h" />
+    <ClInclude Include="src\Player\ReimuBomb1.h" />
     <ClInclude Include="src\Player\ReimuBullet.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
     <ClInclude Include="src\Scene\Game\GrazeNumber.h" />
@@ -201,6 +205,7 @@
     <ClInclude Include="src\STGCore\API.h" />
     <ClInclude Include="src\STGCore\Bullet\Bullet.h" />
     <ClInclude Include="src\STGCore\Bullet\BulletDelegate.h" />
+    <ClInclude Include="src\STGCore\Bullet\Laser.h" />
     <ClInclude Include="src\STGCore\Effect\BulletFog.h" />
     <ClInclude Include="src\STGCore\Enemy\ButterFly.h" />
     <ClInclude Include="src\STGCore\Enemy\Fairy.h" />
@@ -218,6 +223,7 @@
     <ClInclude Include="src\STGCore\STGResources.h" />
     <ClInclude Include="src\THEngine\Asset\THAssetManager.h" />
     <ClInclude Include="src\THEngine\Asset\THImage.h" />
+    <ClInclude Include="src\THEngine\Asset\THRenderTexture.h" />
     <ClInclude Include="src\THEngine\Asset\THShader.h" />
     <ClInclude Include="src\THEngine\Asset\THTexture.h" />
     <ClInclude Include="src\THEngine\Common\THCommon.h" />
@@ -234,13 +240,13 @@
     <ClInclude Include="src\THEngine\Common\THString.h" />
     <ClInclude Include="src\THEngine\Core\3D\THLight.h" />
     <ClInclude Include="src\THEngine\Core\3D\THMesh.h" />
+    <ClInclude Include="src\THEngine\Core\THDataStack.h" />
     <ClInclude Include="src\THEngine\Core\THCamera.h" />
     <ClInclude Include="src\THEngine\Core\THFont.h" />
     <ClInclude Include="src\THEngine\Core\THGame.h" />
     <ClInclude Include="src\THEngine\Core\THLayer.h" />
     <ClInclude Include="src\THEngine\Core\THGameObject.h" />
     <ClInclude Include="src\THEngine\Core\THParticle3D.h" />
-    <ClInclude Include="src\THEngine\Core\THRenderObject.h" />
     <ClInclude Include="src\THEngine\Core\THRenderState.h" />
     <ClInclude Include="src\THEngine\Core\THScene.h" />
     <ClInclude Include="src\THEngine\Core\THSprite.h" />

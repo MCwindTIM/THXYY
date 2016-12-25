@@ -27,7 +27,7 @@ namespace THEngine
 		MeshRenderer();
 		virtual ~MeshRenderer();
 
-		virtual void Render(RenderObject* object) override;
+		virtual void Render(GameObject* object) override;
 
 		static MeshRenderer* Create();
 	};

@@ -45,7 +45,7 @@ Particle3DRenderer* Particle3DRenderer::Create()
 	return renderer;
 }
 
-void Particle3DRenderer::Render(RenderObject* obj)
+void Particle3DRenderer::Render(GameObject* obj)
 {
 	Particle3D* particle = (Particle3D*)obj;
 
@@ -114,7 +114,8 @@ void Particle3DRenderer::Render(RenderObject* obj)
 	D3DXMatrixRotationQuaternion(&temp, &particle->rotation3D);
 	transform *= temp;
 
-	D3DXMatrixTranslation(&temp, floor(0.5f + particle->position.x), floor(0.5f + particle->position.y), particle->position.z);
+	D3DXMatrixTranslation(&temp, floor(0.5f + particle->positionForRender.x), floor(0.5f + particle->positionForRender.y),
+		particle->positionForRender.z);
 	transform *= temp;
 
 	app->SetWorldTransform(&transform);

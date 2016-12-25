@@ -36,7 +36,7 @@ void Sprite::SendToRenderQueue()
 
 void Sprite::Update()
 {
-	RenderObject::Update();
+	GameObject::Update();
 
 	speed += acSpeed;
 	angle += acAngle;

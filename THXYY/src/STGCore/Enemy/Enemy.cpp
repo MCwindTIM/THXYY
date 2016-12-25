@@ -41,12 +41,6 @@ void Enemy::Update()
 			iter->Remove();
 		}
 	}
-
-	if (life < 0)
-	{
-		OnDie();
-		MarkDestroy();
-	}
 }
 
 void Enemy::UpdateMotionState()
@@ -275,6 +269,13 @@ void Enemy::OnDestroy()
 void Enemy::OnHitten(float damage)
 {
 	life -= damage;
+
+
+	if (life < 0)
+	{
+		OnDie();
+		MarkDestroy();
+	}
 
 	STGResources::GetInstance()->soundDamage01->Play();
 }

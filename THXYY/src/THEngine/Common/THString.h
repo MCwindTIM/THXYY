@@ -9,8 +9,8 @@ namespace THEngine
 	class String
 	{
 	private:
-		TCHAR* buffer;
-		int length;
+		TCHAR* buffer = nullptr;
+		int length = 0;
 	public:
 		String();
 		String(const TCHAR* str);
@@ -23,7 +23,7 @@ namespace THEngine
 			return buffer;
 		}
 
-		inline int GetLength()
+		inline int GetLength() const
 		{
 			return length;
 		}

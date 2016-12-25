@@ -77,6 +77,9 @@ public:
 
 	inline void SetHitRange(float hitRange) { this->hitRange = hitRange; }
 	inline float GetHitRange() { return hitRange; }
+
+	inline void SetLife(float life) { this->life = life; }
+	inline float GetLife() { return life; }
 };
 
 #endif

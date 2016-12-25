@@ -60,7 +60,7 @@ namespace THEngine
 	}
 
 
-	void Tween::Bind(RenderObject* object)
+	void Tween::Bind(GameObject* object)
 	{
 		this->object = object;
 	}
@@ -186,7 +186,7 @@ namespace THEngine
 		}
 	}
 
-	void TweenSequence::Bind(RenderObject* object)
+	void TweenSequence::Bind(GameObject* object)
 	{
 		Tween::Bind(object);
 

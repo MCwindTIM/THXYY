@@ -1,6 +1,6 @@
 #include "THConcreteTween.h"
 #include "THConcreteTweener.h"
-#include "../Core/THRenderObject.h"
+#include "../Core/THGameObject.h"
 #include "../Core/THSprite.h"
 
 namespace THEngine

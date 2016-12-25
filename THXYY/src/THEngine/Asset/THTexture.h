@@ -33,6 +33,7 @@ namespace THEngine
 		void OnLostDevice();
 		void OnResetDevice();
 
+		friend class Application;
 		friend class AssetManager;
 		friend class Shader;
 		friend class SpriteRenderer;

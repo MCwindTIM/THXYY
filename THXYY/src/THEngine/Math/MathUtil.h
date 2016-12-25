@@ -9,6 +9,7 @@ namespace THEngine
 	const float PI = 3.1415926f;
 
 	float ToAngle(float x, float y);
+	float StandardizeAngle(float angle);
 	float ToRad(float angle);
 	float RadToDegree(float rad);
 

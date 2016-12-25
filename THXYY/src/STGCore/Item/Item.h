@@ -30,7 +30,7 @@ public:
 		Sprite::SetPosition(Vector3f(x, y, 50.0f));
 	}
 
-
+	friend class STGEngine;
 };
 
 #endif

@@ -22,7 +22,7 @@ void Enemy01_001::Update()
 
 	frame++;
 
-	/*if (frame == 2)
+	if (frame == 2)
 	{
 		frame = 0;
 
@@ -35,9 +35,10 @@ void Enemy01_001::Update()
 			bullet->SetPosition(position.x, position.y);
 			bullet->SetSpeed(2.5);
 			bullet->SetAngle(72 * i + shootAngle);
+
 			engine->ShootBullet(bullet, true, 2);
 		}
 		
 		acShootAngle += 0.08f;
-	}*/
+	}
 }

@@ -126,6 +126,9 @@ bool Game::CreateGame(int width, int height, bool fullScreen, String title,
 	}
 	audio->Retain();
 
+	dataStack = DataStack::GetInstance();
+	dataStack->Retain();
+
 	return true;
 }
 
@@ -196,6 +199,7 @@ void Game::Update()
 {
 	input->Update();
 	eventSystem->Update();
+	audio->Update();
 
 	if (scene && scene->IsPaused() == false)
 	{
@@ -305,6 +309,7 @@ void Game::Shutdown()
 	TH_SAFE_RELEASE(assetManager);
 	TH_SAFE_RELEASE(audio);
 	TH_SAFE_RELEASE(app);
+	TH_SAFE_RELEASE(dataStack);
 
 	delete Logger::GetInstance();
 	delete exceptionManager;

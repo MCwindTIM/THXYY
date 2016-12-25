@@ -23,7 +23,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	app_count++;
 
 	_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(1915);
+	//_CrtSetBreakAlloc(306);
 
 	THXYY game;
 	if (game.CreateGame(640, 480, false) == false)

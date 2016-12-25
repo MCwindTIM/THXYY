@@ -28,7 +28,7 @@ namespace THEngine
 
 		static SpriteRenderer* Create(Application* app);
 
-		virtual void Render(RenderObject* obj) override;
+		virtual void Render(GameObject* obj) override;
 		void Render(Sprite* sprite);
 
 		friend class SpriteRenderQueue;

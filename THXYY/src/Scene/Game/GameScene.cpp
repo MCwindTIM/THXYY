@@ -144,6 +144,7 @@ void GameScene::OnSceneChanged()
 	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 
 	auto engine = STGEngine::GetInstance();
+	engine->Shutdown();
 	engine->SetGameScene(nullptr);
 }
 

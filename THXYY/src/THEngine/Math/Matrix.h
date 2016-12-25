@@ -38,6 +38,10 @@ namespace THEngine
 		Vector3f operator -(const Vector3f& a);
 		Vector3f operator -();
 		Vector3f operator *(float a);
+		Vector3f& operator +=(const Vector3f& a);
+		Vector3f& operator -=(const Vector3f& a);
+		Vector3f& operator *=(const Vector3f& a);
+		Vector3f& operator /=(const Vector3f& a);
 		bool operator ==(const Vector3f& a);
 		bool operator !=(const Vector3f& a);
 

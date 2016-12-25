@@ -27,7 +27,7 @@ void Stage01::Update()
 
 	frame++;
 
-	if (frame == 1)
+	if (frame == 1 || frame == 50 || frame == 100 || frame == 200)
 	{
 		Enemy01_001* enemy = new Enemy01_001();
 		enemy->SetPosition(-30, 420);
@@ -50,7 +50,7 @@ void Stage01::OnLoad()
 	auto assetManager = AssetManager::GetInstance();
 	auto engine = STGEngine::GetInstance();
 
-	texRoad = assetManager->CreateTextureFromFile("res/background/stage01/road.jpg", true);
+	texRoad = assetManager->CreateTextureFromFile("res/background/stage01/road.jpg");
 	house = Mesh::CreateMeshFromFile("res/model/house/house.x");
 	if (house == nullptr)
 	{

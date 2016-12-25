@@ -7,6 +7,7 @@
 namespace THEngine
 {
 	class Input;
+	class RenderTexture;
 
 	class Application : public Object
 	{
@@ -89,6 +90,8 @@ namespace THEngine
 		{
 			device->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 0, 0, 0), 1, 0);
 		}
+
+		void SetRenderTarget(RenderTexture* texture);
 
 		inline bool SwapBuffers()
 		{

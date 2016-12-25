@@ -131,5 +131,30 @@ namespace THEngine
 
 		return sound;
 	}
+
+	void Audio::Play(Sound* sound)
+	{
+		auto iter = playList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto soundPlaying = iter->Next();
+			if (soundPlaying == sound)
+			{
+				return;
+			}
+		}
+		playList.Add(sound);
+	}
+
+	void Audio::Update()
+	{
+		auto iter = playList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto sound = iter->Next();
+			sound->Play();
+			iter->Remove();
+		}
+	}
 }
 

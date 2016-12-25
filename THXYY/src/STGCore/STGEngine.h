@@ -56,7 +56,7 @@ private:
 	LinkedList<PlayerBullet*> playerBulletList;
 	LinkedList<Item*> itemList;
 	LinkedList<Particle3D*> particleList;
-	LinkedList<RenderObject*> backgroundList;
+	LinkedList<GameObject*> backgroundList;
 
 	STGResources* stgResources;
 
@@ -115,6 +115,7 @@ public:
 	inline StageEnum GetStageEnum() { return stageEnum; }
 
 	inline LinkedList<Enemy*>* GetEnemyList() { return &enemyList; }
+	inline LinkedList<Bullet*>* GetBulletList() { return &bulletList; }
 	inline LinkedList<PlayerBullet*>* GetPlayerBulletList() { return &playerBulletList; }
 
 	inline bool IsGameOver() { return gameOver; }
@@ -124,7 +125,7 @@ public:
 	void AddEffect(Sprite* effect);
 	void AddItem(Item* item);
 	void AddParticle(Particle3D* particle);
-	void AddBackgroundObject(RenderObject* object);
+	void AddBackgroundObject(GameObject* object);
 
 	void ShootPlayerBullet(PlayerBullet* playerBullet);
 
@@ -147,6 +148,8 @@ public:
 
 	void SetBackgroundCamera(Camera* camera);
 	Camera* GetBackgroundCamera();
+
+	void GetAllItems();
 
 	void Update();
 

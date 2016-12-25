@@ -30,7 +30,13 @@ namespace THEngine
 		{
 			angle = angle + 180;
 		}
-		return angle;
+		return angle >= 0 ? angle : angle + 360;
+	}
+
+	float StandardizeAngle(float angle)
+	{
+		angle -= ((int)angle) / 360 * 360;
+		return angle >= 0 ? angle : angle + 360;
 	}
 
 	float RadToDegree(float rad)

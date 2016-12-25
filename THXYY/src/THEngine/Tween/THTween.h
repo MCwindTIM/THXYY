@@ -6,12 +6,12 @@
 
 namespace THEngine
 {
-	class RenderObject;
+	class GameObject;
 
 	class Tween : public Object
 	{
 	protected:
-		RenderObject* object = nullptr;
+		GameObject* object = nullptr;
 
 		bool finished = false;
 		bool looped = false;
@@ -35,7 +35,7 @@ namespace THEngine
 		virtual void OnFinish();
 		virtual void OnReset();
 
-		virtual void Bind(RenderObject* object);
+		virtual void Bind(GameObject* object);
 
 		inline bool IsFinished() { return finished; }
 
@@ -81,7 +81,7 @@ namespace THEngine
 		virtual void OnStart() override;
 		virtual void OnReset() override;
 
-		virtual void Bind(RenderObject* object) override;
+		virtual void Bind(GameObject* object) override;
 
 		inline void AddTween(Tween* tween)
 		{ 

@@ -2,9 +2,9 @@
 #define THASSETMANAGER
 
 #include "../Common/THCommon.h"
-#include "../Core/THGame.h"
 #include "THShader.h"
 #include "THTexture.h"
+#include "THRenderTexture.h"
 
 namespace THEngine
 {
@@ -30,7 +30,7 @@ namespace THEngine
 		void DestroyShader(Shader* shader);
 
 		Texture* CreateTextureFromFile(String filePath);
-		Texture* CreateTextureFromFile(String filePath, bool useMipmap);
+		RenderTexture* CreateRenderTexture(int width, int height);
 		void DestroyTexture(Texture* texture);
 
 		void OnLostDevice();

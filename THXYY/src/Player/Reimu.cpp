@@ -1,5 +1,6 @@
 #include "Reimu.h"
 #include "ReimuBullet.h"
+#include "ReimuBomb1.h"
 
 Reimu::Reimu()
 {
@@ -103,5 +104,21 @@ void Reimu::Fire()
 
 void Reimu::Bomb()
 {
+	auto stgResources = STGResources::GetInstance();
 
+	EnterBombState(210);
+	SetInvincible(250);
+
+	auto engine = STGEngine::GetInstance();
+
+	for (int i = 0; i < 8; i++)
+	{
+		ReimuBomb1* bomb = new ReimuBomb1();
+		bomb->SetInitialAngle(-45 * i + 7.5);
+		bomb->SetAttackFrame(10 * i + 90);
+		engine->AddObject(bomb);
+	}
+
+	stgResources->soundBomb->Play();
+	stgResources->soundExplode->Play();
 }

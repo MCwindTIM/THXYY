@@ -12,6 +12,9 @@ namespace THEngine
 		LinkedList<Layer*> layers;
 
 	public:
+		Scene();
+		virtual ~Scene();
+
 		virtual void Update() override;
 		virtual void Draw() override;
 

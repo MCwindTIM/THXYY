@@ -85,49 +85,9 @@ void STGEngine::Start()
 
 void STGEngine::Clear()
 {
-	auto iter = enemyList.GetIterator();
-	while (iter->HasNext())
-	{
-		iter->Next()->MarkDestroy();
-	}
-
-	auto iter2 = bulletList.GetIterator();
-	while (iter2->HasNext())
-	{
-		iter2->Next()->MarkDestroy();
-	}
-
-	auto iter3 = effectList.GetIterator();
-	while (iter3->HasNext())
-	{
-		iter3->Next()->MarkDestroy();
-	}
-
-	auto iter4 = playerBulletList.GetIterator();
-	while (iter4->HasNext())
-	{
-		iter4->Next()->MarkDestroy();
-	}
-
-	auto iter5 = itemList.GetIterator();
-	while (iter5->HasNext())
-	{
-		iter5->Next()->MarkDestroy();
-	}
-
-	auto iter6 = particleList.GetIterator();
-	while (iter6->HasNext())
-	{
-		iter6->Next()->MarkDestroy();
-	}
-
-	auto iter7 = backgroundList.GetIterator();
-	while (iter7->HasNext())
-	{
-		iter7->Next()->MarkDestroy();
-	}
-
-	player->MarkDestroy();
+	gameScene->GetSTGLayer()->Clear();
+	gameScene->GetBackgroundLayer()->Clear();
+	gameScene->GetSTGParticleLayer()->Clear();
 
 	enemyList.Clear();
 	bulletList.Clear();
@@ -272,7 +232,7 @@ void STGEngine::AddParticle(Particle3D* particle)
 	gameScene->GetSTGParticleLayer()->AddChild(particle);
 }
 
-void STGEngine::AddBackgroundObject(RenderObject* object)
+void STGEngine::AddBackgroundObject(GameObject* object)
 {
 	backgroundList.Add(object);
 	gameScene->GetBackgroundLayer()->AddChild(object);
@@ -319,12 +279,13 @@ void STGEngine::ShootBullet(Bullet* bullet, bool hasFog, int sound)
 
 void STGEngine::SetBackgroundCamera(Camera* camera)
 {
+	camera->SetName("Main");
 	gameScene->GetBackgroundLayer()->SetCamera(camera);
 }
 
 Camera* STGEngine::GetBackgroundCamera()
 {
-	return gameScene->GetBackgroundLayer()->GetCamera();
+	return gameScene->GetBackgroundLayer()->GetCameraByName("Main");
 }
 
 void STGEngine::GameOver()
@@ -332,6 +293,8 @@ void STGEngine::GameOver()
 	auto scene = (GameScene*)Game::GetInstance()->GetScene();
 	scene->GetPauseMenu()->DoGameOver();
 	scene->GetSTGLayer()->Pause();
+	scene->GetBackgroundLayer()->Pause();
+	scene->GetSTGParticleLayer()->Pause();
 
 	gameOver = true;
 }
@@ -342,5 +305,16 @@ void STGEngine::RemoveAllBullet()
 	while (iter->HasNext())
 	{
 		iter->Next()->OnDie();
+	}
+}
+
+void STGEngine::GetAllItems()
+{
+	auto iter = itemList.GetIterator();
+	while (iter->HasNext())
+	{
+		auto item = iter->Next();
+		item->gotFromHigh = true;
+		item->GoToPlayer();
 	}
 }

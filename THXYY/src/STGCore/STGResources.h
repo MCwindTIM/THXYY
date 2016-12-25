@@ -35,6 +35,8 @@ public:
 	Sound* soundEnemyDie00 = nullptr;
 	Sound* soundEnemyDie01 = nullptr;
 	Sound* soundPlayerShoot = nullptr;
+	Sound* soundBomb = nullptr;
+	Sound* soundExplode = nullptr;
 
 private:
 	STGResources();

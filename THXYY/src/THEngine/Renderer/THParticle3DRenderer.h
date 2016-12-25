@@ -23,7 +23,7 @@ namespace THEngine
 		Particle3DRenderer();
 		virtual ~Particle3DRenderer();
 
-		virtual void Render(RenderObject* obj) override;
+		virtual void Render(GameObject* obj) override;
 
 		static Particle3DRenderer* Create();
 	};

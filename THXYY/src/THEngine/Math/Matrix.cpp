@@ -155,6 +155,38 @@ namespace THEngine
 		return v;
 	}
 
+	Vector3f& Vector3f::operator +=(const Vector3f& a)
+	{
+		this->x += a.x;
+		this->y += a.y;
+		this->z += a.z;
+		return *this;
+	}
+
+	Vector3f& Vector3f::operator -=(const Vector3f& a)
+	{
+		this->x -= a.x;
+		this->y -= a.y;
+		this->z -= a.z;
+		return *this;
+	}
+
+	Vector3f& Vector3f::operator *=(const Vector3f& a)
+	{
+		this->x *= a.x;
+		this->y *= a.y;
+		this->z *= a.z;
+		return *this;
+	}
+
+	Vector3f& Vector3f::operator /=(const Vector3f& a)
+	{
+		this->x /= a.x;
+		this->y /= a.y;
+		this->z /= a.z;
+		return *this;
+	}
+
 	bool Vector3f::operator ==(const Vector3f& a)
 	{
 		float ex = fabs(x - a.x);

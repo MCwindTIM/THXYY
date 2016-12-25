@@ -1,89 +1,161 @@
 #include "THGameObject.h"
+#include "THDataStack.h"
 
-using namespace THEngine;
-
-GameObject::GameObject()
+namespace THEngine
 {
-	needRemove = false;
-}
-
-GameObject::~GameObject()
-{
-
-}
-
-void GameObject::AddChild(GameObject* obj)
-{
-	children.Add(obj);
-}
-
-void GameObject::Visit()
-{
-	SendToRenderQueue();
-	Iterator<GameObject*>* iter = children.GetIterator();
-	while (iter->HasNext())
+	GameObject::GameObject()
 	{
-		iter->Next()->Visit();
+		needRemove = false;
+
+		tweenManager = new TweenManager();
+		tweenManager->Retain();
+
+		D3DXQuaternionIdentity(&rotation3D);
 	}
-}
 
-void GameObject::Update()
-{
-	EngineObject::Update();
-
-	Iterator<GameObject*>* iter = children.GetIterator();
-	while (iter->HasNext())
+	GameObject::GameObject(const GameObject& object) : EngineObject(object), children(object.children)
 	{
-		auto obj = iter->Next();
-		if (obj->IsPaused())
+		position = object.position;
+		color = object.color;
+		alpha = object.alpha;
+		scale = object.scale;
+		rotation3D = object.rotation3D;
+
+		tweenManager = new TweenManager(*object.tweenManager);
+		tweenManager->Retain();
+		
+		needRemove = false;
+		
+	}
+
+	GameObject::~GameObject()
+	{
+		TH_SAFE_RELEASE(tweenManager);
+	}
+
+	Object* GameObject::Clone()
+	{
+		return new GameObject(*this);
+	}
+
+	void GameObject::AddChild(GameObject* obj)
+	{
+		children.Add(obj);
+	}
+
+	void GameObject::Visit()
+	{
+		Iterator<GameObject*>* iter = children.GetIterator();
+
+		WriteRenderData();
+
+		SendToRenderQueue();
+
+		PushDataStack();
+		while (iter->HasNext())
 		{
-			continue;
+			iter->Next()->Visit();
 		}
-		if (obj->needRemove)
+		PopDataStack();
+	}
+
+	void GameObject::SendToRenderQueue()
+	{
+
+	}
+
+	void GameObject::WriteRenderData()
+	{
+		auto dataStack = DataStack::GetInstance();
+
+		this->positionForRender = dataStack->position + this->position;
+	}
+
+	void GameObject::PushDataStack()
+	{
+		auto dataStack = DataStack::GetInstance();
+
+		dataStack->position = this->positionForRender;
+	}
+
+	void GameObject::PopDataStack()
+	{
+		auto dataStack = DataStack::GetInstance();
+
+		dataStack->position -= this->position;
+	}
+
+	void GameObject::Update()
+	{
+		EngineObject::Update();
+
+		tweenManager->Update();
+
+		Iterator<GameObject*>* iter = children.GetIterator();
+		while (iter->HasNext())
 		{
-			obj->OnDestroy();
+			auto obj = iter->Next();
+			if (obj->IsPaused())
+			{
+				continue;
+			}
+			if (obj->needRemove)
+			{
+				obj->OnDestroy();
+				iter->Remove();
+			}
+			else
+			{
+				obj->Update();
+			}
+		}
+	}
+
+	void GameObject::Draw()
+	{
+
+	}
+
+	void GameObject::OnDestroy()
+	{
+		RemoveAllChildren();
+	}
+
+	void GameObject::RemoveChild(GameObject* child)
+	{
+		auto iter = children.GetIterator();
+		while (iter->HasNext())
+		{
+			auto curChild = iter->Next();
+			if (curChild == child)
+			{
+				iter->Remove();
+				return;
+			}
+			curChild->RemoveChild(child);
+		}
+	}
+
+	void GameObject::RemoveAllChildren()
+	{
+		auto iter = children.GetIterator();
+		while (iter->HasNext())
+		{
+			auto child = iter->Next();
+			child->OnDestroy();
 			iter->Remove();
 		}
-		else
-		{
-			obj->Update();
-		}
 	}
-}
 
-void GameObject::Draw()
-{
-
-}
-
-void GameObject::SendToRenderQueue()
-{
-
-}
-
-void GameObject::OnDestroy()
-{
-	auto iter = children.GetIterator();
-	while (iter->HasNext())
+	void GameObject::AddTween(Tween* tween)
 	{
-		auto child = iter->Next();
-		child->OnDestroy();
-		iter->Remove();
+		tween->Bind(this);
+		tweenManager->AddTween(tween);
 	}
-}
 
-void GameObject::RemoveChild(GameObject* child)
-{
-	auto iter = children.GetIterator();
-	while (iter->HasNext())
+	void GameObject::SetRotationByAxis(const Vector3f& axis, float rotation)
 	{
-		auto curChild = iter->Next();
-		if (curChild == child)
-		{
-			iter->Remove();
-			return;
-		}
-		curChild->RemoveChild(child);
+		D3DXQuaternionRotationAxis(&rotation3D, &D3DXVECTOR3(axis.x, axis.y, axis.z), ToRad(rotation));
 	}
 }
 

@@ -21,12 +21,8 @@ Player::~Player()
 
 }
 
-void Player::Update()
+void Player::ProcessInvincible()
 {
-	auto input = Input::GetInstance();
-	auto engine = STGEngine::GetInstance();
-	auto scene = engine->GetGameScene();
-
 	if (invincible)
 	{
 		frame_invincible--;
@@ -53,22 +49,70 @@ void Player::Update()
 			}
 		}
 	}
+}
+
+void Player::ProcessCenterPoint()
+{
+	auto input = Input::GetInstance();
+	GameScene* scene = (GameScene*)Game::GetInstance()->GetScene();
+
+	if (input->KeyDown(DIK_LSHIFT) || input->KeyDown(DIK_RSHIFT))
+	{
+		if (isHiSpeed)
+		{
+			center = new PlayerCenter();
+			float centerScale = GetRadius() / 3.0f;
+			center->SetScale(centerScale, centerScale);
+			scene->GetSTGLayer()->AddChild(center);
+		}
+		isHiSpeed = false;
+	}
+	else
+	{
+		if (!isHiSpeed)
+		{
+			center->Disappear();
+		}
+		isHiSpeed = true;;
+	}
+}
+
+void Player::Update()
+{
+	auto input = Input::GetInstance();
+	auto engine = STGEngine::GetInstance();
+	auto scene = engine->GetGameScene();
+
+	ProcessInvincible();
+	ProcessCenterPoint();
+
+	if (bombTimer > 0)
+	{
+		bombTimer--;
+		if (bombTimer == 0)
+		{
+			enableBomb = true;
+		}
+	}
+
+	if (enableMove)
+	{
+		Move();
+	}
+	if (enableFire && input->KeyDown(DIK_Z))
+	{
+		Fire();
+	}
 
 	if (state == NORMAL)
 	{
-		Move();
-
-		if (input->KeyDown(DIK_Z))
-		{
-			Fire();
-		}
-
 		int bomb = engine->GetBomb();
 		if (input->KeyDown(DIK_X))
 		{
-			if (bomb >= 1)
+			if (bomb >= 1 && enableBomb)
 			{
 				engine->SetBomb(bomb - 1);
+				engine->GetAllItems();
 				Bomb();
 			}
 		}
@@ -87,7 +131,10 @@ void Player::Update()
 			if (bomb >= 1)
 			{
 				engine->SetBomb(bomb - 1);
+				EnableMove(true);
+				EnableFire(true);
 				state = NORMAL;
+				engine->GetAllItems();
 				Bomb();
 			}
 		}
@@ -97,6 +144,7 @@ void Player::Update()
 		if (alpha <= 0)
 		{
 			state = REINTERING;
+			motionState = STATIC;
 			SetPosition(192.0f, -32.0f);
 			SetSpeed(1.2f);
 			SetAngle(90.0f);
@@ -107,6 +155,7 @@ void Player::Update()
 			if (life > 0)
 			{
 				engine->SetLife(life - 1);
+				engine->SetBomb(3);
 			}
 			else
 			{
@@ -124,6 +173,9 @@ void Player::Update()
 		{
 			position.y = 48.0f;
 			state = NORMAL;
+			EnableBomb(true);
+			EnableMove(true);
+			EnableFire(true);
 		}
 	}
 
@@ -159,26 +211,13 @@ void Player::Move()
 	auto engine = STGEngine::GetInstance();
 	auto scene = engine->GetGameScene();
 
-	if (input->KeyDown(DIK_LSHIFT) || input->KeyDown(DIK_RSHIFT))
+	if (isHiSpeed == false)
 	{
-		if (isHiSpeed)
-		{
-			center = new PlayerCenter();
-			float centerScale = GetRadius() / 3.0f;
-			center->SetScale(centerScale, centerScale);
-			scene->GetSTGLayer()->AddChild(center);
-		}
 		SetSpeed(GetLowSpeed());
-		isHiSpeed = false;
 	}
 	else
 	{
-		if (!isHiSpeed)
-		{
-			center->Disappear();
-		}
 		SetSpeed(GetHiSpeed());
-		isHiSpeed = true;;
 	}
 
 	if (input->KeyDown(DIK_LEFT))
@@ -238,6 +277,8 @@ void Player::Hitten()
 {
 	state = DETERMINE_DEATH;
 	frame_counter = 0;
+	EnableFire(false);
+	EnableMove(false);
 
 	STGResources::GetInstance()->soundBiu->Play();
 }
@@ -245,6 +286,10 @@ void Player::Hitten()
 void Player::Biu()
 {
 	state = DYING;
+
+	EnableMove(false);
+	EnableFire(false);
+	EnableBomb(false);
 
 	auto engine = STGEngine::GetInstance();
 	auto stgResources = STGResources::GetInstance();
@@ -305,4 +350,18 @@ void Player::Biu()
 bool Player::IsDamageable()
 {
 	return state == NORMAL && invincible == false;
+}
+
+void Player::OnDestroy()
+{
+	if (center)
+	{
+		center->MarkDestroy();
+	}
+}
+
+void Player::EnterBombState(int bombTime)
+{
+	EnableBomb(false);
+	bombTimer = bombTime;
 }

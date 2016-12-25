@@ -1,7 +1,7 @@
 #ifndef THSPRITE_H
 #define THSPRITE_H
 
-#include "THRenderObject.h"
+#include "THGameObject.h"
 #include "../Asset/THTexture.h"
 #include "../Renderer/THRenderer.h"
 
@@ -9,7 +9,7 @@ namespace THEngine
 {
 	class Renderer;
 
-	class Sprite : public RenderObject
+	class Sprite : public GameObject
 	{
 	public:
 
@@ -64,6 +64,9 @@ namespace THEngine
 
 		inline void SetAcSpeed(float acSpeed) { this->acSpeed = acSpeed; }
 		inline float GetAcSpeed() { return acSpeed; }
+
+		inline void SetAcAngle(float acAngle) { this->acAngle = acAngle; }
+		inline float GetAcAngle() { return acAngle; }
 
 		friend class SpriteRenderer;
 

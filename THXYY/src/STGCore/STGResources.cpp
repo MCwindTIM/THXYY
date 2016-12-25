@@ -171,31 +171,43 @@ bool STGResources::LoadSounds()
 	}
 
 	soundDamage00 = audio->CreateSound("sound/se_damage00.wav");
-	if (soundItem == nullptr)
+	if (soundDamage00 == nullptr)
 	{
 		return false;
 	}
 
 	soundDamage01 = audio->CreateSound("sound/se_damage01.wav");
-	if (soundItem == nullptr)
+	if (soundDamage01 == nullptr)
 	{
 		return false;
 	}
 
 	soundEnemyDie00 = audio->CreateSound("sound/se_enep00.wav");
-	if (soundItem == nullptr)
+	if (soundEnemyDie00 == nullptr)
 	{
 		return false;
 	}
 
 	soundEnemyDie01 = audio->CreateSound("sound/se_enep01.wav");
-	if (soundItem == nullptr)
+	if (soundEnemyDie01 == nullptr)
 	{
 		return false;
 	}
 
 	soundPlayerShoot = audio->CreateSound("sound/se_plst00.wav");
-	if (soundItem == nullptr)
+	if (soundPlayerShoot == nullptr)
+	{
+		return false;
+	}
+
+	soundBomb = audio->CreateSound("sound/se_nep00.wav");
+	if (soundBomb == nullptr)
+	{
+		return false;
+	}
+
+	soundExplode = audio->CreateSound("sound/se_cat00.wav");
+	if (soundExplode == nullptr)
 	{
 		return false;
 	}
@@ -219,6 +231,8 @@ void STGResources::UnloadSounds()
 	audio->DestroySound(soundEnemyDie00);
 	audio->DestroySound(soundEnemyDie01);
 	audio->DestroySound(soundPlayerShoot);
+	audio->DestroySound(soundBomb);
+	audio->DestroySound(soundExplode);
 
 	soundShoot1 = nullptr;
 	soundShoot2 = nullptr;
@@ -232,5 +246,7 @@ void STGResources::UnloadSounds()
 	soundEnemyDie00 = nullptr;
 	soundEnemyDie01 = nullptr;
 	soundPlayerShoot = nullptr;
+	soundBomb = nullptr;
+	soundExplode = nullptr;
 }
 

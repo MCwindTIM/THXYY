@@ -8,6 +8,7 @@
 #include "THScene.h"
 #include "THFont.h"
 #include "THSprite.h"
+#include "THDataStack.h"
 #include "../Renderer/THSpriteRenderer.h"
 #include "../Renderer/THParticle3DRenderer.h"
 #include "../Renderer/THMeshRenderer.h"
@@ -60,6 +61,8 @@ namespace THEngine
 		Audio* audio = nullptr;
 
 		ExceptionManager* exceptionManager = nullptr;
+
+		DataStack* dataStack = nullptr;
 
 	private:
 		void CalcFPS();

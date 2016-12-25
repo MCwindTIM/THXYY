@@ -22,6 +22,4 @@ void STGLayer::Update()
 void STGLayer::OnDestroy()
 {
 	Layer::OnDestroy();
-
-	STGEngine::GetInstance()->Shutdown();
 }

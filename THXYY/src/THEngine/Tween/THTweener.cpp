@@ -1,5 +1,5 @@
 #include "THTweener.h"
-#include "../Core/THRenderObject.h"
+#include "../Core/THGameObject.h"
 
 namespace THEngine
 {

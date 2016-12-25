@@ -16,7 +16,8 @@ namespace THEngine
 		int left, top;
 		int order;          
 		GameObject rootNode;
-		Camera* camera = nullptr;
+		
+		LinkedList<Camera*> cameraList;
 
 		bool activated = false;
 
@@ -42,13 +43,19 @@ namespace THEngine
 
 		void AddChild(GameObject* obj);
 
+		void Clear();
+
 		inline void AddLight(Light* light) { lights.Add(light); }
 
 		inline void RemoveLight(Light* light) { lights.Remove(light); }
 
-		inline Camera* GetCamera() { return camera; }
+		inline LinkedList<Camera*>* GetCameraList() { return &cameraList; }
 
 		void SetCamera(Camera* camera);
+
+		Camera* GetCameraByName(const String& name);
+
+		inline void AddCamera(Camera* camera) { cameraList.Add(camera); }
 
 		inline void SetOrder(int order) { this->order = order; }
 

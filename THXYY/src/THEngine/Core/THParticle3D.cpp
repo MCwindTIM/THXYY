@@ -27,7 +27,7 @@ namespace THEngine
 
 	void Particle3D::Update()
 	{
-		RenderObject::Update();
+		GameObject::Update();
 
 		position = position + speed * direction;
 

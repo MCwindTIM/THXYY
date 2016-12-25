@@ -7,13 +7,16 @@ using namespace THEngine;
 
 String::String()
 {
-	buffer = TEXT("");
-	length = 0;
+
 }
 
 String::String(const TCHAR* str)
 {
 	length = lstrlen(str);
+	if (buffer)
+	{
+		delete[] buffer;
+	}
 	buffer = new TCHAR[length + 1];
 	lstrcpy(buffer, str);
 }
@@ -21,6 +24,10 @@ String::String(const TCHAR* str)
 String::String(const char* str)
 {
 	length = MultiByteToWideChar(CP_ACP, 0, str, -1, NULL, 0) - 1;
+	if (buffer)
+	{
+		delete[] buffer;
+	}
 	buffer = new TCHAR[length + 1];	
 	MultiByteToWideChar(CP_ACP, 0, str, -1, buffer, length + 1);
 }
@@ -28,6 +35,10 @@ String::String(const char* str)
 String::String(const String& str)
 {
 	length = str.length;
+	if (buffer)
+	{
+		delete[] buffer;
+	}
 	buffer = new TCHAR[length + 1];
 	lstrcpy(buffer, str.buffer);
 }
@@ -104,7 +115,7 @@ String String::operator + (int number)
 
 void String::operator = (const String& str)
 {
-	if (length > 0)
+	if (buffer)
 	{
 		delete[] buffer;
 	}

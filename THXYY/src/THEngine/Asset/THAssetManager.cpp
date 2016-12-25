@@ -1,87 +1,71 @@
 #include "THAssetManager.h"
 #include "THImage.h"
+#include "../Core/THGame.h"
 
-using namespace THEngine;
-
-AssetManager* AssetManager::instance = nullptr;
-
-AssetManager::AssetManager()
+namespace THEngine
 {
-	ASSERT(instance == nullptr);
-	instance = this;
-}
+	AssetManager* AssetManager::instance = nullptr;
 
-AssetManager* AssetManager::GetInstance()
-{
-	return instance;
-}
-
-AssetManager* AssetManager::Create(Application* app)
-{
-	AssetManager* assetManager = new AssetManager();
-	
-	assetManager->device = app->device;
-
-	assetManager->Retain();
-
-	return assetManager;
-}
-
-
-Shader* AssetManager::CreateShaderFromFile(String filePath)
-{
-	Shader* shader = new Shader();
-	
-	ID3DXBuffer *error;
-	if (FAILED(D3DXCreateEffectFromFile(device, filePath.GetBuffer(), NULL, NULL,
-		D3DXSHADER_DEBUG, NULL, &shader->effect, &error)))
+	AssetManager::AssetManager()
 	{
-		if (error)
-		{
-			String message((char*)error->GetBufferPointer());
-			THMessageBox(message);	
-		}
-		else
-		{
-			THMessageBox((String)"无法打开文件:" + filePath);
-		}
-		return nullptr;
+		ASSERT(instance == nullptr);
+		instance = this;
 	}
 
-	shader->path = filePath;
-
-	shaderList.Add(shader);
-
-	return shader;
-}
-
-void AssetManager::DestroyShader(Shader* shader)
-{
-	shaderList.Remove(shader);
-}
-
-Texture* AssetManager::CreateTextureFromFile(String filePath)
-{
-	return CreateTextureFromFile(filePath, false);
-}
-
-Texture* AssetManager::CreateTextureFromFile(String filePath, bool useMipmap)
-{
-	auto exceptionManager = ExceptionManager::GetInstance();
-	Texture* texture = new Texture();
-
-	if (useMipmap)
+	AssetManager* AssetManager::GetInstance()
 	{
-		if (FAILED(D3DXCreateTextureFromFile(device, filePath.GetBuffer(), &texture->texture)))
+		return instance;
+	}
+
+	AssetManager* AssetManager::Create(Application* app)
+	{
+		AssetManager* assetManager = new AssetManager();
+
+		assetManager->device = app->device;
+
+		assetManager->Retain();
+
+		return assetManager;
+	}
+
+
+	Shader* AssetManager::CreateShaderFromFile(String filePath)
+	{
+		Shader* shader = new Shader();
+
+		ID3DXBuffer *error;
+		if (FAILED(D3DXCreateEffectFromFile(device, filePath.GetBuffer(), NULL, NULL,
+			D3DXSHADER_DEBUG, NULL, &shader->effect, &error)))
 		{
-			exceptionManager->PushException(new Exception(
-				((String)"无法加载纹理:" + filePath + "。原因是:\n" + exceptionManager->GetException()->GetInfo())));
-			delete texture;
+			if (error)
+			{
+				String message((char*)error->GetBufferPointer());
+				THMessageBox(message);
+			}
+			else
+			{
+				THMessageBox((String)"无法打开文件:" + filePath);
+			}
 			return nullptr;
 		}
+
+		shader->path = filePath;
+
+		shaderList.Add(shader);
+
+		return shader;
 	}
-	else
+
+	void AssetManager::DestroyShader(Shader* shader)
 	{
+		shaderList.Remove(shader);
+	}
+
+	Texture* AssetManager::CreateTextureFromFile(String filePath)
+	{
+		auto exceptionManager = ExceptionManager::GetInstance();
+		Texture* texture = new Texture();
+
 		Image* image = Image::Load(filePath);
 		if (image == nullptr)
 		{
@@ -108,7 +92,7 @@ Texture* AssetManager::CreateTextureFromFile(String filePath, bool useMipmap)
 		texture->width = texWidth;
 		texture->height = texHeight;
 
-		D3DXCreateTexture(device, texWidth, texHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture->texture);
+		D3DXCreateTexture(device, texWidth, texHeight, 0, D3DUSAGE_AUTOGENMIPMAP, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture->texture);
 
 		IDirect3DTexture9* tex = texture->texture;
 		D3DLOCKED_RECT rect;
@@ -137,52 +121,66 @@ Texture* AssetManager::CreateTextureFromFile(String filePath, bool useMipmap)
 		texture->yScale = (float)texture->imageHeight / texture->height;
 
 		TH_SAFE_RELEASE(image);
-	}
 
-	texture->name = filePath;
+		texture->name = filePath;
 
-	textureList.Add(texture);
+		textureList.Add(texture);
 
 #ifdef _DEBUG
-	THLog((String)"成功加载纹理" + filePath);
+		THLog((String)"成功加载纹理" + filePath);
 #endif
 
-	return texture;
-}
-
-void AssetManager::DestroyTexture(Texture* texture)
-{
-	textureList.Remove(texture);
-}
-
-void AssetManager::OnLostDevice()
-{
-	auto iter = textureList.GetIterator();
-	while (iter->HasNext())
-	{
-		iter->Next()->OnLostDevice();
+		return texture;
 	}
 
-	auto iter2 = shaderList.GetIterator();
-	while (iter2->HasNext())
+	RenderTexture* AssetManager::CreateRenderTexture(int width, int height)
 	{
-		iter2->Next()->OnLostDevice();
+		RenderTexture* texture = new RenderTexture();
+
+		texture->width = width;
+		texture->height = height;
+		D3DXCreateTexture(device, width, height, 0, D3DUSAGE_AUTOGENMIPMAP | D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture->texture);
+
+		textureList.Add(texture);
+
+		return texture;
+	}
+
+	void AssetManager::DestroyTexture(Texture* texture)
+	{
+		textureList.Remove(texture);
+	}
+
+	void AssetManager::OnLostDevice()
+	{
+		auto iter = textureList.GetIterator();
+		while (iter->HasNext())
+		{
+			iter->Next()->OnLostDevice();
+		}
+
+		auto iter2 = shaderList.GetIterator();
+		while (iter2->HasNext())
+		{
+			iter2->Next()->OnLostDevice();
+		}
+	}
+
+	void AssetManager::OnResetDevice()
+	{
+		device = Application::GetInstance()->GetDevice();
+
+		auto iter = textureList.GetIterator();
+		while (iter->HasNext())
+		{
+			iter->Next()->OnResetDevice();
+		}
+
+		auto iter2 = shaderList.GetIterator();
+		while (iter2->HasNext())
+		{
+			iter2->Next()->OnResetDevice();
+		}
 	}
 }
 
-void AssetManager::OnResetDevice()
-{
-	device = Application::GetInstance()->GetDevice();
-
-	auto iter = textureList.GetIterator();
-	while (iter->HasNext())
-	{
-		iter->Next()->OnResetDevice();
-	}
-
-	auto iter2 = shaderList.GetIterator();
-	while (iter2->HasNext())
-	{
-		iter2->Next()->OnResetDevice();
-	}
-}

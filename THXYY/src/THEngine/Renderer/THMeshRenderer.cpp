@@ -48,7 +48,7 @@ namespace THEngine
 		D3DXMatrixRotationQuaternion(&temp, &mesh->rotation3D);
 		transform *= temp;
 
-		D3DXMatrixTranslation(&temp, floor(0.5f + mesh->position.x), floor(0.5f + mesh->position.y), mesh->position.z);
+		D3DXMatrixTranslation(&temp, floor(0.5f + mesh->positionForRender.x), floor(0.5f + mesh->positionForRender.y), mesh->positionForRender.z);
 		transform *= temp;
 
 		Application::GetInstance()->SetWorldTransform(&transform);
@@ -70,7 +70,7 @@ namespace THEngine
 		}
 	}
 
-	void MeshRenderer::Render(RenderObject* object)
+	void MeshRenderer::Render(GameObject* object)
 	{
 		Mesh* mesh = (Mesh*)object;
 		auto app = Application::GetInstance();

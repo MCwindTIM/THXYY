@@ -44,7 +44,7 @@ SpriteRenderer* SpriteRenderer::Create(Application* app)
 	return renderer;
 }
 
-void SpriteRenderer::Render(RenderObject* obj)
+void SpriteRenderer::Render(GameObject* obj)
 {
 	auto sprite = dynamic_cast<Sprite*>(obj);
 	ASSERT(sprite != nullptr);
@@ -119,11 +119,11 @@ void SpriteRenderer::Render(RenderObject* obj)
 
 	if (sprite->pixelAlign)
 	{
-		D3DXMatrixTranslation(&temp, floor(sprite->position.x + 0.5f), floor(sprite->position.y + 0.5f), 0.0f);
+		D3DXMatrixTranslation(&temp, floor(sprite->positionForRender.x + 0.5f), floor(sprite->positionForRender.y + 0.5f), 0.0f);
 	}
 	else
 	{
-		D3DXMatrixTranslation(&temp, sprite->position.x, sprite->position.y, 0.0f);
+		D3DXMatrixTranslation(&temp, sprite->positionForRender.x, sprite->positionForRender.y, 0.0f);
 	}
 	transform *= temp;
 

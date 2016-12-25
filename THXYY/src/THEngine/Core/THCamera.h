@@ -6,17 +6,39 @@
 
 namespace THEngine
 {
+	class RenderTexture;
+
 	class Camera : public EngineObject
 	{
 	protected:
 		Vector3f position;
+		String name = "";
+		RenderTexture* renderTexture = nullptr;
+		Rect viewRect = Rect(0, 0, 0, 0);
 
 	public:
+		Camera();
+		Camera(const String& name);
+		virtual ~Camera();
+
 		inline void SetPosition(Vector3f position) { this->position = position; }
 		inline Vector3f GetPosition() { return position; }
 
 		virtual void Update() override;
 		virtual void Draw() override;
+
+		inline void SetName(const String& name) { this->name = name; }
+
+		inline String& GetName() { return name; }
+
+		inline void SetRenderTexture(RenderTexture* renderTexture)
+		{
+			this->renderTexture = renderTexture;
+		}
+
+		inline void SetViewRect(const Rect& rect) { this->viewRect = rect; }
+
+		virtual bool Is2D() = 0;
 	};
 
 	class Camera2D : public Camera
@@ -26,6 +48,7 @@ namespace THEngine
 
 	public:
 		Camera2D();
+		Camera2D(const String& name);
 		virtual ~Camera2D();
 
 		inline void SetWidth(float width) { this->width = width; }
@@ -33,12 +56,13 @@ namespace THEngine
 
 		inline void SetHeight(float height) { this->height = height; }
 		inline float GetHeight() { return height; }
+
+		virtual bool Is2D() override final { return true; }
 	};
 
 	class Camera3D : public Camera
 	{
 	protected:
-		
 		Vector3f lookAt;
 		Vector3f up;
 		
@@ -46,6 +70,7 @@ namespace THEngine
 
 	public:
 		Camera3D();
+		Camera3D(const String& name);
 		virtual ~Camera3D();
 
 		inline void SetLookAt(Vector3f lookAt) { this->lookAt = lookAt; }
@@ -56,6 +81,8 @@ namespace THEngine
 
 		inline void SetFov(float fov) { this->fov = fov; }
 		inline float GetFov() { return fov; }
+
+		virtual bool Is2D() override final { return false; }
 
 		friend class Layer;
 	};

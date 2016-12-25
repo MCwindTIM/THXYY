@@ -2,7 +2,7 @@
 
 Enemy01_003::Enemy01_003()
 {
-
+	SetLife(6000);
 }
 
 Enemy01_003::~Enemy01_003()

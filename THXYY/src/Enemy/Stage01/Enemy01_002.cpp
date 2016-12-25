@@ -23,7 +23,7 @@ void Enemy01_002::Update()
 
 	frame++;
 
-	/*if (frame == 5)
+	if (frame == 5)
 	{
 		frame = 0;
 		float bulletAngle = Random(0, 359);
@@ -37,5 +37,5 @@ void Enemy01_002::Update()
 			bullet->SetAngle(bulletAngle + 120 * i);
 			engine->ShootBullet(bullet, true, 2);
 		}
-	}*/
+	}
 }

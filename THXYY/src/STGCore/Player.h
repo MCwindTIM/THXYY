@@ -51,10 +51,20 @@ protected:
 	bool isHiSpeed;
 	bool invincible;          //无敌
 
+	bool enableMove = true;
+	bool enableFire = true;
+	bool enableBomb = true;
+
 	float determineDeathTime;              //决死时间
+
+	int bombTimer = 0;     //Bomb时间计时器
 
 	MotionState motionState;
 	State state;
+
+private:
+	void ProcessInvincible();
+	void ProcessCenterPoint();
 
 public:
 	Player();
@@ -83,15 +93,21 @@ public:
 	inline void SetItemGetHeight(float height) { itemGetHeight = height; }
 	inline float GetItemGetHeight() { return itemGetHeight; }
 
+	inline void EnableBomb(bool enableBomb) { this->enableBomb = enableBomb; }
+	inline void EnableFire(bool enableFire) { this->enableFire = enableFire; }
+	inline void EnableMove(bool enableMove) { this->enableMove = enableMove; }
+
 	inline bool IsHiSpeed() { return isHiSpeed; }
 
 	inline bool IsDead() { return state == DYING; }
 
 	virtual void Update() override;
+	virtual void OnDestroy() override;
 
 	void Move();
 	void Hitten();
 	void Biu();
+	void EnterBombState(int bombTime);
 
 	bool IsDamageable();
 

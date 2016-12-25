@@ -7,8 +7,6 @@
 
 namespace THEngine
 {
-	class RenderObject;
-
 	class Tweener : public Object
 	{
 	public:

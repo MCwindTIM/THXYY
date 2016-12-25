@@ -8,7 +8,7 @@ namespace THEngine
 
 	}
 
-	Mesh::Mesh(const Mesh& mesh) : RenderObject(mesh)
+	Mesh::Mesh(const Mesh& mesh) : GameObject(mesh)
 	{
 		vertexCount = mesh.vertexCount;
 		material = mesh.material;
@@ -67,7 +67,7 @@ namespace THEngine
 
 	void Mesh::Update()
 	{
-		RenderObject::Update();
+		GameObject::Update();
 	}
 
 	void Mesh::Draw()
@@ -203,7 +203,7 @@ namespace THEngine
 			if (materials[i].pTextureFilename)
 			{
 				String path = folder + materials[i].pTextureFilename;
-				d3dMesh->materialList[i].texture = assetManager->CreateTextureFromFile(path, true);
+				d3dMesh->materialList[i].texture = assetManager->CreateTextureFromFile(path);
 				if (d3dMesh->materialList[i].texture == nullptr)
 				{
 					delete d3dMesh;
