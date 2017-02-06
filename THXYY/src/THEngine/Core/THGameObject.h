@@ -2,7 +2,7 @@
 #define THGAMEOBJECT_H
 
 #include "../Common/THCommon.h"
-#include "../Math/MathUtil.h"
+#include <Math\THMath.h>
 #include "../Tween/THTweenManager.h"
 
 namespace THEngine
@@ -22,7 +22,7 @@ namespace THEngine
 
 		Vector3f scale = Vector3f(1.0f, 1.0f, 1.0f);
 
-		D3DXQUATERNION rotation3D;
+		Quaternion rotation3D;
 
 		TweenManager* tweenManager = nullptr;
 
@@ -73,7 +73,7 @@ namespace THEngine
 			this->positionForRender = position;
 		}
 
-		inline Vector3f GetPosition()
+		inline const Vector3f& GetPosition()
 		{
 			return position;
 		}
@@ -83,7 +83,7 @@ namespace THEngine
 			this->color = color;
 		}
 
-		inline Vector3f GetColor()
+		inline const Vector3f& GetColor()
 		{
 			return color;
 		}

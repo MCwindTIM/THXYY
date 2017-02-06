@@ -1,10 +1,9 @@
 matrix world, projection, view;
 
-texture tex;
 float4 argb;
+texture tex;
 int screenWidth, screenHeight;
 int viewportWidth, viewportHeight;
-bool pixelAlign;
 
 sampler TextureSampler = sampler_state
 { 
@@ -19,12 +18,14 @@ sampler TextureSampler = sampler_state
 struct VertexIn
 {
 	float3 position : POSITION;
+	float4 color : COLOR0;
 	float2 texCoord : TEXCOORD0;
 };
 
 struct VertexOut
 {
     float4 position : POSITION;
+	float4 color : COLOR;
 	float2 texCoord : TEXCOORD0;
 };
 
@@ -40,6 +41,7 @@ VertexOut VSFunc(VertexIn input)
 	output.position = mul(output.position, transform);
 	
 	output.position = mul(output.position, projection);
+	output.color = input.color;
 	output.texCoord = input.texCoord;
 	
 	return output;
@@ -51,8 +53,8 @@ float4 PSFunc(VertexOut input) : COLOR
 	float2 uv = input.texCoord;
 
 	color = tex2D(TextureSampler, uv.xy);
-	color.xyz *= argb.yzw;
-	color.w *= argb.x;
+	color *= input.color;
+	color = saturate(color);
 	return color;
 }
 

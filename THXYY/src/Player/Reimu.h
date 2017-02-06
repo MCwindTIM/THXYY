@@ -3,6 +3,8 @@
 
 #include "../STGCore/STGCore.h"
 
+class ReimuSubPlane;
+
 class Reimu : public Player
 {
 private:
@@ -10,6 +12,8 @@ private:
 	int frame_fire = 0;
 
 	MotionState prevState;
+
+	ReimuSubPlane* subPlanes[4];
 
 public:
 	Reimu();

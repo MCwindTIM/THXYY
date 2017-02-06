@@ -2,7 +2,7 @@
 #define THCAMERA_H
 
 #include "../Common/THCommon.h"
-#include "../Math/MathUtil.h"
+#include "../Math/THMathUtil.h"
 
 namespace THEngine
 {

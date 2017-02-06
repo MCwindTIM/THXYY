@@ -2,9 +2,9 @@
 #define STGENGINE_H
 
 #include <THEngine.h>
-#include "Player.h"
+#include "Player\Player.h"
+#include "Player\PlayerBullet.h"
 #include "Stage.h"
-#include "PlayerBullet.h"
 #include "../Scene/Game/GameScene.h"
 #include "STGResources.h"
 #include "Enemy\Enemy.h"

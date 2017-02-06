@@ -1,6 +1,6 @@
 #include "THSprite.h"
 #include "THGame.h"
-#include "../Math/MathUtil.h"
+#include <Math\THMath.h>
 
 using namespace THEngine;
 
@@ -26,7 +26,7 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
-
+	TH_SAFE_RELEASE(this->texture);
 }
 
 void Sprite::SendToRenderQueue()

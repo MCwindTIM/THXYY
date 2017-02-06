@@ -2,7 +2,7 @@
 #define THLIGHT_H
 
 #include "../../Common/THCommon.h"
-#include "../../Math/Matrix.h"
+#include <Math\THMatrix.h>
 
 namespace THEngine
 {

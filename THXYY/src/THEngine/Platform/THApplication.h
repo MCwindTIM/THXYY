@@ -2,7 +2,8 @@
 #define THAPPLICATION_H
 
 #include "../Common/THCommon.h"
-#include "../Core/THRenderState.h"
+#include <Core\THRenderState.h>
+#include <Asset\THShader.h>
 
 namespace THEngine
 {
@@ -105,6 +106,10 @@ namespace THEngine
 
 		inline void EndRender()
 		{
+			if (renderState.shader)
+			{
+				renderState.shader->End();
+			}
 			device->EndScene();
 		}
 
@@ -113,18 +118,19 @@ namespace THEngine
 			PostQuitMessage(0);
 		}
 
-		inline void SetWorldTransform(D3DXMATRIX* world)
+		inline void SetWorldMatrix(const Matrix& world)
 		{
-			renderState.world = *world; 
+			renderState.world = world;
 		}
 
-		inline void SetProjectionTransform(D3DXMATRIX* projection) 
+		inline void SetProjectionMatrix(const Matrix& projection)
 		{ 
-			renderState.projection = *projection; 
+			renderState.projection = projection;
 		}
 
-		inline void SetViewTransform(D3DXMATRIX* view) { 
-			renderState.view = *view; 
+		inline void SetViewMatrix(const Matrix& view)
+		{
+			renderState.view = view;
 		}
 
 		friend class AssetManager;

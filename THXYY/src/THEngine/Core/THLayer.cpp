@@ -96,21 +96,21 @@ namespace THEngine
 				app->SetOrtho(pos.x - camera2D->GetWidth() / 2, pos.y - camera2D->GetHeight() / 2,
 					camera2D->GetWidth(), camera2D->GetHeight(), 0, TH_MAX_Z);
 
-				D3DXMATRIX matrix;
-				D3DXMatrixIdentity(&matrix);
-				app->SetViewTransform(&matrix);
+				Matrix matrix;
+				Matrix::Identity(&matrix);
+				app->SetViewMatrix(matrix);
 			}
 			else
 			{
 				camera3D = (Camera3D*)camera;
-				D3DXMATRIX matrix;
-				D3DXMatrixPerspectiveFovLH(&matrix, ToRad(camera3D->fov), (float)width / height, 0.1f, 10000.0f);
-				app->SetProjectionTransform(&matrix);
+				Matrix matrix;
+				Matrix::Perspective(&matrix, camera3D->fov, (float)width / height, 0.1f, 10000.0f);
+				app->SetProjectionMatrix(matrix);
 
-				D3DXMatrixLookAtLH(&matrix, &D3DXVECTOR3(camera3D->position.x, camera3D->position.y, camera3D->position.z),
-					&D3DXVECTOR3(camera3D->lookAt.x, camera3D->lookAt.y, camera3D->lookAt.z),
-					&D3DXVECTOR3(camera3D->up.x, camera3D->up.y, camera3D->up.z));
-				app->SetViewTransform(&matrix);
+				Matrix::LookAt(&matrix, Vector3f(camera3D->position.x, camera3D->position.y, camera3D->position.z),
+					Vector3f(camera3D->lookAt.x, camera3D->lookAt.y, camera3D->lookAt.z),
+					Vector3f(camera3D->up.x, camera3D->up.y, camera3D->up.z));
+				app->SetViewMatrix(matrix);
 			}
 
 			DataStack::GetInstance()->Reset();

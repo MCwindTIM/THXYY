@@ -9,8 +9,6 @@ namespace THEngine
 
 		tweenManager = new TweenManager();
 		tweenManager->Retain();
-
-		D3DXQuaternionIdentity(&rotation3D);
 	}
 
 	GameObject::GameObject(const GameObject& object) : EngineObject(object), children(object.children)
@@ -155,7 +153,7 @@ namespace THEngine
 
 	void GameObject::SetRotationByAxis(const Vector3f& axis, float rotation)
 	{
-		D3DXQuaternionRotationAxis(&rotation3D, &D3DXVECTOR3(axis.x, axis.y, axis.z), ToRad(rotation));
+		Quaternion::RotateAngleAxis(&rotation3D, Vector3f(axis.x, axis.y, axis.z), rotation);
 	}
 }
 

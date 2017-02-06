@@ -3,6 +3,7 @@
 
 #include "../Common/THCommon.h"
 #include "THTexture.h"
+#include <Math\THMath.h>
 
 namespace THEngine
 {
@@ -14,6 +15,7 @@ namespace THEngine
 		ID3DXEffect* effect;
 		UINT passNum;
 		String path;
+		int currentPass = -1;
 
 	public:
 		Shader();
@@ -24,11 +26,29 @@ namespace THEngine
 			effect->SetTechnique(technique);
 		}
 
-		inline void Begin() { effect->Begin(&passNum, 0); }
-		inline void End() { effect->End();}
+		void Use();
 
-		inline void BeginPass(unsigned int pass) { effect->BeginPass(pass); }
-		inline void EndPass() { effect->EndPass(); }
+		void End();
+
+		inline void CommitChanges()
+		{
+			this->effect->CommitChanges();
+		}
+
+		inline void UsePass(unsigned int pass) 
+		{
+			if (currentPass != pass)
+			{
+				currentPass = pass;
+				effect->BeginPass(pass);
+			}
+		}
+
+		inline void EndPass() 
+		{ 
+			currentPass = -1;
+			effect->EndPass(); 
+		}
 
 		inline UINT GetPassNum() { return passNum; }
 
@@ -52,9 +72,9 @@ namespace THEngine
 			effect->SetFloatArray(name, value, count);
 		}
 
-		inline void SetMatrix(char* name, D3DXMATRIX* value)
+		inline void SetMatrix(char* name, const Matrix& value)
 		{
-			effect->SetMatrix(name, value);
+			effect->SetMatrix(name, &value.matrix);
 		}
 
 		inline void SetValue(char* name, void* value, int size)

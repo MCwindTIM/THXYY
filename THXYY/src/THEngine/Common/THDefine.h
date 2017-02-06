@@ -14,6 +14,9 @@
 #define TH_SAFE_DELETE(object)  \
 	if(object) { delete object; object = NULL; }
 
+#define TH_SET(object, value) \
+	 TH_SAFE_RELEASE(object); object = value; object->Retain();
+
 #define TH_INSTANCEOF(instance,classname) (typeid(instance) == typeid(classname))
 
 #define  TH_MAX_FLOAT        FLT_MAX

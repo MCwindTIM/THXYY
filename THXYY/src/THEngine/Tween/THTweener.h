@@ -2,8 +2,8 @@
 #define THTWEENER_H
 
 #include "../Common/THCommon.h"
-#include "../Math/MathUtil.h"
-#include "../Math/Matrix.h"
+#include "../Math/THMathUtil.h"
+#include <Math\THVector.h>
 
 namespace THEngine
 {

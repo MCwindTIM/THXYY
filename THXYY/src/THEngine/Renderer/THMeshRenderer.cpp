@@ -38,20 +38,20 @@ namespace THEngine
 
 	void MeshRenderer::CalcWorldTransform(Mesh* mesh)
 	{
-		D3DXMATRIX transform;
-		D3DXMatrixIdentity(&transform);
+		Matrix transform;
+		Matrix::Identity(&transform);
 
-		D3DXMATRIX temp;
-		D3DXMatrixScaling(&temp, mesh->GetScale().x, mesh->GetScale().y, mesh->GetScale().z);
+		Matrix temp;
+		Matrix::Scale(&temp, mesh->GetScale().x, mesh->GetScale().y, mesh->GetScale().z);
 		transform *= temp;
 
-		D3DXMatrixRotationQuaternion(&temp, &mesh->rotation3D);
+		Matrix::RotateQuarternion(&temp, mesh->rotation3D);
 		transform *= temp;
 
-		D3DXMatrixTranslation(&temp, floor(0.5f + mesh->positionForRender.x), floor(0.5f + mesh->positionForRender.y), mesh->positionForRender.z);
+		Matrix::Translate(&temp, floor(0.5f + mesh->positionForRender.x), floor(0.5f + mesh->positionForRender.y), mesh->positionForRender.z);
 		transform *= temp;
 
-		Application::GetInstance()->SetWorldTransform(&transform);
+		Application::GetInstance()->SetWorldMatrix(transform);
 	}
 
 	void MeshRenderer::SetupRenderState()
@@ -60,7 +60,7 @@ namespace THEngine
 		auto device = app->GetDevice();
 		auto renderState = app->GetRenderState();
 
-		if (renderState->lightingEnable)
+		if (renderState->IsLightingEnabled())
 		{
 			device->SetRenderState(D3DRS_LIGHTING, true);
 		}
@@ -87,21 +87,20 @@ namespace THEngine
 
 		auto renderState = app->GetRenderState();
 
-		D3DXMATRIX mv = renderState->world * renderState->view;
-		D3DXMATRIX normalMatrix;
-		D3DXMatrixInverse(&normalMatrix, nullptr, &mv);
-		D3DXMatrixTranspose(&normalMatrix, &normalMatrix);
+		Matrix mv = renderState->GetWorldMatrix() * renderState->GetViewMatrix();
+		Matrix normalMatrix = mv;
+		normalMatrix.Inverse();
+		normalMatrix.Transpose();
 
-		meshShader->Begin();
+		meshShader->Use();
 
 		meshShader->SetFloatArray("argb", argb, 4);
-		meshShader->SetBoolean("fogEnable", renderState->fogEnable);
-		meshShader->SetValue("fog", &renderState->fog, sizeof(Fog));
-		meshShader->SetMatrix("mvMatrix", &mv);
-		meshShader->SetMatrix("normalMatrix", &normalMatrix);
-		meshShader->SetMatrix("projection", &renderState->projection);
-
-		
+		meshShader->SetBoolean("fogEnable", renderState->IsFogEnabled());
+		meshShader->SetValue("fog", (void*)&renderState->GetFog(), sizeof(Fog));
+		meshShader->SetMatrix("mvMatrix", mv);
+		meshShader->SetMatrix("normalMatrix", normalMatrix);
+		meshShader->SetMatrix("projection", renderState->GetProjectionMatrix());
+	
 		if (mesh->mesh)
 		{
 			DrawD3DMesh(mesh->mesh);
@@ -111,7 +110,7 @@ namespace THEngine
 			meshShader->SetTexture("tex", material.texture);
 			meshShader->SetBoolean("hasTexture", true);
 
-			meshShader->BeginPass(0);
+			meshShader->UsePass(0);
 			switch (mesh->primitiveType)
 			{
 			case Mesh::TRIANGLE_LIST:
@@ -124,8 +123,6 @@ namespace THEngine
 			}
 			meshShader->EndPass();
 		}
-		
-		meshShader->End();
 	}
 
 	void MeshRenderer::DrawD3DMesh(Mesh::D3DMesh* mesh)
@@ -144,7 +141,7 @@ namespace THEngine
 			}
 			meshShader->SetValue("material", &mat, sizeof(Material) - sizeof(Texture*));
 
-			meshShader->BeginPass(0);
+			meshShader->UsePass(0);
 			mesh->mesh->DrawSubset(i);
 			meshShader->EndPass();
 		}

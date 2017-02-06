@@ -42,12 +42,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)/src/THEngine;$(DXSDK_DIR)/Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)/src/STGCore;$(ProjectDir)/src/THEngine;$(DXSDK_DIR)/Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\lib;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)/src/THEngine;$(DXSDK_DIR)/Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)/src/STGCore;$(ProjectDir)/src/THEngine;$(DXSDK_DIR)/Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -65,7 +65,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;dxerr.lib;dinput8.lib;xaudio2.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <Profile>true</Profile>
@@ -79,14 +79,17 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -97,6 +100,7 @@
     <ClCompile Include="src\Player\Reimu.cpp" />
     <ClCompile Include="src\Player\ReimuBomb1.cpp" />
     <ClCompile Include="src\Player\ReimuBullet.cpp" />
+    <ClCompile Include="src\Player\ReimuSubPlane.cpp" />
     <ClCompile Include="src\Scene\Game\GameScene.cpp" />
     <ClCompile Include="src\Scene\Game\GrazeNumber.cpp" />
     <ClCompile Include="src\Scene\Game\PauseMenu.cpp" />
@@ -125,9 +129,10 @@
     <ClCompile Include="src\STGCore\Item\Item.cpp" />
     <ClCompile Include="src\STGCore\Item\PowerItemSmall.cpp" />
     <ClCompile Include="src\STGCore\Item\ScoreItem.cpp" />
-    <ClCompile Include="src\STGCore\Player.cpp" />
-    <ClCompile Include="src\STGCore\PlayerBullet.cpp" />
-    <ClCompile Include="src\STGCore\PlayerCenter.cpp" />
+    <ClCompile Include="src\STGCore\Player\Player.cpp" />
+    <ClCompile Include="src\STGCore\Player\PlayerBullet.cpp" />
+    <ClCompile Include="src\STGCore\Player\PlayerCenter.cpp" />
+    <ClCompile Include="src\STGCore\Player\SubPlane.cpp" />
     <ClCompile Include="src\STGCore\Stage.cpp" />
     <ClCompile Include="src\StgCore\STGEngine.cpp" />
     <ClCompile Include="src\STGCore\STGResources.cpp" />
@@ -157,8 +162,10 @@
     <ClCompile Include="src\THEngine\Core\THRenderState.cpp" />
     <ClCompile Include="src\THEngine\Core\THScene.cpp" />
     <ClCompile Include="src\THEngine\Core\THSprite.cpp" />
-    <ClCompile Include="src\THEngine\Math\MathUtil.cpp" />
-    <ClCompile Include="src\THEngine\Math\Matrix.cpp" />
+    <ClCompile Include="src\THEngine\Math\THMathUtil.cpp" />
+    <ClCompile Include="src\THEngine\Math\THMatrix.cpp" />
+    <ClCompile Include="src\THEngine\Math\THQuaternion.cpp" />
+    <ClCompile Include="src\THEngine\Math\THVector.cpp" />
     <ClCompile Include="src\THEngine\Platform\External\CWaveFile.cpp" />
     <ClCompile Include="src\THEngine\Platform\THAudio.cpp" />
     <ClCompile Include="src\THEngine\Platform\THInput.cpp" />
@@ -186,6 +193,7 @@
     <ClInclude Include="src\Player\Reimu.h" />
     <ClInclude Include="src\Player\ReimuBomb1.h" />
     <ClInclude Include="src\Player\ReimuBullet.h" />
+    <ClInclude Include="src\Player\ReimuSubPlane.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
     <ClInclude Include="src\Scene\Game\GrazeNumber.h" />
     <ClInclude Include="src\Scene\Game\PauseMenu.h" />
@@ -214,9 +222,10 @@
     <ClInclude Include="src\STGCore\Item\Item.h" />
     <ClInclude Include="src\STGCore\Item\PowerItemSmall.h" />
     <ClInclude Include="src\STGCore\Item\ScoreItem.h" />
-    <ClInclude Include="src\STGCore\Player.h" />
-    <ClInclude Include="src\STGCore\PlayerBullet.h" />
-    <ClInclude Include="src\STGCore\PlayerCenter.h" />
+    <ClInclude Include="src\STGCore\Player\Player.h" />
+    <ClInclude Include="src\STGCore\Player\PlayerBullet.h" />
+    <ClInclude Include="src\STGCore\Player\PlayerCenter.h" />
+    <ClInclude Include="src\STGCore\Player\SubPlane.h" />
     <ClInclude Include="src\STGCore\Stage.h" />
     <ClInclude Include="src\STGCore\STGCore.h" />
     <ClInclude Include="src\StgCore\STGEngine.h" />
@@ -250,8 +259,11 @@
     <ClInclude Include="src\THEngine\Core\THRenderState.h" />
     <ClInclude Include="src\THEngine\Core\THScene.h" />
     <ClInclude Include="src\THEngine\Core\THSprite.h" />
-    <ClInclude Include="src\THEngine\Math\MathUtil.h" />
-    <ClInclude Include="src\THEngine\Math\Matrix.h" />
+    <ClInclude Include="src\THEngine\Math\THMathUtil.h" />
+    <ClInclude Include="src\THEngine\Math\THMath.h" />
+    <ClInclude Include="src\THEngine\Math\THMatrix.h" />
+    <ClInclude Include="src\THEngine\Math\THQuaternion.h" />
+    <ClInclude Include="src\THEngine\Math\THVector.h" />
     <ClInclude Include="src\THEngine\Platform\External\CWaveFile.h" />
     <ClInclude Include="src\THEngine\Platform\THAudio.h" />
     <ClInclude Include="src\THEngine\Platform\THInput.h" />

@@ -17,7 +17,6 @@ namespace THEngine
 		Texture* texture;
 		Rect texRect;
 		Renderer* renderer;
-
 		
 		Vector2f pivot;
 
@@ -46,8 +45,13 @@ namespace THEngine
 		virtual void Draw() override;
 
 		inline void SetTexture(Texture* texture) { 
-			this->texture = texture; 
+			TH_SET(this->texture, texture);
 		}
+		inline Texture* GetTexture() const
+		{
+			return this->texture;
+		}
+
 		inline void SetTexRect(Rect rect) { this->texRect = rect; }
 		inline Rect GetTexRect() { return texRect; }
 		inline Renderer* GetRenderer() { return renderer; }

@@ -376,21 +376,28 @@ namespace THEngine
 
 	void Application::SetOrtho(float left, float bottom, float width, float height, float znear, float zfar)
 	{
-		D3DXMATRIX projection;
-		D3DXMatrixOrthoOffCenterLH(&projection, left, left + width, bottom, bottom + height, znear, zfar);
-		SetProjectionTransform(&projection);
+		Matrix projection;
+		Matrix::Ortho(&projection, left, left + width, bottom, bottom + height, znear, zfar);
+		SetProjectionMatrix(projection);
 	}
 
 	void Application::SetViewport(int left, int top, int width, int height)
 	{
-		renderState.viewport.X = left;
-		renderState.viewport.Y = top;
-		renderState.viewport.Width = width;
-		renderState.viewport.Height = height;
-		renderState.viewport.MinZ = 0;
-		renderState.viewport.MaxZ = 1;
+		renderState.viewport.x = left;
+		renderState.viewport.y = top;
+		renderState.viewport.width = width;
+		renderState.viewport.height = height;
+		renderState.viewport.minZ = 0;
+		renderState.viewport.maxZ = 1;
 
-		device->SetViewport(&renderState.viewport);
+		D3DVIEWPORT9 viewport;
+		viewport.X = renderState.viewport.x;
+		viewport.Y = renderState.viewport.y;
+		viewport.Width = renderState.viewport.width;
+		viewport.Height = renderState.viewport.height;
+		viewport.MinZ = renderState.viewport.minZ;
+		viewport.MaxZ = renderState.viewport.maxZ;
+		device->SetViewport(&viewport);
 	}
 
 	void Application::SetRenderTarget(RenderTexture* texture)

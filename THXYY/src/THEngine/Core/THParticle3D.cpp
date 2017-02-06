@@ -20,8 +20,8 @@ namespace THEngine
 
 	void Particle3D::RotateByAxis(Vector3f axis, float degree)
 	{
-		D3DXQUATERNION temp;
-		D3DXQuaternionRotationAxis(&temp, &D3DXVECTOR3(axis.x, axis.y, axis.z), ToRad(degree));
+		Quaternion temp;
+		Quaternion::RotateAngleAxis(&temp, Vector3f(axis.x, axis.y, axis.z), degree);
 		rotation3D *= temp;
 	}
 

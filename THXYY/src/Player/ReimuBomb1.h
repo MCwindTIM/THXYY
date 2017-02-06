@@ -7,7 +7,7 @@ class ReimuBomb1 : public Sprite
 {
 private:
 	class SubSprite;
-
+	
 private:
 	int frame = 0;
 	int lifeTime = 200;
@@ -23,6 +23,8 @@ private:
 	SubSprite* subGreen = nullptr;
 	SubSprite* subBlue = nullptr;
 
+	RenderTexture* renderTexture = nullptr;
+
 private:
 	void Attack();
 	void CalcDamage();
@@ -34,6 +36,7 @@ public:
 	virtual ~ReimuBomb1();
 
 	virtual void Update() override;
+	virtual void Draw() override;
 
 	inline void SetInitialAngle(float angle) { initialAngle = angle; }
 

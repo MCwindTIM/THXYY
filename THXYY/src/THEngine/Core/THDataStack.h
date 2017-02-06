@@ -2,7 +2,7 @@
 #define TH_DATA_STACK_H
 
 #include "../Common/THCommon.h"
-#include "../Math/Matrix.h"
+#include <Math\THVector.h>
 
 namespace THEngine
 {

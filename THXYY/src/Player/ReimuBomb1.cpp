@@ -34,11 +34,13 @@ ReimuBomb1::ReimuBomb1()
 	subBlue->SetSpeed(3.0f);
 	subBlue->SetAngle(angle + 240.0f);
 	subBlue->SetAcAngle(18.0f);
+
+	this->renderTexture = AssetManager::GetInstance()->CreateRenderTexture(128, 128);
 }
 
 ReimuBomb1::~ReimuBomb1()
 {
-
+	AssetManager::GetInstance()->DestroyTexture(this->renderTexture);
 }
 
 void ReimuBomb1::Update()
@@ -236,6 +238,14 @@ void ReimuBomb1::ClearBullet()
 			bullet->OnDie();
 		}
 	}
+}
+
+void ReimuBomb1::Draw()
+{
+	auto app = Application::GetInstance();
+	auto renderState = app->GetRenderState();
+
+	Sprite::Draw();
 }
 
 ///////////////////////////////////////////

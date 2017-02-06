@@ -1,17 +1,16 @@
 #include "THRenderState.h"
+#include <Asset\THShader.h>
 
 namespace THEngine
 {
 	RenderState::RenderState()
 	{
-		D3DXMatrixIdentity(&world);
-		D3DXMatrixIdentity(&projection);
-		D3DXMatrixIdentity(&view);
+
 	}
 
 	RenderState::~RenderState()
 	{
-
+		TH_SAFE_RELEASE(this->shader);
 	}
 
 	void RenderState::Clear()
