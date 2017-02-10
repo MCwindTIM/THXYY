@@ -27,7 +27,7 @@ namespace THEngine
 			if (instance->Dump(exception, fileName))
 			{
 				THMessageBox((String)"啊哦，程序崩溃了>_<\n崩溃信息已写入程序所在目录dump文件夹下的" + (String)fileName 
-					+ "文件中。请将该文件发送至SZSilence06@foxmail.com");
+					+ "文件中。请将该文件发送至SZ_Silence06@foxmail.com");
 			}
 			else
 			{
