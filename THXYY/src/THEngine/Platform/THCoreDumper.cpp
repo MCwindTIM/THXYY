@@ -74,11 +74,14 @@ namespace THEngine
 		information.ThreadId = GetCurrentThreadId();
 		information.ExceptionPointers = exception;
 		information.ClientPointers = TRUE;
-		
+
+		EnterCriticalSection(&section);
 		if (MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, MiniDumpNormal, &information, nullptr, nullptr))
 		{
 			return true;
 		}
+		LeaveCriticalSection(&section);
+
 		return false;
 	}
 }

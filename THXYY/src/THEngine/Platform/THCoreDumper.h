@@ -10,6 +10,8 @@ namespace THEngine
 	private:
 		static CoreDumper* instance;
 
+		CRITICAL_SECTION section;
+
 		static LONG WINAPI  UnhandledExceptionFilter(_EXCEPTION_POINTERS* exception);
 
 		bool Dump(_EXCEPTION_POINTERS* exception, WCHAR* fileName);
