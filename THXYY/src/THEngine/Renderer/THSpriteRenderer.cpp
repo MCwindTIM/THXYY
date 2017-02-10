@@ -130,6 +130,8 @@ void SpriteRenderer::Render(GameObject* obj)
 
 	spriteShader->Use();
 
+	SetupRenderState(obj);
+
 	spriteShader->SetTexture("tex", sprite->texture);
 	spriteShader->SetInt("screenWidth", game->GetWidth());
 	spriteShader->SetInt("screenHeight", game->GetHeight());
@@ -144,7 +146,6 @@ void SpriteRenderer::Render(GameObject* obj)
 	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 	spriteShader->EndPass();
 }
-
 	/*Sprite* sprite = (Sprite*)obj;
 	if (this->spriteBatch.texture && this->spriteBatch.spriteCount < MAX_SPRITE 
 		&& this->spriteBatch.texture == sprite->GetTexture())

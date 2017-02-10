@@ -416,6 +416,20 @@ namespace THEngine
 		}
 	}
 
+	void Application::SetBlendMode(BlendMode blendMode)
+	{
+		switch (blendMode)
+		{
+		case BlendMode::ALPHA_BLEND:
+			device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+			device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+			break;
+		case BlendMode::ADD:
+			device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+			device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+		}
+	}
+
 	void Application::OnKeyDown(int key)
 	{
 		if (key == VK_HOME)

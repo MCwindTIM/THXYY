@@ -268,10 +268,14 @@ void Enemy::OnDestroy()
 
 void Enemy::OnHitten(float damage)
 {
+	if (life <= 0)
+	{
+		return;
+	}
+
 	life -= damage;
 
-
-	if (life < 0)
+	if (life <= 0)
 	{
 		OnDie();
 		MarkDestroy();
@@ -286,26 +290,34 @@ void Enemy::DropItems()
 
 	for (int i = 0; i < powerItemSmallNum; i++)
 	{
-		float itemAngle = ToRad(Random(45, 135));
-		float dist = Random(20, 40);
-
+		float maxOffset = 5 * powerItemSmallNum;
+		if (maxOffset > 40)
+		{
+			maxOffset = 40;
+		}
+		float posX = Random(-maxOffset, maxOffset);
+		float posY = Random(-maxOffset, maxOffset);
+		
 		PowerItemSmall* item = new PowerItemSmall();
-		item->SetPosition(position.x,position.y);
-		item->AddTween(new MoveBy(Vector3f(dist*cos(itemAngle), 
-			dist*sin(itemAngle), 0), 40, Tweener::EASE_OUT));
+		item->SetPosition(position.x + posX, position.y + posY);
+		item->AddTween(new MoveBy(Vector3f(0, 20, 0), 40, Tweener::EASE_OUT));
 		item->AddTween(new Rotate2D(720.0f, 40, Tweener::EASE_OUT));
 		engine->AddItem(item);
 	}
 
 	for (int i = 0; i < scoreItemNum; i++)
 	{
-		float itemAngle = ToRad(Random(45, 135));
-		float dist = Random(20, 40);
+		float maxOffset = 5 * scoreItemNum;
+		if (maxOffset > 40)
+		{
+			maxOffset = 40;
+		}
+		float posX = Random(-maxOffset, maxOffset);
+		float posY = Random(-maxOffset, maxOffset);
 
 		ScoreItem* item = new ScoreItem();
-		item->SetPosition(position.x, position.y);
-		item->AddTween(new MoveBy(Vector3f(dist*cos(itemAngle),
-			dist*sin(itemAngle), 0), 40, Tweener::EASE_OUT));
+		item->SetPosition(position.x + posX, position.y + posY);
+		item->AddTween(new MoveBy(Vector3f(0, 20, 0), 40, Tweener::EASE_OUT));
 		item->AddTween(new Rotate2D(720.0f, 40, Tweener::EASE_OUT));
 		engine->AddItem(item);
 	}

@@ -23,6 +23,16 @@ namespace THEngine
 
 	void EngineObject::Update()
 	{
+		if (loaded == false)
+		{
+			loaded = true;
+			OnLoad();
+		}
 		scheduler->Update();
+	}
+
+	void EngineObject::OnLoad()
+	{
+
 	}
 }

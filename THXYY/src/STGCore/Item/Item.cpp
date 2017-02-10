@@ -97,6 +97,7 @@ void Item::Update()
 void Item::GoToPlayer()
 {
 	goToPlayer = true;
+	ClearTweens();
 	SetAcSpeed(1.0f);
 }
 

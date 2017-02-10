@@ -18,8 +18,8 @@ namespace THEngine
 
 		virtual Object* Clone();
 		
-		virtual void Retain() final;
-		virtual void Release() final;
+		void Retain();
+		void Release();
 	};
 }
 

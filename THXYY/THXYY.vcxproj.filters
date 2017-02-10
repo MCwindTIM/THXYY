@@ -130,9 +130,6 @@
     <Filter Include="头文件\Stage">
       <UniqueIdentifier>{b62e219c-9746-46c1-9c98-cab0d79e81b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\STGCore\Item">
-      <UniqueIdentifier>{836df9b3-3a1b-439f-9ec9-8d9a0c2c9bb1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\STGCore\Item">
       <UniqueIdentifier>{6f9940f4-9f09-4b0a-b771-275bbef00f3f}</UniqueIdentifier>
     </Filter>
@@ -159,6 +156,15 @@
     </Filter>
     <Filter Include="头文件\Stage\Stage01">
       <UniqueIdentifier>{c431ddba-06f4-4114-82ec-f3590c8bb1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\STGCore\Player">
+      <UniqueIdentifier>{6f992a7c-7c21-4f34-9fdb-2b22be4c9847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore\Player">
+      <UniqueIdentifier>{55801f6b-1beb-4971-9a4f-81650edb7a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\STGCore\Item">
+      <UniqueIdentifier>{836df9b3-3a1b-439f-9ec9-8d9a0c2c9bb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +194,6 @@
     </ClCompile>
     <ClCompile Include="src\THEngine\Core\THScene.cpp">
       <Filter>源文件\THEngine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\THEngine\Math\MathUtil.cpp">
-      <Filter>源文件\THEngine\Math</Filter>
     </ClCompile>
     <ClCompile Include="src\THEngine\Platform\THApplication.cpp">
       <Filter>源文件\THEngine\Platform</Filter>
@@ -249,12 +252,6 @@
     <ClCompile Include="src\Scene\Game\GrazeNumber.cpp">
       <Filter>源文件\Scene\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\THEngine\Math\Matrix.cpp">
-      <Filter>源文件\THEngine\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\STGCore\Player.cpp">
-      <Filter>源文件\STGCore</Filter>
-    </ClCompile>
     <ClCompile Include="src\Player\Reimu.cpp">
       <Filter>源文件\Player</Filter>
     </ClCompile>
@@ -265,9 +262,6 @@
       <Filter>源文件\THEngine\Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\STGCore\Stage.cpp">
-      <Filter>源文件\STGCore</Filter>
-    </ClCompile>
-    <ClCompile Include="src\STGCore\PlayerCenter.cpp">
       <Filter>源文件\STGCore</Filter>
     </ClCompile>
     <ClCompile Include="src\THEngine\Common\THEngineObject.cpp">
@@ -348,9 +342,6 @@
     <ClCompile Include="src\Scene\Title\TitleMenuItem.cpp">
       <Filter>源文件\Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="src\STGCore\PlayerBullet.cpp">
-      <Filter>源文件\STGCore</Filter>
-    </ClCompile>
     <ClCompile Include="src\Player\ReimuBullet.cpp">
       <Filter>源文件\Player</Filter>
     </ClCompile>
@@ -393,9 +384,6 @@
     <ClCompile Include="src\Stage\Stage01\Stage01.cpp">
       <Filter>源文件\Stage\Stage01</Filter>
     </ClCompile>
-    <ClCompile Include="src\THEngine\Core\THRenderState.cpp">
-      <Filter>源文件\THEngine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\THEngine\Core\3D\THLight.cpp">
       <Filter>源文件\THEngine\Core\3D</Filter>
     </ClCompile>
@@ -425,6 +413,42 @@
     </ClCompile>
     <ClCompile Include="src\THEngine\Asset\THRenderTexture.cpp">
       <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player\ReimuSubPlane.cpp">
+      <Filter>源文件\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Player\Player.cpp">
+      <Filter>源文件\STGCore\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Player\PlayerBullet.cpp">
+      <Filter>源文件\STGCore\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Player\PlayerCenter.cpp">
+      <Filter>源文件\STGCore\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STGCore\Player\SubPlane.cpp">
+      <Filter>源文件\STGCore\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Math\THMatrix.cpp">
+      <Filter>源文件\THEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Math\THVector.cpp">
+      <Filter>源文件\THEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THRenderState.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Math\THMathUtil.cpp">
+      <Filter>源文件\THEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Math\THQuaternion.cpp">
+      <Filter>源文件\THEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player\ReimuSubPlaneBullet.cpp">
+      <Filter>源文件\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -457,9 +481,6 @@
     </ClInclude>
     <ClInclude Include="src\THEngine\Core\THScene.h">
       <Filter>头文件\THEngine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\THEngine\Math\MathUtil.h">
-      <Filter>头文件\THEngine\Math</Filter>
     </ClInclude>
     <ClInclude Include="src\THEngine\Platform\THApplication.h">
       <Filter>头文件\THEngine\Platform</Filter>
@@ -536,12 +557,6 @@
     <ClInclude Include="src\Scene\Game\GrazeNumber.h">
       <Filter>头文件\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\THEngine\Math\Matrix.h">
-      <Filter>头文件\THEngine\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\STGCore\Player.h">
-      <Filter>头文件\STGCore</Filter>
-    </ClInclude>
     <ClInclude Include="src\Player\Reimu.h">
       <Filter>头文件\Player</Filter>
     </ClInclude>
@@ -552,9 +567,6 @@
       <Filter>头文件\THEngine\Platform</Filter>
     </ClInclude>
     <ClInclude Include="src\STGCore\Stage.h">
-      <Filter>头文件\STGCore</Filter>
-    </ClInclude>
-    <ClInclude Include="src\STGCore\PlayerCenter.h">
       <Filter>头文件\STGCore</Filter>
     </ClInclude>
     <ClInclude Include="src\THEngine\Common\THEngineObject.h">
@@ -632,9 +644,6 @@
     <ClInclude Include="src\Scene\Title\TitleMenuItem.h">
       <Filter>头文件\Scene\Title</Filter>
     </ClInclude>
-    <ClInclude Include="src\STGCore\PlayerBullet.h">
-      <Filter>头文件\STGCore</Filter>
-    </ClInclude>
     <ClInclude Include="src\Player\ReimuBullet.h">
       <Filter>头文件\Player</Filter>
     </ClInclude>
@@ -677,9 +686,6 @@
     <ClInclude Include="src\Stage\Stage01\Stage01.h">
       <Filter>头文件\Stage\Stage01</Filter>
     </ClInclude>
-    <ClInclude Include="src\THEngine\Core\THRenderState.h">
-      <Filter>头文件\THEngine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\THEngine\Core\3D\THLight.h">
       <Filter>头文件\THEngine\Core\3D</Filter>
     </ClInclude>
@@ -709,6 +715,42 @@
     </ClInclude>
     <ClInclude Include="src\THEngine\Asset\THRenderTexture.h">
       <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\ReimuSubPlane.h">
+      <Filter>头文件\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Player\Player.h">
+      <Filter>头文件\STGCore\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Player\PlayerBullet.h">
+      <Filter>头文件\STGCore\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Player\PlayerCenter.h">
+      <Filter>头文件\STGCore\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STGCore\Player\SubPlane.h">
+      <Filter>头文件\STGCore\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\THMatrix.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\THVector.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\THMath.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THRenderState.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\THMathUtil.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Math\THQuaternion.h">
+      <Filter>头文件\THEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\ReimuSubPlaneBullet.h">
+      <Filter>头文件\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

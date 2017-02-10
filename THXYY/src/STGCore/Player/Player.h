@@ -3,6 +3,7 @@
 
 #include <THEngine.h>
 #include "PlayerCenter.h"
+#include "SubPlane.h"
 
 using namespace THEngine;
 
@@ -62,6 +63,8 @@ protected:
 	MotionState motionState;
 	State state;
 
+	LinkedList<SubPlane*> subPlaneList;
+
 private:
 	void ProcessInvincible();
 	void ProcessCenterPoint();
@@ -93,6 +96,8 @@ public:
 	inline void SetItemGetHeight(float height) { itemGetHeight = height; }
 	inline float GetItemGetHeight() { return itemGetHeight; }
 
+	int GetPowerLevel();
+
 	inline void EnableBomb(bool enableBomb) { this->enableBomb = enableBomb; }
 	inline void EnableFire(bool enableFire) { this->enableFire = enableFire; }
 	inline void EnableMove(bool enableMove) { this->enableMove = enableMove; }
@@ -101,13 +106,14 @@ public:
 
 	inline bool IsDead() { return state == DYING; }
 
-	virtual void Update() override;
-	virtual void OnDestroy() override;
-
 	void Move();
 	void Hitten();
 	void Biu();
 	void EnterBombState(int bombTime);
+	
+	void AddSubPlane(SubPlane* subPlane);
+	void RemoveSubPlane(int index);
+	void RemoveAllSubPlanes();
 
 	bool IsDamageable();
 
@@ -119,7 +125,17 @@ public:
 		invincible_shrink_counter = 0;
 	}
 
-	virtual void Fire() = 0;
+	//virtual functions
+	virtual void OnPowerLevelChanged(int oldPowerLevel, int newPowerLevel);
+	virtual void OnEnterLowSpeed();
+	virtual void OnEnterHighSpeed();
+
+	virtual void Update() override;
+	virtual void OnDestroy() override;
+	virtual void OnLoad() override;
+	
+	virtual void SetupSubPlanes() = 0;
+	virtual void Fire();
 	virtual void Bomb() = 0;
 };
 

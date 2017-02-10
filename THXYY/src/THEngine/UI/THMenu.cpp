@@ -32,9 +32,9 @@ namespace THEngine
 		}
 	}
 
-	void Menu::OnActivate()
+	void Menu::OnLoad()
 	{
-		Layer::OnActivate();
+		Layer::OnLoad();
 		EventSystem::GetInstance()->RegisterKeyDownListener(this);
 	}
 

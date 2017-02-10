@@ -1,7 +1,9 @@
 #ifndef SUBPLANE_H
 #define SUBPLANE_H
 
-#include "Player.h"
+#include <THEngine.h>
+
+using namespace THEngine;
 
 class SubPlane : public Sprite
 {
@@ -12,6 +14,8 @@ public:
 	virtual void Update() override;
 
 	virtual void Fire() = 0;
+
+	void Disappear();
 };
 
 #endif

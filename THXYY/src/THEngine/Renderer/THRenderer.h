@@ -13,6 +13,9 @@ namespace THEngine
 	protected:
 		IDirect3DDevice9* device;
 
+	protected:
+		void SetupRenderState(GameObject* object);
+
 	public:
 		virtual void Render(GameObject* obj) = 0;
 	};

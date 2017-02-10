@@ -26,7 +26,14 @@ void PowerItemSmall::OnGot()
 	auto power = engine->GetPower();
 	if (power < 400)
 	{
+		int oldPowerLevel = power / 100;
+		int newPowerLevel = (power + 1) / 100;
 		engine->SetPower(engine->GetPower() + 1);
+		if (newPowerLevel != oldPowerLevel)
+		{
+			auto player = engine->GetPlayer();
+			player->OnPowerLevelChanged(oldPowerLevel, newPowerLevel);
+		}
 	}	
 }
 

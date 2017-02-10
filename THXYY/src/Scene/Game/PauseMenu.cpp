@@ -19,9 +19,9 @@ PauseMenu::~PauseMenu()
 	AssetManager::GetInstance()->DestroyTexture(PauseMenuItem::texPauseMenu);
 }
 
-void PauseMenu::OnActivate()
+void PauseMenu::OnLoad()
 {
-	Menu::OnActivate();
+	Menu::OnLoad();
 
 	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 }

@@ -101,6 +101,7 @@
     <ClCompile Include="src\Player\ReimuBomb1.cpp" />
     <ClCompile Include="src\Player\ReimuBullet.cpp" />
     <ClCompile Include="src\Player\ReimuSubPlane.cpp" />
+    <ClCompile Include="src\Player\ReimuSubPlaneBullet.cpp" />
     <ClCompile Include="src\Scene\Game\GameScene.cpp" />
     <ClCompile Include="src\Scene\Game\GrazeNumber.cpp" />
     <ClCompile Include="src\Scene\Game\PauseMenu.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="src\THEngine\Platform\THSound.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THMeshRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp" />
     <ClCompile Include="src\THEngine\Tween\THConcreteTween.cpp" />
@@ -194,6 +196,7 @@
     <ClInclude Include="src\Player\ReimuBomb1.h" />
     <ClInclude Include="src\Player\ReimuBullet.h" />
     <ClInclude Include="src\Player\ReimuSubPlane.h" />
+    <ClInclude Include="src\Player\ReimuSubPlaneBullet.h" />
     <ClInclude Include="src\Scene\Game\GameScene.h" />
     <ClInclude Include="src\Scene\Game\GrazeNumber.h" />
     <ClInclude Include="src\Scene\Game\PauseMenu.h" />

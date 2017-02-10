@@ -24,6 +24,12 @@ namespace THEngine
 		int maxZ;
 	};
 
+	enum BlendMode
+	{
+		ALPHA_BLEND = 1,
+		ADD = 2
+	};
+
 	class RenderState : public Object
 	{
 	private:

@@ -134,6 +134,11 @@ namespace THEngine
 		}
 	}
 
+	void GameObject::RemoveChildAt(int index)
+	{
+		children.RemoveAt(index);
+	}
+
 	void GameObject::RemoveAllChildren()
 	{
 		auto iter = children.GetIterator();
@@ -149,6 +154,11 @@ namespace THEngine
 	{
 		tween->Bind(this);
 		tweenManager->AddTween(tween);
+	}
+
+	void GameObject::ClearTweens()
+	{
+		tweenManager->ClearTweens();
 	}
 
 	void GameObject::SetRotationByAxis(const Vector3f& axis, float rotation)

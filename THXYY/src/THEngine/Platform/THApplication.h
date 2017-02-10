@@ -94,6 +94,8 @@ namespace THEngine
 
 		void SetRenderTarget(RenderTexture* texture);
 
+		void SetBlendMode(BlendMode blendMode);
+
 		inline bool SwapBuffers()
 		{
 			return (!FAILED(device->Present(NULL, NULL, NULL, NULL)));

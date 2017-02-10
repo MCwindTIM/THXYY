@@ -23,6 +23,8 @@ namespace THEngine
 		inline void AddTween(Tween* tween) { tweenList.Add(tween); }
 
 		inline void KillTween(Tween* tween) { tweenList.Remove(tween); }
+
+		inline void ClearTweens() { tweenList.Clear(); }
 	};
 }
 

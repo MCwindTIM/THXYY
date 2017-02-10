@@ -13,7 +13,8 @@ private:
 
 	MotionState prevState;
 
-	ReimuSubPlane* subPlanes[4];
+	Vector2f subPlaneOffsetHigh[4][4];
+	Vector2f subPlaneOffsetLow[4][4];
 
 public:
 	Reimu();
@@ -23,6 +24,11 @@ public:
 
 	virtual void Fire() override;
 	virtual void Bomb() override;
+
+	virtual void OnEnterLowSpeed() override;
+	virtual void OnEnterHighSpeed() override;
+	virtual void OnPowerLevelChanged(int oldPowerLevel, int newPowerLevel) override;
+	virtual void SetupSubPlanes() override;
 };
 
 #endif

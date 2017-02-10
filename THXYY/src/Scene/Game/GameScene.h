@@ -53,7 +53,7 @@ public:
 	virtual void Draw() override;
 
 	virtual void OnLoad() override;
-	virtual void OnSceneChanged() override;
+	virtual void OnDestroy() override;
 
 	virtual bool OnKeyDown(EngineObject* sender, int key) override;
 

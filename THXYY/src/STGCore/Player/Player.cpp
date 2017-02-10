@@ -64,6 +64,7 @@ void Player::ProcessCenterPoint()
 			float centerScale = GetRadius() / 3.0f;
 			center->SetScale(centerScale, centerScale);
 			scene->GetSTGLayer()->AddChild(center);
+			OnEnterLowSpeed();
 		}
 		isHiSpeed = false;
 	}
@@ -72,8 +73,9 @@ void Player::ProcessCenterPoint()
 		if (!isHiSpeed)
 		{
 			center->Disappear();
+			OnEnterHighSpeed();
 		}
-		isHiSpeed = true;;
+		isHiSpeed = true;
 	}
 }
 
@@ -150,6 +152,7 @@ void Player::Update()
 			SetAngle(90.0f);
 			SetAlpha(1.0f);
 			SetInvincible(250);
+			SetupSubPlanes();
 
 			auto life = engine->GetLife();
 			if (life > 0)
@@ -294,6 +297,7 @@ void Player::Biu()
 	auto engine = STGEngine::GetInstance();
 	auto stgResources = STGResources::GetInstance();
 
+	RemoveAllSubPlanes();
 	engine->RemoveAllBullet();
 
 	for (int i = 0; i < 30; i++)
@@ -360,8 +364,70 @@ void Player::OnDestroy()
 	}
 }
 
+void Player::Fire()
+{
+	auto iter = this->subPlaneList.GetIterator();
+	while (iter->HasNext())
+	{
+		auto subPlane = iter->Next();
+		subPlane->Fire();
+	}
+}
+
 void Player::EnterBombState(int bombTime)
 {
 	EnableBomb(false);
 	bombTimer = bombTime;
+}
+
+int Player::GetPowerLevel()
+{
+	auto engine = STGEngine::GetInstance();
+	return engine->GetPower() / 100;
+}
+
+void Player::OnLoad()
+{
+	Sprite::OnLoad();
+
+	SetupSubPlanes();
+}
+
+void Player::OnPowerLevelChanged(int oldPowerLevel, int newPowerLevel)
+{
+	
+}
+
+void Player::OnEnterLowSpeed()
+{
+
+}
+
+void Player::OnEnterHighSpeed()
+{
+
+}
+
+void Player::AddSubPlane(SubPlane* subPlane)
+{
+	this->subPlaneList.Add(subPlane);
+	AddChild(subPlane);
+}
+
+void Player::RemoveSubPlane(int index)
+{
+	SubPlane* subPlane = this->subPlaneList.Get(index);
+	this->subPlaneList.RemoveAt(index);
+	subPlane->Disappear();
+}
+
+void Player::RemoveAllSubPlanes()
+{
+	auto iter = this->subPlaneList.GetIterator();
+	while (iter->HasNext())
+	{
+		auto subPlane = iter->Next();
+		subPlane->Disappear();
+	}
+	this->subPlaneList.Clear();
 }

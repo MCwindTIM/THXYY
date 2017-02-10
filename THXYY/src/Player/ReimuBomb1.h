@@ -23,8 +23,6 @@ private:
 	SubSprite* subGreen = nullptr;
 	SubSprite* subBlue = nullptr;
 
-	RenderTexture* renderTexture = nullptr;
-
 private:
 	void Attack();
 	void CalcDamage();

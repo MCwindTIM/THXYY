@@ -4,6 +4,7 @@
 #include "../Common/THCommon.h"
 #include <Math\THMath.h>
 #include "../Tween/THTweenManager.h"
+#include "THRenderState.h"
 
 namespace THEngine
 {
@@ -15,6 +16,7 @@ namespace THEngine
 	protected:
 		LinkedList<GameObject*> children;
 		bool needRemove;
+		bool activated = false;
 
 		Vector3f position = Vector3f(0.0f, 0.0f, 0.0f);
 		Vector3f color = Vector3f(1.0f, 1.0f, 1.0f);
@@ -27,6 +29,9 @@ namespace THEngine
 		TweenManager* tweenManager = nullptr;
 
 		Vector3f positionForRender = Vector3f(0.0f, 0.0f, 0.0f);
+
+		//Render Settings
+		BlendMode blendMode = BlendMode::ALPHA_BLEND;
 
 	private:
 		void Visit();
@@ -53,6 +58,8 @@ namespace THEngine
 
 		void RemoveChild(GameObject* child);
 
+		void RemoveChildAt(int index);
+
 		void RemoveAllChildren();
 
 		inline void MarkDestroy() { needRemove = true; }
@@ -61,6 +68,8 @@ namespace THEngine
 	
 
 		void AddTween(Tween* tween);
+
+		void ClearTweens();
 
 		inline void KillTween(Tween* tween)
 		{
@@ -95,6 +104,9 @@ namespace THEngine
 		inline Vector3f GetScale() { return scale; }
 
 		void SetRotationByAxis(const Vector3f& axis, float rotation);
+
+		inline void SetBlendMode(BlendMode blendMode) { this->blendMode = blendMode; }
+		inline BlendMode GetBlendMode() { return this->blendMode; }
 
 		friend class Layer;
 		friend class RenderQueue;

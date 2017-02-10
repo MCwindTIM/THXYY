@@ -23,24 +23,24 @@ ReimuBomb1::ReimuBomb1()
 
 	int angle = Random(0, 359);
 
-	subRed->SetSpeed(3.0f);
+	subRed->SetSpeed(1.0f);
 	subRed->SetAngle(angle);
 	subRed->SetAcAngle(18.0f);
 
-	subGreen->SetSpeed(3.0f);
+	subGreen->SetSpeed(1.0f);
 	subGreen->SetAngle(angle + 120.0f);
 	subGreen->SetAcAngle(18.0f);
 
-	subBlue->SetSpeed(3.0f);
+	subBlue->SetSpeed(1.0f);
 	subBlue->SetAngle(angle + 240.0f);
 	subBlue->SetAcAngle(18.0f);
 
-	this->renderTexture = AssetManager::GetInstance()->CreateRenderTexture(128, 128);
+	SetAlpha(0);
 }
 
 ReimuBomb1::~ReimuBomb1()
 {
-	AssetManager::GetInstance()->DestroyTexture(this->renderTexture);
+
 }
 
 void ReimuBomb1::Update()
@@ -214,7 +214,6 @@ void ReimuBomb1::Explode()
 {
 	auto stgResources = STGResources::GetInstance();
 
-	AddTween(new ScaleTo(Vector3f(8.0f, 8.0f, 1.0f), 16, Tweener::EASE_OUT));
 	AddTween(new FadeOut(16, Tweener::EASE_OUT));
 
 	stgResources->soundShoot1->Play();
@@ -255,7 +254,7 @@ ReimuBomb1::SubSprite::SubSprite()
 
 	SetTexture(stgResources->texReimu);
 	SetTexRect(Rect(64, 128, 192, 256));
-	SetAlpha(0.33f);
+	SetBlendMode(BlendMode::ADD);
 
 	position.z = 10.0f;
 }
@@ -279,7 +278,10 @@ void ReimuBomb1::SubSprite::Update()
 
 	if (frame == 200)
 	{
-		MarkDestroy();
+		AddTween(new ScaleTo(Vector3f(8.0f, 8.0f, 1.0f), 16, Tweener::EASE_OUT));
+		AddTween(new FadeOut(16, Tweener::EASE_OUT));
+		SetSpeed(0);
+		SetAcSpeed(0);
 	}
 }
 

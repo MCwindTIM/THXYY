@@ -15,9 +15,9 @@ YesNoMenu::~YesNoMenu()
 
 }
 
-void YesNoMenu::OnActivate()
+void YesNoMenu::OnLoad()
 {
-	Menu::OnActivate();
+	Menu::OnLoad();
 
 	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 }

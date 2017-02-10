@@ -11,6 +11,7 @@ namespace THEngine
 	protected:
 		Scheduler* scheduler = nullptr;
 		bool paused = false;
+		bool loaded = false;
 
 	public:
 		EngineObject();
@@ -25,6 +26,8 @@ namespace THEngine
 		inline bool IsPaused() { return paused; }
 		inline void Pause() { paused = true; }
 		inline void Resume() { paused = false; }
+
+		virtual void OnLoad();
 	};
 }
 

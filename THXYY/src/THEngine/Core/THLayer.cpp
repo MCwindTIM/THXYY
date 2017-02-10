@@ -153,11 +153,6 @@ namespace THEngine
 		rootNode.RemoveChild(obj);
 	}
 
-	void Layer::OnActivate()
-	{
-		activated = true;
-	}
-
 	void Layer::OnDestroy()
 	{
 		rootNode.OnDestroy();

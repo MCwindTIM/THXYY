@@ -34,6 +34,7 @@ namespace THEngine
 		IXAudio2SourceVoice* sourceVoice = nullptr;
 		XAUDIO2_BUFFER buffer;
 		SoundCallback* callback = nullptr;
+		bool submitted = false;
 
 	public:
 		Sound();

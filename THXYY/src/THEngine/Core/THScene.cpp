@@ -43,10 +43,6 @@ namespace THEngine
 			Layer* curLayer = iter->Next();
 			if (curLayer->IsPaused() == false)
 			{
-				if (curLayer->activated == false)
-				{
-					curLayer->OnActivate();
-				}
 				curLayer->Update();
 			}
 		}
@@ -63,12 +59,7 @@ namespace THEngine
 		}
 	}
 
-	void Scene::OnLoad()
-	{
-
-	}
-
-	void Scene::OnSceneChanged()
+	void Scene::OnDestroy()
 	{
 
 	}

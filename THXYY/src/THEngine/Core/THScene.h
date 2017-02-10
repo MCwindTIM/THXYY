@@ -18,8 +18,7 @@ namespace THEngine
 		virtual void Update() override;
 		virtual void Draw() override;
 
-		virtual void OnLoad();
-		virtual void OnSceneChanged();
+		virtual void OnDestroy();
 
 		void AddLayer(Layer* layer);
 	};

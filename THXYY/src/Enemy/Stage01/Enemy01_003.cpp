@@ -3,6 +3,9 @@
 Enemy01_003::Enemy01_003()
 {
 	SetLife(6000);
+
+	SetItem(POWER_SMALL, 20);
+	SetItem(SCORE, 20);
 }
 
 Enemy01_003::~Enemy01_003()

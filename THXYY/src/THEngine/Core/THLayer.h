@@ -19,8 +19,6 @@ namespace THEngine
 		
 		LinkedList<Camera*> cameraList;
 
-		bool activated = false;
-
 		bool fogEnable = false;
 		Fog fog;
 
@@ -38,7 +36,6 @@ namespace THEngine
 		virtual void Update() override;
 		virtual void Draw() override;
 
-		virtual void OnActivate();
 		virtual void OnDestroy();
 
 		void AddChild(GameObject* obj);

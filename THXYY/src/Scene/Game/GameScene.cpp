@@ -137,9 +137,9 @@ void GameScene::OnLoad()
 	engine->OnLoad();
 }
 
-void GameScene::OnSceneChanged()
+void GameScene::OnDestroy()
 {
-	Scene::OnSceneChanged();
+	Scene::OnDestroy();
 
 	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 

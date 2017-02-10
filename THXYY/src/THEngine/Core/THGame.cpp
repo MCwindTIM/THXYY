@@ -169,10 +169,9 @@ int Game::Run()
 			{
 				if (scene)
 				{
-					scene->OnSceneChanged();
+					scene->OnDestroy();
 				}
 				SetScene(nextScene);
-				nextScene->OnLoad();
 				nextScene = nullptr;
 			}
 		}
