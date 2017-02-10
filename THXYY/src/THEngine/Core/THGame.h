@@ -14,6 +14,7 @@
 #include "../Renderer/THMeshRenderer.h"
 #include "../Asset/THAssetManager.h"
 #include "../UI/THEventSystem.h"
+#include <Platform\THCoreDumper.h>
 
 
 namespace THEngine
@@ -35,6 +36,8 @@ namespace THEngine
 		bool showFPS;
 		
 		unsigned int lastTime, currentTime;
+
+		CoreDumper coreDumper;
 
 		Application* app;
 
@@ -96,7 +99,7 @@ namespace THEngine
 
 		static Game* GetInstance();
 
-		bool CreateGame(int width, int height, bool fullScreen, String title, int bigIcon, int smallIcon);
+		bool CreateGame(int width, int height, bool fullScreen, const String& title, int bigIcon, int smallIcon);
 
 		void SetScene(Scene* scene);
 
@@ -131,6 +134,8 @@ namespace THEngine
 		inline int GetHeight() { return height; }
 
 		inline Scene* GetScene() { return scene; }
+
+		inline const String& GetTitle() { return title; }
 
 		void SendToRenderQueue(RenderQueueType type, GameObject* obj);
 	};

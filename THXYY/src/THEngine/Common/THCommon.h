@@ -19,6 +19,7 @@
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"xaudio2.lib")
 #pragma comment(lib,"winmm.lib")
+#pragma comment(lib,"Dbghelp.lib")
 #endif
 
 #ifndef DIRECTINPUT_VERSION

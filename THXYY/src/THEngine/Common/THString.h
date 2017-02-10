@@ -18,7 +18,7 @@ namespace THEngine
 		String(const String& str);
 		~String();
 
-		inline TCHAR* GetBuffer()
+		inline TCHAR* GetBuffer() const
 		{
 			return buffer;
 		}

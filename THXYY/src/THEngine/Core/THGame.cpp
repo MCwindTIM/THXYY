@@ -40,7 +40,7 @@ Game* Game::GetInstance()
 	return instance;
 }
 
-bool Game::CreateGame(int width, int height, bool fullScreen, String title, 
+bool Game::CreateGame(int width, int height, bool fullScreen, const String& title, 
 	int bigIcon, int smallIcon)
 {
 	this->width = width;
