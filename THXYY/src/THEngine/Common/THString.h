@@ -28,10 +28,10 @@ namespace THEngine
 			return length;
 		}
 
-		std::string ToStdString();
+		std::string ToStdString() const;
 
-		int LastIndexOf(TCHAR ch);
-		String SubString(int start, int end);
+		int LastIndexOf(TCHAR ch) const;
+		String SubString(int start, int end) const;
 
 		String operator +(const String& str);
 		String operator +(int number);

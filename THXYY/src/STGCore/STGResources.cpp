@@ -1,5 +1,14 @@
 #include "STGResources.h"
 
+#define STGRES_LOAD_TEXTURE(texture, path) \
+	texture = manager->CreateTextureFromFile(path); \
+	if (texture == nullptr) \
+	{   \
+		return false;  \
+	}  \
+	texture->Retain();
+
+
 STGResources* STGResources::instance = nullptr;
 
 STGResources::STGResources()
@@ -30,65 +39,16 @@ bool STGResources::LoadTexTures()
 
 	THLog("加载STG纹理。。。");
 
-	texPlayerCenter = manager->CreateTextureFromFile("res/player/center.png");
-	if (texPlayerCenter == nullptr)
-	{
-		return false;
-	}
-
-	texEnemy01 = manager->CreateTextureFromFile("res/enemy/enemy01.png");
-	if (texEnemy01 == nullptr)
-	{
-		return false;
-	}
-
-	texBullet01 = manager->CreateTextureFromFile("res/bullet/bullet1.png");
-	if (texBullet01 == nullptr)
-	{
-		return false;
-	}
-
-	texBullet02 = manager->CreateTextureFromFile("res/bullet/bullet2.png");
-	if (texBullet02 == nullptr)
-	{
-		return false;
-	}
-
-	texBullet03 = manager->CreateTextureFromFile("res/bullet/bullet3.png");
-	if (texBullet03 == nullptr)
-	{
-		return false;
-	}
-
-	texBullet04 = manager->CreateTextureFromFile("res/bullet/bullet4.png");
-	if (texBullet04 == nullptr)
-	{
-		return false;
-	}
-
-	texReimu = manager->CreateTextureFromFile("res/player/reimu.png");
-	if (texReimu == nullptr)
-	{
-		return false;
-	}
-
-	texEffBase = manager->CreateTextureFromFile("res/effect/eff_base.png");
-	if (texEffBase == nullptr)
-	{
-		return false;
-	}
-
-	texPointLight = manager->CreateTextureFromFile("res/effect/point_light.png");
-	if (texPointLight == nullptr)
-	{
-		return false;
-	}
-
-	texFourAngleStar = manager->CreateTextureFromFile("res/effect/four_angle_star.png");
-	if (texFourAngleStar == nullptr)
-	{
-		return false;
-	}
+	STGRES_LOAD_TEXTURE(texPlayerCenter, "res/player/center.png");
+	STGRES_LOAD_TEXTURE(texEnemy01, "res/enemy/enemy01.png");
+	STGRES_LOAD_TEXTURE(texBullet01, "res/bullet/bullet1.png");
+	STGRES_LOAD_TEXTURE(texBullet02, "res/bullet/bullet2.png");
+	STGRES_LOAD_TEXTURE(texBullet03, "res/bullet/bullet3.png");
+	STGRES_LOAD_TEXTURE(texBullet04, "res/bullet/bullet4.png");
+	STGRES_LOAD_TEXTURE(texReimu, "res/player/reimu.png");
+	STGRES_LOAD_TEXTURE(texEffBase, "res/effect/eff_base.png");
+	STGRES_LOAD_TEXTURE(texPointLight, "res/effect/point_light.png");
+	STGRES_LOAD_TEXTURE(texFourAngleStar, "res/effect/four_angle_star.png");
 
 	THLog("加载STG纹理成功。");
 
@@ -101,16 +61,16 @@ void STGResources::UnloadTextures()
 
 	THLog("释放STG纹理。");
 
-	manager->DestroyTexture(texPlayerCenter);
-	manager->DestroyTexture(texEnemy01);
-	manager->DestroyTexture(texBullet01);
-	manager->DestroyTexture(texBullet02);
-	manager->DestroyTexture(texBullet03);
-	manager->DestroyTexture(texBullet04);
-	manager->DestroyTexture(texReimu);
-	manager->DestroyTexture(texEffBase);
-	manager->DestroyTexture(texPointLight);
-	manager->DestroyTexture(texFourAngleStar);
+	TH_SAFE_RELEASE(texPlayerCenter);
+	TH_SAFE_RELEASE(texEnemy01);
+	TH_SAFE_RELEASE(texBullet01);
+	TH_SAFE_RELEASE(texBullet02);
+	TH_SAFE_RELEASE(texBullet03);
+	TH_SAFE_RELEASE(texBullet04);
+	TH_SAFE_RELEASE(texReimu);
+	TH_SAFE_RELEASE(texEffBase);
+	TH_SAFE_RELEASE(texPointLight);
+	TH_SAFE_RELEASE(texFourAngleStar);
 
 	texPlayerCenter = nullptr;
 	texEnemy01 = nullptr;

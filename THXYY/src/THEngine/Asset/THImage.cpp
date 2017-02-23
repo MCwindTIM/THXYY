@@ -38,7 +38,7 @@ Image::~Image()
 	data = nullptr;
 }
 
-Image* Image::Load(String filePath)
+Image* Image::Load(const String& filePath)
 {
 	auto exceptionManager = ExceptionManager::GetInstance();
 

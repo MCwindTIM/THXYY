@@ -11,6 +11,7 @@ TitleMenu::TitleMenu() : Menu(464, 216, 128, 248)
 	itemCount = 10;
 
 	TitleMenuItem::texTitleMenu = AssetManager::GetInstance()->CreateTextureFromFile("res/title/main_menu.png");
+	TitleMenuItem::texTitleMenu->Retain();
 
 	TitleMenuItem* menuItem = new TitleMenuItem(TitleMenuItem::GAME_START);
 	menuItem->SetPosition(Vector3f(64, 232, 0));
@@ -72,7 +73,7 @@ void TitleMenu::OnDestroy()
 {
 	Menu::OnDestroy();
 
-	AssetManager::GetInstance()->DestroyTexture(TitleMenuItem::texTitleMenu);
+	TH_SAFE_RELEASE(TitleMenuItem::texTitleMenu);
 }
 
 void TitleMenu::Update()

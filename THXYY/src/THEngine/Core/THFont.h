@@ -15,6 +15,7 @@ namespace THEngine
 
 	public:
 		Font();
+		virtual ~Font();
 		
 		static Font* CreateFontFromFile(String ImagePath,String txtPath);
 

@@ -9,7 +9,7 @@ Global::Global()
 
 Global::~Global()
 {
-
+	TH_SAFE_RELEASE(texBlack);
 }
 
 Global* Global::GetInstance()
@@ -29,6 +29,7 @@ bool Global::LoadTextures()
 	{
 		return false;
 	}
+	texBlack->Retain();
 	return true;
 }
 

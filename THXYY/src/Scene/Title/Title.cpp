@@ -8,6 +8,7 @@ Title::Title()
 	bgrLayer->SetOrder(100);
 	
 	titleTex = AssetManager::GetInstance()->CreateTextureFromFile("res/title/title.jpg");
+	titleTex->Retain();
 
 	Sprite* background = new Sprite();
 	background->SetTexture(titleTex);
@@ -36,5 +37,5 @@ Title::Title()
 
 Title::~Title()
 {
-	AssetManager::GetInstance()->DestroyTexture(titleTex);
+	TH_SAFE_RELEASE(titleTex);
 }

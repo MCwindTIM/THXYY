@@ -8,6 +8,8 @@ class Stage01 : public Stage
 private:
 	static Texture* texRoad;
 
+	CubeMap* sky = nullptr;
+
 	int frame = 0;
 
 	Mesh* house = nullptr;

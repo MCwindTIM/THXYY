@@ -51,7 +51,7 @@ String::~String()
 	}
 }
 
-std::string String::ToStdString()
+std::string String::ToStdString() const
 {
 	int requiredSize = WideCharToMultiByte(CP_ACP, 0, buffer, -1, nullptr, 0, nullptr, nullptr);
 	char* outBuffer = new char[requiredSize + 1];
@@ -62,7 +62,7 @@ std::string String::ToStdString()
 	return ret;
 }
 
-int String::LastIndexOf(TCHAR ch)
+int String::LastIndexOf(TCHAR ch) const
 {
 	int i;
 	for (i = length - 1; i >= 0; i--)
@@ -75,7 +75,7 @@ int String::LastIndexOf(TCHAR ch)
 	return i;
 }
 
-String String::SubString(int start, int end)
+String String::SubString(int start, int end) const
 {
 	ASSERT(start >= 0 && end <= length && start < end);
 	String ret;

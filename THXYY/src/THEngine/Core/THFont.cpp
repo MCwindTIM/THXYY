@@ -10,12 +10,18 @@ Font::Font()
 
 }
 
+Font::~Font()
+{
+	TH_SAFE_RELEASE(texture);
+}
+
 Font* Font::CreateFontFromFile(String imagePath, String txtPath)
 {
 	std::string s = txtPath.ToStdString();
 
 	Font* font = new Font();
 	font->texture = AssetManager::GetInstance()->CreateTextureFromFile(imagePath);
+	font->texture->Retain();
 
 	if (font->texture == nullptr)
 	{

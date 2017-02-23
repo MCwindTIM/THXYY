@@ -7,6 +7,7 @@ static const int FADE_TIME = 30;
 PauseMenu::PauseMenu() : Menu(32, 16, 384, 448)
 {
 	PauseMenuItem::texPauseMenu = AssetManager::GetInstance()->CreateTextureFromFile("res/menu/pause_menu.png");
+	PauseMenuItem::texPauseMenu->Retain();
 
 	auto stgResources = STGResources::GetInstance();
 
@@ -16,7 +17,7 @@ PauseMenu::PauseMenu() : Menu(32, 16, 384, 448)
 
 PauseMenu::~PauseMenu()
 {
-	AssetManager::GetInstance()->DestroyTexture(PauseMenuItem::texPauseMenu);
+	TH_SAFE_RELEASE(PauseMenuItem::texPauseMenu);
 }
 
 void PauseMenu::OnLoad()

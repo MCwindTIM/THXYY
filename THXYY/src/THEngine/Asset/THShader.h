@@ -54,7 +54,7 @@ namespace THEngine
 
 		inline void SetTexture(char* textureName, Texture* texture)
 		{
-			effect->SetTexture(textureName, texture->texture);
+			effect->SetTexture(textureName, texture->texImpl->texture);
 		}
 
 		inline void SetInt(char* name, int value)

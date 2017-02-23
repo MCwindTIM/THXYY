@@ -1,20 +1,42 @@
 #ifndef THTEXTURE_H
 #define THTEXTURE_H
 
-#include "../Common/THCommon.h"
+#include "THAssetImpl.h"
 #include "THImage.h"
 
 namespace THEngine
 {
-	class Texture : public Object
+	class TextureImpl : public AssetImpl
 	{
-	protected:
-		IDirect3DTexture9* texture;
+	private:
+		IDirect3DTexture9* texture = nullptr;
+		Image* texImage = nullptr;
 		int width, height;
 		int imageWidth, imageHeight;
 		float xScale, yScale;
 
-		Image* texImage = nullptr;
+	protected:
+		TextureImpl();
+
+	public:
+		virtual ~TextureImpl();
+
+		virtual void OnLostDevice() override;
+		virtual void OnResetDevice() override;
+
+		bool SaveToFile(const String& path);
+
+		friend class Texture;
+		friend class Application;
+		friend class AssetManager;
+		friend class Shader;
+		friend class SpriteRenderer;
+	};
+
+	class Texture : public Object
+	{
+	protected:
+		TextureImpl* texImpl = nullptr;
 
 		String name;
 
@@ -22,16 +44,13 @@ namespace THEngine
 		Texture();
 		virtual ~Texture();
 
-		inline int GetWidth() { return width; }
-		inline int GetHeight() { return height; }
-		inline int GetImageWidth() { return imageWidth; }
-		inline int GetImageHeight() { return imageHeight; }
+		inline int GetWidth() { return texImpl->width; }
+		inline int GetHeight() { return texImpl->height; }
+		inline int GetImageWidth() { return texImpl->imageWidth; }
+		inline int GetImageHeight() { return texImpl->imageHeight; }
 		inline String GetName() { return name; }
 
-		bool SaveToFile(String path);
-
-		void OnLostDevice();
-		void OnResetDevice();
+		inline bool SaveToFile(const String& path) { return texImpl->SaveToFile(path); }
 
 		friend class Application;
 		friend class AssetManager;

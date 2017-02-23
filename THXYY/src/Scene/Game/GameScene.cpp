@@ -11,7 +11,9 @@ GameScene::GameScene()
 
 	AssetManager* manager = AssetManager::GetInstance();
 	texGameBg = manager->CreateTextureFromFile("res/front/gamebg.jpg");
+	texGameBg->Retain();
 	texGameBg2 = manager->CreateTextureFromFile("res/front/gamebg2.png");
+	texGameBg2->Retain();
 
 	baseLayer = new Layer();
 	baseLayer->SetOrder(100);
@@ -103,8 +105,8 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	AssetManager* manager = AssetManager::GetInstance();
-	manager->DestroyTexture(texGameBg);
-	manager->DestroyTexture(texGameBg2);
+	TH_SAFE_RELEASE(texGameBg);
+	TH_SAFE_RELEASE(texGameBg2);
 }
 
 void GameScene::Update()

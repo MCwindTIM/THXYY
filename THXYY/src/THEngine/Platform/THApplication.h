@@ -81,6 +81,8 @@ namespace THEngine
 
 		inline int GetReturnCode() { return returnCode; }
 
+		inline HWND GetWindowHandle() { return hWnd; }
+
 		inline void ClearBuffer()
 		{
 			device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,

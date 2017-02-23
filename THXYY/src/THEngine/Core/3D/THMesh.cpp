@@ -150,7 +150,7 @@ namespace THEngine
 		{
 			for (int i = 0; i < numMaterials; i++)
 			{
-				assetManager->DestroyTexture(materialList[i].texture);
+				TH_SAFE_RELEASE(materialList[i].texture);
 			}
 			delete[] materialList;
 		}
@@ -209,6 +209,7 @@ namespace THEngine
 					delete d3dMesh;
 					return nullptr;
 				}
+				d3dMesh->materialList[i].texture->Retain();
 			}		
 			d3dMesh->materialList[i].ambient[0] = materials[i].MatD3D.Diffuse.r;
 			d3dMesh->materialList[i].ambient[1] = materials[i].MatD3D.Diffuse.g;

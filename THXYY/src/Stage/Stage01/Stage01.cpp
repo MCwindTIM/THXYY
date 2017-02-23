@@ -14,7 +14,8 @@ Stage01::~Stage01()
 {
 	auto assetManager = AssetManager::GetInstance();
 
-	assetManager->DestroyTexture(texRoad);
+	TH_SAFE_RELEASE(texRoad);
+	TH_SAFE_RELEASE(sky);
 
 	TH_SAFE_RELEASE(house);
 }
@@ -51,6 +52,24 @@ void Stage01::OnLoad()
 	auto engine = STGEngine::GetInstance();
 
 	texRoad = assetManager->CreateTextureFromFile("res/background/stage01/road.jpg");
+	if (texRoad == nullptr)
+	{
+		THMessageBox(ExceptionManager::GetInstance()->GetException()->GetInfo());
+	}
+	texRoad->Retain();
+
+	sky = assetManager->CreateCubeMapFromFile("res/background/stage01/skybox/BluePinkNebular_front.jpg",
+		"res/background/stage01/skybox/BluePinkNebular_back.jpg",
+		"res/background/stage01/skybox/BluePinkNebular_left.jpg",
+		"res/background/stage01/skybox/BluePinkNebular_right.jpg",
+		"res/background/stage01/skybox/BluePinkNebular_top.jpg",
+		"res/background/stage01/skybox/BluePinkNebular_bottom.jpg");
+	if (sky == nullptr)
+	{
+		THMessageBox(ExceptionManager::GetInstance()->GetException()->GetInfo());
+	}
+	sky->Retain();
+
 	house = Mesh::CreateMeshFromFile("res/model/house/house.x");
 	if (house == nullptr)
 	{
