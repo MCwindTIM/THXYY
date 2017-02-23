@@ -285,7 +285,7 @@ void STGEngine::SetBackgroundCamera(Camera* camera)
 
 Camera* STGEngine::GetBackgroundCamera()
 {
-	return gameScene->GetBackgroundLayer()->GetCameraByName("Main");
+	return gameScene->GetBackgroundLayer()->GetFirstCamera();
 }
 
 void STGEngine::GameOver()

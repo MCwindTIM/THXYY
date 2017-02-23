@@ -10,7 +10,7 @@ namespace THEngine
 		this->width = Game::GetInstance()->GetWidth();
 		this->height = Game::GetInstance()->GetHeight();
 
-		Camera2D* camera2D = new Camera2D("Main");
+		Camera2D* camera2D = new Camera2D();
 		camera2D->SetWidth(width);
 		camera2D->SetHeight(height);
 		camera2D->SetPosition(Vector3f(width / 2, height / 2, 0));
@@ -68,6 +68,27 @@ namespace THEngine
 			}
 		}
 		return nullptr;
+	}
+
+	Camera* Layer::GetCameraByIndex(int index)
+	{
+		int i = 0;
+		auto iter = cameraList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto camera = iter->Next();
+			if (index == i)
+			{
+				return camera;
+			}
+			i++;
+		}
+		return nullptr;
+	}
+
+	Camera* Layer::GetFirstCamera()
+	{
+		return GetCameraByIndex(0);
 	}
 
 	void Layer::Update()
