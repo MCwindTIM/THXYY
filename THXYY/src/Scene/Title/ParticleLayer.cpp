@@ -3,12 +3,12 @@
 
 ParticleLayer::ParticleLayer()
 {
-	Camera3D* camera = new Camera3D("Main");
+	Camera3D* camera = new Camera3D();
 	camera->SetPosition(Vector3f(320, 240, -200));
 	camera->SetLookAt(Vector3f(320, 240, 0));
 	camera->SetUp(Vector3f(0, 1, 0));
 
-	SetCamera(camera);
+	SetFirstCamera(camera);
 }
 
 ParticleLayer::~ParticleLayer()

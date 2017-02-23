@@ -15,11 +15,7 @@ namespace THEngine
 
 	Camera::~Camera()
 	{
-		if (renderTexture)
-		{
-			auto assetManager = AssetManager::GetInstance();
-			assetManager->DestroyTexture(renderTexture);
-		}
+		TH_SAFE_RELEASE(renderTexture);
 	}
 
 	void Camera::Update()

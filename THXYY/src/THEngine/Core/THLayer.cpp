@@ -41,21 +41,6 @@ namespace THEngine
 		rootNode.AddChild(obj);
 	}
 
-	void Layer::SetCamera(Camera* camera)
-	{
-		auto iter = cameraList.GetIterator();
-		while (iter->HasNext())
-		{
-			auto cameraNow = iter->Next();
-			if (cameraNow->GetName() == camera->GetName())
-			{
-				iter->Remove();
-				iter->AddAfter(camera);
-				return;
-			}
-		}
-	}
-
 	Camera* Layer::GetCameraByName(const String& name)
 	{
 		auto iter = cameraList.GetIterator();
@@ -89,6 +74,43 @@ namespace THEngine
 	Camera* Layer::GetFirstCamera()
 	{
 		return GetCameraByIndex(0);
+	}
+
+	void Layer::SetCameraByName(Camera* camera, const String& name)
+	{
+		auto iter = cameraList.GetIterator();
+		while (iter->HasNext())
+		{
+			auto curCamera = iter->Next();
+			if (curCamera->GetName() == name)
+			{
+				iter->Remove();
+				iter->AddAfter(camera);
+				return;
+			}
+		}
+	}
+
+	void Layer::SetCameraByIndex(Camera* camera, int index)
+	{
+		int i = 0;
+		auto iter = cameraList.GetIterator();
+		while (iter->HasNext())
+		{
+			iter->Next();
+			if (index == i)
+			{
+				iter->Remove();
+				iter->AddAfter(camera);
+				return;
+			}
+			i++;
+		}
+	}
+
+	void Layer::SetFirstCamera(Camera* camera)
+	{
+		SetCameraByIndex(camera, 0);
 	}
 
 	void Layer::Update()

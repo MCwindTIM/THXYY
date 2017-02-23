@@ -279,8 +279,7 @@ void STGEngine::ShootBullet(Bullet* bullet, bool hasFog, int sound)
 
 void STGEngine::SetBackgroundCamera(Camera* camera)
 {
-	camera->SetName("Main");
-	gameScene->GetBackgroundLayer()->SetCamera(camera);
+	gameScene->GetBackgroundLayer()->SetFirstCamera(camera);
 }
 
 Camera* STGEngine::GetBackgroundCamera()

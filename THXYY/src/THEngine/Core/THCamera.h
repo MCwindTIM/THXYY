@@ -3,18 +3,21 @@
 
 #include "../Common/THCommon.h"
 #include "../Math/THMathUtil.h"
+#include <Asset\THRenderTexture.h>
 
 namespace THEngine
 {
-	class RenderTexture;
+	class Layer;
 
 	class Camera : public EngineObject
 	{
 	protected:
+		Layer* layer = nullptr;
+
 		Vector3f position;
 		String name = "";
 		RenderTexture* renderTexture = nullptr;
-		Rect viewRect = Rect(0, 0, 0, 0);
+		Rect viewport = Rect(0, 0, 0, 0);
 
 	public:
 		Camera();
@@ -33,10 +36,10 @@ namespace THEngine
 
 		inline void SetRenderTexture(RenderTexture* renderTexture)
 		{
-			this->renderTexture = renderTexture;
+			TH_SET(this->renderTexture, renderTexture);
 		}
 
-		inline void SetViewRect(const Rect& rect) { this->viewRect = rect; }
+		inline void SetViewport(const Rect& rect) { this->viewport = rect; }
 
 		virtual bool Is2D() = 0;
 	};
