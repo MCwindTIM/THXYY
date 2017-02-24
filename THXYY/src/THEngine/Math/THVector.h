@@ -83,6 +83,18 @@ namespace THEngine
 		inline float Width() { return right - left; }
 		inline float Height() { return bottom - top; }
 	};
+
+	class RectInt
+	{
+	public:
+		int left, right, top, bottom;
+
+	public:
+		RectInt() {}
+		RectInt(int l, int r, int t, int b) :left(l), right(r), top(t), bottom(b) {}
+		inline int Width() { return right - left; }
+		inline int Height() { return bottom - top; }
+	};
 }
 
 #endif

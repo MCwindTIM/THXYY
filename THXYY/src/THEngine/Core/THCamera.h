@@ -17,7 +17,10 @@ namespace THEngine
 		Vector3f position;
 		String name = "";
 		RenderTexture* renderTexture = nullptr;
-		Rect viewport = Rect(0, 0, 0, 0);
+		RectInt viewport = RectInt(0, 0, 0, 0);
+
+	protected:
+		void SetupViewport(Layer* layer);
 
 	public:
 		Camera();
@@ -39,9 +42,11 @@ namespace THEngine
 			TH_SET(this->renderTexture, renderTexture);
 		}
 
-		inline void SetViewport(const Rect& rect) { this->viewport = rect; }
+		inline void SetViewport(const RectInt& rect) { this->viewport = rect; }
 
 		virtual bool Is2D() = 0;
+
+		virtual void Render(Layer* layer) = 0;
 	};
 
 	class Camera2D : public Camera
@@ -61,6 +66,8 @@ namespace THEngine
 		inline float GetHeight() { return height; }
 
 		virtual bool Is2D() override final { return true; }
+
+		virtual void Render(Layer* layer) override;
 	};
 
 	class Camera3D : public Camera
@@ -86,6 +93,8 @@ namespace THEngine
 		inline float GetFov() { return fov; }
 
 		virtual bool Is2D() override final { return false; }
+
+		virtual void Render(Layer* layer) override;
 
 		friend class Layer;
 	};

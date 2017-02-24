@@ -41,6 +41,11 @@ namespace THEngine
 
 		virtual void OnDestroy();
 
+		inline int GetWidth() const { return width; }
+		inline int GetHeight() const { return height; }
+		inline int GetLeft() const { return left; }
+		inline int GetTop() const { return top; }
+
 		void AddChild(GameObject* obj);
 
 		void Clear();

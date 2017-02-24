@@ -3,18 +3,9 @@
 
 namespace THEngine
 {
-	Layer::Layer()
+	Layer::Layer() : Layer(0, 0, Game::GetInstance()->GetWidth(), Game::GetInstance()->GetHeight())
 	{
-		this->left = 0;
-		this->top = 0;
-		this->width = Game::GetInstance()->GetWidth();
-		this->height = Game::GetInstance()->GetHeight();
-
-		Camera2D* camera2D = new Camera2D();
-		camera2D->SetWidth(width);
-		camera2D->SetHeight(height);
-		camera2D->SetPosition(Vector3f(width / 2, height / 2, 0));
-		AddCamera(camera2D);
+		
 	}
 
 	Layer::Layer(int left, int top, int width, int height)
@@ -24,10 +15,11 @@ namespace THEngine
 		this->width = width;
 		this->height = height;
 
-		Camera2D* camera2D = new Camera2D("Main");
+		Camera2D* camera2D = new Camera2D();
 		camera2D->SetWidth(width);
 		camera2D->SetHeight(height);
 		camera2D->SetPosition(Vector3f(width / 2, height / 2, 0));
+		camera2D->SetViewport(RectInt(0, this->width, 0, this->height));
 		AddCamera(camera2D);
 	}
 
@@ -122,48 +114,17 @@ namespace THEngine
 
 	void Layer::Draw()
 	{
-		auto app = Application::GetInstance();
-		app->SetViewport(left, top, width, height);
-
-		Camera2D* camera2D;
-		Camera3D* camera3D;
-
 		auto iter = cameraList.GetIterator();
 		while (iter->HasNext())
 		{
 			auto camera = iter->Next();
-			if (camera->Is2D())
-			{
-				camera2D = (Camera2D*)camera;
-				Vector3f pos = camera2D->GetPosition();
-				app->SetOrtho(pos.x - camera2D->GetWidth() / 2, pos.y - camera2D->GetHeight() / 2,
-					camera2D->GetWidth(), camera2D->GetHeight(), 0, TH_MAX_Z);
-
-				Matrix matrix;
-				Matrix::Identity(&matrix);
-				app->SetViewMatrix(matrix);
-			}
-			else
-			{
-				camera3D = (Camera3D*)camera;
-				Matrix matrix;
-				Matrix::Perspective(&matrix, camera3D->fov, (float)width / height, 0.1f, 10000.0f);
-				app->SetProjectionMatrix(matrix);
-
-				Matrix::LookAt(&matrix, Vector3f(camera3D->position.x, camera3D->position.y, camera3D->position.z),
-					Vector3f(camera3D->lookAt.x, camera3D->lookAt.y, camera3D->lookAt.z),
-					Vector3f(camera3D->up.x, camera3D->up.y, camera3D->up.z));
-				app->SetViewMatrix(matrix);
-			}
 
 			DataStack::GetInstance()->Reset();
 			rootNode.Visit();
 
 			SetupRenderState();
 
-			Game::GetInstance()->Render();
-
-			Application::GetInstance()->ClearDepthBuffer();
+			camera->Render(this);
 		}
 	}
 
