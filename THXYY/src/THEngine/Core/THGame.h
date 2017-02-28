@@ -12,6 +12,7 @@
 #include "../Renderer/THSpriteRenderer.h"
 #include "../Renderer/THParticle3DRenderer.h"
 #include "../Renderer/THMeshRenderer.h"
+#include <Renderer\THSkyBoxRenderer.h>
 #include "../Asset/THAssetManager.h"
 #include "../UI/THEventSystem.h"
 #include <Platform\THCoreDumper.h>
@@ -48,10 +49,9 @@ namespace THEngine
 		RenderQueue* normalQueue = nullptr;
 
 		SpriteRenderer* spriteRenderer;
-
 		Particle3DRenderer* particle3DRenderer = nullptr;
-
 		MeshRenderer* meshRenderer = nullptr;
+		SkyBoxRenderer* skyBoxRenderer = nullptr;
 
 		AssetManager* assetManager;
 
@@ -123,6 +123,8 @@ namespace THEngine
 		{
 			return meshRenderer;
 		}
+
+		inline SkyBoxRenderer* GetSkyBoxRenderer() const { return skyBoxRenderer; }
 
 		inline AssetManager* GetAssetManager()
 		{

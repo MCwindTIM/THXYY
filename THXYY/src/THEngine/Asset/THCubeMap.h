@@ -20,6 +20,7 @@ namespace THEngine
 		virtual void OnResetDevice() override;
 
 		friend class AssetManager;
+		friend class Shader;
 	};
 
 	class CubeMap : public Object
@@ -32,6 +33,7 @@ namespace THEngine
 		virtual ~CubeMap();
 
 		friend class AssetManager;
+		friend class Shader;
 	};
 }
 

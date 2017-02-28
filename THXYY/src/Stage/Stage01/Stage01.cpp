@@ -64,6 +64,12 @@ void Stage01::OnLoad()
 		"res/background/stage01/skybox/BluePinkNebular_right.jpg",
 		"res/background/stage01/skybox/BluePinkNebular_top.jpg",
 		"res/background/stage01/skybox/BluePinkNebular_bottom.jpg");
+	/*sky = assetManager->CreateCubeMapFromFile("res/background/stage01/skybox/front.jpg",
+		"res/background/stage01/skybox/back.jpg",
+		"res/background/stage01/skybox/left.jpg",
+		"res/background/stage01/skybox/right.jpg",
+		"res/background/stage01/skybox/top.jpg",
+		"res/background/stage01/skybox/bottom.jpg");*/
 	if (sky == nullptr)
 	{
 		THMessageBox(ExceptionManager::GetInstance()->GetException()->GetInfo());
@@ -130,6 +136,8 @@ void Stage01::SetupFog()
 void Stage01::InitBackgroundObjects()
 {
 	auto engine = STGEngine::GetInstance();
+
+	engine->GetGameScene()->GetBackgroundLayer()->SetSkyBox(sky);
 
 	Mesh* road = new Mesh();
 	road->InitVertexBuffer(4);

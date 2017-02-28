@@ -16,11 +16,11 @@ namespace THEngine
 		Vector2f(float x, float y);
 		float Norm();
 		Vector2f Normalize();
-		Vector2f operator +(Vector2f a);
-		Vector2f operator -(Vector2f a);
+		Vector2f operator +(const Vector2f& a);
+		Vector2f operator -(const Vector2f& a);
 		Vector2f operator -();
-		bool operator ==(Vector2f a);
-		bool operator !=(Vector2f a);
+		bool operator ==(const Vector2f& a);
+		bool operator !=(const Vector2f& a);
 	};
 
 	struct Vector3f
@@ -33,10 +33,10 @@ namespace THEngine
 		Vector3f(float a1, float a2, float a3);
 		float Norm();
 		Vector3f Normalize();
-		Vector3f operator +(const Vector3f& a);
-		Vector3f operator -(const Vector3f& a);
-		Vector3f operator -();
-		Vector3f operator *(float a);
+		Vector3f operator +(const Vector3f& a) const;
+		Vector3f operator -(const Vector3f& a) const;
+		Vector3f operator -() const;
+		Vector3f operator *(float a) const;
 		Vector3f& operator +=(const Vector3f& a);
 		Vector3f& operator -=(const Vector3f& a);
 		Vector3f& operator *=(const Vector3f& a);
@@ -44,11 +44,11 @@ namespace THEngine
 		bool operator ==(const Vector3f& a);
 		bool operator !=(const Vector3f& a);
 
-		static Vector3f Cross(Vector3f a, Vector3f b);
-		static float Dot(Vector3f a, Vector3f b);
+		static Vector3f Cross(const Vector3f& a, const Vector3f& b);
+		static float Dot(const Vector3f& a, const Vector3f& b);
 	};
 
-	Vector3f operator*(float a, Vector3f v);
+	Vector3f operator*(float a, const Vector3f& v);
 
 	struct Vector4f
 	{

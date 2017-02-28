@@ -222,8 +222,8 @@ namespace THEngine
 		IDirect3DSurface9* surfaceTop = nullptr;
 		IDirect3DSurface9* surfaceBottom = nullptr;
 
-		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_NEGATIVE_Z, 0, &surfaceFront);
-		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_Z, 0, &surfaceBack);
+		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_Z, 0, &surfaceFront);
+		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_NEGATIVE_Z, 0, &surfaceBack);
 		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_NEGATIVE_X, 0, &surfaceLeft);
 		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_X, 0, &surfaceRight);
 		cubeMapImpl->cubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_Y, 0, &surfaceTop);

@@ -24,17 +24,17 @@ namespace THEngine
 				:x(x), y(y), z(z), color(D3DCOLOR_ARGB((int)(255 * a), (int)(255 * r), (int)(255 * g), (int)(255 * b))), u(u), v(v) {}
 		};
 
-		struct SpriteBatch
+		/*struct SpriteBatch
 		{
 			SpriteVertex vertices[MAX_SPRITE][6];
 			int spriteCount = 0;
 			Texture* texture;
-		};
+		};*/
 
 
 		Shader* spriteShader;
 		IDirect3DVertexBuffer9* vb;
-		SpriteBatch spriteBatch;
+		//SpriteBatch spriteBatch;
 
 	private:
 		/*void PushBatch(Sprite* sprite);

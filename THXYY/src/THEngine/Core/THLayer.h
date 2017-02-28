@@ -75,6 +75,7 @@ namespace THEngine
 		inline void SetFog(Fog fog) { this->fog = fog; }
 
 		inline void SetSkyBox(CubeMap* skyBox) { TH_SET(this->skyBox, skyBox); }
+		inline CubeMap* GetSkyBox() const { return skyBox; }
 
 		void DestroyObjectImmediately(GameObject* obj);
 

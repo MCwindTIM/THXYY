@@ -97,6 +97,16 @@ bool Game::CreateGame(int width, int height, bool fullScreen, const String& titl
 	}
 	meshRenderer->Retain();
 
+	skyBoxRenderer = SkyBoxRenderer::Create();
+	if (skyBoxRenderer == nullptr)
+	{
+		auto exception = exceptionManager->GetException();
+		auto newException = new Exception((String)"创建SkyBoxRenderer失败。原因是：\n" + exception->GetInfo());
+		exceptionManager->PushException(newException);
+		return false;
+	}
+	skyBoxRenderer->Retain();
+
 	defaultFont = Font::CreateFontFromFile("res/font/font-fps-opensans.png","res/font/font-fps-opensans.txt");
 	if (defaultFont == nullptr)
 	{
@@ -300,6 +310,7 @@ void Game::Shutdown()
 	TH_SAFE_RELEASE(spriteRenderer);
 	TH_SAFE_RELEASE(particle3DRenderer);
 	TH_SAFE_RELEASE(meshRenderer);
+	TH_SAFE_RELEASE(skyBoxRenderer);
 	
 	TH_SAFE_RELEASE(eventSystem);
 	TH_SAFE_RELEASE(defaultFont);

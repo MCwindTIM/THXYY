@@ -3,6 +3,7 @@
 
 #include "../Common/THCommon.h"
 #include "THTexture.h"
+#include "THCubeMap.h"
 #include <Math\THMath.h>
 
 namespace THEngine
@@ -35,7 +36,7 @@ namespace THEngine
 			this->effect->CommitChanges();
 		}
 
-		inline void UsePass(unsigned int pass) 
+		inline void UsePass(unsigned int pass)
 		{
 			if (currentPass != pass)
 			{
@@ -44,10 +45,10 @@ namespace THEngine
 			}
 		}
 
-		inline void EndPass() 
-		{ 
+		inline void EndPass()
+		{
 			currentPass = -1;
-			effect->EndPass(); 
+			effect->EndPass();
 		}
 
 		inline UINT GetPassNum() { return passNum; }
@@ -57,9 +58,19 @@ namespace THEngine
 			effect->SetTexture(textureName, texture->texImpl->texture);
 		}
 
+		inline void SetCubeMap(char* textureName, CubeMap* cubeMap)
+		{
+			effect->SetTexture(textureName, cubeMap->impl->cubeTexture);
+		}
+
 		inline void SetInt(char* name, int value)
 		{
 			effect->SetInt(name, value);
+		}
+
+		inline void SetFloat(char* name, float value)
+		{
+			effect->SetFloat(name, value);
 		}
 
 		inline void SetBoolean(char* name, bool value)

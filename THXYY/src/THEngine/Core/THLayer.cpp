@@ -25,7 +25,7 @@ namespace THEngine
 
 	Layer::~Layer()
 	{
-
+		TH_SAFE_RELEASE(skyBox);
 	}
 
 	void Layer::AddChild(GameObject* obj)

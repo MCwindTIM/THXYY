@@ -27,8 +27,8 @@ namespace THEngine
 		Camera(const String& name);
 		virtual ~Camera();
 
-		inline void SetPosition(Vector3f position) { this->position = position; }
-		inline Vector3f GetPosition() { return position; }
+		inline void SetPosition(const Vector3f& position) { this->position = position; }
+		inline const Vector3f& GetPosition() { return position; }
 
 		virtual void Update() override;
 		virtual void Draw() override;
@@ -83,11 +83,11 @@ namespace THEngine
 		Camera3D(const String& name);
 		virtual ~Camera3D();
 
-		inline void SetLookAt(Vector3f lookAt) { this->lookAt = lookAt; }
-		inline Vector3f GetLookAt() { return lookAt; }
+		inline void SetLookAt(const Vector3f& lookAt) { this->lookAt = lookAt; }
+		inline const Vector3f& GetLookAt() { return lookAt; }
 
-		inline void SetUp(Vector3f up) { this->up = up; }
-		inline Vector3f GetUp() { return up; }
+		inline void SetUp(const Vector3f& up) { this->up = up; }
+		inline const Vector3f& GetUp() { return up; }
 
 		inline void SetFov(float fov) { this->fov = fov; }
 		inline float GetFov() { return fov; }

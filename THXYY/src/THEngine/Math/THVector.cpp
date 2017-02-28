@@ -33,7 +33,7 @@ namespace THEngine
 		return ret;
 	}
 
-	Vector2f Vector2f::operator +(Vector2f a)
+	Vector2f Vector2f::operator +(const Vector2f& a)
 	{
 		Vector2f ans;
 		ans.x = this->x + a.x;
@@ -41,7 +41,7 @@ namespace THEngine
 		return ans;
 	}
 
-	Vector2f Vector2f::operator -(Vector2f a)
+	Vector2f Vector2f::operator -(const Vector2f& a)
 	{
 		Vector2f ans;
 		ans.x = this->x - a.x;
@@ -57,14 +57,14 @@ namespace THEngine
 		return ans;
 	}
 
-	bool Vector2f::operator ==(Vector2f a)
+	bool Vector2f::operator ==(const Vector2f& a)
 	{
 		float ex = fabs(x - a.x);
 		float ey = fabs(y - a.y);
 		return ex < 1e-4 && ey < 1e-4;
 	}
 
-	bool Vector2f::operator !=(Vector2f a)
+	bool Vector2f::operator !=(const Vector2f& a)
 	{
 		return !(*this == a);
 	}
@@ -88,7 +88,7 @@ namespace THEngine
 		return sqrt(x*x + y*y + z*z);
 	}
 
-	Vector3f Vector3f::Cross(Vector3f a, Vector3f b)
+	Vector3f Vector3f::Cross(const Vector3f& a, const Vector3f& b)
 	{
 		Vector3f v;
 		v.x = a.z*b.y - a.y*b.z;
@@ -97,12 +97,12 @@ namespace THEngine
 		return v;
 	}
 
-	float Vector3f::Dot(Vector3f a, Vector3f b)
+	float Vector3f::Dot(const Vector3f& a, const Vector3f& b)
 	{
 		return a.x*b.x + a.y*b.y + a.z*b.z;
 	}
 
-	Vector3f Vector3f::operator*(float a)
+	Vector3f Vector3f::operator*(float a) const
 	{
 		Vector3f ret;
 		ret.x = x * a;
@@ -111,7 +111,7 @@ namespace THEngine
 		return ret;
 	}
 
-	Vector3f operator*(float a, Vector3f v)
+	Vector3f operator*(float a, const Vector3f& v)
 	{
 		return v * a;
 	}
@@ -128,7 +128,7 @@ namespace THEngine
 		return ret;
 	}
 
-	Vector3f Vector3f::operator +(const Vector3f& a)
+	Vector3f Vector3f::operator +(const Vector3f& a) const
 	{
 		Vector3f v;
 		v.x = this->x + a.x;
@@ -137,7 +137,7 @@ namespace THEngine
 		return v;
 	}
 
-	Vector3f Vector3f::operator -(const Vector3f& a)
+	Vector3f Vector3f::operator -(const Vector3f& a) const
 	{
 		Vector3f v;
 		v.x = this->x - a.x;
@@ -146,7 +146,7 @@ namespace THEngine
 		return v;
 	}
 
-	Vector3f Vector3f::operator -()
+	Vector3f Vector3f::operator -() const
 	{
 		Vector3f v;
 		v.x = -this->x;

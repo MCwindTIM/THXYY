@@ -1,7 +1,8 @@
 #include "THCamera.h"
 #include "THLayer.h"
 #include "THGame.h"
-#include "../Asset/THAssetManager.h"
+#include <Asset\THAssetManager.h>
+#include <Asset\THCubeMap.h>
 #include <Platform\THApplication.h>
 
 namespace THEngine
@@ -101,6 +102,11 @@ namespace THEngine
 		auto app = Application::GetInstance();
 
 		SetupViewport(layer);
+
+		if (layer->GetSkyBox())
+		{
+			Game::GetInstance()->GetSkyBoxRenderer()->RenderSkyBox(this, layer);
+		}
 
 		Matrix matrix;
 		if (this->viewport.left == 0 && this->viewport.right == 0 && this->viewport.top == 0 && this->viewport.bottom == 0)
