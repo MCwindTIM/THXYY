@@ -450,6 +450,24 @@
     <ClCompile Include="src\Player\ReimuSubPlaneBullet.cpp">
       <Filter>源文件\Player</Filter>
     </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THCoreDumper.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THCubeMap.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THAssetImpl.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THShaderStock.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THSkyBoxRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Core\THEnvironment.cpp">
+      <Filter>源文件\THEngine\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -752,6 +770,24 @@
     <ClInclude Include="src\Player\ReimuSubPlaneBullet.h">
       <Filter>头文件\Player</Filter>
     </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THCoreDumper.h">
+      <Filter>头文件\THEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THCubeMap.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THAssetImpl.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THShaderStock.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THSkyBoxRenderer.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Core\THEnvironment.h">
+      <Filter>头文件\THEngine\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="THXYY.rc">
@@ -766,6 +802,9 @@
       <Filter>fx</Filter>
     </None>
     <None Include="fx\lighting.fx">
+      <Filter>fx</Filter>
+    </None>
+    <None Include="fx\skybox.fx">
       <Filter>fx</Filter>
     </None>
   </ItemGroup>

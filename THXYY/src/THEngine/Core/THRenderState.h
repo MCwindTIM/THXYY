@@ -4,16 +4,10 @@
 #include <Common\THCommon.h>
 #include <Math\THMath.h>
 #include <Core\3D\THLight.h>
+#include "THEnvironment.h"
 
 namespace THEngine
 {
-	struct Fog
-	{
-		Vector4f fogColor;
-		float fogStart;
-		float fogEnd;
-	};
-
 	struct Viewport
 	{
 		int x;
@@ -33,10 +27,7 @@ namespace THEngine
 	class RenderState : public Object
 	{
 	private:
-		bool fogEnable = false;
-		Fog fog;
-
-		bool lightingEnable = false;
+		Environment* environment; 
 
 		Matrix world;
 		Matrix projection;
@@ -44,24 +35,25 @@ namespace THEngine
 
 		Viewport viewport;
 
-		ArrayList<DirectionalLight*> directionalLights;
-
 		Shader* shader = nullptr;
 
 	public:
 		RenderState();
 		virtual ~RenderState();
 
-		inline bool IsFogEnabled() { return this->fogEnable; }
+		inline bool IsFogEnabled() { return this->environment->fogEnable; }
 
-		inline bool IsLightingEnabled() { return this->lightingEnable; }
+		inline bool IsLightingEnabled() { return this->environment->lightingEnable; }
 
-		inline const Fog& GetFog() const { return this->fog; }
+		inline const Fog& GetFog() const { return this->environment->fog; }
 
 		inline const Matrix& GetWorldMatrix() { return this->world; }
 		inline const Matrix& GetProjectionMatrix() { return this->projection; }
 		inline const Matrix& GetViewMatrix() { return this->view; }
 		inline const Viewport& GetViewport() const { return this->viewport; }
+
+		inline const Vector4f& GetAmbientLight() const { return environment->ambientLight; }
+		inline LinkedList<Light*>* GetLights() const { return &environment->lights; }
 
 		void Clear();
 

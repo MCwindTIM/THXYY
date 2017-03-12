@@ -230,9 +230,6 @@ namespace THEngine
 			d3dMesh->materialList[i].power = materials[i].MatD3D.Power;
 		}
 
-		//float* data = new float[100000];
-		//d3dMesh->mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&data);
-
 		return d3dMesh;
 	}
 

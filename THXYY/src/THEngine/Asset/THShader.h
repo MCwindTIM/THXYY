@@ -22,10 +22,7 @@ namespace THEngine
 		Shader();
 		virtual ~Shader();
 
-		inline void SetTechnique(char* technique)
-		{
-			effect->SetTechnique(technique);
-		}
+		void SetTechnique(char* technique);
 
 		void Use();
 
@@ -81,6 +78,11 @@ namespace THEngine
 		inline void SetFloatArray(char* name, float* value, int count)
 		{
 			effect->SetFloatArray(name, value, count);
+		}
+
+		inline void SetFloat4(char* name, const Vector4f vector)
+		{
+			effect->SetFloatArray(name, vector._data, 4);
 		}
 
 		inline void SetMatrix(char* name, const Matrix& value)

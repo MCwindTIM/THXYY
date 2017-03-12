@@ -23,6 +23,16 @@ namespace THEngine
 
 		void SetupRenderState();
 
+		void SetupShaderParams(Mesh* mesh);
+
+		void Shade(Mesh* mesh);
+
+		void ShadeWithAmbient(Mesh* mesh, const Vector4f& ambient);
+
+		void ShadeWithLight(Mesh* mesh, Light* light);
+
+		void DrawMesh(Mesh* mesh);
+
 	public:
 		MeshRenderer();
 		virtual ~MeshRenderer();

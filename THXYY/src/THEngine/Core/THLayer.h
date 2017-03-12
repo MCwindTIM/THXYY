@@ -4,6 +4,7 @@
 #include "../Common/THCommon.h"
 #include "THGameObject.h"
 #include "THCamera.h"
+#include "THEnvironment.h"
 #include <Asset\THCubeMap.h>
 #include "../Platform/THApplication.h"
 #include "3D\THLight.h"
@@ -20,14 +21,9 @@ namespace THEngine
 		
 		LinkedList<Camera*> cameraList;
 
-		bool fogEnable = false;
-		Fog fog;
-
+		Environment environment;
+		
 		CubeMap* skyBox = nullptr;
-
-		LinkedList<Light*> lights;
-
-		bool lightingEnable = false;
 
 	protected:
 		void SetupRenderState();
@@ -50,9 +46,9 @@ namespace THEngine
 
 		void Clear();
 
-		inline void AddLight(Light* light) { lights.Add(light); }
+		inline void AddLight(Light* light) { this->environment.lights.Add(light); }
 
-		inline void RemoveLight(Light* light) { lights.Remove(light); }
+		inline void RemoveLight(Light* light) { this->environment.lights.Remove(light); }
 
 		inline LinkedList<Camera*>* GetCameraList() { return &cameraList; }
 
@@ -68,11 +64,13 @@ namespace THEngine
 
 		inline void SetOrder(int order) { this->order = order; }
 
-		inline void EnableFog(bool fogEnable) { this->fogEnable = fogEnable; }
+		inline void EnableFog(bool fogEnable) { this->environment.fogEnable = fogEnable; }
 
-		inline void EnableLighting(bool lightingEnable) { this->lightingEnable = lightingEnable; }
+		inline void EnableLighting(bool lightingEnable) { this->environment.lightingEnable = lightingEnable; }
+
+		inline void SetAmbientLight(const Vector4f ambient) { this->environment.ambientLight = ambient; }
 		
-		inline void SetFog(Fog fog) { this->fog = fog; }
+		inline void SetFog(Fog fog) { this->environment.fog = fog; }
 
 		inline void SetSkyBox(CubeMap* skyBox) { TH_SET(this->skyBox, skyBox); }
 		inline CubeMap* GetSkyBox() const { return skyBox; }

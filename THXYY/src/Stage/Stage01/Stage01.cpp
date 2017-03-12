@@ -64,12 +64,6 @@ void Stage01::OnLoad()
 		"res/background/stage01/skybox/BluePinkNebular_right.jpg",
 		"res/background/stage01/skybox/BluePinkNebular_top.jpg",
 		"res/background/stage01/skybox/BluePinkNebular_bottom.jpg");
-	/*sky = assetManager->CreateCubeMapFromFile("res/background/stage01/skybox/front.jpg",
-		"res/background/stage01/skybox/back.jpg",
-		"res/background/stage01/skybox/left.jpg",
-		"res/background/stage01/skybox/right.jpg",
-		"res/background/stage01/skybox/top.jpg",
-		"res/background/stage01/skybox/bottom.jpg");*/
 	if (sky == nullptr)
 	{
 		THMessageBox(ExceptionManager::GetInstance()->GetException()->GetInfo());
@@ -83,8 +77,23 @@ void Stage01::OnLoad()
 	}
 	house->Retain();
 
+	InitBackground();
+	
+}
+
+void Stage01::InitBackground()
+{
+	auto engine = STGEngine::GetInstance();
+	auto background = engine->GetGameScene()->GetBackgroundLayer();
+
 	SetupCamera();
 	SetupFog();
+
+	background->SetSkyBox(sky);
+	background->EnableLighting(true);
+	background->SetAmbientLight(Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
+	background->AddLight(new DirectionalLight(Vector3f(1.8f, 1.8f, 1.8f), Vector3f(1.0f, -1.0f, 0.0f)));
+
 	InitBackgroundObjects();
 }
 
@@ -136,8 +145,6 @@ void Stage01::SetupFog()
 void Stage01::InitBackgroundObjects()
 {
 	auto engine = STGEngine::GetInstance();
-
-	engine->GetGameScene()->GetBackgroundLayer()->SetSkyBox(sky);
 
 	Mesh* road = new Mesh();
 	road->InitVertexBuffer(4);

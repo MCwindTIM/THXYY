@@ -7,22 +7,12 @@ struct Fog
 	float end;
 };
 
-struct Material
-{
-    float4 ambient;
-	float4 diffuse;
-	float4 specular;
-	float4 emissive;
-	float power;
-};
-
 matrix mvMatrix, normalMatrix, projection;
 texture tex;
 float4 argb;
 bool fogEnable;
 bool hasTexture;
 Fog fog;
-Material material;
 
 sampler TextureSampler = sampler_state
 { 
@@ -34,20 +24,6 @@ sampler TextureSampler = sampler_state
  	AddressV = mirror;
 };
 
-struct VertexIn
-{
-	float3 position : POSITION;
-	float3 normal : NORMAL;
-	float2 texCoord : TEXCOORD0;
-};
-
-struct VertexOut
-{
-    float4 sv_position : POSITION;
-	float4 positionInView : TEXCOORD2;
-	float3 normal : TEXCOORD1;
-	float2 texCoord : TEXCOORD0;
-};
 
 VertexOut VSFunc(VertexIn input)
 {
@@ -67,32 +43,61 @@ VertexOut VSFunc(VertexIn input)
 	normal4.w = 0;
 
 	float4 outputNormal4 = mul(normal4, normalMatrix);
-	outputNormal4 = mul(outputNormal4, projection);
 
 	output.normal = outputNormal4.xyz;
 
 	return output;
 }
 
-float4 PSFunc(VertexOut input) : COLOR
+void fogShading(inout float4 color, in PixelIn input)
 {
-	float4 color;
-	float2 uv = input.texCoord;
-
-	if(hasTexture)
-	{
-	    color = tex2D(TextureSampler, uv.xy);
-	}
-	color.xyz *= argb.yzw;
-	color.w *= argb.x;
-
 	if (fogEnable)
 	{
 		float3 posInView = (input.positionInView).xyz;
 		float distToCamera = length(posInView);
-		float fogLerp = saturate((distToCamera - fog.start) / (fog.end - fog.start));
-		color = lerp(color, fog.color, fogLerp);
+		float fogLerp = saturate((distToCamera - fog.start) / (fog.end - fog.start)) * fog.color.w;
+		color.xyz = lerp(color.xyz, fog.color.xyz, fogLerp);
 	}
+}
+
+float4 getTexturedColor(in PixelIn input)
+{
+	float4 color = argb;
+	if (hasTexture)
+	{
+		color *= tex2D(TextureSampler, input.texCoord.xy);
+	}
+	return color;
+}
+
+float4 PSFunc(PixelIn input) : COLOR
+{
+	float4 color;
+
+	color = getTexturedColor(input);
+	fogShading(color, input);
+
+	return color;
+}
+
+float4 PSFunc_Ambient(PixelIn input) : COLOR
+{
+	float4 color;
+
+	color = getTexturedColor(input); 
+	color = ambientLighting(color);
+	fogShading(color, input);
+
+	return color;
+}
+
+float4 PSFunc_Directional(PixelIn input) : COLOR
+{
+	float4 color;
+
+	color = getTexturedColor(input);
+	color = shadeWithDirectional(color, input);
+	fogShading(color, input);
 
 	return color;
 }
@@ -103,5 +108,23 @@ technique Mesh
 	{
 		VertexShader = compile vs_2_0 VSFunc();
 		PixelShader = compile ps_2_0 PSFunc();
+	}
+}
+
+technique Ambient
+{
+	pass Pass0
+	{
+		VertexShader = compile vs_2_0 VSFunc();
+		PixelShader = compile ps_2_0 PSFunc_Ambient();
+	}
+}
+
+technique Directional
+{
+	pass Pass0
+	{
+		VertexShader = compile vs_2_0 VSFunc();
+		PixelShader = compile ps_2_0 PSFunc_Directional();
 	}
 }

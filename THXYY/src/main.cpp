@@ -33,7 +33,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		THMessageBox(message);
 		return 0;
 	}
-
 	return game.Run();
 }
 // THXYY-modified.cpp : 定义应用程序的入口点。

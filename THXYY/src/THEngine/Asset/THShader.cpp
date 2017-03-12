@@ -38,6 +38,21 @@ namespace THEngine
 		}
 	}
 
+	void Shader::SetTechnique(char* technique)
+	{
+		auto renderState = Application::GetInstance()->GetRenderState();
+		if (renderState->shader == this)
+		{
+			End();
+			effect->SetTechnique(technique);
+			Use();
+		}
+		else
+		{
+			effect->SetTechnique(technique);
+		}
+	}
+
 	void Shader::Use()
 	{
 		auto renderState = Application::GetInstance()->GetRenderState();

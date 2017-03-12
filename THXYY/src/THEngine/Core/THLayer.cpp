@@ -133,22 +133,7 @@ namespace THEngine
 		auto app = Application::GetInstance();
 		auto renderState = app->GetRenderState();
 
-		renderState->fogEnable = this->fogEnable;
-		renderState->fog = this->fog;
-
-		renderState->lightingEnable = lightingEnable;
-
-		auto iter = lights.GetIterator();
-		while (iter->HasNext())
-		{
-			auto light = iter->Next();
-			switch (light->GetType())
-			{
-			case Light::DIRECTIONAL:
-				renderState->directionalLights.Add((DirectionalLight*)light);
-				break;
-			}
-		}
+		renderState->environment = &this->environment;
 	}
 
 	void Layer::DestroyObjectImmediately(GameObject* obj)
@@ -165,7 +150,7 @@ namespace THEngine
 	void Layer::Clear()
 	{
 		rootNode.RemoveAllChildren();
-		lights.Clear();
+		environment.Clear();
 	}
 }
 

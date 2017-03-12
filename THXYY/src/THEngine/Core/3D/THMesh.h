@@ -20,8 +20,8 @@ namespace THEngine
 	struct MeshVertex
 	{
 		float x, y, z;
-		float u, v;
 		float nx, ny, nz;
+		float u, v;
 		MeshVertex() {}
 		MeshVertex(float x, float y, float z, float nx, float ny, float nz, float u, float v) :
 			x(x), y(y), z(z), nx(nx), ny(ny), nz(nz), u(u), v(v) {}
