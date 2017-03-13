@@ -63,5 +63,5 @@ float4 directionalLighting(float4 diffuse, float4 specular, float power, float3 
 
 float4 shadeWithDirectional(float4 color, PixelIn input)
 {
-	return directionalLighting(color, material.specular, material.power, input.normal, input.positionInView);
+	return color * directionalLighting(material.diffuse, material.specular, material.power, input.normal, input.positionInView);
 }
