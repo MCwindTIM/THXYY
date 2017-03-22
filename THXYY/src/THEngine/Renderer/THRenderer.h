@@ -15,6 +15,7 @@ namespace THEngine
 
 	protected:
 		void SetupRenderState(GameObject* object);
+		void SetupWorldTransform(GameObject* object);
 
 	public:
 		virtual void Render(GameObject* obj) = 0;

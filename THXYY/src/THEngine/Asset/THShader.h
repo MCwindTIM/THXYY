@@ -33,20 +33,9 @@ namespace THEngine
 			this->effect->CommitChanges();
 		}
 
-		inline void UsePass(unsigned int pass)
-		{
-			if (currentPass != pass)
-			{
-				currentPass = pass;
-				effect->BeginPass(pass);
-			}
-		}
+		void UsePass(unsigned int pass);
 
-		inline void EndPass()
-		{
-			currentPass = -1;
-			effect->EndPass();
-		}
+		void EndPass();
 
 		inline UINT GetPassNum() { return passNum; }
 

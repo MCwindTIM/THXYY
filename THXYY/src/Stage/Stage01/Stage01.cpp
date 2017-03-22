@@ -182,7 +182,7 @@ void Stage01::CreateHouses()
 	houseRight1->SetRotationByAxis(Vector3f(0, 1, 0), 180);
 	engine->AddBackgroundObject(houseRight1);
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 1; i < 5; i++)
 	{
 		Mesh* houseLeft2 = (Mesh*)houseLeft1->Clone();
 		houseLeft2->SetPosition(Vector3f(-800, 395, 1000 + 1500 * i));

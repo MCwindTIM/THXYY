@@ -76,7 +76,7 @@ namespace THEngine
 		Matrix::Identity(&matrix);
 		app->SetViewMatrix(matrix);
 
-		Game::GetInstance()->Render();
+		Game::GetInstance()->GetRenderPipeline()->Render();
 
 		Application::GetInstance()->ClearDepthBuffer();
 	}
@@ -105,7 +105,7 @@ namespace THEngine
 
 		if (layer->GetSkyBox())
 		{
-			Game::GetInstance()->GetSkyBoxRenderer()->RenderSkyBox(this, layer);
+			Game::GetInstance()->GetRenderPipeline()->GetSkyBoxRenderer()->RenderSkyBox(this, layer);
 		}
 
 		Matrix matrix;
@@ -124,7 +124,7 @@ namespace THEngine
 			Vector3f(this->up.x, this->up.y, this->up.z));
 		app->SetViewMatrix(matrix);
 
-		Game::GetInstance()->Render();
+		Game::GetInstance()->GetRenderPipeline()->Render();
 
 		Application::GetInstance()->ClearDepthBuffer();
 	}

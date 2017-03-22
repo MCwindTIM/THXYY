@@ -136,7 +136,7 @@ void Particle3DRenderer::Render(GameObject* obj)
 	spriteShader->SetMatrix("projection", renderState->GetProjectionMatrix());
 	spriteShader->SetMatrix("view", renderState->GetViewMatrix());
 
+	spriteShader->CommitChanges();
 	spriteShader->UsePass(0);
 	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
-	spriteShader->EndPass();
 }

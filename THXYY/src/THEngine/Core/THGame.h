@@ -12,6 +12,7 @@
 #include "../Renderer/THSpriteRenderer.h"
 #include "../Renderer/THParticle3DRenderer.h"
 #include "../Renderer/THMeshRenderer.h"
+#include <Renderer\THRenderPipeline.h>
 #include <Renderer\THSkyBoxRenderer.h>
 #include "../Asset/THAssetManager.h"
 #include "../UI/THEventSystem.h"
@@ -45,13 +46,7 @@ namespace THEngine
 		Scene* scene;
 		Scene* nextScene;
 
-		RenderQueue* spriteQueue;
-		RenderQueue* normalQueue = nullptr;
-
-		SpriteRenderer* spriteRenderer;
-		Particle3DRenderer* particle3DRenderer = nullptr;
-		MeshRenderer* meshRenderer = nullptr;
-		SkyBoxRenderer* skyBoxRenderer = nullptr;
+		RenderPipeline* pipeline = nullptr;
 
 		AssetManager* assetManager;
 
@@ -72,11 +67,7 @@ namespace THEngine
 		void DrawFPS();
 
 	public:
-		enum RenderQueueType
-		{
-			SPRITE,
-			NORMAL
-		};
+		using RenderQueueType = RenderPipeline::RenderQueueType;
 
 	public:
 		Game();
@@ -105,41 +96,22 @@ namespace THEngine
 
 		void LoadScene(Scene* scene);
 
-		void Render();
+		inline Application* GetApplication() const { return app; }
 
-		inline Application* GetApplication() { return app; }
+		inline RenderPipeline* GetRenderPipeline() const { return pipeline; }
 
-		inline SpriteRenderer* GetSpriteRenderer()
-		{
-			return spriteRenderer;
-		}
-
-		inline Particle3DRenderer* GetParticle3DRenderer()
-		{
-			return particle3DRenderer;
-		}
-
-		inline MeshRenderer* GetMeshRenderer()
-		{
-			return meshRenderer;
-		}
-
-		inline SkyBoxRenderer* GetSkyBoxRenderer() const { return skyBoxRenderer; }
-
-		inline AssetManager* GetAssetManager()
+		inline AssetManager* GetAssetManager() const
 		{
 			return assetManager;
 		}
 
-		inline int GetWidth() { return width; }
+		inline int GetWidth() const { return width; }
 
-		inline int GetHeight() { return height; }
+		inline int GetHeight() const { return height; }
 
-		inline Scene* GetScene() { return scene; }
+		inline Scene* GetScene() const { return scene; }
 
-		inline const String& GetTitle() { return title; }
-
-		void SendToRenderQueue(RenderQueueType type, GameObject* obj);
+		inline const String& GetTitle() const { return title; }
 	};
 }
 

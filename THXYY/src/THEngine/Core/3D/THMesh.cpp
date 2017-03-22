@@ -42,7 +42,7 @@ namespace THEngine
 
 	void Mesh::SendToRenderQueue()
 	{
-		Game::GetInstance()->SendToRenderQueue(Game::NORMAL, this);
+		Game::GetInstance()->GetRenderPipeline()->SendToRenderQueue(RenderPipeline::NORMAL, this);
 	}
 
 	void Mesh::InitVertexBuffer(int size)
@@ -72,7 +72,34 @@ namespace THEngine
 
 	void Mesh::Draw()
 	{
-		Game::GetInstance()->GetMeshRenderer()->Render(this);
+		Game::GetInstance()->GetRenderPipeline()->GetMeshRenderer()->Render(this);
+	}
+
+	void Mesh::DrawGeometry()
+	{
+		auto app = Application::GetInstance();
+
+		if (this->mesh)
+		{
+			this->mesh->DrawGeometry();
+		}
+		else
+		{
+			D3DVERTEXBUFFER_DESC vbdesc;
+			this->vertexBuffer->GetDesc(&vbdesc);
+			app->GetDevice()->SetFVF(vbdesc.FVF);
+
+			switch (this->primitiveType)
+			{
+			case Mesh::TRIANGLE_LIST:
+				app->GetDevice()->DrawPrimitive(D3DPT_TRIANGLELIST, 0, this->vertexCount / 3);
+				break;
+			case Mesh::TRIANGLE_STRIP:
+				app->GetDevice()->SetStreamSource(0, this->vertexBuffer, 0, sizeof(MeshVertex));
+				app->GetDevice()->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, this->vertexCount - 2);
+				break;
+			}
+		}
 	}
 
 	Mesh* Mesh::CreateMeshFromFile(String filePath)
@@ -236,5 +263,27 @@ namespace THEngine
 	Object* Mesh::D3DMesh::Clone()
 	{
 		return new D3DMesh(*this);
+	}
+
+	void Mesh::D3DMesh::DrawGeometry()
+	{
+		auto meshShader = Application::GetInstance()->GetRenderState()->GetCurrentShader();
+		for (int i = 0; i < this->numMaterials; i++)
+		{
+			
+			Material& mat = this->materialList[i];
+			if (mat.texture)
+			{
+				meshShader->SetTexture("tex", mat.texture);
+				meshShader->SetBoolean("hasTexture", true);
+			}
+			else
+			{
+				meshShader->SetBoolean("hasTexture", false);
+			}
+			meshShader->SetValue("material", &mat, sizeof(Material) - sizeof(Texture*));
+			meshShader->CommitChanges();
+			this->mesh->DrawSubset(i);
+		}
 	}
 }

@@ -78,7 +78,12 @@ namespace THEngine
 	{
 		auto device = Application::GetInstance()->GetDevice();
 
-		D3DXCreateTexture(device, width, height, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture);
+		if (FAILED(D3DXCreateTexture(device, width, height, 0, D3DUSAGE_AUTOGENMIPMAP, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture)))
+		{
+			ExceptionManager::GetInstance()->PushException(new Exception(
+				((String)"纹理加载失败。原因是：\nD3DXCreateTexture失败。")));
+			return;
+		}
 
 		D3DLOCKED_RECT rect;
 		texture->LockRect(0, &rect, nullptr, 0);

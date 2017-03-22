@@ -181,6 +181,8 @@
     <ClCompile Include="src\THEngine\Renderer\THMeshRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THRenderPipleline.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THShadowRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THSkyBoxRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderQueue.cpp" />
@@ -287,7 +289,9 @@
     <ClInclude Include="src\THEngine\Renderer\THMeshRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THParticle3DRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderer.h" />
+    <ClInclude Include="src\THEngine\Renderer\THRenderPipeline.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderQueue.h" />
+    <ClInclude Include="src\THEngine\Renderer\THShadowRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THSkyBoxRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THSpriteRenderer.h" />
     <ClInclude Include="src\THEngine\THEngine.h" />
@@ -324,6 +328,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fx\skybox.fx">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\shadow.fx">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

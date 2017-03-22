@@ -468,6 +468,12 @@
     <ClCompile Include="src\THEngine\Core\THEnvironment.cpp">
       <Filter>源文件\THEngine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THShadowRenderer.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THRenderPipleline.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\THXYY.h">
@@ -788,6 +794,12 @@
     <ClInclude Include="src\THEngine\Core\THEnvironment.h">
       <Filter>头文件\THEngine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THShadowRenderer.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THRenderPipeline.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="THXYY.rc">
@@ -805,6 +817,9 @@
       <Filter>fx</Filter>
     </None>
     <None Include="fx\skybox.fx">
+      <Filter>fx</Filter>
+    </None>
+    <None Include="fx\shadow.fx">
       <Filter>fx</Filter>
     </None>
   </ItemGroup>

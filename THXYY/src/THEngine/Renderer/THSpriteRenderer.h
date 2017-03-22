@@ -46,10 +46,9 @@ namespace THEngine
 		SpriteRenderer();
 		virtual ~SpriteRenderer();
 
-		static SpriteRenderer* Create(Application* app);
+		static SpriteRenderer* Create();
 
 		virtual void Render(GameObject* obj) override;
-		void Render(Sprite* sprite);
 
 		friend class SpriteRenderQueue;
 	};

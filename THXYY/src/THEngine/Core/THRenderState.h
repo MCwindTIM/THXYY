@@ -55,6 +55,8 @@ namespace THEngine
 		inline const Vector4f& GetAmbientLight() const { return environment->ambientLight; }
 		inline LinkedList<Light*>* GetLights() const { return &environment->lights; }
 
+		inline Shader* GetCurrentShader() const { return this->shader; }
+
 		void Clear();
 
 		friend class Application;

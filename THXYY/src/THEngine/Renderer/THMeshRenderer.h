@@ -15,12 +15,12 @@ namespace THEngine
 		IDirect3DVertexBuffer9* vertexBuffer = nullptr;
 		IDirect3DIndexBuffer9* indexBuffer = nullptr;
 
-	protected:
-		void CalcWorldTransform(Mesh* mesh);
+		Light* currentLight = nullptr;
+		Texture* shadowMap = nullptr;
+
+		bool isRenderingAmbient = false;
 
 	private:
-		void DrawD3DMesh(Mesh::D3DMesh* mesh);
-
 		void SetupRenderState();
 
 		void SetupShaderParams(Mesh* mesh);
@@ -31,6 +31,8 @@ namespace THEngine
 
 		void ShadeWithLight(Mesh* mesh, Light* light);
 
+		void DrawShadowMap();
+
 		void DrawMesh(Mesh* mesh);
 
 	public:
@@ -38,6 +40,10 @@ namespace THEngine
 		virtual ~MeshRenderer();
 
 		virtual void Render(GameObject* object) override;
+
+		inline void SetRenderAmbient(bool renderAmbient) { this->isRenderingAmbient = renderAmbient; }
+		inline void SetCurrentLight(Light* light) { this->currentLight = light; }
+		inline void SetShadowMap(Texture* shadowMap) { this->shadowMap = shadowMap; }
 
 		static MeshRenderer* Create();
 	};

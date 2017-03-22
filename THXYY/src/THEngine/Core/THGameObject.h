@@ -52,7 +52,11 @@ namespace THEngine
 
 		virtual Object* Clone() override;
 		
+		//virtual functions
 		virtual void OnDestroy();
+		virtual void DrawGeometry();
+		virtual void GetWorldMatrix(Matrix* world);
+
 
 		void AddChild(GameObject* obj);
 

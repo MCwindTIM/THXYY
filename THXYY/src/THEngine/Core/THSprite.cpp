@@ -6,7 +6,6 @@ using namespace THEngine;
 
 Sprite::Sprite()
 {
-	renderer = Game::GetInstance()->GetSpriteRenderer();
 	texRect = Rect(0, 0, 0, 0);
 	alpha = 1.0f;
 	color = Vector3f(1.0f, 1.0f, 1.0f);
@@ -31,7 +30,7 @@ Sprite::~Sprite()
 
 void Sprite::SendToRenderQueue()
 {
-	Game::GetInstance()->SendToRenderQueue(Game::SPRITE, this);
+	Game::GetInstance()->GetRenderPipeline()->SendToRenderQueue(RenderPipeline::SPRITE, this);
 }
 
 void Sprite::Update()
@@ -50,5 +49,5 @@ void Sprite::Update()
 
 void Sprite::Draw()
 {
-	renderer->Render(this);
+	Game::GetInstance()->GetRenderPipeline()->GetSpriteRenderer()->Render(this);
 }

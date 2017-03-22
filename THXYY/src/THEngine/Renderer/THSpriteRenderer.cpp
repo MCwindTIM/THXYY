@@ -14,8 +14,9 @@ SpriteRenderer::~SpriteRenderer()
 	TH_SAFE_RELEASE(vb);
 }
 
-SpriteRenderer* SpriteRenderer::Create(Application* app)
+SpriteRenderer* SpriteRenderer::Create()
 {
+	auto app = Application::GetInstance();
 	SpriteRenderer* renderer = new SpriteRenderer();
 	if (renderer)
 	{
@@ -30,7 +31,7 @@ SpriteRenderer* SpriteRenderer::Create(Application* app)
 			return nullptr;
 		}
 
-		renderer->device = app->device;
+		renderer->device = app->GetDevice();
 		renderer->device->CreateVertexBuffer(4 * sizeof(SpriteVertex), D3DUSAGE_DYNAMIC,
 			SPRITE_FVF, D3DPOOL_DEFAULT, &renderer->vb, NULL);
 		if (renderer->vb == nullptr)
@@ -39,7 +40,6 @@ SpriteRenderer* SpriteRenderer::Create(Application* app)
 			delete renderer;
 			return nullptr;
 		}
-		renderer->Retain();
 	}
 	return renderer;
 }
@@ -142,9 +142,9 @@ void SpriteRenderer::Render(GameObject* obj)
 	spriteShader->SetMatrix("view", renderState->GetViewMatrix());
 	spriteShader->SetBoolean("pixelAlign", sprite->pixelAlign);
 
+	spriteShader->CommitChanges();
 	spriteShader->UsePass(0);
 	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
-	spriteShader->EndPass();
 }
 	/*Sprite* sprite = (Sprite*)obj;
 	if (this->spriteBatch.texture && this->spriteBatch.spriteCount < MAX_SPRITE 

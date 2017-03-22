@@ -81,5 +81,24 @@ namespace THEngine
 			TH_SAFE_RELEASE(renderState->shader);
 		}
 	}
+
+	void Shader::UsePass(unsigned int pass)
+	{
+		if (currentPass != pass)
+		{
+			EndPass();
+			currentPass = pass;
+			effect->BeginPass(pass);
+		}
+	}
+
+	void Shader::EndPass()
+	{
+		if (currentPass != -1)
+		{
+			currentPass = -1;
+			effect->EndPass();
+		}
+	}
 }
 

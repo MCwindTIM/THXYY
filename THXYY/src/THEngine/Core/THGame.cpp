@@ -17,8 +17,6 @@ Game::Game()
 	frameCount = 0;
 	showFPS = true;
 
-	spriteQueue = nullptr;
-	spriteRenderer = nullptr;
 	assetManager = nullptr;
 	defaultFont = nullptr;
 	input = nullptr;
@@ -58,54 +56,18 @@ bool Game::CreateGame(int width, int height, bool fullScreen, const String& titl
 	app->Retain();
 
 	assetManager = AssetManager::Create(app);
-	
-	spriteQueue = new SpriteRenderQueue();
-	spriteQueue->Retain();
-
-	normalQueue = new NormalRenderQueue();
-	normalQueue->Retain();
 
 	eventSystem = EventSystem::Create();
 
-	spriteRenderer = SpriteRenderer::Create(app);
-	if (spriteRenderer == nullptr)
+	pipeline = RenderPipeline::Create();
+	if (pipeline == nullptr)
 	{
 		auto exception = exceptionManager->GetException();
-		auto newException = new Exception((String)"创建SpriteRenderer失败。原因是：\n" + exception->GetInfo());
+		auto newException = new Exception((String)"创建RenderPipleline失败。原因是：\n" + exception->GetInfo());
 		exceptionManager->PushException(newException);
 		return false;
 	}
-
-	particle3DRenderer = Particle3DRenderer::Create();
-	if (particle3DRenderer == nullptr)
-	{
-		auto exception = exceptionManager->GetException();
-		auto newException = new Exception((String)"创建Particle3DRenderer失败。原因是：\n" + exception->GetInfo());
-		exceptionManager->PushException(newException);
-		return false;
-	}
-	particle3DRenderer->Retain();
-
-
-	meshRenderer = MeshRenderer::Create();
-	if (meshRenderer == nullptr)
-	{
-		auto exception = exceptionManager->GetException();
-		auto newException = new Exception((String)"创建MeshRenderer失败。原因是：\n" + exception->GetInfo());
-		exceptionManager->PushException(newException);
-		return false;
-	}
-	meshRenderer->Retain();
-
-	skyBoxRenderer = SkyBoxRenderer::Create();
-	if (skyBoxRenderer == nullptr)
-	{
-		auto exception = exceptionManager->GetException();
-		auto newException = new Exception((String)"创建SkyBoxRenderer失败。原因是：\n" + exception->GetInfo());
-		exceptionManager->PushException(newException);
-		return false;
-	}
-	skyBoxRenderer->Retain();
+	pipeline->Retain();
 
 	defaultFont = Font::CreateFontFromFile("res/font/font-fps-opensans.png","res/font/font-fps-opensans.txt");
 	if (defaultFont == nullptr)
@@ -249,29 +211,6 @@ void Game::LoadScene(Scene* scene)
 	nextScene = scene;
 }
 
-void Game::Render()
-{
-	spriteQueue->Render();
-	spriteQueue->Clear();
-
-	normalQueue->Render();
-	normalQueue->Clear();
-}
-
-
-void Game::SendToRenderQueue(RenderQueueType type, GameObject* obj)
-{
-	switch (type)
-	{
-	case SPRITE:
-		spriteQueue->Add(obj);
-		break;
-	case NORMAL:
-		normalQueue->Add(obj);
-		break;
-	}
-}
-
 void Game::CalcFPS()
 {
 	currentTime = GetTickCount();
@@ -303,14 +242,8 @@ void Game::Shutdown()
 {
 	OnShutdown();
 
+	TH_SAFE_RELEASE(pipeline);
 	TH_SAFE_RELEASE(scene);
-
-	TH_SAFE_RELEASE(spriteQueue);
-	TH_SAFE_RELEASE(normalQueue);
-	TH_SAFE_RELEASE(spriteRenderer);
-	TH_SAFE_RELEASE(particle3DRenderer);
-	TH_SAFE_RELEASE(meshRenderer);
-	TH_SAFE_RELEASE(skyBoxRenderer);
 	
 	TH_SAFE_RELEASE(eventSystem);
 	TH_SAFE_RELEASE(defaultFont);

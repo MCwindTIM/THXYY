@@ -36,24 +36,6 @@ namespace THEngine
 		return renderer;
 	}
 
-	void MeshRenderer::CalcWorldTransform(Mesh* mesh)
-	{
-		Matrix transform;
-		Matrix::Identity(&transform);
-
-		Matrix temp;
-		Matrix::Scale(&temp, mesh->GetScale().x, mesh->GetScale().y, mesh->GetScale().z);
-		transform *= temp;
-
-		Matrix::RotateQuarternion(&temp, mesh->rotation3D);
-		transform *= temp;
-
-		Matrix::Translate(&temp, floor(0.5f + mesh->positionForRender.x), floor(0.5f + mesh->positionForRender.y), mesh->positionForRender.z);
-		transform *= temp;
-
-		Application::GetInstance()->SetWorldMatrix(transform);
-	}
-
 	void MeshRenderer::SetupRenderState()
 	{
 		auto app = Application::GetInstance();
@@ -74,7 +56,7 @@ namespace THEngine
 	{
 		auto app = Application::GetInstance();
 
-		CalcWorldTransform(mesh);
+		SetupWorldTransform(mesh);
 
 		Material material = mesh->material;
 
@@ -109,31 +91,9 @@ namespace THEngine
 
 	void MeshRenderer::DrawMesh(Mesh* mesh)
 	{
-		auto app = Application::GetInstance();
-
-		if (mesh->mesh)
-		{
-			DrawD3DMesh(mesh->mesh);
-		}
-		else
-		{
-			D3DVERTEXBUFFER_DESC vbdesc;
-			mesh->vertexBuffer->GetDesc(&vbdesc);
-			app->GetDevice()->SetFVF(vbdesc.FVF);
-			
-			meshShader->UsePass(0);
-			switch (mesh->primitiveType)
-			{
-			case Mesh::TRIANGLE_LIST:
-				app->GetDevice()->DrawPrimitive(D3DPT_TRIANGLELIST, 0, mesh->vertexCount / 3);
-				break;
-			case Mesh::TRIANGLE_STRIP:
-				app->GetDevice()->SetStreamSource(0, mesh->vertexBuffer, 0, sizeof(MeshVertex));
-				app->GetDevice()->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, mesh->vertexCount - 2);
-				break;
-			}
-			meshShader->EndPass();
-		}
+		meshShader->UsePass(0);
+		mesh->DrawGeometry();
+		meshShader->EndPass();
 	}
 
 	void MeshRenderer::ShadeWithAmbient(Mesh* mesh, const Vector4f& ambient)
@@ -194,18 +154,14 @@ namespace THEngine
 
 		if (renderState->IsLightingEnabled())
 		{
-			ShadeWithAmbient(mesh, renderState->GetAmbientLight());
-			app->SetBlendMode(BlendMode::ADD);
-
-			auto lights = renderState->GetLights();
-			auto iter = lights->GetIterator();
-			while (iter->HasNext())
+			if (isRenderingAmbient)
 			{
-				auto light = iter->Next();
-				ShadeWithLight(mesh, light);
+				ShadeWithAmbient(mesh, renderState->GetAmbientLight());
 			}
-
-			app->SetBlendMode(BlendMode::ALPHA_BLEND);
+			else
+			{
+				ShadeWithLight(mesh, this->currentLight);
+			}
 		}
 
 		else
@@ -222,27 +178,5 @@ namespace THEngine
 		SetupShaderParams(mesh);
 
 		Shade(mesh);
-	}
-
-	void MeshRenderer::DrawD3DMesh(Mesh::D3DMesh* mesh)
-	{
-		for (int i = 0; i < mesh->numMaterials; i++)
-		{
-			Material& mat = mesh->materialList[i];
-			if (mat.texture)
-			{
-				meshShader->SetTexture("tex", mat.texture);
-				meshShader->SetBoolean("hasTexture", true);
-			}
-			else
-			{
-				meshShader->SetBoolean("hasTexture", false);
-			}
-			meshShader->SetValue("material", &mat, sizeof(Material) - sizeof(Texture*));
-
-			meshShader->UsePass(0);
-			mesh->mesh->DrawSubset(i);
-			meshShader->EndPass();
-		}
 	}
 }

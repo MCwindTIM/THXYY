@@ -114,6 +114,26 @@ namespace THEngine
 
 	}
 
+	void GameObject::DrawGeometry()
+	{
+
+	}
+
+	void GameObject::GetWorldMatrix(Matrix* world)
+	{
+		Matrix::Identity(world);
+
+		Matrix temp;
+		Matrix::Scale(&temp, GetScale().x, GetScale().y, GetScale().z);
+		*world *= temp;
+
+		Matrix::RotateQuarternion(&temp, rotation3D);
+		*world *= temp;
+
+		Matrix::Translate(&temp, floor(0.5f + positionForRender.x), floor(0.5f + positionForRender.y), positionForRender.z);
+		*world *= temp;
+	}
+
 	void GameObject::OnDestroy()
 	{
 		RemoveAllChildren();

@@ -15,7 +15,7 @@ namespace THEngine
 
 	void Particle3D::SendToRenderQueue()
 	{
-		Game::GetInstance()->SendToRenderQueue(Game::SPRITE, this);
+		Game::GetInstance()->GetRenderPipeline()->SendToRenderQueue(RenderPipeline::SPRITE, this);
 	}
 
 	void Particle3D::RotateByAxis(Vector3f axis, float degree)
@@ -42,6 +42,6 @@ namespace THEngine
 
 	void Particle3D::Draw()
 	{
-		Game::GetInstance()->GetParticle3DRenderer()->Render(this);
+		Game::GetInstance()->GetRenderPipeline()->GetParticle3DRenderer()->Render(this);
 	}
 }

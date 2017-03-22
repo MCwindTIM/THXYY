@@ -12,6 +12,13 @@ namespace THEngine
 
 		app->SetBlendMode(obj->GetBlendMode());
 	}
+
+	void Renderer::SetupWorldTransform(GameObject* object)
+	{
+		Matrix world;
+		object->GetWorldMatrix(&world);
+		Application::GetInstance()->SetWorldMatrix(world);
+	}
 }
 
 #endif

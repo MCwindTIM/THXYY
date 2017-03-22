@@ -54,6 +54,8 @@ namespace THEngine
 
 			virtual Object* Clone() override;
 
+			void DrawGeometry();
+
 			friend class MeshRenderer;
 		};
 
@@ -79,6 +81,7 @@ namespace THEngine
 		virtual void Draw() override;
 		virtual void SendToRenderQueue() override;
 		virtual Object* Clone() override;
+		virtual void DrawGeometry() override;
 
 		inline void SetMaterial(Material material) { this->material = material; }
 
