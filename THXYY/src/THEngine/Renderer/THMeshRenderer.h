@@ -7,6 +7,8 @@
 
 namespace THEngine
 {
+	class FloatTexture;
+
 	class MeshRenderer : public Renderer
 	{
 	protected:
@@ -16,7 +18,7 @@ namespace THEngine
 		IDirect3DIndexBuffer9* indexBuffer = nullptr;
 
 		Light* currentLight = nullptr;
-		Texture* shadowMap = nullptr;
+		FloatTexture* shadowMap = nullptr;
 
 		bool isRenderingAmbient = false;
 
@@ -43,7 +45,7 @@ namespace THEngine
 
 		inline void SetRenderAmbient(bool renderAmbient) { this->isRenderingAmbient = renderAmbient; }
 		inline void SetCurrentLight(Light* light) { this->currentLight = light; }
-		inline void SetShadowMap(Texture* shadowMap) { this->shadowMap = shadowMap; }
+		inline void SetShadowMap(FloatTexture* shadowMap) { this->shadowMap = shadowMap; }
 
 		static MeshRenderer* Create();
 	};

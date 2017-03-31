@@ -9,6 +9,7 @@ namespace THEngine
 {
 	class Input;
 	class RenderTexture;
+	class Surface;
 
 	class Application : public Object
 	{
@@ -39,6 +40,7 @@ namespace THEngine
 		bool RegisterGameClass();
 		bool CreateGameWindow();
 		bool InitDeviceContext();
+		void InitRenderState();
 		void GetDeviceInfo(D3DDEVTYPE* deviceType, int* vertexProcessingType);
 		void GetMultiSampleType(D3DDEVTYPE deviceType, D3DMULTISAMPLE_TYPE* multiSampleType, DWORD* qualityLevel);
 		bool CheckDeviceCaps(D3DDEVTYPE deviceType);
@@ -89,12 +91,22 @@ namespace THEngine
 				D3DCOLOR_ARGB(255, 0, 0, 0), 1, 0);
 		}
 
+		inline void ClearColorBuffer(const Vector4f& color)
+		{
+			device->Clear(0, NULL, D3DCLEAR_TARGET,
+				D3DCOLOR_ARGB((int)(255 * color.w + 0.5), ((int)(255 * color.x + 0.5)), ((int)(255 * color.y + 0.5)),
+				((int)(255 * color.z + 0.5))), 1, 0);
+		}
+
 		inline void ClearDepthBuffer()
 		{
-			device->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 0, 0, 0), 1, 0);
+			device->Clear(0, NULL, D3DCLEAR_ZBUFFER, 0, 1, 0);
 		}
 
 		void SetRenderTarget(RenderTexture* texture);
+
+		void SetDepthBuffer(Surface* depthBuffer);
+		Surface* CreateDepthBuffer(int width, int height); 
 
 		void SetBlendMode(BlendMode blendMode);
 
@@ -136,6 +148,8 @@ namespace THEngine
 		{
 			renderState.view = view;
 		}
+
+		void EnableDepthTest(bool value);
 
 		friend class AssetManager;
 		friend class SpriteRenderer;

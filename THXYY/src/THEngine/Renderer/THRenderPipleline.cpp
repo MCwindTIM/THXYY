@@ -16,6 +16,7 @@ namespace THEngine
 		TH_SAFE_RELEASE(particle3DRenderer);
 		TH_SAFE_RELEASE(meshRenderer);
 		TH_SAFE_RELEASE(skyBoxRenderer);
+		TH_SAFE_RELEASE(shadowRenderer);
 	}
 
 	RenderPipeline* RenderPipeline::Create()
@@ -74,6 +75,17 @@ namespace THEngine
 		}
 		pipeline->skyBoxRenderer->Retain();
 
+		pipeline->shadowRenderer = ShadowRenderer::Create();
+		if (pipeline->shadowRenderer == nullptr)
+		{
+			auto exception = exceptionManager->GetException();
+			auto newException = new Exception((String)"创建ShadowRenderer失败。原因是：\n" + exception->GetInfo());
+			exceptionManager->PushException(newException);
+			delete pipeline;
+			return nullptr;
+		}
+		pipeline->shadowRenderer->Retain();
+
 		return pipeline;
 	}
 
@@ -120,6 +132,7 @@ namespace THEngine
 				RenderShadowMap(light);
 
 				this->meshRenderer->SetCurrentLight(light);
+				this->meshRenderer->SetShadowMap(this->shadowRenderer->GetShadowMap());
 				normalQueue->Render();	
 			}
 			app->SetBlendMode(BlendMode::ALPHA_BLEND);
@@ -133,6 +146,15 @@ namespace THEngine
 
 	void RenderPipeline::RenderShadowMap(Light* light)
 	{
+		this->shadowRenderer->SetLight(light);
 
+		this->shadowRenderer->Begin();
+		auto iter = normalQueue->GetObjects()->GetIterator();
+		while (iter->HasNext())
+		{
+			auto obj = iter->Next();
+			shadowRenderer->Render(obj);
+		}
+		this->shadowRenderer->End();
 	}
 }

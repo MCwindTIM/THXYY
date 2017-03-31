@@ -14,6 +14,8 @@ namespace THEngine
 		virtual void Add(GameObject* obj);
 		void Clear();
 		virtual void Render();
+
+		inline ArrayList<GameObject*>* GetObjects() { return &this->objList; }
 	};
 
 	class SpriteRenderQueue : public RenderQueue

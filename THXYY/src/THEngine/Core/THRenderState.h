@@ -8,6 +8,9 @@
 
 namespace THEngine
 {
+	class RenderTexture;
+	class Surface;
+
 	struct Viewport
 	{
 		int x;
@@ -37,6 +40,11 @@ namespace THEngine
 
 		Shader* shader = nullptr;
 
+		RenderTexture* renderTarget = nullptr;
+		Surface* depthBuffer = nullptr;
+
+		bool isDepthTestEnabled = true;
+
 	public:
 		RenderState();
 		virtual ~RenderState();
@@ -56,6 +64,12 @@ namespace THEngine
 		inline LinkedList<Light*>* GetLights() const { return &environment->lights; }
 
 		inline Shader* GetCurrentShader() const { return this->shader; }
+
+		inline RenderTexture* GetRenderTarget() const { return this->renderTarget; }
+
+		inline Surface* GetDepthBuffer() const { return this->depthBuffer; }
+
+		inline bool IsDepthTestEnabled() const { return this->isDepthTestEnabled; }
 
 		void Clear();
 

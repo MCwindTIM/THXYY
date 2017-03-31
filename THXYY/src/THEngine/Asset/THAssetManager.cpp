@@ -266,6 +266,22 @@ namespace THEngine
 		return texture;
 	}
 
+	FloatTexture* AssetManager::CreateFloatTexture(int width, int height)
+	{
+		TextureImpl* texImpl = new TextureImpl();
+
+		texImpl->width = width;
+		texImpl->height = height;
+		D3DXCreateTexture(device, width, height, 0, D3DUSAGE_AUTOGENMIPMAP | D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &texImpl->texture);
+
+		textureList.Add(texImpl);
+
+		FloatTexture* texture = new FloatTexture();
+		TH_SET(texture->texImpl, texImpl);
+
+		return texture;
+	}
+
 	void AssetManager::DestroyTexture(Texture* texture)
 	{
 		textureList.Remove(texture->texImpl);

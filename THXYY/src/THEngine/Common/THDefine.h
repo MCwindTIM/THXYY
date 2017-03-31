@@ -15,7 +15,10 @@
 	if(object) { delete object; object = NULL; }
 
 #define TH_SET(object, value) \
-	 TH_SAFE_RELEASE(object); object = value; object->Retain();
+	TH_SAFE_RELEASE(object); \
+	object = value; \
+	if(object) \
+		object->Retain();
 
 #define TH_INSTANCEOF(instance,classname) (typeid(instance) == typeid(classname))
 

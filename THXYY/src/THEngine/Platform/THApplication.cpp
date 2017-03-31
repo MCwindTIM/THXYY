@@ -1,6 +1,7 @@
 #include "THApplication.h"
 #include "../UI/THEventSystem.h"
 #include "../Asset/THAssetManager.h"
+#include "THSurface.h"
 
 namespace THEngine
 {
@@ -219,6 +220,8 @@ namespace THEngine
 		hr = d3d->CreateDevice(D3DADAPTER_DEFAULT, deviceType,
 			hWnd, vertexProcessingType, &d3dpp, &device);
 
+		InitRenderState();
+
 		if (FAILED(hr))
 		{
 			return false;
@@ -286,6 +289,16 @@ namespace THEngine
 			exceptionManager->PushException(new Exception((String)"当前显卡支持的像素着色器版本过低。\n"
 				"当前支持版本：" + mainPSVersion + "." + subPSVersion
 				+ "   最低需要版本：2.0"));
+			return false;
+		}
+
+		//检查纹理格式支持
+		D3DDISPLAYMODE mode;
+		d3d->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &mode);
+		if (FAILED(d3d->CheckDeviceFormat(D3DADAPTER_DEFAULT, deviceType, mode.Format, D3DUSAGE_RENDERTARGET,
+			D3DRTYPE_TEXTURE, D3DFMT_R32F)))
+		{
+			exceptionManager->PushException(new Exception("您的显卡不支持32位浮点纹理。"));
 			return false;
 		}
 
@@ -374,6 +387,13 @@ namespace THEngine
 		}
 	}
 
+	void Application::InitRenderState()
+	{
+		this->renderState.depthBuffer = new Surface();
+		this->device->GetDepthStencilSurface(&this->renderState.depthBuffer->surface);
+		this->renderState.depthBuffer->Retain();
+	}
+
 	void Application::SetOrtho(float left, float bottom, float width, float height, float znear, float zfar)
 	{
 		Matrix projection;
@@ -414,6 +434,25 @@ namespace THEngine
 			device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &surface);
 			device->SetRenderTarget(0, surface);
 		}
+		
+		TH_SET(renderState.renderTarget, texture);
+	}
+
+	void Application::SetDepthBuffer(Surface* depthBuffer)
+	{
+		this->device->SetDepthStencilSurface(depthBuffer->surface);
+	}
+
+	Surface* Application::CreateDepthBuffer(int width, int height)
+	{
+		Surface* depthBuffer = new Surface();
+		if (FAILED(this->device->CreateDepthStencilSurface(width, height, this->d3dpp.AutoDepthStencilFormat,
+			this->d3dpp.MultiSampleType, this->d3dpp.MultiSampleQuality, TRUE, &depthBuffer->surface, nullptr)))
+		{
+			delete depthBuffer;
+			return nullptr;
+		}
+		return depthBuffer;
 	}
 
 	void Application::SetBlendMode(BlendMode blendMode)
@@ -501,6 +540,12 @@ namespace THEngine
 			return true;
 		}
 		return false;
+	}
+
+	void Application::EnableDepthTest(bool value)
+	{
+		this->renderState.isDepthTestEnabled = value;
+		this->device->SetRenderState(D3DRS_ZENABLE, value);
 	}
 
 	LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
