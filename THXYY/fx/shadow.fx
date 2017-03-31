@@ -6,6 +6,11 @@ struct VertexOut
 	float2 depth : TEXCOORD0;
 };
 
+struct PixelIn
+{
+	float2 depth : TEXCOORD1;
+};
+
 VertexOut VSFunc(float3 input : POSITION)
 {
 	VertexOut output;
@@ -14,12 +19,21 @@ VertexOut VSFunc(float3 input : POSITION)
 	output.position.w = 1.0f;
 	output.position = mul(output.position, mvMatrix);
 	output.position = mul(output.position, projection);
-	output.depth = output.position.zw;
+	output.depth.xy = output.position.zw;
 
 	return output;
 }
 
-float PSFunc(float2 depth : TEXCOORD) : COLOR
+float4 PSFunc(float2 depth : TEXCOORD0) : COLOR
 {
 	return depth.x / depth.y;
+}
+
+technique Shadow
+{
+	pass Pass0
+	{
+		VertexShader = compile vs_2_0 VSFunc();
+		PixelShader = compile ps_2_0 PSFunc();
+	}
 }
