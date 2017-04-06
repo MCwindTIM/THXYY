@@ -1,5 +1,7 @@
 #include "lighting.fx"
 
+#define SHADOW_EPSILON 0.00005f
+
 struct Fog
 {
 	float4 color;
@@ -13,6 +15,7 @@ texture shadowMap;
 float4 argb;
 bool fogEnable;
 bool hasTexture;
+int shadowMapWidth, shadowMapHeight;
 Fog fog;
 
 sampler TextureSampler = sampler_state
@@ -31,8 +34,8 @@ sampler ShadowSampler = sampler_state
 	magfilter = POINT;
 	minfilter = POINT;
 	mipfilter = POINT;
-	AddressU = clamp;
-	AddressV = clamp;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
 };
 
 VertexOut VSFunc(VertexIn input)
@@ -85,21 +88,32 @@ float4 getTexturedColor(in PixelIn input)
 	return color;
 }
 
-float getShadowDensity(in PixelIn input)
+float getLightDensity(in PixelIn input)
 {
-	float2 shadowTex = input.posInShadowMap.xy;
-	shadowTex /= input.posInShadowMap.w;
-	shadowTex *= 0.5f;
-	shadowTex += 0.5f;
+	float2 shadowTex = 0.5 * input.posInShadowMap.xy / input.posInShadowMap.w + float2(0.5, 0.5);
 	shadowTex.y = 1.0f - shadowTex.y;
 
 	float depth = input.posInShadowMap.z / input.posInShadowMap.w;
 
-	if (tex2D(ShadowSampler, shadowTex).r + 0.00005f >= depth)
-	{
-		return 0;
-	}
-	return 1;
+	float2 texelPos;
+	texelPos.x = shadowMapWidth * shadowTex.x;
+	texelPos.y = shadowMapHeight * shadowTex.y;
+        
+	float2 lerps = frac(texelPos);
+	float dx = 1.0 / shadowMapWidth;
+	float dy = 1.0 / shadowMapHeight;
+
+	float sourcevals[4];
+	sourcevals[0] = (tex2D(ShadowSampler, shadowTex).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
+	sourcevals[1] = (tex2D(ShadowSampler, shadowTex + float2(dx, 0)).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
+	sourcevals[2] = (tex2D(ShadowSampler, shadowTex + float2(0, dy)).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
+	sourcevals[3] = (tex2D(ShadowSampler, shadowTex + float2(dx, 1.0 / shadowMapHeight)).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
+
+	float amount = lerp(lerp(sourcevals[0], sourcevals[1], lerps.x),
+		lerp(sourcevals[2], sourcevals[3], lerps.x),
+		lerps.y);
+
+	return amount;
 }
 
 float4 PSFunc(PixelIn input) : COLOR
@@ -129,7 +143,7 @@ float4 PSFunc_Directional(PixelIn input) : COLOR
 
 	color = getTexturedColor(input);
 	color = shadeWithDirectional(color, input);
-	color *= 1 - getShadowDensity(input);
+	color *= getLightDensity(input);
 	fogShading(color, input);
 
 	return color;
@@ -158,6 +172,6 @@ technique Directional
 	pass Pass0
 	{
 		VertexShader = compile vs_2_0 VSFunc();
-		PixelShader = compile ps_2_0 PSFunc_Directional();
+		PixelShader = compile ps_3_0 PSFunc_Directional();
 	}
 }

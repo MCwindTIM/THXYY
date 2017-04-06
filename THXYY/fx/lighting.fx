@@ -49,18 +49,16 @@ float4 ambientLighting(in float4 color)
 float4 directionalLighting(float4 diffuse, float4 specular, float power, float3 normal, float3 viewDir)
 {
 	normal = normalize(normal);
-	float3 lightDir = normalize(directionalLight.direction);
-	float4 result;
+	viewDir = normalize(viewDir);
+	float3 lightDir = directionalLight.direction;
 	float cosine = -dot(lightDir, normal);
 	if (cosine < 0)
 	{
-		result.x = result.y = result.z = 0;
-		result.w = 1;
-		return result;
+		return float4(0.0f, 0.0f, 0.0f, 1.0f);
 	}
-	float3 reflect = lightDir + 2 * normal;
 	float3 halfAngle = normalize(lightDir + viewDir);
-	return directionalLight.color * cosine * diffuse  + pow(-dot(normal, halfAngle), power) * specular;
+	return directionalLight.color * cosine * diffuse + pow(max(-dot(normal, halfAngle), 0.0f), power) * specular
+		* directionalLight.color;
 }
 
 float4 shadeWithDirectional(float4 color, PixelIn input)

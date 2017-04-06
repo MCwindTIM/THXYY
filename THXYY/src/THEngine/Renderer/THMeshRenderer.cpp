@@ -91,10 +91,12 @@ namespace THEngine
 		if (this->shadowMap)
 		{
 			meshShader->SetTexture("shadowMap", this->shadowMap);
+			meshShader->SetInt("shadowMapWidth", this->shadowMap->GetWidth());
+			meshShader->SetInt("shadowMapHeight", this->shadowMap->GetHeight());
 		}
 		if (this->currentLight)
 		{
-			Matrix lightVP = (*this->lightView) * (*this->lightProjection);
+			Matrix lightVP = renderState->GetWorldMatrix() * (*this->lightView) * (*this->lightProjection);
 			meshShader->SetMatrix("lightViewProjection", lightVP);
 		}
 	}
@@ -144,6 +146,7 @@ namespace THEngine
 			lightForRender.direction.x = lightDirInView.x;
 			lightForRender.direction.y = lightDirInView.y;
 			lightForRender.direction.z = lightDirInView.z;
+			lightForRender.direction = lightForRender.direction.Normalize();
 
 			meshShader->SetTechnique("Directional");
 			meshShader->SetValue("directionalLight", &lightForRender, sizeof(DirectionalLight_For_Render));

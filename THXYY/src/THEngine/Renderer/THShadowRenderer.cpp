@@ -151,6 +151,8 @@ namespace THEngine
 	{
 		auto app = Application::GetInstance();
 
+		this->shadowMap->GenerateMipmap();
+
 		app->SetBlendMode(ADD);
 
 		app->SetRenderTarget(this->renderTargetPrev);

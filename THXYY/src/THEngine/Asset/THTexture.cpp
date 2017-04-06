@@ -108,6 +108,11 @@ namespace THEngine
 		TH_SAFE_RELEASE(texImage);
 	}
 
+	void TextureImpl::GenerateMipmap()
+	{
+		this->texture->GenerateMipSubLevels();
+	}
+
 	////////////////////////////////////////////
 	Texture::Texture()
 	{

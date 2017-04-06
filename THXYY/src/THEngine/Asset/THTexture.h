@@ -26,6 +26,8 @@ namespace THEngine
 
 		bool SaveToFile(const String& path);
 
+		void GenerateMipmap();
+
 		friend class Texture;
 		friend class Application;
 		friend class AssetManager;
@@ -44,13 +46,15 @@ namespace THEngine
 		Texture();
 		virtual ~Texture();
 
-		inline int GetWidth() { return texImpl->width; }
-		inline int GetHeight() { return texImpl->height; }
-		inline int GetImageWidth() { return texImpl->imageWidth; }
-		inline int GetImageHeight() { return texImpl->imageHeight; }
-		inline String GetName() { return name; }
+		inline int GetWidth() const { return texImpl->width; }
+		inline int GetHeight() const { return texImpl->height; }
+		inline int GetImageWidth() const { return texImpl->imageWidth; }
+		inline int GetImageHeight() const { return texImpl->imageHeight; }
+		inline String GetName() const { return name; }
 
-		inline bool SaveToFile(const String& path) { return texImpl->SaveToFile(path); }
+		inline bool SaveToFile(const String& path) const { return texImpl->SaveToFile(path); }
+
+		inline void GenerateMipmap() { return texImpl->GenerateMipmap(); }
 
 		friend class Application;
 		friend class AssetManager;
