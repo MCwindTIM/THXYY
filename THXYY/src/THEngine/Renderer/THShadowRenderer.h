@@ -15,6 +15,8 @@ namespace THEngine
 		Shader* shadowShader = nullptr;
 		Light* light = nullptr;
 		bool depthTestEnabledPrev = true;
+		Matrix lightProjection;
+		Matrix lightView;
 
 		Matrix projPrev;
 		Matrix viewPrev;
@@ -25,6 +27,7 @@ namespace THEngine
 	private:
 		ShadowRenderer();
 		void SetupLightProjection();
+		void ComputeFrustum();
 
 	public:
 		virtual ~ShadowRenderer();
@@ -36,6 +39,10 @@ namespace THEngine
 		inline void SetLight(Light* light) { this->light = light; }
 
 		inline FloatTexture* GetShadowMap() const { return this->shadowMap; }
+
+		inline const Matrix& GetLightProjection() const { return this->lightProjection; }
+
+		inline const Matrix& GetLightView() const { return this->lightView; }
 
 		void Begin();
 		void End();

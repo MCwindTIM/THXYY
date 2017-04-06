@@ -31,8 +31,8 @@ namespace THEngine
 
 		Vector3f();
 		Vector3f(float a1, float a2, float a3);
-		float Norm();
-		Vector3f Normalize();
+		float Norm() const;
+		Vector3f Normalize() const;
 		Vector3f operator +(const Vector3f& a) const;
 		Vector3f operator -(const Vector3f& a) const;
 		Vector3f operator -() const;
@@ -92,8 +92,8 @@ namespace THEngine
 	public:
 		RectInt() {}
 		RectInt(int l, int r, int t, int b) :left(l), right(r), top(t), bottom(b) {}
-		inline int Width() { return right - left; }
-		inline int Height() { return bottom - top; }
+		inline int Width() const { return right - left; }
+		inline int Height() const { return bottom - top; }
 	};
 }
 

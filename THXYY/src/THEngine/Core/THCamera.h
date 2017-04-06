@@ -44,9 +44,11 @@ namespace THEngine
 
 		inline void SetViewport(const RectInt& rect) { this->viewport = rect; }
 
+		inline const RectInt& GetViewport() const { return this->viewport; }
+
 		virtual bool Is2D() = 0;
 
-		virtual void Render(Layer* layer) = 0;
+		virtual void Render(Layer* layer);
 	};
 
 	class Camera2D : public Camera

@@ -19,6 +19,8 @@ namespace THEngine
 
 		Light* currentLight = nullptr;
 		FloatTexture* shadowMap = nullptr;
+		const Matrix* lightProjection = nullptr;
+		const Matrix* lightView = nullptr;
 
 		bool isRenderingAmbient = false;
 
@@ -33,8 +35,6 @@ namespace THEngine
 
 		void ShadeWithLight(Mesh* mesh, Light* light);
 
-		void DrawShadowMap();
-
 		void DrawMesh(Mesh* mesh);
 
 	public:
@@ -46,6 +46,8 @@ namespace THEngine
 		inline void SetRenderAmbient(bool renderAmbient) { this->isRenderingAmbient = renderAmbient; }
 		inline void SetCurrentLight(Light* light) { this->currentLight = light; }
 		inline void SetShadowMap(FloatTexture* shadowMap) { this->shadowMap = shadowMap; }
+		inline void SetLightProjection(const Matrix& matrix) { this->lightProjection = &matrix; }
+		inline void SetLightView(const Matrix& matrix) { this->lightView = &matrix; }
 
 		static MeshRenderer* Create();
 	};

@@ -133,6 +133,8 @@ namespace THEngine
 
 				this->meshRenderer->SetCurrentLight(light);
 				this->meshRenderer->SetShadowMap(this->shadowRenderer->GetShadowMap());
+				this->meshRenderer->SetLightProjection(this->shadowRenderer->GetLightProjection());
+				this->meshRenderer->SetLightView(this->shadowRenderer->GetLightView());
 				normalQueue->Render();	
 			}
 			app->SetBlendMode(BlendMode::ALPHA_BLEND);

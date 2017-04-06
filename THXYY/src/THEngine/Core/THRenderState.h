@@ -10,6 +10,7 @@ namespace THEngine
 {
 	class RenderTexture;
 	class Surface;
+	class Camera;
 
 	struct Viewport
 	{
@@ -42,6 +43,7 @@ namespace THEngine
 
 		RenderTexture* renderTarget = nullptr;
 		Surface* depthBuffer = nullptr;
+		Camera* camera = nullptr;
 
 		bool isDepthTestEnabled = true;
 
@@ -69,6 +71,8 @@ namespace THEngine
 
 		inline Surface* GetDepthBuffer() const { return this->depthBuffer; }
 
+		inline Camera* GetCamera() const { return this->camera; }
+
 		inline bool IsDepthTestEnabled() const { return this->isDepthTestEnabled; }
 
 		void Clear();
@@ -76,6 +80,7 @@ namespace THEngine
 		friend class Application;
 		friend class Layer;
 		friend class Shader;
+		friend class Camera;
 	};
 }
 

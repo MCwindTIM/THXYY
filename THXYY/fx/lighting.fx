@@ -23,6 +23,7 @@ struct VertexIn
 struct VertexOut
 {
 	float4 sv_position : POSITION;
+	float4 posInShadowMap : TEXCOORD3;
 	float4 positionInView : TEXCOORD2;
 	float3 normal : TEXCOORD1;
 	float2 texCoord : TEXCOORD0;
@@ -30,6 +31,7 @@ struct VertexOut
 
 struct PixelIn
 {
+	float4 posInShadowMap : TEXCOORD3;
 	float4 positionInView : TEXCOORD2;
 	float3 normal : TEXCOORD1;
 	float2 texCoord : TEXCOORD0;
@@ -63,5 +65,5 @@ float4 directionalLighting(float4 diffuse, float4 specular, float power, float3 
 
 float4 shadeWithDirectional(float4 color, PixelIn input)
 {
-	return color * directionalLighting(material.diffuse, material.specular, material.power, input.normal, input.positionInView);
+	return directionalLighting(color, material.specular, material.power, input.normal, input.positionInView);
 }

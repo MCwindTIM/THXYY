@@ -87,6 +87,16 @@ namespace THEngine
 		meshShader->SetMatrix("mvMatrix", mv);
 		meshShader->SetMatrix("normalMatrix", normalMatrix);
 		meshShader->SetMatrix("projection", renderState->GetProjectionMatrix());
+
+		if (this->shadowMap)
+		{
+			meshShader->SetTexture("shadowMap", this->shadowMap);
+		}
+		if (this->currentLight)
+		{
+			Matrix lightVP = (*this->lightView) * (*this->lightProjection);
+			meshShader->SetMatrix("lightViewProjection", lightVP);
+		}
 	}
 
 	void MeshRenderer::DrawMesh(Mesh* mesh)

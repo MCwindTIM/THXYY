@@ -46,6 +46,12 @@ namespace THEngine
 		}
 	}
 
+	void Camera::Render(Layer* layer)
+	{
+		auto renderState = Application::GetInstance()->GetRenderState();
+		TH_SET(renderState->camera, this);
+	}
+
 	/////////////////////////////////////////
 	Camera2D::Camera2D()
 	{
@@ -64,6 +70,8 @@ namespace THEngine
 
 	void Camera2D::Render(Layer* layer)
 	{
+		Camera::Render(layer);
+
 		auto app = Application::GetInstance();
 
 		SetupViewport(layer);
@@ -99,6 +107,8 @@ namespace THEngine
 
 	void Camera3D::Render(Layer* layer)
 	{
+		Camera::Render(layer);
+
 		auto app = Application::GetInstance();
 
 		SetupViewport(layer);

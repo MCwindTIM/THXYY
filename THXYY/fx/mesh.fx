@@ -7,8 +7,9 @@ struct Fog
 	float end;
 };
 
-matrix mvMatrix, normalMatrix, projection;
+matrix mvMatrix, normalMatrix, projection, lightViewProjection;
 texture tex;
+texture shadowMap;
 float4 argb;
 bool fogEnable;
 bool hasTexture;
@@ -24,6 +25,15 @@ sampler TextureSampler = sampler_state
  	AddressV = mirror;
 };
 
+sampler ShadowSampler = sampler_state
+{
+	texture = <shadowMap>;
+	magfilter = POINT;
+	minfilter = POINT;
+	mipfilter = POINT;
+	AddressU = clamp;
+	AddressV = clamp;
+};
 
 VertexOut VSFunc(VertexIn input)
 {
@@ -31,8 +41,9 @@ VertexOut VSFunc(VertexIn input)
 
 	output.sv_position.xyz = input.position;
 	output.sv_position.w = 1.0f;
+	output.posInShadowMap = mul(output.sv_position, lightViewProjection);
 	output.sv_position = mul(output.sv_position, mvMatrix);
-
+	
 	output.positionInView = output.sv_position;
 	output.sv_position = mul(output.sv_position, projection);
 
@@ -67,7 +78,28 @@ float4 getTexturedColor(in PixelIn input)
 	{
 		color *= tex2D(TextureSampler, input.texCoord.xy);
 	}
+	else
+	{
+		color *= material.diffuse;
+	}
 	return color;
+}
+
+float getShadowDensity(in PixelIn input)
+{
+	float2 shadowTex = input.posInShadowMap.xy;
+	shadowTex /= input.posInShadowMap.w;
+	shadowTex *= 0.5f;
+	shadowTex += 0.5f;
+	shadowTex.y = 1.0f - shadowTex.y;
+
+	float depth = input.posInShadowMap.z / input.posInShadowMap.w;
+
+	if (tex2D(ShadowSampler, shadowTex).r + 0.00005f >= depth)
+	{
+		return 0;
+	}
+	return 1;
 }
 
 float4 PSFunc(PixelIn input) : COLOR
@@ -97,6 +129,7 @@ float4 PSFunc_Directional(PixelIn input) : COLOR
 
 	color = getTexturedColor(input);
 	color = shadeWithDirectional(color, input);
+	color *= 1 - getShadowDensity(input);
 	fogShading(color, input);
 
 	return color;

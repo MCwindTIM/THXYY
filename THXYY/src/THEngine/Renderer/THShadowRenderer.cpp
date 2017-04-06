@@ -2,6 +2,7 @@
 #include <Platform\THApplication.h>
 #include <Asset\THAssetManager.h>
 #include <Core\THGame.h>
+#include <Util\THPicker.h>
 
 namespace THEngine
 {
@@ -73,19 +74,49 @@ namespace THEngine
 	void ShadowRenderer::SetupLightProjection()
 	{
 		auto app = Application::GetInstance();
-		Matrix projection;
-		Matrix view;
 		switch (light->GetType())
 		{
 		case Light::DIRECTIONAL:
-			Matrix::Ortho(&projection, 0, shadowMap->GetWidth(), 0, shadowMap->GetHeight(), 0, TH_MAX_Z);
-			app->SetProjectionMatrix(projection);
-			Matrix::Identity(&view);
-			app->SetViewMatrix(view);
+		{
+			DirectionalLight* dirLight = (DirectionalLight*)light;
+			ComputeFrustum();
+			Matrix::Ortho(&this->lightProjection, -2000, 8000, -2000, 2000, 0, TH_MAX_Z);
+			app->SetProjectionMatrix(this->lightProjection);
+
+			Vector3f up;
+			if (dirLight->GetDirection().x == 0 && dirLight->GetDirection().y == 0)
+			{
+				up.x = 0;
+				up.y = 1;
+				up.z = 0;
+			}
+			else
+			{
+				up.x = dirLight->GetDirection().y;
+				up.y = -dirLight->GetDirection().x;
+				up.z = 0;
+			}
+			Matrix::LookAt(&this->lightView, -1000 * dirLight->GetDirection(), Vector3f(0, 0, 0), up);
+			app->SetViewMatrix(this->lightView);
 			break;
+		}		
 		default:
 			throw std::runtime_error("Not implemented.");
 		}
+	}
+
+	void ShadowRenderer::ComputeFrustum()
+	{
+		auto app = Application::GetInstance();
+		auto camera = (Camera3D*)(app->GetRenderState()->GetCamera());
+		Picker picker(camera);
+		int width = camera->GetViewport().Width();
+		int height = camera->GetViewport().Height();
+
+		//Vector3f lb = picker.GenerateRay(0, 0);
+		//Vector3f lt = picker.GenerateRay(0, height);
+		//Vector3f rb = picker.GenerateRay(width, 0);
+		//Vector3f rt = picker.GenerateRay(width, height);
 	}
 
 	void ShadowRenderer::Begin()

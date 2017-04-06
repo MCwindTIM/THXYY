@@ -83,7 +83,7 @@ namespace THEngine
 		this->z = z;
 	}
 
-	float Vector3f::Norm()
+	float Vector3f::Norm() const
 	{
 		return sqrt(x*x + y*y + z*z);
 	}
@@ -116,7 +116,7 @@ namespace THEngine
 		return v * a;
 	}
 
-	Vector3f Vector3f::Normalize()
+	Vector3f Vector3f::Normalize() const
 	{
 		float norm = Norm();
 		ASSERT(Norm() != 0);
