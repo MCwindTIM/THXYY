@@ -6,11 +6,6 @@ struct VertexOut
 	float2 depth : TEXCOORD0;
 };
 
-struct PixelIn
-{
-	float2 depth : TEXCOORD1;
-};
-
 VertexOut VSFunc(float3 input : POSITION)
 {
 	VertexOut output;

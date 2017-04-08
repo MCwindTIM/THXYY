@@ -92,7 +92,7 @@ void Stage01::InitBackground()
 	background->SetSkyBox(sky);
 	background->EnableLighting(true);
 	background->SetAmbientLight(Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
-	background->AddLight(new DirectionalLight(Vector3f(1.8f, 1.8f, 1.8f), Vector3f(0.0f, -1.0f, 0.0f)));
+	background->AddLight(new DirectionalLight(Vector3f(1.8f, 1.8f, 1.8f), Vector3f(1.0f, -1.0f, 0.0f)));
 
 	InitBackgroundObjects();
 }

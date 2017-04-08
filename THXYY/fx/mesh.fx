@@ -1,6 +1,6 @@
 #include "lighting.fx"
 
-#define SHADOW_EPSILON 0.00005f
+#define SHADOW_EPSILON 0.0005f
 
 struct Fog
 {
@@ -24,8 +24,8 @@ sampler TextureSampler = sampler_state
 	magfilter = LINEAR;
 	minfilter = LINEAR;
 	mipfilter = LINEAR;
-	AddressU = mirror;
- 	AddressV = mirror;
+	AddressU = WRAP;
+ 	AddressV = WRAP;
 };
 
 sampler ShadowSampler = sampler_state
