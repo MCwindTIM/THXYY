@@ -23,7 +23,8 @@ struct VertexIn
 struct VertexOut
 {
 	float4 sv_position : POSITION;
-	float4 posInShadowMap : TEXCOORD3;
+	float4 position : TEXCOORD4;
+	float4 posInWorld : TEXCOORD3;
 	float4 positionInView : TEXCOORD2;
 	float3 normal : TEXCOORD1;
 	float2 texCoord : TEXCOORD0;
@@ -31,7 +32,8 @@ struct VertexOut
 
 struct PixelIn
 {
-	float4 posInShadowMap : TEXCOORD3;
+	float4 position : TEXCOORD4;
+	float4 posInWorld : TEXCOORD3;
 	float4 positionInView : TEXCOORD2;
 	float3 normal : TEXCOORD1;
 	float2 texCoord : TEXCOORD0;

@@ -1,4 +1,5 @@
 #include "THRenderPipeline.h"
+#include "THShadowRenderer.h"
 #include <Core/THGame.h>
 
 namespace THEngine
@@ -16,7 +17,8 @@ namespace THEngine
 		TH_SAFE_RELEASE(particle3DRenderer);
 		TH_SAFE_RELEASE(meshRenderer);
 		TH_SAFE_RELEASE(skyBoxRenderer);
-		TH_SAFE_RELEASE(shadowRenderer);
+		TH_SAFE_RELEASE(dirShadowRenderer);
+		TH_SAFE_RELEASE(dirLightRenderer);
 	}
 
 	RenderPipeline* RenderPipeline::Create()
@@ -64,6 +66,17 @@ namespace THEngine
 		}
 		pipeline->meshRenderer->Retain();
 
+		pipeline->dirLightRenderer = DirectionalLightRenderer::Create();
+		if (pipeline->dirLightRenderer == nullptr)
+		{
+			auto exception = exceptionManager->GetException();
+			auto newException = new Exception((String)"创建DirectionalLightRenderer失败。原因是：\n" + exception->GetInfo());
+			exceptionManager->PushException(newException);
+			delete pipeline;
+			return nullptr;
+		}
+		pipeline->dirLightRenderer->Retain();
+
 		pipeline->skyBoxRenderer = SkyBoxRenderer::Create();
 		if (pipeline->skyBoxRenderer == nullptr)
 		{
@@ -75,16 +88,17 @@ namespace THEngine
 		}
 		pipeline->skyBoxRenderer->Retain();
 
-		pipeline->shadowRenderer = ShadowRenderer::Create();
-		if (pipeline->shadowRenderer == nullptr)
+		pipeline->dirShadowRenderer = DirectionalLightShadowRenderer::Create();
+		if (pipeline->dirShadowRenderer == nullptr)
 		{
 			auto exception = exceptionManager->GetException();
-			auto newException = new Exception((String)"创建ShadowRenderer失败。原因是：\n" + exception->GetInfo());
+			auto newException = new Exception((String)"创建DirectionalLightShadowRenderer失败。原因是：\n" 
+				+ exception->GetInfo());
 			exceptionManager->PushException(newException);
 			delete pipeline;
 			return nullptr;
 		}
-		pipeline->shadowRenderer->Retain();
+		pipeline->dirShadowRenderer->Retain();
 
 		return pipeline;
 	}
@@ -129,13 +143,7 @@ namespace THEngine
 			while (iter->HasNext())
 			{
 				auto light = iter->Next();
-				RenderShadowMap(light);
-
-				this->meshRenderer->SetCurrentLight(light);
-				this->meshRenderer->SetShadowMap(this->shadowRenderer->GetShadowMap());
-				this->meshRenderer->SetLightProjection(this->shadowRenderer->GetLightProjection());
-				this->meshRenderer->SetLightView(this->shadowRenderer->GetLightView());
-				normalQueue->Render();	
+				RenderWithLight(light);
 			}
 			app->SetBlendMode(BlendMode::ALPHA_BLEND);
 		}
@@ -148,15 +156,35 @@ namespace THEngine
 
 	void RenderPipeline::RenderShadowMap(Light* light)
 	{
-		this->shadowRenderer->SetLight(light);
-
-		this->shadowRenderer->Begin();
-		auto iter = normalQueue->GetObjects()->GetIterator();
-		while (iter->HasNext())
+		ShadowRenderer* shadowRenderer = nullptr;
+		switch (light->GetType())
 		{
-			auto obj = iter->Next();
-			shadowRenderer->Render(obj);
+		case Light::DIRECTIONAL:
+			shadowRenderer = this->dirShadowRenderer;
+			this->dirShadowRenderer->SetLight((DirectionalLight*)light);
+			break;
+		default:
+			throw std::logic_error("not implemented");
 		}
-		this->shadowRenderer->End();
+
+		shadowRenderer->RenderShadow(normalQueue);
+	}
+
+	void RenderPipeline::RenderWithLight(Light* light)
+	{
+		RenderShadowMap(light);
+
+		switch (light->GetType())
+		{
+		case Light::DIRECTIONAL:
+			this->dirLightRenderer->SetCurrentLight(light);
+			this->dirLightRenderer->SetShadowMapNear(this->dirShadowRenderer->GetCascadedShadowMaps()->Get(0));
+			this->dirLightRenderer->SetShadowMapMid(this->dirShadowRenderer->GetCascadedShadowMaps()->Get(1));
+			this->dirLightRenderer->SetShadowMapFar(this->dirShadowRenderer->GetCascadedShadowMaps()->Get(2));
+			this->dirLightRenderer->RenderObjects(normalQueue);
+			break;
+		default:
+			throw std::logic_error("not implemented");
+		}
 	}
 }

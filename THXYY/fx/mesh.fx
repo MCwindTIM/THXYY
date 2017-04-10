@@ -1,6 +1,6 @@
 #include "lighting.fx"
 
-#define SHADOW_EPSILON 0.0005f
+#define SHADOW_EPSILON 0.0001f
 
 struct Fog
 {
@@ -9,14 +9,18 @@ struct Fog
 	float end;
 };
 
-matrix mvMatrix, normalMatrix, projection, lightViewProjection;
+matrix worldMatrix, mvMatrix, normalMatrix, projection;
+matrix lightVPNear, lightVPMid, lightVPFar;
 texture tex;
-texture shadowMap;
+texture shadowMapNear, shadowMapMid, shadowMapFar;
 float4 argb;
 bool fogEnable;
 bool hasTexture;
 int shadowMapWidth, shadowMapHeight;
+float znear, zfar, blendBand;
 Fog fog;
+
+float4 posInWorld : TEXCOORD3;
 
 sampler TextureSampler = sampler_state
 { 
@@ -28,14 +32,35 @@ sampler TextureSampler = sampler_state
  	AddressV = WRAP;
 };
 
-sampler ShadowSampler = sampler_state
+sampler ShadowSampler[3] =
 {
-	texture = <shadowMap>;
-	magfilter = POINT;
-	minfilter = POINT;
-	mipfilter = POINT;
-	AddressU = CLAMP;
-	AddressV = CLAMP;
+	sampler_state
+	{
+		texture = <shadowMapNear>;
+		magfilter = POINT;
+		minfilter = POINT;
+		mipfilter = POINT;
+		AddressU = CLAMP;
+		AddressV = CLAMP;
+	},
+	sampler_state
+	{
+		texture = <shadowMapMid>;
+		magfilter = POINT;
+		minfilter = POINT;
+		mipfilter = POINT;
+		AddressU = CLAMP;
+		AddressV = CLAMP;
+	},
+	sampler_state
+	{
+		texture = <shadowMapFar>;
+		magfilter = POINT;
+		minfilter = POINT;
+		mipfilter = POINT;
+		AddressU = CLAMP;
+		AddressV = CLAMP;
+	}
 };
 
 VertexOut VSFunc(VertexIn input)
@@ -44,11 +69,12 @@ VertexOut VSFunc(VertexIn input)
 
 	output.sv_position.xyz = input.position;
 	output.sv_position.w = 1.0f;
-	output.posInShadowMap = mul(output.sv_position, lightViewProjection);
+	output.posInWorld = mul(output.sv_position, worldMatrix);
 	output.sv_position = mul(output.sv_position, mvMatrix);
 	
 	output.positionInView = output.sv_position;
 	output.sv_position = mul(output.sv_position, projection);
+	output.position = output.sv_position;
 
 	output.texCoord = input.texCoord;
 
@@ -88,32 +114,76 @@ float4 getTexturedColor(in PixelIn input)
 	return color;
 }
 
-float getLightDensity(in PixelIn input)
+float getPCF(in int cascadedLevel, in float4 posInShadowMap, in float shadowBias)
 {
-	float2 shadowTex = 0.5 * input.posInShadowMap.xy / input.posInShadowMap.w + float2(0.5, 0.5);
+	matrix lightVP[3] = { lightVPNear, lightVPMid, lightVPFar };
+
+	float2 shadowTex = 0.5 * posInShadowMap.xy / posInShadowMap.w + float2(0.5, 0.5);
 	shadowTex.y = 1.0f - shadowTex.y;
 
-	float depth = input.posInShadowMap.z / input.posInShadowMap.w;
+	float depth = posInShadowMap.z / posInShadowMap.w;
 
 	float2 texelPos;
 	texelPos.x = shadowMapWidth * shadowTex.x;
 	texelPos.y = shadowMapHeight * shadowTex.y;
-        
+
 	float2 lerps = frac(texelPos);
 	float dx = 1.0 / shadowMapWidth;
 	float dy = 1.0 / shadowMapHeight;
 
 	float sourcevals[4];
-	sourcevals[0] = (tex2D(ShadowSampler, shadowTex).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
-	sourcevals[1] = (tex2D(ShadowSampler, shadowTex + float2(dx, 0)).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
-	sourcevals[2] = (tex2D(ShadowSampler, shadowTex + float2(0, dy)).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
-	sourcevals[3] = (tex2D(ShadowSampler, shadowTex + float2(dx, 1.0 / shadowMapHeight)).r + SHADOW_EPSILON < depth) ? 0.0f : 1.0f;
-
-	float amount = lerp(lerp(sourcevals[0], sourcevals[1], lerps.x),
+	int i = cascadedLevel;
+	sourcevals[0] = tex2D(ShadowSampler[i], shadowTex).r + shadowBias < depth ? 0.0f : 1.0f;
+	sourcevals[1] = tex2D(ShadowSampler[i], shadowTex + float2(dx, 0)).r + shadowBias < depth ? 0.0f : 1.0f;
+	sourcevals[2] = tex2D(ShadowSampler[i], shadowTex + float2(0, dy)).r + shadowBias < depth ? 0.0f : 1.0f;
+	sourcevals[3] = tex2D(ShadowSampler[i], shadowTex + float2(dx, 1.0 / shadowMapHeight)).r + shadowBias < depth ? 0.0f : 1.0f;
+	
+	float amount = saturate(lerp(lerp(sourcevals[0], sourcevals[1], lerps.x),
 		lerp(sourcevals[2], sourcevals[3], lerps.x),
-		lerps.y);
+		lerps.y));
 
 	return amount;
+}
+
+float getLightDensity(in PixelIn input)
+{
+	float4 posInShadowMap;
+
+	//compute bias
+	float3 normal = normalize(input.normal);
+	float3 lightDir = normalize(directionalLight.direction);
+	float shadowBias = max(0.005 * (1.0 - dot(normal, lightDir)), SHADOW_EPSILON);
+
+	matrix lightVP[3] = { lightVPNear, lightVPMid, lightVPFar };
+	float zvalue = input.positionInView.z / input.positionInView.w;
+	float dz = (zfar - znear) / 3;
+	for (int i = 0; i < 3; i++)
+	{
+		float end = znear + dz * (i + 1);
+		if (zvalue <= end)
+		{
+			posInShadowMap = mul(input.posInWorld, lightVP[i]);
+			float margin1 = end - blendBand;
+			float margin2 = end - dz + blendBand;
+			if (zvalue >= margin1 && i < 2)
+			{
+				return lerp(getPCF(i, posInShadowMap, shadowBias),
+					getPCF(i + 1, posInShadowMap, shadowBias),
+					lerp(1, 0.5, (zvalue - margin1) / blendBand));
+			}
+			else if (zvalue <= margin2 && i > 0)
+			{
+				return lerp(getPCF(i, posInShadowMap, shadowBias),
+					getPCF(i - 1, posInShadowMap, shadowBias),
+					lerp(1, 0.5, (margin2 - zvalue) / blendBand));
+			}
+			else
+			{
+				return getPCF(i, posInShadowMap, shadowBias);
+			}
+		}
+	}
+	return getPCF(2, posInShadowMap, shadowBias);
 }
 
 float4 PSFunc(PixelIn input) : COLOR

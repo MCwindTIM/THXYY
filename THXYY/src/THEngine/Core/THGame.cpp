@@ -1,4 +1,5 @@
 #include "THGame.h"
+#include <Asset\THShaderStock.h>
 
 using namespace THEngine;
 
@@ -55,9 +56,35 @@ bool Game::CreateGame(int width, int height, bool fullScreen, const String& titl
 	}
 	app->Retain();
 
-	assetManager = AssetManager::Create(app);
+	assetManager = AssetManager::Create();
+	if (assetManager == nullptr)
+	{
+		auto exception = exceptionManager->GetException();
+		auto newException = new Exception((String)"创建AssetManager失败。原因是：\n" + exception->GetInfo());
+		exceptionManager->PushException(newException);
+		return false;
+	}
+	assetManager->Retain();
+
+	shaderStock = ShaderStock::Create();
+	if (shaderStock == nullptr)
+	{
+		auto exception = exceptionManager->GetException();
+		auto newException = new Exception((String)"创建AssetManager失败。原因是：\n" + exception->GetInfo());
+		exceptionManager->PushException(newException);
+		return false;
+	}
+	shaderStock->Retain();
 
 	eventSystem = EventSystem::Create();
+	if (eventSystem == nullptr)
+	{
+		auto exception = exceptionManager->GetException();
+		auto newException = new Exception((String)"创建EventSystem失败。原因是：\n" + exception->GetInfo());
+		exceptionManager->PushException(newException);
+		return false;
+	}
+	eventSystem->Retain();
 
 	pipeline = RenderPipeline::Create();
 	if (pipeline == nullptr)
@@ -77,6 +104,7 @@ bool Game::CreateGame(int width, int height, bool fullScreen, const String& titl
 		exceptionManager->PushException(newException);
 		return false;
 	}
+	defaultFont->Retain();
 
 	input = Input::Create(app);
 	if (input == nullptr)
@@ -249,6 +277,7 @@ void Game::Shutdown()
 	TH_SAFE_RELEASE(defaultFont);
 	
 	TH_SAFE_RELEASE(input);
+	TH_SAFE_RELEASE(shaderStock);
 	TH_SAFE_RELEASE(assetManager);
 	TH_SAFE_RELEASE(audio);
 	TH_SAFE_RELEASE(app);

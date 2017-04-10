@@ -125,6 +125,7 @@ void Stage01::SetupCamera()
 	camera->SetUp(Vector3f(0, 1, 0));
 	camera->SetLookAt(Vector3f(0, 500, 10000));
 	camera->SetFov(65.0f);
+	camera->SetZFar(9000);
 	engine->SetBackgroundCamera(camera);
 }
 

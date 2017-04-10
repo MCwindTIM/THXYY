@@ -13,8 +13,6 @@ namespace THEngine
 	class AssetManager : public Object
 	{
 	private:
-		IDirect3DDevice9* device;
-
 		ArrayList<Shader*> shaderList;
 		ArrayList<TextureImpl*> textureList;
 		ArrayList<CubeMapImpl*> cubeMapList;
@@ -27,7 +25,7 @@ namespace THEngine
 	public:
 		static AssetManager* instance;
 
-		static AssetManager* Create(Application* app);
+		static AssetManager* Create();
 
 		static AssetManager* GetInstance();
 

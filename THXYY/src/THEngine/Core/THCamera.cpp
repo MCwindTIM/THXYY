@@ -35,15 +35,8 @@ namespace THEngine
 	void Camera::SetupViewport(Layer* layer)
 	{
 		auto app = Application::GetInstance();
-		if (this->viewport.left == 0 && this->viewport.right == 0 && this->viewport.top == 0 && this->viewport.bottom == 0)
-		{
-			app->SetViewport(layer->GetLeft(), layer->GetTop(), layer->GetWidth(), layer->GetHeight());
-		}
-		else
-		{
-			app->SetViewport(layer->GetLeft() + this->viewport.left, layer->GetTop() + this->viewport.top,
-				this->viewport.Width(), this->viewport.Height());
-		}
+		app->SetViewport(layer->GetLeft() + this->viewport.left, layer->GetTop() + this->viewport.top,
+			this->viewport.Width(), this->viewport.Height());
 	}
 
 	void Camera::Render(Layer* layer)
@@ -55,12 +48,12 @@ namespace THEngine
 	/////////////////////////////////////////
 	Camera2D::Camera2D()
 	{
-
+		this->znear = 0;
 	}
 
 	Camera2D::Camera2D(const String& name) : Camera(name)
 	{
-
+		this->znear = 0;
 	}
 
 	Camera2D::~Camera2D()
@@ -78,7 +71,7 @@ namespace THEngine
 
 		Vector3f pos = GetPosition();
 		app->SetOrtho(pos.x - GetWidth() / 2, pos.y - GetHeight() / 2, 
-			GetWidth(), GetHeight(), 0, TH_MAX_Z);
+			GetWidth(), GetHeight(), this->znear, this->zfar);
 
 		Matrix matrix;
 		Matrix::Identity(&matrix);
@@ -119,14 +112,9 @@ namespace THEngine
 		}
 
 		Matrix matrix;
-		if (this->viewport.left == 0 && this->viewport.right == 0 && this->viewport.top == 0 && this->viewport.bottom == 0)
-		{
-			Matrix::Perspective(&matrix, this->fov, (float)layer->GetWidth () / layer->GetHeight(), 0.1f, 10000.0f);
-		}
-		else
-		{
-			Matrix::Perspective(&matrix, this->fov, (float)this->viewport.Width() / this->viewport.Height(), 0.1f, 10000.0f);
-		}
+		Matrix::Perspective(&matrix, this->fov, (float)this->viewport.Width() / this->viewport.Height(),
+			this->znear, this->zfar);
+
 		app->SetProjectionMatrix(matrix);
 
 		Matrix::LookAt(&matrix, Vector3f(this->position.x, this->position.y,  this->position.z),

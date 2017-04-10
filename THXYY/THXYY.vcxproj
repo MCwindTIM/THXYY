@@ -140,6 +140,7 @@
     <ClCompile Include="src\THEngine\Asset\THAssetManager.cpp" />
     <ClCompile Include="src\THEngine\Asset\THAssetImpl.cpp" />
     <ClCompile Include="src\THEngine\Asset\THCubeMap.cpp" />
+    <ClCompile Include="src\THEngine\Asset\THFloatTexture.cpp" />
     <ClCompile Include="src\THEngine\Asset\THImage.cpp" />
     <ClCompile Include="src\THEngine\Asset\THRenderTexture.cpp" />
     <ClCompile Include="src\THEngine\Asset\THShader.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="src\THEngine\Math\THQuaternion.cpp" />
     <ClCompile Include="src\THEngine\Math\THVector.cpp" />
     <ClCompile Include="src\THEngine\Platform\External\CWaveFile.cpp" />
+    <ClCompile Include="src\THEngine\Platform\THSurface.cpp" />
     <ClCompile Include="src\THEngine\Platform\THAudio.cpp" />
     <ClCompile Include="src\THEngine\Platform\THCoreDumper.cpp" />
     <ClCompile Include="src\THEngine\Platform\THInput.cpp" />
@@ -182,6 +184,7 @@
     <ClCompile Include="src\THEngine\Renderer\THParticle3DRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THRenderPipleline.cpp" />
+    <ClCompile Include="src\THEngine\Renderer\THShadowMap.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THShadowRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THSkyBoxRenderer.cpp" />
     <ClCompile Include="src\THEngine\Renderer\THSpriteRenderer.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="src\THEngine\UI\THEventSystem.cpp" />
     <ClCompile Include="src\THEngine\UI\THMenu.cpp" />
     <ClCompile Include="src\THEngine\UI\THMenuItem.cpp" />
+    <ClCompile Include="src\THEngine\Util\THPicker.cpp" />
     <ClCompile Include="src\THXYY.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +248,7 @@
     <ClInclude Include="src\THEngine\Asset\THAssetImpl.h" />
     <ClInclude Include="src\THEngine\Asset\THAssetManager.h" />
     <ClInclude Include="src\THEngine\Asset\THCubeMap.h" />
+    <ClInclude Include="src\THEngine\Asset\THFloatTexture.h" />
     <ClInclude Include="src\THEngine\Asset\THImage.h" />
     <ClInclude Include="src\THEngine\Asset\THRenderTexture.h" />
     <ClInclude Include="src\THEngine\Asset\THShader.h" />
@@ -280,6 +285,7 @@
     <ClInclude Include="src\THEngine\Math\THQuaternion.h" />
     <ClInclude Include="src\THEngine\Math\THVector.h" />
     <ClInclude Include="src\THEngine\Platform\External\CWaveFile.h" />
+    <ClInclude Include="src\THEngine\Platform\THSurface.h" />
     <ClInclude Include="src\THEngine\Platform\THAudio.h" />
     <ClInclude Include="src\THEngine\Platform\THCoreDumper.h" />
     <ClInclude Include="src\THEngine\Platform\THInput.h" />
@@ -291,6 +297,7 @@
     <ClInclude Include="src\THEngine\Renderer\THRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderPipeline.h" />
     <ClInclude Include="src\THEngine\Renderer\THRenderQueue.h" />
+    <ClInclude Include="src\THEngine\Renderer\THShadowMap.h" />
     <ClInclude Include="src\THEngine\Renderer\THShadowRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THSkyBoxRenderer.h" />
     <ClInclude Include="src\THEngine\Renderer\THSpriteRenderer.h" />
@@ -304,6 +311,7 @@
     <ClInclude Include="src\THEngine\UI\THEventSystem.h" />
     <ClInclude Include="src\THEngine\UI\THMenu.h" />
     <ClInclude Include="src\THEngine\UI\THMenuItem.h" />
+    <ClInclude Include="src\THEngine\Util\THPicker.h" />
     <ClInclude Include="src\THXYY.h" />
   </ItemGroup>
   <ItemGroup>

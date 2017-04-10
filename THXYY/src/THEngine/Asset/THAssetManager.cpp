@@ -17,13 +17,9 @@ namespace THEngine
 		return instance;
 	}
 
-	AssetManager* AssetManager::Create(Application* app)
+	AssetManager* AssetManager::Create()
 	{
 		AssetManager* assetManager = new AssetManager();
-
-		assetManager->device = app->device;
-
-		assetManager->Retain();
 
 		return assetManager;
 	}
@@ -32,6 +28,7 @@ namespace THEngine
 	Shader* AssetManager::CreateShaderFromFile(String filePath)
 	{
 		Shader* shader = new Shader();
+		auto device = Application::GetInstance()->GetDevice();
 
 		ID3DXBuffer *error;
 		if (FAILED(D3DXCreateEffectFromFile(device, filePath.GetBuffer(), NULL, NULL,
@@ -46,6 +43,7 @@ namespace THEngine
 			{
 				THMessageBox((String)"无法打开文件:" + filePath);
 			}
+			delete shader;
 			return nullptr;
 		}
 
@@ -90,6 +88,8 @@ namespace THEngine
 	{
 		auto exceptionManager = ExceptionManager::GetInstance();
 		TextureImpl* texImpl = new TextureImpl();
+
+		auto device = Application::GetInstance()->GetDevice();
 
 		Image* image = Image::Load(filePath);
 		if (image == nullptr)
@@ -148,6 +148,7 @@ namespace THEngine
 	{
 		CubeMapImpl* cubeMapImpl = new CubeMapImpl();
 		auto exceptionManager = ExceptionManager::GetInstance();
+		auto device = Application::GetInstance()->GetDevice();
 
 		Image* frontImage = Image::Load(front);
 		Image* backImage = Image::Load(back);
@@ -205,7 +206,7 @@ namespace THEngine
 			//TODO : Scale the image.
 		}
 
-		if (FAILED(D3DXCreateCubeTexture(this->device, imgWidth, 0, D3DUSAGE_AUTOGENMIPMAP, D3DFMT_A8R8G8B8,
+		if (FAILED(D3DXCreateCubeTexture(device, imgWidth, 0, D3DUSAGE_AUTOGENMIPMAP, D3DFMT_A8R8G8B8,
 			D3DPOOL_MANAGED, &cubeMapImpl->cubeTexture)))
 		{
 			exceptionManager->PushException(new Exception(
@@ -253,6 +254,7 @@ namespace THEngine
 	RenderTexture* AssetManager::CreateRenderTexture(int width, int height)
 	{
 		TextureImpl* texImpl = new TextureImpl();
+		auto device = Application::GetInstance()->GetDevice();
 		
 		texImpl->width = width;
 		texImpl->height = height;
@@ -269,6 +271,7 @@ namespace THEngine
 	FloatTexture* AssetManager::CreateFloatTexture(int width, int height)
 	{
 		TextureImpl* texImpl = new TextureImpl();
+		auto device = Application::GetInstance()->GetDevice();
 
 		texImpl->width = width;
 		texImpl->height = height;
@@ -311,8 +314,6 @@ namespace THEngine
 
 	void AssetManager::OnResetDevice()
 	{
-		device = Application::GetInstance()->GetDevice();
-
 		auto iter = textureList.GetIterator();
 		while (iter->HasNext())
 		{

@@ -11,6 +11,8 @@
 
 namespace THEngine
 {
+	class DirectionalLightShadowRenderer;
+
 	class RenderPipeline : public Object
 	{
 	private:
@@ -18,7 +20,8 @@ namespace THEngine
 		Particle3DRenderer* particle3DRenderer = nullptr;
 		MeshRenderer* meshRenderer = nullptr;
 		SkyBoxRenderer* skyBoxRenderer = nullptr;
-		ShadowRenderer* shadowRenderer = nullptr;
+		DirectionalLightShadowRenderer* dirShadowRenderer = nullptr;
+		DirectionalLightRenderer* dirLightRenderer = nullptr;
 
 		SpriteRenderQueue* spriteQueue = nullptr;
 		NormalRenderQueue* normalQueue = nullptr;
@@ -27,6 +30,7 @@ namespace THEngine
 		RenderPipeline();
 
 		void Render3D();
+		void RenderWithLight(Light* light);
 		void RenderShadowMap(Light* light);
 
 	public:

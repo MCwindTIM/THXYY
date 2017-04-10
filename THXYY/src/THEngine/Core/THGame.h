@@ -22,6 +22,7 @@
 namespace THEngine
 {
 	class Font;
+	class ShaderStock;
 
 	class Game : public EngineObject
 	{
@@ -49,6 +50,7 @@ namespace THEngine
 		RenderPipeline* pipeline = nullptr;
 
 		AssetManager* assetManager;
+		ShaderStock* shaderStock;
 
 		EventSystem* eventSystem;
 

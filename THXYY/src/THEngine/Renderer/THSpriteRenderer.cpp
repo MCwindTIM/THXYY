@@ -1,5 +1,6 @@
 #include "THSpriteRenderer.h"
-#include "../Core/THGame.h"
+#include <Core\THGame.h>
+#include <Asset\THShaderStock.h>
 
 using namespace THEngine;
 
@@ -10,7 +11,6 @@ SpriteRenderer::SpriteRenderer()
 
 SpriteRenderer::~SpriteRenderer()
 {
-	Game::GetInstance()->GetAssetManager()->DestroyShader(spriteShader);
 	TH_SAFE_RELEASE(vb);
 }
 
@@ -20,17 +20,6 @@ SpriteRenderer* SpriteRenderer::Create()
 	SpriteRenderer* renderer = new SpriteRenderer();
 	if (renderer)
 	{
-		renderer->spriteShader = Game::GetInstance()->GetAssetManager()->CreateShaderFromFile("fx/sprite.fx");
-		if (renderer->spriteShader)
-		{
-			renderer->spriteShader->SetTechnique("Sprite");
-		}
-		else
-		{
-			delete renderer;
-			return nullptr;
-		}
-
 		renderer->device = app->GetDevice();
 		renderer->device->CreateVertexBuffer(4 * sizeof(SpriteVertex), D3DUSAGE_DYNAMIC,
 			SPRITE_FVF, D3DPOOL_DEFAULT, &renderer->vb, NULL);
@@ -51,6 +40,7 @@ void SpriteRenderer::Render(GameObject* obj)
 
 	auto game = Game::GetInstance();
 	auto app = Application::GetInstance();
+	auto spriteShader = ShaderStock::GetInstance()->GetSpriteShader();
 
 	const int texWidth = sprite->texture->GetWidth();
 	const int texHeight = sprite->texture->GetHeight();

@@ -33,6 +33,17 @@ namespace THEngine
 		rootNode.AddChild(obj);
 	}
 
+	void Layer::AddCamera(Camera* camera)
+	{
+		cameraList.Add(camera);
+		if (camera->viewport.left == 0 && camera->viewport.right == 0
+			&& camera->viewport.top == 0 && camera->viewport.bottom == 0)
+		{
+			camera->viewport.right = this->width;
+			camera->viewport.bottom = this->height;
+		}
+	}
+
 	Camera* Layer::GetCameraByName(const String& name)
 	{
 		auto iter = cameraList.GetIterator();
@@ -78,6 +89,12 @@ namespace THEngine
 			{
 				iter->Remove();
 				iter->AddAfter(camera);
+				if (camera->viewport.left == 0 && camera->viewport.right == 0
+					&& camera->viewport.top == 0 && camera->viewport.bottom == 0)
+				{
+					camera->viewport.right = this->width;
+					camera->viewport.bottom = this->height;
+				}
 				return;
 			}
 		}
@@ -94,6 +111,12 @@ namespace THEngine
 			{
 				iter->Remove();
 				iter->AddAfter(camera);
+				if (camera->viewport.left == 0 && camera->viewport.right == 0
+					&& camera->viewport.top == 0 && camera->viewport.bottom == 0)
+				{
+					camera->viewport.right = this->width;
+					camera->viewport.bottom = this->height;
+				}
 				return;
 			}
 			i++;

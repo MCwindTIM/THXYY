@@ -166,6 +166,12 @@
     <Filter Include="源文件\STGCore\Item">
       <UniqueIdentifier>{836df9b3-3a1b-439f-9ec9-8d9a0c2c9bb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\THEngine\Util">
+      <UniqueIdentifier>{df9f67cf-53fd-4d55-a117-8bf84a4fdfb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\THEngine\Util">
+      <UniqueIdentifier>{be491496-987d-4d52-840e-393964af0673}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -472,6 +478,18 @@
       <Filter>源文件\THEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\THEngine\Renderer\THRenderPipleline.cpp">
+      <Filter>源文件\THEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Asset\THFloatTexture.cpp">
+      <Filter>源文件\THEngine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Platform\THSurface.cpp">
+      <Filter>源文件\THEngine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Util\THPicker.cpp">
+      <Filter>源文件\THEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THEngine\Renderer\THShadowMap.cpp">
       <Filter>源文件\THEngine\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -798,6 +816,18 @@
       <Filter>头文件\THEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\THEngine\Renderer\THRenderPipeline.h">
+      <Filter>头文件\THEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Asset\THFloatTexture.h">
+      <Filter>头文件\THEngine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Platform\THSurface.h">
+      <Filter>头文件\THEngine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Util\THPicker.h">
+      <Filter>头文件\THEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Renderer\THShadowMap.h">
       <Filter>头文件\THEngine\Renderer</Filter>
     </ClInclude>
   </ItemGroup>

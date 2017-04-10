@@ -18,6 +18,8 @@ namespace THEngine
 		String name = "";
 		RenderTexture* renderTexture = nullptr;
 		RectInt viewport = RectInt(0, 0, 0, 0);
+		float znear = 1;
+		float zfar = TH_MAX_Z;
 
 	protected:
 		void SetupViewport(Layer* layer);
@@ -34,7 +36,6 @@ namespace THEngine
 		virtual void Draw() override;
 
 		inline void SetName(const String& name) { this->name = name; }
-
 		inline String& GetName() { return name; }
 
 		inline void SetRenderTexture(RenderTexture* renderTexture)
@@ -43,12 +44,19 @@ namespace THEngine
 		}
 
 		inline void SetViewport(const RectInt& rect) { this->viewport = rect; }
-
 		inline const RectInt& GetViewport() const { return this->viewport; }
+
+		inline void SetZNear(float znear) { this->znear = znear; }
+		inline float GetZNear() const { return this->znear; }
+
+		inline void SetZFar(float zfar) { this->zfar = zfar; }
+		inline float GetZFar() const { return this->zfar; }
 
 		virtual bool Is2D() = 0;
 
 		virtual void Render(Layer* layer);
+
+		friend class Layer;
 	};
 
 	class Camera2D : public Camera

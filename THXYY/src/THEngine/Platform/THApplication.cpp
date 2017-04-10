@@ -457,6 +457,7 @@ namespace THEngine
 
 	void Application::SetBlendMode(BlendMode blendMode)
 	{
+		this->renderState.blendMode = blendMode;
 		switch (blendMode)
 		{
 		case BlendMode::ALPHA_BLEND:

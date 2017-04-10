@@ -1,6 +1,7 @@
 #include "THParticle3DRenderer.h"
-#include "../Core/THParticle3D.h"
-#include "../Core/THGame.h"
+#include <Core\THParticle3D.h>
+#include <Core\THGame.h>
+#include <Asset\THShaderStock.h>
 
 using namespace THEngine;
 
@@ -19,17 +20,6 @@ Particle3DRenderer* Particle3DRenderer::Create()
 	Particle3DRenderer* renderer = new Particle3DRenderer();
 	if (renderer)
 	{
-		renderer->spriteShader = Game::GetInstance()->GetAssetManager()->CreateShaderFromFile("fx/sprite.fx");
-		if (renderer->spriteShader)
-		{
-			renderer->spriteShader->SetTechnique("Sprite");
-		}
-		else
-		{
-			delete renderer;
-			return nullptr;
-		}
-
 		auto app = Application::GetInstance();
 
 		renderer->device = app->GetDevice();
@@ -48,7 +38,8 @@ Particle3DRenderer* Particle3DRenderer::Create()
 void Particle3DRenderer::Render(GameObject* obj)
 {
 	Particle3D* particle = (Particle3D*)obj;
-
+	
+	auto spriteShader = ShaderStock::GetInstance()->GetSpriteShader();
 	auto app = Application::GetInstance();
 
 	const int texWidth = particle->texture->GetWidth();

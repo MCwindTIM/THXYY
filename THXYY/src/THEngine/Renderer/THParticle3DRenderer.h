@@ -9,7 +9,6 @@ namespace THEngine
 	{
 	protected:
 		IDirect3DVertexBuffer9* vb;
-		Shader* spriteShader;
 
 		struct ParticleVertex
 		{

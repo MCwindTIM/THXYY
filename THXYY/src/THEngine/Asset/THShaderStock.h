@@ -11,6 +11,9 @@ namespace THEngine
 		static ShaderStock* instance;
 
 		Shader* skyBoxShader = nullptr;
+		Shader* shadowShader = nullptr;
+		Shader* meshShader = nullptr;
+		Shader* spriteShader = nullptr;
 
 	private:
 		ShaderStock();
@@ -19,8 +22,12 @@ namespace THEngine
 		virtual ~ShaderStock();
 
 		static ShaderStock* GetInstance();
+		static ShaderStock* Create();
 
 		inline Shader* GetSkyBoxShader() const { return skyBoxShader; }
+		inline Shader* GetShadowShader() const { return shadowShader; }
+		inline Shader* GetSpriteShader() const { return spriteShader; }
+		inline Shader* GetMeshShader() const { return meshShader; }
 	};
 }
 

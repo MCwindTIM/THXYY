@@ -1,6 +1,7 @@
 #include "THSkyBoxRenderer.h"
 #include <Core\THLayer.h>
 #include <Core\THGame.h>
+#include <Asset\THShaderStock.h>
 
 namespace THEngine
 {
@@ -11,7 +12,6 @@ namespace THEngine
 
 	SkyBoxRenderer::~SkyBoxRenderer()
 	{
-		Game::GetInstance()->GetAssetManager()->DestroyShader(skyBoxShader);
 		TH_SAFE_RELEASE(vb);
 	}
 
@@ -20,17 +20,6 @@ namespace THEngine
 		SkyBoxRenderer* renderer = new SkyBoxRenderer();
 		if (renderer)
 		{
-			renderer->skyBoxShader = Game::GetInstance()->GetAssetManager()->CreateShaderFromFile("fx/skybox.fx");
-			if (renderer->skyBoxShader)
-			{
-				renderer->skyBoxShader->SetTechnique("SkyBox");
-			}
-			else
-			{
-				delete renderer;
-				return nullptr;
-			}
-
 			auto device = Application::GetInstance()->GetDevice();
 			device->CreateVertexBuffer(4 * sizeof(SkyBoxVertex), D3DUSAGE_DYNAMIC,
 				SKYBOX_FVF, D3DPOOL_DEFAULT, &renderer->vb, NULL);
@@ -48,6 +37,7 @@ namespace THEngine
 	{
 		CubeMap* skyBox = layer->GetSkyBox();
 
+		auto skyBoxShader = ShaderStock::GetInstance()->GetSkyBoxShader();
 		auto app = Application::GetInstance();
 		auto renderState = app->GetRenderState();
 		auto& viewport = renderState->GetViewport();

@@ -23,7 +23,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	app_count++;
 
 	_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(502);
+	//_CrtSetBreakAlloc(5396);
 
 	THXYY game;
 	if (game.CreateGame(640, 480, false) == false)
@@ -31,6 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		String error = ExceptionManager::GetInstance()->GetException()->GetInfo();
 		String message = (String)"糟糕，游戏好像被隙间了。原因是：\n" + error;
 		THMessageBox(message);
+		game.Shutdown();
 		return 0;
 	}
 	return game.Run();

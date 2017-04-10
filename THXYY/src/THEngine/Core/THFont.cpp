@@ -52,7 +52,6 @@ Font* Font::CreateFontFromFile(String imagePath, String txtPath)
 		font->charset.insert(std::pair<char,Rect>(c,rc));
 	}
 	in.close();
-	font->Retain();
 	return font;
 }
 

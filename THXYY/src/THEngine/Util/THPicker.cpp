@@ -15,7 +15,7 @@ namespace THEngine
 		this->height = camera->GetViewport().Height();
 		this->front = (camera->GetLookAt() - camera->GetPosition()).Normalize();
 		this->up = camera->GetUp().Normalize();
-		this->right = Vector3f::Cross(up, front);
+		this->right = Vector3f::Cross(front, up);
 		this->fovScale = tan(ToRad(camera->GetFov() * 0.5)) * 2;
 		this->whFactor = this->width * 1.0f / this->height;
 	}

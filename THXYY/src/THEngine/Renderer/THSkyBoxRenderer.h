@@ -9,8 +9,6 @@ namespace THEngine
 	class SkyBoxRenderer : public Object
 	{
 	private:
-		Shader* skyBoxShader = nullptr;
-
 		struct SkyBoxVertex
 		{
 			float x, y, z;

@@ -56,7 +56,7 @@ namespace THEngine
 		Camera* GetCameraByIndex(int index);
 		Camera* GetFirstCamera();
 
-		inline void AddCamera(Camera* camera) { cameraList.Add(camera); }
+		void AddCamera(Camera* camera);
 
 		void SetCameraByName(Camera* camera, const String& name);
 		void SetCameraByIndex(Camera* camera, int index);

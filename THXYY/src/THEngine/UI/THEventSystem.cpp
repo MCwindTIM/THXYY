@@ -19,7 +19,6 @@ EventSystem* EventSystem::Create()
 	if (instance == nullptr)
 	{
 		instance = new EventSystem();
-		instance->Retain();
 		return instance;
 	}
 	return nullptr;

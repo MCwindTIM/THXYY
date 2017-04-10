@@ -39,6 +39,8 @@ namespace THEngine
 
 		Viewport viewport;
 
+		BlendMode blendMode;
+
 		Shader* shader = nullptr;
 
 		RenderTexture* renderTarget = nullptr;
@@ -72,6 +74,8 @@ namespace THEngine
 		inline Surface* GetDepthBuffer() const { return this->depthBuffer; }
 
 		inline Camera* GetCamera() const { return this->camera; }
+
+		inline BlendMode GetBlendMode() const { return this->blendMode; }
 
 		inline bool IsDepthTestEnabled() const { return this->isDepthTestEnabled; }
 

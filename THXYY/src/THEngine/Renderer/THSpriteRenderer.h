@@ -31,8 +31,6 @@ namespace THEngine
 			Texture* texture;
 		};*/
 
-
-		Shader* spriteShader;
 		IDirect3DVertexBuffer9* vb;
 		//SpriteBatch spriteBatch;
 

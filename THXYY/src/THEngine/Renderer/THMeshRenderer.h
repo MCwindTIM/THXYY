@@ -1,5 +1,5 @@
-#ifndef THMESHRENDERER_H
-#define THMESHRENDERER_H
+#ifndef TH_MESH_RENDERER_H
+#define TH_MESH_RENDERER_H
 
 #include "../Core/3D/THMesh.h"
 #include "THRenderer.h"
@@ -8,23 +8,19 @@
 namespace THEngine
 {
 	class FloatTexture;
+	class ShadowMap;
 
 	class MeshRenderer : public Renderer
 	{
 	protected:
-		Shader* meshShader = nullptr;
-
 		IDirect3DVertexBuffer9* vertexBuffer = nullptr;
 		IDirect3DIndexBuffer9* indexBuffer = nullptr;
 
 		Light* currentLight = nullptr;
-		FloatTexture* shadowMap = nullptr;
-		const Matrix* lightProjection = nullptr;
-		const Matrix* lightView = nullptr;
 
 		bool isRenderingAmbient = false;
 
-	private:
+	protected:
 		void SetupRenderState();
 
 		void SetupShaderParams(Mesh* mesh);
@@ -33,7 +29,7 @@ namespace THEngine
 
 		void ShadeWithAmbient(Mesh* mesh, const Vector4f& ambient);
 
-		void ShadeWithLight(Mesh* mesh, Light* light);
+		virtual void ShadeWithLight(Mesh* mesh);
 
 		void DrawMesh(Mesh* mesh);
 
@@ -43,13 +39,36 @@ namespace THEngine
 
 		virtual void Render(GameObject* object) override;
 
+		void RenderObjects(RenderQueue* renderQueue);
+
 		inline void SetRenderAmbient(bool renderAmbient) { this->isRenderingAmbient = renderAmbient; }
 		inline void SetCurrentLight(Light* light) { this->currentLight = light; }
-		inline void SetShadowMap(FloatTexture* shadowMap) { this->shadowMap = shadowMap; }
-		inline void SetLightProjection(const Matrix& matrix) { this->lightProjection = &matrix; }
-		inline void SetLightView(const Matrix& matrix) { this->lightView = &matrix; }
+
 
 		static MeshRenderer* Create();
+	};
+
+	//////////////////////////////////////////////
+	class DirectionalLightRenderer : public MeshRenderer
+	{
+	private:
+		ShadowMap* shadowMapNear = nullptr;
+		ShadowMap* shadowMapMid = nullptr;
+		ShadowMap* shadowMapFar = nullptr;
+
+	private:
+		DirectionalLightRenderer();
+
+	public:
+		virtual ~DirectionalLightRenderer();
+
+		static DirectionalLightRenderer* Create();
+
+		virtual void ShadeWithLight(Mesh* mesh) override;
+
+		inline void SetShadowMapNear(ShadowMap* shadowMap) { this->shadowMapNear = shadowMap; }
+		inline void SetShadowMapMid(ShadowMap* shadowMap) { this->shadowMapMid = shadowMap; }
+		inline void SetShadowMapFar(ShadowMap* shadowMap) { this->shadowMapFar = shadowMap; }
 	};
 }
 
