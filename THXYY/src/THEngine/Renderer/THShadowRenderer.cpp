@@ -149,15 +149,6 @@ namespace THEngine
 			}
 		}
 		End();
-
-		static int i = 1;
-		if (i == 1)
-		{
-			this->cascadedShadowMaps.Get(0)->GetShadowMap()->SaveToFile("shadowNear.jpg");
-			this->cascadedShadowMaps.Get(1)->GetShadowMap()->SaveToFile("shadowMid.jpg");
-			this->cascadedShadowMaps.Get(2)->GetShadowMap()->SaveToFile("shadowFar.jpg");
-		}
-		i++;
 	}
 
 	void DirectionalLightShadowRenderer::SetupLightView()

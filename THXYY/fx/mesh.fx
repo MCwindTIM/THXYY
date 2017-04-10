@@ -131,12 +131,37 @@ float getPCF(in int cascadedLevel, in float4 posInShadowMap, in float shadowBias
 	float dx = 1.0 / shadowMapWidth;
 	float dy = 1.0 / shadowMapHeight;
 
+	float3 vShadowTexDDX = mul(ddx(posInWorld), lightVP[cascadedLevel]);
+	float3 vShadowTexDDY = mul(ddy(posInWorld), lightVP[cascadedLevel]);
+	float2x2 matScreentoShadow = float2x2(vShadowTexDDX.xy, vShadowTexDDY.xy);
+	float fInvDeterminant = 1.0f / determinant(matScreentoShadow);
+
+	float2x2 matShadowToScreen = float2x2 (
+		matScreentoShadow._22 * fInvDeterminant,
+		matScreentoShadow._12 * -fInvDeterminant,
+		matScreentoShadow._21 * -fInvDeterminant,
+		matScreentoShadow._11 * fInvDeterminant);
+
+	float2 vRightShadowTexelLocation = float2(dx, 0.0f);
+	float2 vUpShadowTexelLocation = float2(0.0f, dy);
+	float2 vRightTexelDepthRatio = mul(vRightShadowTexelLocation, matShadowToScreen);
+	float2 vUpTexelDepthRatio = mul(vUpShadowTexelLocation, matShadowToScreen);
+
+	float fUpTexelDepthDelta = vUpTexelDepthRatio.x * vShadowTexDDX.z
+		+ vUpTexelDepthRatio.y * vShadowTexDDY.z;
+	float fRightTexelDepthDelta = vRightTexelDepthRatio.x * vShadowTexDDX.z
+		+ vRightTexelDepthRatio.y * vShadowTexDDY.z;
+
 	float sourcevals[4];
 	int i = cascadedLevel;
-	sourcevals[0] = tex2D(ShadowSampler[i], shadowTex).r + shadowBias < depth ? 0.0f : 1.0f;
-	sourcevals[1] = tex2D(ShadowSampler[i], shadowTex + float2(dx, 0)).r + shadowBias < depth ? 0.0f : 1.0f;
-	sourcevals[2] = tex2D(ShadowSampler[i], shadowTex + float2(0, dy)).r + shadowBias < depth ? 0.0f : 1.0f;
-	sourcevals[3] = tex2D(ShadowSampler[i], shadowTex + float2(dx, 1.0 / shadowMapHeight)).r + shadowBias < depth ? 0.0f : 1.0f;
+	float d0 = tex2D(ShadowSampler[i], shadowTex).r;
+	float d1 = tex2D(ShadowSampler[i], shadowTex + float2(dx, 0)).r + fRightTexelDepthDelta;
+	float d2 = tex2D(ShadowSampler[i], shadowTex + float2(0, dy)).r + fUpTexelDepthDelta;
+	float d3 = tex2D(ShadowSampler[i], shadowTex + float2(dx, dy)).r + fRightTexelDepthDelta + fUpTexelDepthDelta;
+	sourcevals[0] = d0 < depth - shadowBias ? 0.0f : 1.0f;
+	sourcevals[1] = d1 + shadowBias < depth ? 0.0f : 1.0f;
+	sourcevals[2] = d2 + shadowBias < depth ? 0.0f : 1.0f;
+	sourcevals[3] = d3 + shadowBias < depth ? 0.0f : 1.0f;
 	
 	float amount = saturate(lerp(lerp(sourcevals[0], sourcevals[1], lerps.x),
 		lerp(sourcevals[2], sourcevals[3], lerps.x),
