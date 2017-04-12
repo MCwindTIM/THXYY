@@ -208,8 +208,8 @@ namespace THEngine
 		//round the projection bound to elimiate shadow flickering
 		float clipWidth = bbox.xmax - bbox.xmin;
 		float clipHeight = bbox.ymax - bbox.ymin;
-		const float dx = clipWidth * (1.0f / SHADOW_MAP_SIZE * 16);
-		const float dy = clipHeight * (1.0f / SHADOW_MAP_SIZE * 16);
+		const float dx = clipWidth * (1.0f / SHADOW_MAP_SIZE);
+		const float dy = clipHeight * (1.0f / SHADOW_MAP_SIZE);
 
 		bbox.xmin = floor(bbox.xmin / dx) * dx;
 		bbox.xmax = bbox.xmin + clipWidth;
