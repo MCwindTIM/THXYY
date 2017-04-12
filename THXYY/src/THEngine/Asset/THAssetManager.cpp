@@ -275,7 +275,7 @@ namespace THEngine
 
 		texImpl->width = width;
 		texImpl->height = height;
-		D3DXCreateTexture(device, width, height, 0, D3DUSAGE_AUTOGENMIPMAP | D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &texImpl->texture);
+		D3DXCreateTexture(device, width, height, 0, D3DUSAGE_AUTOGENMIPMAP | D3DUSAGE_RENDERTARGET, D3DFMT_G32R32F, D3DPOOL_DEFAULT, &texImpl->texture);
 
 		textureList.Add(texImpl);
 

@@ -23,44 +23,44 @@ Fog fog;
 float4 posInWorld : TEXCOORD3;
 
 sampler TextureSampler = sampler_state
-{ 
+{
 	texture = <tex>;
 	magfilter = LINEAR;
 	minfilter = LINEAR;
 	mipfilter = LINEAR;
 	AddressU = WRAP;
- 	AddressV = WRAP;
+	AddressV = WRAP;
 };
 
 sampler ShadowSampler[3] =
 {
 	sampler_state
-	{
-		texture = <shadowMapNear>;
-		magfilter = POINT;
-		minfilter = POINT;
-		mipfilter = POINT;
-		AddressU = CLAMP;
-		AddressV = CLAMP;
-	},
-	sampler_state
-	{
-		texture = <shadowMapMid>;
-		magfilter = POINT;
-		minfilter = POINT;
-		mipfilter = POINT;
-		AddressU = CLAMP;
-		AddressV = CLAMP;
-	},
-	sampler_state
-	{
-		texture = <shadowMapFar>;
-		magfilter = POINT;
-		minfilter = POINT;
-		mipfilter = POINT;
-		AddressU = CLAMP;
-		AddressV = CLAMP;
-	}
+{
+	texture = <shadowMapNear>;
+	magfilter = LINEAR;
+	minfilter = LINEAR;
+	mipfilter = LINEAR;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
+},
+sampler_state
+{
+	texture = <shadowMapMid>;
+	magfilter = LINEAR;
+	minfilter = LINEAR;
+	mipfilter = LINEAR;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
+},
+sampler_state
+{
+	texture = <shadowMapFar>;
+	magfilter = LINEAR;
+	minfilter = LINEAR;
+	mipfilter = LINEAR;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
+}
 };
 
 VertexOut VSFunc(VertexIn input)
@@ -71,7 +71,7 @@ VertexOut VSFunc(VertexIn input)
 	output.sv_position.w = 1.0f;
 	output.posInWorld = mul(output.sv_position, worldMatrix);
 	output.sv_position = mul(output.sv_position, mvMatrix);
-	
+
 	output.positionInView = output.sv_position;
 	output.sv_position = mul(output.sv_position, projection);
 	output.position = output.sv_position;
@@ -131,8 +131,8 @@ float getPCF(in int cascadedLevel, in float4 posInShadowMap, in float shadowBias
 	float dx = 1.0 / shadowMapWidth;
 	float dy = 1.0 / shadowMapHeight;
 
-	float3 vShadowTexDDX = mul(ddx(posInWorld), lightVP[cascadedLevel]);
-	float3 vShadowTexDDY = mul(ddy(posInWorld), lightVP[cascadedLevel]);
+	float3 vShadowTexDDX = mul(ddx(posInWorld), lightVP[cascadedLevel]).xyz;
+	float3 vShadowTexDDY = mul(ddy(posInWorld), lightVP[cascadedLevel]).xyz;
 	float2x2 matScreentoShadow = float2x2(vShadowTexDDX.xy, vShadowTexDDY.xy);
 	float fInvDeterminant = 1.0f / determinant(matScreentoShadow);
 
@@ -162,12 +162,46 @@ float getPCF(in int cascadedLevel, in float4 posInShadowMap, in float shadowBias
 	sourcevals[1] = d1 + shadowBias < depth ? 0.0f : 1.0f;
 	sourcevals[2] = d2 + shadowBias < depth ? 0.0f : 1.0f;
 	sourcevals[3] = d3 + shadowBias < depth ? 0.0f : 1.0f;
-	
+
 	float amount = saturate(lerp(lerp(sourcevals[0], sourcevals[1], lerps.x),
 		lerp(sourcevals[2], sourcevals[3], lerps.x),
 		lerps.y));
 
 	return amount;
+}
+
+float chebyshev(float2 moments, float depth)
+{
+	float p = ( depth <= moments.x) ? 1.0f : 0.0f;
+	float variance = moments.y - moments.x * moments.x;
+	variance = min(1.0f, max(variance + 0.0001f, 0.0f));
+	float d = depth - moments.x;
+	float p_max = variance / (variance + d * d);
+	return max(p, p_max);
+}
+
+float2 computeMoments(float depth)
+{
+	float2 moments;
+	// First moment is the depth itself.  
+	moments.x = depth;
+	// Compute partial derivatives of depth.  
+	float dx = ddx(depth);
+	float dy = ddy(depth);
+	// Compute second moment over the pixel extents.  
+	moments.y = depth * depth + 0.25*(dx*dx + dy*dy);
+	return moments;
+}
+
+float getVSM(in int cascadedLevel, in float4 posInShadowMap)
+{
+	matrix lightVP[3] = { lightVPNear, lightVPMid, lightVPFar };
+	float2 shadowTex = 0.5 * posInShadowMap.xy / posInShadowMap.w + float2(0.5, 0.5);
+	shadowTex.y = 1.0f - shadowTex.y;
+	float depth = posInShadowMap.z / posInShadowMap.w;
+
+	float2 moments = tex2D(ShadowSampler[cascadedLevel], shadowTex.xy).xy;
+	return chebyshev(moments, depth);
 }
 
 float getLightDensity(in PixelIn input)
@@ -177,7 +211,7 @@ float getLightDensity(in PixelIn input)
 	//compute bias
 	float3 normal = normalize(input.normal);
 	float3 lightDir = normalize(directionalLight.direction);
-	float shadowBias = max(0.005 * (1.0 - dot(normal, lightDir)), SHADOW_EPSILON);
+	float shadowBias = max(0.004 * (1.0 - dot(normal, lightDir)), SHADOW_EPSILON);
 
 	matrix lightVP[3] = { lightVPNear, lightVPMid, lightVPFar };
 	float zvalue = input.positionInView.z / input.positionInView.w;
@@ -188,44 +222,49 @@ float getLightDensity(in PixelIn input)
 		if (zvalue <= end)
 		{
 			posInShadowMap = mul(input.posInWorld, lightVP[i]);
-			float margin1 = end - blendBand;
+			/*float margin1 = end - blendBand;
 			float margin2 = end - dz + blendBand;
 			if (zvalue >= margin1 && i < 2)
 			{
-				return lerp(getPCF(i, posInShadowMap, shadowBias),
-					getPCF(i + 1, posInShadowMap, shadowBias),
+				//return lerp(getPCF(i, posInShadowMap, shadowBias),
+				//	getPCF(i + 1, posInShadowMap, shadowBias),
+				//	lerp(1, 0.5, (zvalue - margin1) / blendBand));
+				return lerp(getVSM(i, posInShadowMap),
+					getVSM(i + 1, posInShadowMap),
 					lerp(1, 0.5, (zvalue - margin1) / blendBand));
 			}
-			else if (zvalue <= margin2 && i > 0)
+			if (zvalue <= margin2 && i > 0)
 			{
-				return lerp(getPCF(i, posInShadowMap, shadowBias),
-					getPCF(i - 1, posInShadowMap, shadowBias),
+				//return lerp(getPCF(i, posInShadowMap, shadowBias),
+				//	getPCF(i - 1, posInShadowMap, shadowBias),
+				//	lerp(1, 0.5, (margin2 - zvalue) / blendBand));
+				return lerp(getVSM(i, posInShadowMap),
+					getVSM(i - 1, posInShadowMap),
 					lerp(1, 0.5, (margin2 - zvalue) / blendBand));
-			}
-			else
-			{
-				return getPCF(i, posInShadowMap, shadowBias);
-			}
+			}*/
+			//return getPCF(i, posInShadowMap, shadowBias);
+			return getVSM(i, posInShadowMap);
 		}
 	}
-	return getPCF(2, posInShadowMap, shadowBias);
+	//the code should not go here
+	return 0;
 }
 
 float4 PSFunc(PixelIn input) : COLOR
 {
 	float4 color;
 
-	color = getTexturedColor(input);
-	fogShading(color, input);
+color = getTexturedColor(input);
+fogShading(color, input);
 
-	return color;
+return color;
 }
 
 float4 PSFunc_Ambient(PixelIn input) : COLOR
 {
 	float4 color;
 
-	color = getTexturedColor(input); 
+	color = getTexturedColor(input);
 	color = ambientLighting(color);
 	fogShading(color, input);
 

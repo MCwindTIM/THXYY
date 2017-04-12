@@ -840,9 +840,6 @@
     <None Include="fx\sprite.fx">
       <Filter>fx</Filter>
     </None>
-    <None Include="fx\mesh.fx">
-      <Filter>fx</Filter>
-    </None>
     <None Include="fx\lighting.fx">
       <Filter>fx</Filter>
     </None>
@@ -850,6 +847,9 @@
       <Filter>fx</Filter>
     </None>
     <None Include="fx\shadow.fx">
+      <Filter>fx</Filter>
+    </None>
+    <None Include="fx\mesh.fx">
       <Filter>fx</Filter>
     </None>
   </ItemGroup>

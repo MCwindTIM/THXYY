@@ -323,13 +323,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fx\mesh.fx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="fx\lighting.fx">
       <FileType>Document</FileType>
     </None>
@@ -341,6 +334,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fx\shadow.fx">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\mesh.fx">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

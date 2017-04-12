@@ -21,7 +21,11 @@ VertexOut VSFunc(float3 input : POSITION)
 
 float4 PSFunc(float2 depth : TEXCOORD0) : COLOR
 {
-	return depth.x / depth.y;
+	float4 output;
+	output.x = depth.x / depth.y;
+	output.y = output.x * output.x;
+	output.z = output.w = 1.0f;
+	return output;
 }
 
 technique Shadow
