@@ -54,11 +54,9 @@ void RankSelectMenu::OnMenuItemClicked(int item)
 		engine->SetDifficulty(STGEngine::LUNATIC);
 		break;
 	}
-	engine->Init();
-	global->stageEnum = Global::STAGE_01;
-	global->playerEnum = Global::REIMU;
-	GameScene* scene = new GameScene();
-	Game::GetInstance()->LoadScene(scene);
+
+	EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
+	((SelectScene*)Game::GetInstance()->GetScene())->StartGame();
 }
 
 bool RankSelectMenu::OnKeyDown(EngineObject* sender, int key)
@@ -87,6 +85,7 @@ bool RankSelectMenu::OnKeyDown(EngineObject* sender, int key)
 		this->hard = nullptr;
 		this->lunatic = nullptr;
 
+		EventSystem::GetInstance()->UnRegisterKeyDownListener(this);
 		((SelectScene*)Game::GetInstance()->GetScene())->Back();
 
 		return true;

@@ -12,8 +12,9 @@ class SelectScene : public Scene
 {
 private:
 	Texture* texBackground = nullptr;
+	Texture* texLoading = nullptr;
 
-	Layer* uiLayer = nullptr;
+	Layer* bgrLayer = nullptr;
 	RankSelectMenu* rankSelectMenu = nullptr;
 
 	SelectTitle* title = nullptr;
@@ -24,6 +25,7 @@ public:
 
 	void ShowRank();
 	void Back();
+	void StartGame();
 };
 
 #endif
