@@ -40,3 +40,28 @@ void RankSelectMenuItem::SetType(Type type)
 	}
 }
 
+void RankSelectMenuItem::Enter()
+{
+
+}
+
+void RankSelectMenuItem::Exit()
+{
+	AddTween(new FadeOut(FADE_TIME, Tweener::SIMPLE));
+	switch (type)
+	{
+	case EASY:
+		AddTween(new MoveTo(Vector3f(210 - OFFSET, 352, 0), FADE_TIME, Tweener::SIMPLE));
+		break;
+	case NORMAL:
+		AddTween(new MoveTo(Vector3f(420 + OFFSET, 256, 0), FADE_TIME, Tweener::SIMPLE));
+		break;
+	case HARD:
+		AddTween(new MoveTo(Vector3f(258 - OFFSET, 180, 0), FADE_TIME, Tweener::SIMPLE));
+		break;
+	case LUNATIC:
+		AddTween(new MoveTo(Vector3f(388 + OFFSET, 84, 0), FADE_TIME, Tweener::SIMPLE));
+		break;
+	}
+}
+

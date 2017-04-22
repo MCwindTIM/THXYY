@@ -23,6 +23,7 @@ public:
 	virtual ~SelectScene();
 
 	void ShowRank();
+	void Back();
 };
 
 #endif

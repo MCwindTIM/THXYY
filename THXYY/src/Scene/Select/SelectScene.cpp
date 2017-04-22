@@ -1,6 +1,7 @@
 #include "SelectScene.h"
 #include "SelectTitle.h"
 #include "RankSelectMenu.h"
+#include "../Title/Title.h"
 
 static const int FADE_TIME = 24;
 static const int OFFSET = 60;
@@ -54,4 +55,18 @@ void SelectScene::ShowRank()
 
 	this->rankSelectMenu = new RankSelectMenu();
 	AddLayer(this->rankSelectMenu);
+}
+
+void SelectScene::Back()
+{
+	this->title->AddTween(new MoveTo(Vector3f(480 + OFFSET, 416, 5), FADE_TIME, Tweener::SIMPLE));
+	this->title->AddTween(new FadeOut(FADE_TIME, Tweener::SIMPLE));
+	
+	FrameTimer* timer = new FrameTimer();
+	timer->SetFrame(FADE_TIME);
+	timer->run = []() {
+		auto game = Game::GetInstance();
+		game->LoadScene(new Title());
+	};
+	GetScheduler()->AddTimer(timer);
 }

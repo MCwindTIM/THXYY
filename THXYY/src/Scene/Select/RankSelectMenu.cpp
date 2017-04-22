@@ -1,5 +1,6 @@
 #include "RankSelectMenu.h"
 #include "RankSelectMenuItem.h"
+#include "SelectScene.h"
 #include <STGEngine.h>
 #include <Global.h>
 
@@ -58,4 +59,37 @@ void RankSelectMenu::OnMenuItemClicked(int item)
 	global->playerEnum = Global::REIMU;
 	GameScene* scene = new GameScene();
 	Game::GetInstance()->LoadScene(scene);
+}
+
+bool RankSelectMenu::OnKeyDown(EngineObject* sender, int key)
+{
+	if (key == 'x' || key == 'X' || key == VK_ESCAPE)
+	{
+		if (this->easy)
+		{
+			this->easy->Exit();
+		}
+		if (this->normal)
+		{
+			this->normal->Exit();
+		}
+		if (this->hard)
+		{
+			this->hard->Exit();
+		}
+		if (this->lunatic)
+		{
+			this->lunatic->Exit();
+		}	
+
+		this->easy = nullptr;
+		this->normal = nullptr;
+		this->hard = nullptr;
+		this->lunatic = nullptr;
+
+		((SelectScene*)Game::GetInstance()->GetScene())->Back();
+
+		return true;
+	}
+	return Menu::OnKeyDown(sender, key);
 }

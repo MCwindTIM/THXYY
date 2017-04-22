@@ -20,6 +20,8 @@ public:
 	virtual ~RankSelectMenu();
 
 	virtual void OnMenuItemClicked(int item) override;
+
+	virtual bool OnKeyDown(EngineObject* sender, int key) override;
 };
 
 #endif

@@ -26,6 +26,10 @@ public:
 	virtual ~RankSelectMenuItem() = default;
 
 	void SetType(Type type);
+
+	void Enter();
+
+	void Exit();
 };
 
 #endif
