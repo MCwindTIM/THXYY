@@ -14,6 +14,7 @@ namespace THEngine
 		Scheduler* scheduler = nullptr;
 		bool paused = false;
 		bool started = false;
+		bool loaded = false;
 
 	public:
 		EngineObject();
@@ -31,6 +32,8 @@ namespace THEngine
 
 		virtual void OnStart();
 		virtual void OnLoad(AsyncInfo* info);
+
+		friend class Game;
 	};
 }
 

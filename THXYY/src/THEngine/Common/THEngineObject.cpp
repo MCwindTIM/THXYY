@@ -37,5 +37,10 @@ namespace THEngine
 
 	void EngineObject::OnLoad(AsyncInfo* info)
 	{
+		if (loaded)
+		{
+			return;
+		}
+		loaded = true;
 	}
 }

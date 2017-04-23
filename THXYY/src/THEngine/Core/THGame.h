@@ -89,7 +89,11 @@ namespace THEngine
 
 		void LoadScene(Scene* scene);
 
-		AsyncInfo* LoadSceneAsync(Scene* scene);
+		void LoadSceneAsync(Scene* scene);
+
+		void LoadSceneAsync(Scene* scene, int delay, const std::function<void()>& onLoadCompleted);
+
+		AsyncInfo* LoadSceneAsyncWithInfo(Scene* scene, bool autoChange);
 
 		inline Application* GetApplication() const { return app; }
 

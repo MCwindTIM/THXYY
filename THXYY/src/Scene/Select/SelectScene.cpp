@@ -88,7 +88,7 @@ void SelectScene::StartGame()
 	blackLayer->AddChild(black);
 
 	Sprite* loading = new Sprite();
-	loading->SetPosition(Vector3f(544, 80, 0));
+	loading->SetPosition(Vector3f(544, 80, 20));
 	loading->SetTexture(this->texLoading);
 	loading->SetTexRect(Rect(0, 256, 0, 96));
 	loading->SetAlpha(0.0f);
@@ -102,7 +102,7 @@ void SelectScene::StartGame()
 
 	FrameTimer* timer = new FrameTimer();
 	timer->SetFrame(GO_TO_NEXT_SCENE_TIME);
-	timer->run = []() {
+	timer->run = [blackLayer]() {
 		auto engine = STGEngine::GetInstance();
 		auto global = Global::GetInstance();
 
@@ -110,7 +110,14 @@ void SelectScene::StartGame()
 		global->stageEnum = Global::STAGE_01;
 		global->playerEnum = Global::REIMU;
 		GameScene* scene = new GameScene();
-		Game::GetInstance()->LoadSceneAsync(scene);
+		Game::GetInstance()->LoadSceneAsync(scene, 18, [blackLayer]() {
+			Sprite* black2 = new Sprite();
+			black2->SetPosition(Vector3f(320, 240, 0));
+			black2->SetTexture(Global::GetInstance()->texBlack);
+			black2->SetAlpha(0);
+			black2->AddTween(new FadeTo(1.0f, 18, Tweener::SIMPLE));
+			blackLayer->AddChild(black2);
+		});
 	};
 	GetScheduler()->AddTimer(timer);
 }

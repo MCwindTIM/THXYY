@@ -22,6 +22,10 @@ namespace THEngine
 		AsyncInfo() = default;
 		virtual ~AsyncInfo() = default;
 
+		inline bool IsFinished() const { return this->finished; }
+
+		inline int GetProgress() const { return this->progress; }
+
 		friend class AsyncLoader;
 	};
 }

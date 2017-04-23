@@ -139,6 +139,14 @@ void GameScene::OnStart()
 {
 	Scene::OnStart();
 
+	Sprite* black = new Sprite();
+	black->SetTexture(Global::GetInstance()->texBlack);
+	black->SetPosition(Vector3f(0.0f, 0.0f, 1.0f));
+	black->SetPivot(Vector2f(0.0f, 0.0f));
+	black->SetAlpha(1.0f);
+	black->AddTween(new FadeOut(30, Tweener::EASE_OUT));
+	blackLayer->AddChild(black);
+
 	auto eventSystem = EventSystem::GetInstance();
 	eventSystem->RegisterKeyDownListener(this);
 

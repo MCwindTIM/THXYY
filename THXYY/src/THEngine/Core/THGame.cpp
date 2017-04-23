@@ -210,6 +210,8 @@ void Game::OnReturnToForeground()
 
 void Game::Update()
 {
+	EngineObject::Update();
+
 	input->Update();
 	eventSystem->Update();
 	audio->Update();
@@ -251,15 +253,56 @@ void Game::SetScene(Scene* scene)
 void Game::LoadScene(Scene* scene)
 {
 	nextScene = scene;
-	nextScene->OnLoad(nullptr);
+	if (scene->loaded == false)
+	{
+		nextScene->OnLoad(nullptr);
+	}
 }
 
-AsyncInfo* Game::LoadSceneAsync(Scene* scene)
+void Game::LoadSceneAsync(Scene* scene)
 {
-	return AsyncLoader::Load(scene, [this, scene]()
+	if (scene->loaded)
+	{
+		return;
+	}
+	AsyncLoader::Load(scene, [this, scene]()
 	{
 		this->nextScene = scene;
 	});
+}
+
+void Game::LoadSceneAsync(Scene* scene, int delay, const std::function<void()>& onLoadCompleted)
+{
+	if (scene->loaded)
+	{
+		return;
+	}
+	AsyncLoader::Load(scene, [this, scene, delay, onLoadCompleted]()
+	{
+		FrameTimer* timer = new FrameTimer();
+		timer->SetFrame(delay);
+		timer->run = [this, scene]() {
+			this->nextScene = scene;
+		};
+		this->GetScheduler()->AddTimer(timer);
+		onLoadCompleted();
+	});
+}
+
+AsyncInfo* Game::LoadSceneAsyncWithInfo(Scene* scene, bool autoChange)
+{
+	if (scene->loaded)
+	{
+		return nullptr;
+	}
+	if (autoChange)
+	{
+		return AsyncLoader::LoadWithInfo(scene, [this, scene]()
+		{
+			this->nextScene = scene;
+		});
+	}
+	return AsyncLoader::LoadWithInfo(scene);
 }
 
 void Game::CalcFPS()

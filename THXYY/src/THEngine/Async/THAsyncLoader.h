@@ -18,10 +18,16 @@ namespace THEngine
 
 		static void ThreadFuncLoad(AsyncInfo* info, EngineObject* object);
 
-	public:
-		static AsyncInfo* Load(EngineObject* object);
+		static void Load(EngineObject* object, const Callback& onCompleted, AsyncInfo* outputInfo);
 
-		static AsyncInfo* Load(EngineObject* object, const Callback& onCompleted);
+	public:
+		static void Load(EngineObject* object);
+
+		static void Load(EngineObject* object, const Callback& onCompleted);
+
+		static AsyncInfo* LoadWithInfo(EngineObject* object);
+
+		static AsyncInfo* LoadWithInfo(EngineObject* object, const Callback& onCompleted);
 	};
 }
 

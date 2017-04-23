@@ -97,6 +97,7 @@ void STGEngine::Clear()
 void STGEngine::Restart()
 {
 	Clear();
+	OnLoad();
 	Start();
 }
 
