@@ -19,9 +19,14 @@ private:
 
 	SelectTitle* title = nullptr;
 
+	int frame = 0;
+
 public:
 	SelectScene();
 	virtual ~SelectScene();
+
+	virtual void Update() override;
+	virtual void OnStart() override;
 
 	void ShowRank();
 	void Back();

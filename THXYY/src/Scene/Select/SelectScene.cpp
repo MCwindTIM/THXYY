@@ -1,6 +1,7 @@
 #include "SelectScene.h"
 #include "SelectTitle.h"
 #include "RankSelectMenu.h"
+#include "StarParticle.h"
 #include "../Title/Title.h"
 #include <Global.h>
 #include <STGEngine.h>
@@ -18,6 +19,7 @@ SelectScene::SelectScene()
 
 	this->texLoading = assetManager->CreateTextureFromFile("res/loading/loading.png");
 	this->texLoading->Retain();
+	StarParticle::tex = this->texLoading;
 
 	SelectTitle::tex = assetManager->CreateTextureFromFile("res/menu/select.png");
 	SelectTitle::tex->Retain();
@@ -36,8 +38,6 @@ SelectScene::SelectScene()
 	sequence->SetLooped(true);
 	background->AddTween(sequence);
 	bgrLayer->AddChild(background);
-
-	ShowRank();
 }
 
 SelectScene::~SelectScene()
@@ -45,6 +45,32 @@ SelectScene::~SelectScene()
 	TH_SAFE_RELEASE(this->texBackground);
 	TH_SAFE_RELEASE(this->texLoading);
 	TH_SAFE_RELEASE(SelectTitle::tex);
+}
+
+void SelectScene::OnStart()
+{
+	Scene::OnStart();
+
+	ShowRank();
+
+	for (int i = 0; i < 10; i++)
+	{
+		StarParticle* particle = new StarParticle();
+		this->bgrLayer->AddChild(particle);
+	}
+}
+
+void SelectScene::Update()
+{
+	Scene::Update();
+
+	frame++;
+	if (frame == 8)
+	{
+		frame = 0;
+		StarParticle* particle = new StarParticle();
+		this->bgrLayer->AddChild(particle);
+	}
 }
 
 void SelectScene::ShowRank()
