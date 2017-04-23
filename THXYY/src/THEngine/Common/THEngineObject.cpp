@@ -23,16 +23,19 @@ namespace THEngine
 
 	void EngineObject::Update()
 	{
-		if (loaded == false)
+		if (started == false)
 		{
-			loaded = true;
-			OnLoad();
+			started = true;
+			OnStart();
 		}
 		scheduler->Update();
 	}
 
-	void EngineObject::OnLoad()
+	void EngineObject::OnStart()
 	{
+	}
 
+	void EngineObject::OnLoad(AsyncInfo* info)
+	{
 	}
 }

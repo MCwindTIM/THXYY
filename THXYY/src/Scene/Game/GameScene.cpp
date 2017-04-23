@@ -31,7 +31,7 @@ GameScene::GameScene()
 	blackLayer->SetOrder(0);
 	AddLayer(blackLayer);
 
-	blackSTGLayer = new Layer(32,16,384,448);
+	blackSTGLayer = new Layer(32, 16, 384, 448);
 	blackLayer->SetOrder(1);
 	AddLayer(blackSTGLayer);
 
@@ -57,7 +57,7 @@ GameScene::GameScene()
 	Sprite* difficulty = new Sprite();
 	difficulty->SetTexture(texGameBg2);
 	difficulty->SetPosition(Vector3f(528.0f, 448.0f, 1.0f));
-	switch(engine->GetDifficulty())
+	switch (engine->GetDifficulty())
 	{
 	case STGEngine::EASY:
 		difficulty->SetTexRect(Rect(0.0f, 96.0f, 0.0f, 32.0f));
@@ -127,16 +127,23 @@ void GameScene::Draw()
 	DrawGraze();
 }
 
-void GameScene::OnLoad()
+void GameScene::OnLoad(AsyncInfo* info)
 {
-	Scene::OnLoad();
+	Scene::OnLoad(info);
+
+	auto engine = STGEngine::GetInstance();
+	engine->OnLoad();
+}
+
+void GameScene::OnStart()
+{
+	Scene::OnStart();
 
 	auto eventSystem = EventSystem::GetInstance();
 	eventSystem->RegisterKeyDownListener(this);
 
 	auto engine = STGEngine::GetInstance();
-
-	engine->OnLoad();
+	engine->OnStart();
 }
 
 void GameScene::OnDestroy()
@@ -271,7 +278,7 @@ void GameScene::UpdateScore()
 {
 	STGEngine* engine = STGEngine::GetInstance();
 
-	long long temp1 = engine->GetScore(), temp2 = engine->GetHiScore(); 
+	long long temp1 = engine->GetScore(), temp2 = engine->GetHiScore();
 	for (int i = 0; i < 10; i++)
 	{
 		score[9 - i]->SetNumber(temp1 % 10);
@@ -404,7 +411,7 @@ void GameScene::ReturnToTitle()
 	Scheduler* scheduler = GetScheduler();
 	FrameTimer* timer = new FrameTimer();
 	timer->SetFrame(60);
-	timer->run = [](){Game::GetInstance()->LoadScene(new Title()); };
+	timer->run = []() {Game::GetInstance()->LoadScene(new Title()); };
 	scheduler->AddTimer(timer);
 }
 
@@ -443,4 +450,3 @@ bool GameScene::OnKeyDown(EngineObject* sender, int key)
 
 	return false;
 }
-

@@ -65,7 +65,7 @@ void SelectScene::Back()
 {
 	this->title->AddTween(new MoveTo(Vector3f(480 + OFFSET, 416, 25), FADE_TIME, Tweener::SIMPLE));
 	this->title->AddTween(new FadeOut(FADE_TIME, Tweener::SIMPLE));
-	
+
 	FrameTimer* timer = new FrameTimer();
 	timer->SetFrame(FADE_TIME);
 	timer->run = []() {
@@ -100,7 +100,7 @@ void SelectScene::StartGame()
 	loading->AddTween(new FadeTo(1.0f, 18, Tweener::SIMPLE));
 	blackLayer->AddChild(loading);
 
-	/*FrameTimer* timer = new FrameTimer();
+	FrameTimer* timer = new FrameTimer();
 	timer->SetFrame(GO_TO_NEXT_SCENE_TIME);
 	timer->run = []() {
 		auto engine = STGEngine::GetInstance();
@@ -110,7 +110,7 @@ void SelectScene::StartGame()
 		global->stageEnum = Global::STAGE_01;
 		global->playerEnum = Global::REIMU;
 		GameScene* scene = new GameScene();
-		Game::GetInstance()->LoadScene(scene);
+		Game::GetInstance()->LoadSceneAsync(scene);
 	};
-	GetScheduler()->AddTimer(timer);*/
+	GetScheduler()->AddTimer(timer);
 }
