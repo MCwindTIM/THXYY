@@ -2,6 +2,7 @@
 #define TH_ASYNC_INFO_H
 
 #include <Common\THCommon.h>
+#include <mutex>
 
 namespace THEngine
 {
@@ -15,6 +16,7 @@ namespace THEngine
 		int maxProgress = 100;
 		bool finished = false;
 		Callback onFinished;
+		std::mutex mutex;
 
 	public:
 		AsyncInfo() = default;
