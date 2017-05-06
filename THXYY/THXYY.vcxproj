@@ -126,7 +126,8 @@
     <ClCompile Include="src\Stage\Stage01\Stage01.cpp" />
     <ClCompile Include="src\STGCore\API.cpp" />
     <ClCompile Include="src\STGCore\Bullet\Bullet.cpp" />
-    <ClCompile Include="src\STGCore\Bullet\BulletDelegate.cpp" />
+    <ClCompile Include="src\STGCore\Bullet\ConcreteBulletType.cpp" />
+    <ClCompile Include="src\STGCore\Bullet\HitChecker.cpp" />
     <ClCompile Include="src\STGCore\Bullet\Laser.cpp" />
     <ClCompile Include="src\STGCore\Effect\BulletFog.cpp" />
     <ClCompile Include="src\STGCore\Enemy\ButterFly.cpp" />
@@ -241,7 +242,10 @@
     <ClInclude Include="src\Stage\Stage01\Stage01.h" />
     <ClInclude Include="src\STGCore\API.h" />
     <ClInclude Include="src\STGCore\Bullet\Bullet.h" />
-    <ClInclude Include="src\STGCore\Bullet\BulletDelegate.h" />
+    <ClInclude Include="src\STGCore\Bullet\BulletColor.h" />
+    <ClInclude Include="src\STGCore\Bullet\ConcreteBulletType.h" />
+    <ClInclude Include="src\STGCore\Bullet\BulletType.h" />
+    <ClInclude Include="src\STGCore\Bullet\HitChecker.h" />
     <ClInclude Include="src\STGCore\Bullet\Laser.h" />
     <ClInclude Include="src\STGCore\Effect\BulletFog.h" />
     <ClInclude Include="src\STGCore\Enemy\ButterFly.h" />

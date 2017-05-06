@@ -3,6 +3,8 @@
 
 #include "STGEngine.h"
 #include "Stage.h"
+#include "Bullet\Bullet.h"
+#include "Bullet\ConcreteBulletType.h"
 #include "Enemy\Enemy.h"
 #include "Enemy\Fairy.h"
 #include "Enemy\ButterFly.h"

@@ -11,7 +11,6 @@ Enemy01_001::Enemy01_001()
 
 Enemy01_001::~Enemy01_001()
 {
-
 }
 
 void Enemy01_001::Update()
@@ -31,14 +30,14 @@ void Enemy01_001::Update()
 		for (int i = 0; i < 5; i++)
 		{
 			Bullet* bullet = new Bullet();
-			bullet->SetType(Bullet::ARROW_TEAL);
+			bullet->SetType(new ArrowTeal());
 			bullet->SetPosition(position.x, position.y);
 			bullet->SetSpeed(2.5);
 			bullet->SetAngle(72 * i + shootAngle);
 
 			engine->ShootBullet(bullet, true, 2);
 		}
-		
+
 		acShootAngle += 0.08f;
 	}
 }

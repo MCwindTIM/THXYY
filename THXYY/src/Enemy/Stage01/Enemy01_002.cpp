@@ -12,7 +12,6 @@ Enemy01_002::Enemy01_002()
 
 Enemy01_002::~Enemy01_002()
 {
-
 }
 
 void Enemy01_002::Update()
@@ -31,7 +30,7 @@ void Enemy01_002::Update()
 		for (int i = 0; i < 3; i++)
 		{
 			Bullet* bullet = new Bullet();
-			bullet->SetType(Bullet::BIGJADE_BLUE);
+			bullet->SetType(new BigJadeBlue());
 			bullet->SetPosition(position.x, position.y);
 			bullet->SetSpeed(2.5);
 			bullet->SetAngle(bulletAngle + 120 * i);
