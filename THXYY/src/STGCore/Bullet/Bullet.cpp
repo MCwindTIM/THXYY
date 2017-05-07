@@ -94,14 +94,14 @@ void Bullet::OnDie()
 			break;
 		}
 
-		float effectAngle = ToRad(Random(0, 359));
-		float dist = Random(0, 20);
+		float effectAngle = Math::ToRad(engine->Random(0, 359));
+		float dist = engine->Random(0, 20);
 
-		float effectScale = Random(20, 50) / 100.0f;
+		float effectScale = engine->Random(20, 50) / 100.0f;
 		effect[i]->SetScale(Vector3f(effectScale, effectScale, 1));
 
-		effect[i]->SetRotatingAxis(Vector3f(Random(0, 100), Random(0, 100), Random(0, 100)));
-		effect[i]->SetRotatingSpeed(Random(50, 100) / 10.0f);
+		effect[i]->SetRotatingAxis(Vector3f(engine->Random(0, 100), engine->Random(0, 100), engine->Random(0, 100)));
+		effect[i]->SetRotatingSpeed(engine->Random(50, 100) / 10.0f);
 		effect[i]->SetAlpha(0.6f);
 
 		TweenSequence* sequence = new TweenSequence();
