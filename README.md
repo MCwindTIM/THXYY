@@ -1,5 +1,5 @@
 # THXYY
-This game is a touhou fan game. It is still under development.
+This game is a <em>Touhou Project</em> fan game. It is still under development.
 
 ## Dependency
 This project used these 3rd party open source libraries.
