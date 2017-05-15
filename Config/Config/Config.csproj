@@ -95,7 +95,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="u=2578754810,3960167069&amp;fm=23&amp;gp=0.jpg" />
+    <Resource Include="logo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -69,7 +69,7 @@
             </Grid>
         </GroupBox>
 
-        <Image Grid.Row="0" Grid.Column="1" Source="u=2578754810,3960167069&amp;fm=23&amp;gp=0.jpg" />
+        <Image Grid.Row="0" Grid.Column="1" Source="logo.jpg" />
 
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
