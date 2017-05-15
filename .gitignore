@@ -1,3 +1,4 @@
-/Config/.vs/*
-/Config/Config/bin/*
-/Config/Config/obj/*
+/Config/.vs
+/Config/Config/bin
+/Config/Config/obj
+/Config/packages

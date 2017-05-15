@@ -22,6 +22,26 @@ namespace Config
         public MainWindow()
         {
             InitializeComponent();
+
+            config = Configuration.Create();
+            Update();
+        }
+
+        private void Button_Click_OK(object sender, RoutedEventArgs e)
+        {
+            SaveConfig();
+            Close();
+        }
+
+        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Click_Reset(object sender, RoutedEventArgs e)
+        {
+            config.SetToDefault();
+            Update();
         }
     }
 }
