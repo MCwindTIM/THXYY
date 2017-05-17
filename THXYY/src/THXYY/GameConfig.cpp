@@ -3,6 +3,8 @@
 
 #include "GameConfig.h"
 #include "../External/rapidjson/document.h"
+#include "../External/rapidjson/stringbuffer.h"
+#include "../External/rapidjson/prettywriter.h"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -40,14 +42,25 @@ void GameConfig::Save()
 {
 	const std::string fileName = "config.json";
 
-	std::ofstream writer;
-	writer.open(fileName.c_str());
-	if (writer.is_open() == false)
+	Document document;
+	document.SetObject();
+	SaveRenderConfig(document);
+	SaveStartupConfig(document);
+
+	StringBuffer buffer;
+	PrettyWriter<StringBuffer> writer(buffer);
+	writer.SetIndent(' ', 2);
+	document.Accept(writer);
+
+	std::ofstream of;
+	of.open(fileName.c_str());
+	if (of.is_open() == false)
 	{
-		writer.close();
+		of.close();
 		return;
 	}
-	writer.close();
+	of << buffer.GetString();
+	of.close();
 }
 
 bool GameConfig::ParseJson(const std::string& json)
@@ -208,6 +221,20 @@ bool GameConfig::LoadStartupConfig(const rapidjson::Document& document)
 	return true;
 }
 
+void GameConfig::SaveRenderConfig(rapidjson::Document& document)
+{
+	AddBool(document, "useMultiSample", this->useMultiSample);
+	AddBool(document, "useVerticalAsync", this->useVerticalAsync);
+	AddInt(document, "lightShadowLevel", this->lightLevel);
+	AddInt(document, "drawInterval", this->drawInterval);
+}
+
+void GameConfig::SaveStartupConfig(rapidjson::Document& document)
+{
+	AddInt(document, "startupType", this->startupType);
+	AddBool(document, "askEveryTime", this->askEveryTime);
+}
+
 bool GameConfig::ReadBool(const rapidjson::Document& document, const char* member, bool* valueToSet)
 {
 	if (document.HasMember(member) == false)
@@ -242,10 +269,14 @@ bool GameConfig::ReadInt(const rapidjson::Document& document, const char* member
 
 void GameConfig::AddBool(rapidjson::Document& document, const char* member, bool value)
 {
-	//document.AddMember(member, value, document.GetAllocator());
+	Value v;
+	v.SetBool(value);
+	document.AddMember((Document::StringRefType)member, v, document.GetAllocator());
 }
 
 void GameConfig::AddInt(rapidjson::Document& document, const char* member, int value)
 {
-	//document.AddMember(member, value, document.GetAllocator());
+	Value v;
+	v.SetInt(value);
+	document.AddMember((Document::StringRefType)member, v, document.GetAllocator());
 }

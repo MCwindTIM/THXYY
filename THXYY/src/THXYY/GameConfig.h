@@ -24,21 +24,21 @@ namespace rapidjson
 class GameConfig
 {
 public:
-	enum class LightLevel
+	enum LightLevel
 	{
 		NONE = 0,
 		NORMAL = 1,
 		HIGH = 2
 	};
 
-	enum class DrawInterval
+	enum DrawInterval
 	{
 		ONE = 0,
 		HALF = 1,
 		ONE_THIRD = 2
 	};
 
-	enum class StartupType
+	enum StartupType
 	{
 		FULL_SCREEN_640_480 = 0,
 		WINDOW_640_480 = 1
@@ -59,9 +59,11 @@ private:
 	bool ParseJson(const std::string& json);
 	bool LoadRenderConfig(const rapidjson::Document& document);
 	bool LoadStartupConfig(const rapidjson::Document& document);
+	void SaveRenderConfig(rapidjson::Document& document);
+	void SaveStartupConfig(rapidjson::Document& document);
+
 	bool ReadBool(const rapidjson::Document& document, const char* member, bool* valueToSet);
 	bool ReadInt(const rapidjson::Document& document, const char* member, int* valueToSet);
-
 	void AddBool(rapidjson::Document& document, const char* member, bool value);
 	void AddInt(rapidjson::Document& document, const char* member, int value);
 public:

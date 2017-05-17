@@ -41,7 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 
-	//config.Save();
+	config.Save();
 
 	THXYY game;
 	if (game.CreateGame(config) == false)
