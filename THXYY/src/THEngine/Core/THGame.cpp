@@ -4,9 +4,12 @@
 #include "THDataStack.h"
 #include "THScene.h"
 #include "THConfig.h"
+#include <Scheduling\THScheduler.h>
+#include <Scheduling\THFrameTimer.h>
 #include <Platform\THApplication.h>
 #include <Platform\THInput.h>
 #include <Platform\THAudio.h>
+#include <Platform\THSystemClock.h>
 #include <Renderer\THRenderPipeline.h>
 #include <Asset\THAssetManager.h>
 #include <Asset\THShaderStock.h>
@@ -148,6 +151,10 @@ bool Game::CreateGame(const Config& config, int bigIcon, int smallIcon)
 	dataStack = DataStack::GetInstance();
 	dataStack->Retain();
 
+	LARGE_INTEGER frequency;
+	QueryPerformanceFrequency(&frequency);
+	this->timerFrequency = frequency.QuadPart;
+
 	this->config = new Config(config);
 	return true;
 }
@@ -196,9 +203,17 @@ int Game::Run()
 
 		if (enterBackground == false)
 		{
-			CalcFPS();
-			Update();
-			Draw();
+			if (this->speedCounter < 1.0f)
+			{
+				this->speedCounter += this->speedReciprocal;
+				Update();
+			}
+			if (this->speedCounter >= 1.0f)
+			{
+				this->speedCounter -= 1.0f;
+				CalcFPS();
+				Draw();
+			}
 
 			if (nextScene)
 			{
@@ -264,7 +279,24 @@ void Game::Draw()
 
 	app->EndRender();
 
-	app->SwapBuffers();
+	if (config->useVSync)
+	{
+		app->SwapBuffers();
+	}
+	else
+	{
+		while (true)
+		{
+			Time currentTime = SystemClock::GetInstance()->GetTime();
+			long long deltaTime = currentTime.ToMicroSecond() - this->lastTimeStamp.ToMicroSecond();
+			if (deltaTime > 1000000.0f / config->fps)
+			{
+				app->SwapBuffers();
+				this->lastTimeStamp = currentTime;
+				break;
+			}
+		}
+	}
 }
 
 void Game::SetScene(Scene* scene)
@@ -308,7 +340,7 @@ void Game::LoadSceneAsync(Scene* scene, int delay, const std::function<void()>& 
 		timer->run = [this, scene]() {
 			this->nextScene = scene;
 		};
-		this->GetScheduler()->AddTimer(timer);
+		this->GetScheduler()->AddFrameTimer(timer);
 		onLoadCompleted();
 	});
 }
@@ -331,7 +363,7 @@ AsyncInfo* Game::LoadSceneAsyncWithInfo(Scene* scene, bool autoChange)
 
 void Game::CalcFPS()
 {
-	currentTime = GetTickCount();
+	this->currentTime = GetTickCount64();
 	frameCount++;
 	if (lastTime < 0)
 	{
@@ -340,7 +372,7 @@ void Game::CalcFPS()
 	}
 	if (currentTime - lastTime >= 1000)
 	{
-		fps = (float)frameCount / (currentTime - lastTime) * 1000;
+		fps = (double)frameCount / (currentTime - lastTime) * 1000;
 		lastTime = currentTime;
 		frameCount = 0;
 	}

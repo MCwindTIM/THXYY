@@ -174,14 +174,9 @@ namespace THEngine
 		HRESULT hr;
 
 		//ÉèÖÃÖ¡ÂÊ
-		int refresh;
-		if (!config->fullScreen)
+		int refresh = D3DPRESENT_RATE_DEFAULT;
+		if (config->fullScreen)
 		{
-			refresh = 0;
-		}
-		else
-		{
-			refresh = 60;
 			ShowCursor(FALSE);
 		}
 
@@ -216,8 +211,15 @@ namespace THEngine
 		d3dpp.EnableAutoDepthStencil = true;
 		d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 		d3dpp.Flags = 0;
-		d3dpp.FullScreen_RefreshRateInHz = refresh;
-		d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
+		d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
+		if (config->useVSync)
+		{
+			d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
+		}
+		else
+		{
+			d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+		}
 
 		hr = d3d->CreateDevice(D3DADAPTER_DEFAULT, deviceType,
 			hWnd, vertexProcessingType | D3DCREATE_MULTITHREADED, &d3dpp, &device);
