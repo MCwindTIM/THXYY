@@ -50,7 +50,7 @@ namespace Config
             if (this.IsInitialized)
             {
                 this.config.useVSync = (bool)(sender as CheckBox).IsChecked;
-                Update();
+                this.combo_drawInterval.IsEnabled = !this.config.useVSync;
             }
         }
     }

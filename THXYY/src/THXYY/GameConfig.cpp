@@ -152,7 +152,7 @@ void GameConfig::GetConfig(Config* config) const
 		throw std::logic_error("Not implemented");
 	}
 
-	config->title = "东方星雨夜 ~ Legend of Dancing Stars";
+	config->title = "东方星语夜 ~ Legend of Dancing Stars";
 }
 
 bool GameConfig::LoadRenderConfig(const rapidjson::Document& document)
