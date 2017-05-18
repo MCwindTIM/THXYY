@@ -36,6 +36,7 @@ namespace THEngine
 		bool showFPS;
 
 		//game speed control
+		float speed = 1.0f;          //1表示原速，2表示2倍速
 		float speedReciprocal = 1;   //速率的倒数
 		float speedCounter = 0;
 
@@ -104,7 +105,14 @@ namespace THEngine
 
 		AsyncInfo* LoadSceneAsyncWithInfo(Scene* scene, bool autoChange);
 
-		inline void SetSpeed(float speed) { this->speedReciprocal = 1.0f / speed; }
+		inline void SetSpeed(float speed)
+		{
+			this->speed = speed;
+			this->speedReciprocal = 1.0f / speed;
+		}
+		inline float GetSpeed() const { return this->speed; }
+
+		inline Config* GetConfig() const { return this->config; }
 
 		inline Application* GetApplication() const { return app; }
 

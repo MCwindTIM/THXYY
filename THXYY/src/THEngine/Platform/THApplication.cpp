@@ -361,7 +361,6 @@ namespace THEngine
 				if (*multiSampleType == D3DMULTISAMPLE_NONE)
 				{
 					*qualityLevel = 0;
-					THLog("不使用多重采样。");
 				}
 				else
 				{
@@ -373,10 +372,17 @@ namespace THEngine
 					{
 						*qualityLevel = qualityLevels - 1;
 					}
-					THLog((String)"使用多重采样。采样数为" + *multiSampleType + "，质量等级" + *qualityLevel + "。");
 				}
-				return;
+				break;
 			}
+		}
+		if (*multiSampleType == D3DMULTISAMPLE_NONE)
+		{
+			THLog("不使用多重采样。");
+		}
+		else
+		{
+			THLog((String)"使用多重采样。采样数为" + *multiSampleType + "，质量等级" + *qualityLevel + "。");
 		}
 	}
 
