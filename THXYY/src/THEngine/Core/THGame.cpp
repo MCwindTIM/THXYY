@@ -211,8 +211,26 @@ int Game::Run()
 			if (this->speedCounter >= 1.0f)
 			{
 				this->speedCounter -= 1.0f;
-				CalcFPS();
-				Draw();
+				if (config->useVSync)
+				{
+					CalcFPS();
+					Draw();
+				}
+				else
+				{
+					while (true)
+					{
+						Time currentTime = SystemClock::GetInstance()->GetTime();
+						long long deltaTime = currentTime.ToMicroSecond() - this->lastTimeStamp.ToMicroSecond();
+						if (deltaTime > 1000000.0f / config->fps)
+						{
+							CalcFPS();
+							Draw();
+							this->lastTimeStamp = currentTime;
+							break;
+						}
+					}
+				}
 			}
 
 			if (nextScene)
@@ -279,24 +297,7 @@ void Game::Draw()
 
 	app->EndRender();
 
-	if (config->useVSync)
-	{
-		app->SwapBuffers();
-	}
-	else
-	{
-		while (true)
-		{
-			Time currentTime = SystemClock::GetInstance()->GetTime();
-			long long deltaTime = currentTime.ToMicroSecond() - this->lastTimeStamp.ToMicroSecond();
-			if (deltaTime > 1000000.0f / config->fps)
-			{
-				app->SwapBuffers();
-				this->lastTimeStamp = currentTime;
-				break;
-			}
-		}
-	}
+	app->SwapBuffers();
 }
 
 void Game::SetScene(Scene* scene)
