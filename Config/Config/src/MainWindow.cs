@@ -50,6 +50,9 @@ namespace Config
             //render config
             checkBox_useMultiSample.IsChecked = config.useMultiSample;
             checkBox_useVerticalAsync.IsChecked = config.useVSync;
+
+            combo_drawInterval.IsEnabled = !config.useVSync;
+
             switch (config.lightShadowLevel)
             {
                 case Configuration.LightShadowLevel.NONE:
