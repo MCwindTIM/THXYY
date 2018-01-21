@@ -73,7 +73,7 @@ bool THXYY::CreateGame(const GameConfig& config)
 void THXYY::OnShutdown()
 {
 	Game::OnShutdown();
-	
+
 	Global::DestroyInstance();
 
 	engine = nullptr;
