@@ -70,6 +70,7 @@
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <Profile>true</Profile>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -294,7 +295,9 @@
     <ClInclude Include="src\THEngine\Common\THList.h" />
     <ClInclude Include="src\THEngine\Common\THLogger.h" />
     <ClInclude Include="src\THEngine\Common\THObject.h" />
+    <ClInclude Include="src\THEngine\Common\THPtr.h" />
     <ClInclude Include="src\THEngine\Common\THString.h" />
+    <ClInclude Include="src\THEngine\Common\THTemplates.h" />
     <ClInclude Include="src\THEngine\Core\3D\THLight.h" />
     <ClInclude Include="src\THEngine\Core\3D\THMesh.h" />
     <ClInclude Include="src\THEngine\Core\THConfig.h" />

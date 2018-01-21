@@ -968,6 +968,12 @@
     <ClInclude Include="src\THEngine\Platform\THDevice.h">
       <Filter>头文件\THEngine\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THPtr.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\THEngine\Common\THTemplates.h">
+      <Filter>头文件\THEngine\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="THXYY.rc">
