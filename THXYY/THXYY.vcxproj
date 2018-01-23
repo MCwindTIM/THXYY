@@ -148,11 +148,8 @@
     <ClCompile Include="src\STGCore\STGResources.cpp" />
     <ClCompile Include="src\STGCore\STGUtil.cpp" />
     <ClCompile Include="src\THEngine\Asset\THAssetManager.cpp" />
-    <ClCompile Include="src\THEngine\Asset\THAssetImpl.cpp" />
     <ClCompile Include="src\THEngine\Asset\THCubeMap.cpp" />
-    <ClCompile Include="src\THEngine\Asset\THFloatTexture.cpp" />
     <ClCompile Include="src\THEngine\Asset\THImage.cpp" />
-    <ClCompile Include="src\THEngine\Asset\THRenderTexture.cpp" />
     <ClCompile Include="src\THEngine\Asset\THShader.cpp" />
     <ClCompile Include="src\THEngine\Asset\THShaderStock.cpp" />
     <ClCompile Include="src\THEngine\Asset\THTexture.cpp" />
@@ -275,7 +272,7 @@
     <ClInclude Include="src\StgCore\STGEngine.h" />
     <ClInclude Include="src\STGCore\STGResources.h" />
     <ClInclude Include="src\STGCore\STGUtil.h" />
-    <ClInclude Include="src\THEngine\Asset\THAssetImpl.h" />
+    <ClInclude Include="src\THEngine\Asset\THBaseAsset.h" />
     <ClInclude Include="src\THEngine\Asset\THAssetManager.h" />
     <ClInclude Include="src\THEngine\Asset\THCubeMap.h" />
     <ClInclude Include="src\THEngine\Asset\THFloatTexture.h" />
