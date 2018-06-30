@@ -62,7 +62,7 @@ void Stage01::AddEnemy001(int startFrame)
 		Ptr<Enemy01_001> enemy = Ptr<Enemy01_001>::New();
 		enemy->SetPosition(-30, 420);
 		Ptr<TweenSequence> sequence = Ptr<TweenSequence>::New();
-		sequence->AddTween(Ptr<MoveTo>::New(Vector3f(192 + interval * (3.5f - i), 280, 
+		sequence->AddTween(Ptr<MoveTo>::New(Vector3f(192 + interval * (3.5f - i), 280,
 			enemy->GetPosition().z), 120, Tweener::EASE_OUT).Get());
 		sequence->AddTween(Ptr<Delay>::New(60).Get());
 		sequence->AddTween(Ptr<MoveTo>::New(Vector3f(420, 140, enemy->GetPosition().z), 120, Tweener::EASE_IN).Get());
@@ -82,7 +82,7 @@ void Stage01::AddEnemy002(int startFrame)
 		Ptr<Enemy01_002> enemy = Ptr<Enemy01_002>::New();
 		enemy->SetPosition(414, 420);
 		Ptr<TweenSequence> sequence = Ptr<TweenSequence>::New();
-		sequence->AddTween(Ptr<MoveTo>::New(Vector3f(192 + interval * (i - 3.5), 280, 
+		sequence->AddTween(Ptr<MoveTo>::New(Vector3f(192 + interval * (i - 3.5), 280,
 			enemy->GetPosition().z), 120, Tweener::EASE_OUT).Get());
 		sequence->AddTween(Ptr<Delay>::New(60).Get());
 		sequence->AddTween(Ptr<MoveTo>::New(Vector3f(-36, 140, enemy->GetPosition().z), 120, Tweener::EASE_IN).Get());
@@ -217,23 +217,40 @@ void Stage01::InitBackgroundObjects()
 {
 	auto engine = STGEngine::GetInstance();
 
-	Ptr<Mesh> road = Ptr<Mesh>::New();
-	road->InitVertexBuffer(4);
+	Ptr<Mesh> roadMesh = Ptr<Mesh>::New();
+	auto& vertices = roadMesh->GetVertices();
+	vertices.push_back(Vector3f(-10000, 0, -10000));
+	vertices.push_back(Vector3f(10000, 0, -10000));
+	vertices.push_back(Vector3f(-10000, 0, 10000));
+	vertices.push_back(Vector3f(10000, 0, 10000));
 
-	MeshVertex meshVertices[4] = {
-		{ -10000, 0, -10000, 0, 1, 0, -100, -100 },
-		{ 10000, 0, -10000, 0, 1, 0, 100, -100 },
-		{ -10000, 0, 10000, 0, 1, 0, -100, 100 },
-		{ 10000, 0, 10000, 0, 1, 0, 100, 100 }
-	};
+	auto& normals = roadMesh->GetNormals();
+	normals.push_back(Vector3f(0, 1, 0));
+	normals.push_back(Vector3f(0, 1, 0));
+	normals.push_back(Vector3f(0, 1, 0));
+	normals.push_back(Vector3f(0, 1, 0));
 
-	road->SetVertexData(meshVertices);
-	road->SetPrimitiveType(Mesh::TRIANGLE_STRIP);
+	auto& uv = roadMesh->GetUV();
+	uv.push_back(Vector2f(-100, -100));
+	uv.push_back(Vector2f(100, -100));
+	uv.push_back(Vector2f(-100, 100));
+	uv.push_back(Vector2f(100, 100));
+
+	auto& indices = roadMesh->GetTriangles();
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(2);
+	indices.push_back(1);
+	indices.push_back(2);
+	indices.push_back(3);
 
 	Material roadMaterial;
 	roadMaterial.texture = texRoad;
 
-	road->SetMaterial(roadMaterial);
+	roadMesh->SetMaterial(roadMaterial);
+
+	Ptr<MeshObject> road = Ptr<MeshObject>::New();
+	road->SetMesh(roadMesh);
 
 	engine->AddBackgroundObject(road.Get());
 
@@ -244,22 +261,24 @@ void Stage01::CreateHouses()
 {
 	auto engine = STGEngine::GetInstance();
 
-	Ptr<Mesh> houseLeft1 = (Mesh*)house->Clone().Get();
+	Ptr<MeshObject> houseLeft1 = Ptr<MeshObject>::New();
 	houseLeft1->SetPosition(Vector3f(-800, 395, 1000));
+	houseLeft1->SetMesh(this->house);
 	engine->AddBackgroundObject(houseLeft1.Get());
 
-	Ptr<Mesh> houseRight1 = (Mesh*)house->Clone().Get();
+	Ptr<MeshObject> houseRight1 = Ptr<MeshObject>::New();
 	houseRight1->SetPosition(Vector3f(800, 395, 1000));
 	houseRight1->SetRotationByAxis(Vector3f(0, 1, 0), 180);
+	houseRight1->SetMesh(this->house);
 	engine->AddBackgroundObject(houseRight1.Get());
 
 	for (int i = 1; i < 5; i++)
 	{
-		Ptr<Mesh> houseLeft2 = (Mesh*)houseLeft1->Clone().Get();
+		Ptr<MeshObject> houseLeft2 = (MeshObject*)houseLeft1->Clone().Get();
 		houseLeft2->SetPosition(Vector3f(-800, 395, 1000 + 1500 * i));
 		engine->AddBackgroundObject(houseLeft2.Get());
 
-		Ptr<Mesh> houseRight2 = (Mesh*)houseRight1->Clone().Get();
+		Ptr<MeshObject> houseRight2 = (MeshObject*)houseRight1->Clone().Get();
 		houseRight2->SetPosition(Vector3f(800, 395, 1000 + 1500 * i));
 		engine->AddBackgroundObject(houseRight2.Get());
 	}

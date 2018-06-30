@@ -6,7 +6,7 @@ int volatile app_count = 0;
 #include "THXYY/GameConfig.h"
 #include "THXYY/THXYY.h"
 #include "THXYY/StartupDialog.h"
-#include "resource.h"
+#include "../resource.h"
 
 #include <crtdbg.h>
 

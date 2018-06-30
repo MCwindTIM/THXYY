@@ -54,7 +54,7 @@ void Title::OnStart()
 		black->SetTexture(Global::GetInstance()->texBlack);
 		black->SetPosition(Vector3f(0.0f, 0.0f, 1.0f));
 		black->SetPivot(Vector2f(0.0f, 0.0f));
-		black->AddTween(Ptr<FadeTo>::New(0.0f, 80, Tweener::SIMPLE).Get());
+		black->AddTween(Ptr<FadeOut>::New(80, Tweener::SIMPLE).Get());
 		blackLayer->AddChild(black.Get());
 
 		titleMenu->Pause();

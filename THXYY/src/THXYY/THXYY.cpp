@@ -2,7 +2,7 @@
 #include "GameConfig.h"
 #include <STGCore.h>
 #include "..\Scene\Title\Title.h"
-#include "..\resource.h"
+#include "..\..\resource.h"
 #include <time.h>
 
 THXYY::THXYY()

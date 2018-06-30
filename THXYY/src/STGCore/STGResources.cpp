@@ -5,7 +5,7 @@
 	if (texture == nullptr) \
 	{   \
 		return false;  \
-	} 
+	}
 
 STGResources::~STGResources()
 {
@@ -147,21 +147,6 @@ bool STGResources::LoadSounds()
 void STGResources::UnloadSounds()
 {
 	auto audio = Audio::GetInstance();
-
-	audio->DestroySound(soundShoot1);
-	audio->DestroySound(soundShoot2);
-	audio->DestroySound(soundShoot3);
-	audio->DestroySound(soundBiu);
-	audio->DestroySound(soundMenuOK);
-	audio->DestroySound(soundMenuSelect);
-	audio->DestroySound(soundItem);
-	audio->DestroySound(soundDamage00);
-	audio->DestroySound(soundDamage01);
-	audio->DestroySound(soundEnemyDie00);
-	audio->DestroySound(soundEnemyDie01);
-	audio->DestroySound(soundPlayerShoot);
-	audio->DestroySound(soundBomb);
-	audio->DestroySound(soundExplode);
 
 	soundShoot1 = nullptr;
 	soundShoot2 = nullptr;

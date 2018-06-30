@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B7B677F7-DD11-40AE-8BF4-D59EB486D3B3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Game</RootNamespace>
+    <ProjectName>THEngine</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)\src\External;$(ProjectDir)\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Configuration)\Temp</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)src\External;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Configuration)\Temp</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ShowIncludes>false</ShowIncludes>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib;libcmtd.lib;libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Asset\THAssetManager.cpp" />
+    <ClCompile Include="src\Asset\THCubeMap.cpp" />
+    <ClCompile Include="src\Asset\THImage.cpp" />
+    <ClCompile Include="src\Asset\THMesh.cpp" />
+    <ClCompile Include="src\Asset\THShader.cpp" />
+    <ClCompile Include="src\Asset\THShaderStock.cpp" />
+    <ClCompile Include="src\Asset\THTexture.cpp" />
+    <ClCompile Include="src\Async\THAsyncInfo.cpp" />
+    <ClCompile Include="src\Async\THAsyncLoader.cpp" />
+    <ClCompile Include="src\Common\THCommon.cpp" />
+    <ClCompile Include="src\Common\THEngineObject.cpp" />
+    <ClCompile Include="src\Common\THException.cpp" />
+    <ClCompile Include="src\Common\THExceptionManager.cpp" />
+    <ClCompile Include="src\Common\THLogger.cpp" />
+    <ClCompile Include="src\Common\THObject.cpp" />
+    <ClCompile Include="src\Common\THString.cpp" />
+    <ClCompile Include="src\Core\3D\THLight.cpp" />
+    <ClCompile Include="src\Core\3D\THMeshObject.cpp" />
+    <ClCompile Include="src\Core\3D\THTerrain.cpp" />
+    <ClCompile Include="src\Core\THCamera.cpp" />
+    <ClCompile Include="src\Core\THDataStack.cpp" />
+    <ClCompile Include="src\Core\THEnvironment.cpp" />
+    <ClCompile Include="src\Core\THFont.cpp" />
+    <ClCompile Include="src\Core\THGame.cpp" />
+    <ClCompile Include="src\Core\THGameObject.cpp" />
+    <ClCompile Include="src\Core\THLayer.cpp" />
+    <ClCompile Include="src\Core\THParticle3D.cpp" />
+    <ClCompile Include="src\Core\THRenderState.cpp" />
+    <ClCompile Include="src\Core\THScene.cpp" />
+    <ClCompile Include="src\Core\THSprite.cpp" />
+    <ClCompile Include="src\Math\THMathUtil.cpp" />
+    <ClCompile Include="src\Math\THMatrix.cpp" />
+    <ClCompile Include="src\Math\THQuaternion.cpp" />
+    <ClCompile Include="src\Math\THRandomGenerator.cpp" />
+    <ClCompile Include="src\Math\THVector.cpp" />
+    <ClCompile Include="src\Platform\THApplication.cpp" />
+    <ClCompile Include="src\Platform\THAudio.cpp" />
+    <ClCompile Include="src\Platform\THCoreDumper.cpp" />
+    <ClCompile Include="src\Graphic\THDevice.cpp" />
+    <ClCompile Include="src\Platform\THInput.cpp" />
+    <ClCompile Include="src\Platform\THMusic.cpp" />
+    <ClCompile Include="src\Platform\THSound.cpp" />
+    <ClCompile Include="src\Graphic\THBuffers.cpp" />
+    <ClCompile Include="src\Platform\THSystemClock.cpp" />
+    <ClCompile Include="src\Renderer\THMeshRenderer.cpp" />
+    <ClCompile Include="src\Renderer\THParticle3DRenderer.cpp" />
+    <ClCompile Include="src\Renderer\THRenderer.cpp" />
+    <ClCompile Include="src\Renderer\THRenderPipleline.cpp" />
+    <ClCompile Include="src\Renderer\THRenderQueue.cpp" />
+    <ClCompile Include="src\Renderer\THShadowMap.cpp" />
+    <ClCompile Include="src\Renderer\THShadowRenderer.cpp" />
+    <ClCompile Include="src\Renderer\THSkyBoxRenderer.cpp" />
+    <ClCompile Include="src\Renderer\THSpriteRenderer.cpp" />
+    <ClCompile Include="src\Renderer\THTerrainRenderer.cpp" />
+    <ClCompile Include="src\Scheduling\THFrameTimer.cpp" />
+    <ClCompile Include="src\Scheduling\THScheduler.cpp" />
+    <ClCompile Include="src\Scheduling\THTime.cpp" />
+    <ClCompile Include="src\Scheduling\THTimer.cpp" />
+    <ClCompile Include="src\Tween\THConcreteTween.cpp" />
+    <ClCompile Include="src\Tween\THConcreteTweener.cpp" />
+    <ClCompile Include="src\Tween\THTween.cpp" />
+    <ClCompile Include="src\Tween\THTweener.cpp" />
+    <ClCompile Include="src\Tween\THTweenManager.cpp" />
+    <ClCompile Include="src\UI\THEventSystem.cpp" />
+    <ClCompile Include="src\UI\THMenu.cpp" />
+    <ClCompile Include="src\UI\THMenuItem.cpp" />
+    <ClCompile Include="src\Util\THFirstPersonCamera.cpp" />
+    <ClCompile Include="src\Util\THPicker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Asset\THMesh.h" />
+    <ClInclude Include="src\Core\3D\THTerrain.h" />
+    <ClInclude Include="src\Graphic\THForwardRenderingState.h" />
+    <ClInclude Include="src\Renderer\THTerrainRenderer.h" />
+    <ClInclude Include="src\THEngine\Asset\THAssetImpl.h" />
+    <ClInclude Include="src\Asset\THAssetManager.h" />
+    <ClInclude Include="src\Asset\THCubeMap.h" />
+    <ClInclude Include="src\Asset\THFloatTexture.h" />
+    <ClInclude Include="src\Asset\THImage.h" />
+    <ClInclude Include="src\Asset\THRenderTexture.h" />
+    <ClInclude Include="src\Asset\THShader.h" />
+    <ClInclude Include="src\Asset\THShaderStock.h" />
+    <ClInclude Include="src\Asset\THTexture.h" />
+    <ClInclude Include="src\Async\THAsyncInfo.h" />
+    <ClInclude Include="src\Async\THAsyncLoader.h" />
+    <ClInclude Include="src\Common\THCommon.h" />
+    <ClInclude Include="src\Common\THDefine.h" />
+    <ClInclude Include="src\Common\THEngineObject.h" />
+    <ClInclude Include="src\Common\THException.h" />
+    <ClInclude Include="src\Common\THExceptionManager.h" />
+    <ClInclude Include="src\THEngine\Common\THFrameTimer.h" />
+    <ClInclude Include="src\Common\THList.h" />
+    <ClInclude Include="src\Common\THLogger.h" />
+    <ClInclude Include="src\Common\THMap.h" />
+    <ClInclude Include="src\Common\THObject.h" />
+    <ClInclude Include="src\Common\THPtr.h" />
+    <ClInclude Include="src\THEngine\Common\THScheduler.h" />
+    <ClInclude Include="src\Common\THString.h" />
+    <ClInclude Include="src\Common\THTemplates.h" />
+    <ClInclude Include="src\Core\3D\THLight.h" />
+    <ClInclude Include="src\Core\3D\THMeshObject.h" />
+    <ClInclude Include="src\Core\THCamera.h" />
+    <ClInclude Include="src\Core\THConfig.h" />
+    <ClInclude Include="src\Core\THDataStack.h" />
+    <ClInclude Include="src\Core\THEnvironment.h" />
+    <ClInclude Include="src\Core\THFont.h" />
+    <ClInclude Include="src\Core\THGame.h" />
+    <ClInclude Include="src\Core\THGameObject.h" />
+    <ClInclude Include="src\Core\THLayer.h" />
+    <ClInclude Include="src\Core\THParticle3D.h" />
+    <ClInclude Include="src\THEngine\Core\THRenderObject.h" />
+    <ClInclude Include="src\Core\THRenderState.h" />
+    <ClInclude Include="src\Core\THScene.h" />
+    <ClInclude Include="src\Core\THSprite.h" />
+    <ClInclude Include="src\External\libjpeg\jconfig.h" />
+    <ClInclude Include="src\External\libjpeg\jmorecfg.h" />
+    <ClInclude Include="src\External\libjpeg\jpeglib.h" />
+    <ClInclude Include="src\External\libpng\png.h" />
+    <ClInclude Include="src\External\libpng\pngconf.h" />
+    <ClInclude Include="src\External\libpng\pnginfo.h" />
+    <ClInclude Include="src\External\libpng\pnglibconf.h" />
+    <ClInclude Include="src\External\libpng\pngpriv.h" />
+    <ClInclude Include="src\External\libpng\pngstruct.h" />
+    <ClInclude Include="src\External\SDL2\begin_code.h" />
+    <ClInclude Include="src\External\SDL2\close_code.h" />
+    <ClInclude Include="src\External\SDL2\SDL.h" />
+    <ClInclude Include="src\External\SDL2\SDL_assert.h" />
+    <ClInclude Include="src\External\SDL2\SDL_atomic.h" />
+    <ClInclude Include="src\External\SDL2\SDL_audio.h" />
+    <ClInclude Include="src\External\SDL2\SDL_bits.h" />
+    <ClInclude Include="src\External\SDL2\SDL_blendmode.h" />
+    <ClInclude Include="src\External\SDL2\SDL_clipboard.h" />
+    <ClInclude Include="src\External\SDL2\SDL_config.h" />
+    <ClInclude Include="src\External\SDL2\SDL_cpuinfo.h" />
+    <ClInclude Include="src\External\SDL2\SDL_egl.h" />
+    <ClInclude Include="src\External\SDL2\SDL_endian.h" />
+    <ClInclude Include="src\External\SDL2\SDL_error.h" />
+    <ClInclude Include="src\External\SDL2\SDL_events.h" />
+    <ClInclude Include="src\External\SDL2\SDL_filesystem.h" />
+    <ClInclude Include="src\External\SDL2\SDL_gamecontroller.h" />
+    <ClInclude Include="src\External\SDL2\SDL_gesture.h" />
+    <ClInclude Include="src\External\SDL2\SDL_haptic.h" />
+    <ClInclude Include="src\External\SDL2\SDL_hints.h" />
+    <ClInclude Include="src\External\SDL2\SDL_joystick.h" />
+    <ClInclude Include="src\External\SDL2\SDL_keyboard.h" />
+    <ClInclude Include="src\External\SDL2\SDL_keycode.h" />
+    <ClInclude Include="src\External\SDL2\SDL_loadso.h" />
+    <ClInclude Include="src\External\SDL2\SDL_log.h" />
+    <ClInclude Include="src\External\SDL2\SDL_main.h" />
+    <ClInclude Include="src\External\SDL2\SDL_messagebox.h" />
+    <ClInclude Include="src\External\SDL2\SDL_mixer.h" />
+    <ClInclude Include="src\External\SDL2\SDL_mouse.h" />
+    <ClInclude Include="src\External\SDL2\SDL_mutex.h" />
+    <ClInclude Include="src\External\SDL2\SDL_name.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengl.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengles.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengles2.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengles2_gl2.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengles2_gl2ext.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengles2_gl2platform.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengles2_khrplatform.h" />
+    <ClInclude Include="src\External\SDL2\SDL_opengl_glext.h" />
+    <ClInclude Include="src\External\SDL2\SDL_pixels.h" />
+    <ClInclude Include="src\External\SDL2\SDL_platform.h" />
+    <ClInclude Include="src\External\SDL2\SDL_power.h" />
+    <ClInclude Include="src\External\SDL2\SDL_quit.h" />
+    <ClInclude Include="src\External\SDL2\SDL_rect.h" />
+    <ClInclude Include="src\External\SDL2\SDL_render.h" />
+    <ClInclude Include="src\External\SDL2\SDL_revision.h" />
+    <ClInclude Include="src\External\SDL2\SDL_rwops.h" />
+    <ClInclude Include="src\External\SDL2\SDL_scancode.h" />
+    <ClInclude Include="src\External\SDL2\SDL_shape.h" />
+    <ClInclude Include="src\External\SDL2\SDL_stdinc.h" />
+    <ClInclude Include="src\External\SDL2\SDL_surface.h" />
+    <ClInclude Include="src\External\SDL2\SDL_system.h" />
+    <ClInclude Include="src\External\SDL2\SDL_syswm.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_assert.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_common.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_compare.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_crc32.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_font.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_fuzzer.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_harness.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_images.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_log.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_md5.h" />
+    <ClInclude Include="src\External\SDL2\SDL_test_random.h" />
+    <ClInclude Include="src\External\SDL2\SDL_thread.h" />
+    <ClInclude Include="src\External\SDL2\SDL_timer.h" />
+    <ClInclude Include="src\External\SDL2\SDL_touch.h" />
+    <ClInclude Include="src\External\SDL2\SDL_types.h" />
+    <ClInclude Include="src\External\SDL2\SDL_version.h" />
+    <ClInclude Include="src\External\SDL2\SDL_video.h" />
+    <ClInclude Include="src\Graphic\THGraphicDefines.h" />
+    <ClInclude Include="src\Graphic\THVertexFormat.h" />
+    <ClInclude Include="src\THEngine\Math\MathUtil.h" />
+    <ClInclude Include="src\THEngine\Math\Matrix.h" />
+    <ClInclude Include="src\Math\THMath.h" />
+    <ClInclude Include="src\Math\THMathUtil.h" />
+    <ClInclude Include="src\Math\THMatrix.h" />
+    <ClInclude Include="src\Math\THQuaternion.h" />
+    <ClInclude Include="src\Math\THRandomGenerator.h" />
+    <ClInclude Include="src\Math\THVector.h" />
+    <ClInclude Include="src\Platform\THApplication.h" />
+    <ClInclude Include="src\Platform\THAudio.h" />
+    <ClInclude Include="src\Platform\THCoreDumper.h" />
+    <ClInclude Include="src\Graphic\THDevice.h" />
+    <ClInclude Include="src\Platform\THInput.h" />
+    <ClInclude Include="src\Platform\THMusic.h" />
+    <ClInclude Include="src\Platform\THSound.h" />
+    <ClInclude Include="src\Graphic\THBuffers.h" />
+    <ClInclude Include="src\Platform\THSystemClock.h" />
+    <ClInclude Include="src\Renderer\THMeshRenderer.h" />
+    <ClInclude Include="src\Renderer\THParticle3DRenderer.h" />
+    <ClInclude Include="src\Renderer\THRenderer.h" />
+    <ClInclude Include="src\Renderer\THRenderPipeline.h" />
+    <ClInclude Include="src\Renderer\THRenderQueue.h" />
+    <ClInclude Include="src\Renderer\THShadowMap.h" />
+    <ClInclude Include="src\Renderer\THShadowRenderer.h" />
+    <ClInclude Include="src\Renderer\THSkyBoxRenderer.h" />
+    <ClInclude Include="src\Renderer\THSpriteRenderer.h" />
+    <ClInclude Include="src\Scheduling\THFrameTimer.h" />
+    <ClInclude Include="src\Scheduling\THScheduler.h" />
+    <ClInclude Include="src\Scheduling\THTime.h" />
+    <ClInclude Include="src\Scheduling\THTimer.h" />
+    <ClInclude Include="src\THEngine.h" />
+    <ClInclude Include="src\Tween\THConcreteTween.h" />
+    <ClInclude Include="src\Tween\THConcreteTweener.h" />
+    <ClInclude Include="src\Tween\THTween.h" />
+    <ClInclude Include="src\Tween\THTweener.h" />
+    <ClInclude Include="src\Tween\THTweenManager.h" />
+    <ClInclude Include="src\UI\THEvents.h" />
+    <ClInclude Include="src\UI\THEventSystem.h" />
+    <ClInclude Include="src\UI\THMenu.h" />
+    <ClInclude Include="src\UI\THMenuItem.h" />
+    <ClInclude Include="src\Util\THFirstPersonCamera.h" />
+    <ClInclude Include="src\Util\THPicker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\font\font-fps-opensans.png" />
+    <Image Include="res\icon\Game.ico" />
+    <Image Include="res\icon\small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\lighting.hlsli">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="fx\mesh.fx">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="fx\sprite.fx">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\font\font-fps-opensans.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fx\terrainShadow.fx">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

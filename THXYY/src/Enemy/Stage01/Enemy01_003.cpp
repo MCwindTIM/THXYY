@@ -51,9 +51,10 @@ void Enemy01_003::Shoot(float x, float y, ShootColor color)
 			bullet->SetSpeed(0.5 + j);
 			bullet->SetAngle(baseAngle + 15 * i + 2 * j);
 			bullet->AddTween(Ptr<SpeedTo>::New(0.0f, 45, Tweener::SIMPLE).Get());
-			bullet->GetScheduler()->AddFrameTimer(90, [bullet]() {
-				bullet->SetAngle(bullet->GetAngle() + 60);
-				bullet->AddTween(Ptr<SpeedTo>::New(-1.5f, 45, Tweener::SIMPLE).Get());
+			Bullet* raw = bullet.Get();
+			bullet->GetScheduler()->AddFrameTimer(90, [raw]() {
+				raw->SetAngle(raw->GetAngle() + 60);
+				raw->AddTween(Ptr<SpeedTo>::New(1.5f, 45, Tweener::SIMPLE).Get());
 			});
 
 			switch (color)

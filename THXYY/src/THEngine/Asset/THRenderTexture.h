@@ -10,6 +10,9 @@ namespace THEngine
 	public:
 		RenderTexture() = default;
 		virtual ~RenderTexture() = default;
+
+		virtual void OnLostDevice() override;
+		virtual void OnResetDevice() override;
 	};
 }
 

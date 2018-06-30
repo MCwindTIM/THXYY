@@ -36,7 +36,10 @@ void Bullet::Update()
 
 	if (dirSame)
 	{
-		SetRotation(angle - 90);
+		if (this->speed >= 0)
+			SetRotation(angle - 90);
+		else
+			SetRotation(angle + 90);
 	}
 
 	if (autoDelete)

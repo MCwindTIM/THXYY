@@ -1,6 +1,7 @@
 #ifndef THSHADER_H
 #define THSHADER_H
 
+#include "THBaseAsset.h"
 #include <Common\THCommon.h>
 #include <Math\THMath.h>
 
@@ -10,10 +11,10 @@ namespace THEngine
 	class Texture;
 	class CubeMap;
 
-	class Shader : public Object
+	class Shader : public BaseAsset
 	{
 	protected:
-		ID3DXEffect* effect;
+		ID3DXEffect * effect;
 		UINT passNum;
 		String path;
 		int currentPass = -1;
@@ -78,8 +79,8 @@ namespace THEngine
 			effect->SetValue(name, value, size);
 		}
 
-		void OnLostDevice();
-		void OnResetDevice();
+		virtual void OnLostDevice() override;
+		virtual void OnResetDevice() override;
 
 		friend class AssetManager;
 	};

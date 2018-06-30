@@ -184,11 +184,7 @@ namespace THEngine
 
 	bool Application::IsMinimized()
 	{
-		if (IsIconic(hWnd))
-		{
-			return true;
-		}
-		return false;
+		return IsIconic(hWnd);
 	}
 
 	LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

@@ -252,7 +252,7 @@ ReimuBomb1::SubSprite::SubSprite()
 
 	SetTexture(stgResources->texReimu);
 	SetTexRect(Rect(64, 128, 192, 256));
-	SetBlendMode(BlendMode::ADD);
+	SetBlendMode(SpriteBlendMode::ADD);
 
 	position.z = 10.0f;
 }
