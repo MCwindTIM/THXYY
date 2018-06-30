@@ -133,6 +133,7 @@ copy $(SolutionDir)THEngine\SDL2_mixer.dll $(SolutionDir)$(Configuration)</Comma
       <Command>xcopy /E /Y $(SolutionDir)THEngine\fx $(SolutionDir)$(Configuration)\fx\
 xcopy /E /Y $(SolutionDir)THEngine\res $(SolutionDir)$(Configuration)\res\
 xcopy /E /Y $(ProjectDir)res $(SolutionDir)$(Configuration)\res\
+xcopy /E /Y $(ProjectDir)sound $(SolutionDir)$(Configuration)\sound\
 copy $(SolutionDir)THEngine\SDL2.dll $(SolutionDir)$(Configuration)
 copy $(SolutionDir)THEngine\SDL2_mixer.dll $(SolutionDir)$(Configuration)</Command>
     </PostBuildEvent>
