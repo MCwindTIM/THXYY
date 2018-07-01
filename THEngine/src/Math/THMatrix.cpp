@@ -92,6 +92,11 @@ namespace THEngine
 		return float4x4(row, coloum);
 	}
 
+	void Matrix::Dump(float* output)
+	{
+		XMStoreFloat4x4((XMFLOAT4X4*)output, this->matrix);
+	}
+
 	Matrix& Matrix::operator*=(const Matrix& matrix)
 	{
 		this->matrix *= matrix.matrix;

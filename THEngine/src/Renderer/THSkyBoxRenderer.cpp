@@ -33,7 +33,7 @@ namespace THEngine
 				return nullptr;
 			}
 			std::vector<VertexFormatItem> vfitems;
-			vfitems.push_back(VertexFormatItem(0, DataType::FLOAT3, Semantic::POSITION, 0, 0));
+			vfitems.push_back(VertexFormatItem(0, DataType::FLOAT3, "POSITION", 0, 0));
 			renderer->format = device->CreateVertexFormat(vfitems, ShaderStock::GetInstance()->GetSkyBoxShader(), "SkyBox", 0);
 			if (renderer->format == nullptr)
 			{

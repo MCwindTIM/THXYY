@@ -3,7 +3,7 @@
 
 #include <Core\THGame.h>
 #include <Core\THScene.h>
-#include <Core\THParticle3D.h>
+#include <Core\THSprite3D.h>
 #include <Core\3D\THMeshObject.h>
 #include <Core\3D\THTerrain.h>
 #include <Core\THConfig.h>

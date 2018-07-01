@@ -4,7 +4,7 @@
 
 using namespace THEngine;
 
-class SakuraParticle : public Particle3D
+class SakuraParticle : public Sprite3D
 {
 public:
 	SakuraParticle();

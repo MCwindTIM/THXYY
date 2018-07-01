@@ -89,6 +89,8 @@ namespace THEngine
 		Rect(float l, float r, float t, float b) :left(l), right(r), top(t), bottom(b) {}
 		inline float Width() const { return right - left; }
 		inline float Height() const { return bottom - top; }
+
+		bool operator ==(const Rect& rhs) const { return left == rhs.left && right == rhs.right && top == rhs.top && bottom == rhs.bottom; }
 	};
 
 	class RectInt
@@ -101,6 +103,8 @@ namespace THEngine
 		RectInt(int l, int r, int t, int b) :left(l), right(r), top(t), bottom(b) {}
 		inline int Width() const { return right - left; }
 		inline int Height() const { return bottom - top; }
+
+		bool operator ==(const RectInt& rhs) const { return left == rhs.left && right == rhs.right && top == rhs.top && bottom == rhs.bottom; }
 	};
 }
 

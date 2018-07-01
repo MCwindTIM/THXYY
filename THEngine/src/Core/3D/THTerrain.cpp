@@ -14,8 +14,8 @@ namespace THEngine
 		auto terrainShader = ShaderStock::GetInstance()->GetTerrainShader();
 
 		std::vector<VertexFormatItem> vfitems;
-		vfitems.push_back(VertexFormatItem(0, DataType::FLOAT3, Semantic::POSITION, 0, 0));
-		vfitems.push_back(VertexFormatItem(sizeof(float) * 6, DataType::FLOAT2, Semantic::TEXCOORD, 0, 0));
+		vfitems.push_back(VertexFormatItem(0, DataType::FLOAT3, "POSITION", 0, 0));
+		vfitems.push_back(VertexFormatItem(sizeof(float) * 6, DataType::FLOAT2, "TEXCOORD", 0, 0));
 		this->vertexFormat = device->CreateVertexFormat(vfitems, terrainShader, "Terrain", 0);
 	}
 

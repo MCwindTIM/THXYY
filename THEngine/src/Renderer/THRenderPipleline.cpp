@@ -1,7 +1,6 @@
 #include "THRenderPipeline.h"
 #include "THShadowRenderer.h"
 #include "THSpriteRenderer.h"
-#include "THParticle3DRenderer.h"
 #include "THMeshRenderer.h"
 #include "THSkyBoxRenderer.h"
 #include "THRenderQueue.h"
@@ -38,15 +37,6 @@ namespace THEngine
 			exceptionManager->PushException(newException);
 			return nullptr;
 		};
-
-		pipeline->particle3DRenderer = Particle3DRenderer::Create();
-		if (pipeline->particle3DRenderer == nullptr)
-		{
-			auto exception = exceptionManager->GetException();
-			auto newException = Ptr<Exception>::New((String)"创建Particle3DRenderer失败。原因是：\n" + exception->GetInfo());
-			exceptionManager->PushException(newException);
-			return nullptr;
-		}
 
 		pipeline->meshRenderer = MeshRenderer::Create();
 		if (pipeline->meshRenderer == nullptr)

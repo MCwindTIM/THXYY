@@ -5,14 +5,6 @@
 
 namespace THEngine
 {
-	enum class Semantic
-	{
-		POSITION,
-		NORMAL,
-		COLOR,
-		TEXCOORD
-	};
-
 	enum class DataType
 	{
 		INT,
@@ -26,17 +18,19 @@ namespace THEngine
 	{
 		size_t offset;
 		DataType dataType;
-		Semantic semantic;
+		const char* semantic;
 		size_t semanticIndex;
 		int stream = 0;
+		bool isInstanceData = false;
 
 		VertexFormatItem() = default;
-		VertexFormatItem(size_t offset, DataType dataType, Semantic semantic, size_t semanticIndex, int stream = 0) :
+		VertexFormatItem(size_t offset, DataType dataType, const char* semantic, size_t semanticIndex, int stream = 0, bool isInstanceData = false) :
 			offset(offset),
 			dataType(dataType),
 			semantic(semantic),
 			semanticIndex(semanticIndex),
-			stream(stream)
+			stream(stream),
+			isInstanceData(isInstanceData)
 		{
 		}
 	};

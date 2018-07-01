@@ -216,7 +216,7 @@ void STGEngine::AddItem(Ptr<Item> item)
 	gameScene->GetSTGLayer()->AddChild(item.Get());
 }
 
-void STGEngine::AddParticle(Ptr<Particle3D> particle)
+void STGEngine::AddParticle(Ptr<Sprite3D> particle)
 {
 	particleList.Add(particle);
 	gameScene->GetSTGParticleLayer()->AddChild(particle.Get());

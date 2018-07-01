@@ -58,12 +58,12 @@ void Bullet::OnDie()
 	auto engine = STGEngine::GetInstance();
 	auto stgResources = STGResources::GetInstance();
 
-	Ptr<Particle3D> effect[1];
+	Ptr<Sprite3D> effect[1];
 	for (int i = 0; i < 1; i++)
 	{
 		int effectLife = 40;
 
-		effect[i] = Ptr<Particle3D>::New();
+		effect[i] = Ptr<Sprite3D>::New();
 		effect[i]->SetTexture(stgResources->texFourAngleStar);
 		effect[i]->SetPosition(position);
 		effect[i]->SetLife(effectLife);

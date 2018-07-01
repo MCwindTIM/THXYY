@@ -2,6 +2,8 @@
 #include "THSprite.h"
 #include "THGame.h"
 #include <Graphic\THDevice.h>
+#include <Renderer\THRenderPipeline.h>
+#include <Renderer\THSpriteRenderer.h>
 #include "../Asset/THAssetManager.h"
 #include <fstream>
 #include <sstream>
@@ -81,6 +83,9 @@ void SpriteFont::DrawString(const String& text, float x, float y)
 		sprite->SetPosition(Vector3f(x, y, 0));
 		sprite->WriteRenderData();
 		sprite->Draw();
+
+		Game::GetInstance()->GetRenderPipeline()->GetSpriteRenderer()->Flush();
+
 		x += rc.Width();
 	}
 }

@@ -128,7 +128,7 @@
     <ClCompile Include="src\Core\THGame.cpp" />
     <ClCompile Include="src\Core\THGameObject.cpp" />
     <ClCompile Include="src\Core\THLayer.cpp" />
-    <ClCompile Include="src\Core\THParticle3D.cpp" />
+    <ClCompile Include="src\Core\THSprite3D.cpp" />
     <ClCompile Include="src\Core\THRenderState.cpp" />
     <ClCompile Include="src\Core\THScene.cpp" />
     <ClCompile Include="src\Core\THSprite.cpp" />
@@ -147,7 +147,6 @@
     <ClCompile Include="src\Graphic\THBuffers.cpp" />
     <ClCompile Include="src\Platform\THSystemClock.cpp" />
     <ClCompile Include="src\Renderer\THMeshRenderer.cpp" />
-    <ClCompile Include="src\Renderer\THParticle3DRenderer.cpp" />
     <ClCompile Include="src\Renderer\THRenderer.cpp" />
     <ClCompile Include="src\Renderer\THRenderPipleline.cpp" />
     <ClCompile Include="src\Renderer\THRenderQueue.cpp" />
@@ -211,7 +210,7 @@
     <ClInclude Include="src\Core\THGame.h" />
     <ClInclude Include="src\Core\THGameObject.h" />
     <ClInclude Include="src\Core\THLayer.h" />
-    <ClInclude Include="src\Core\THParticle3D.h" />
+    <ClInclude Include="src\Core\THSprite3D.h" />
     <ClInclude Include="src\THEngine\Core\THRenderObject.h" />
     <ClInclude Include="src\Core\THRenderState.h" />
     <ClInclude Include="src\Core\THScene.h" />
@@ -316,7 +315,6 @@
     <ClInclude Include="src\Graphic\THBuffers.h" />
     <ClInclude Include="src\Platform\THSystemClock.h" />
     <ClInclude Include="src\Renderer\THMeshRenderer.h" />
-    <ClInclude Include="src\Renderer\THParticle3DRenderer.h" />
     <ClInclude Include="src\Renderer\THRenderer.h" />
     <ClInclude Include="src\Renderer\THRenderPipeline.h" />
     <ClInclude Include="src\Renderer\THRenderQueue.h" />

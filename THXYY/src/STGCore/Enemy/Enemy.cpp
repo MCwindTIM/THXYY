@@ -153,12 +153,12 @@ void Enemy::OnDie()
 
 	stgResources->soundEnemyDie00->Play();
 
-	Ptr<Particle3D> effect[10];
+	Ptr<Sprite3D> effect[10];
 	for (int i = 0; i < 10; i++)
 	{
 		int effectLife = 40;
 
-		effect[i] = Ptr<Particle3D>::New();
+		effect[i] = Ptr<Sprite3D>::New();
 		effect[i]->SetTexture(stgResources->texFourAngleStar);
 		effect[i]->SetPosition(position);
 		effect[i]->SetLife(effectLife);
@@ -187,7 +187,7 @@ void Enemy::OnDie()
 
 	Ptr<Sprite> dieEffect = Ptr<Sprite>::New();
 	dieEffect->SetPosition(position);
-	dieEffect->SetTexture(stgResources->texEffBase);	
+	dieEffect->SetTexture(stgResources->texEffBase);
 	dieEffect->AddTween(Ptr<ScaleTo>::New(Vector3f(2.0f, 2.0f, 1.0f), 10, Tweener::SIMPLE).Get());
 	dieEffect->AddTween(Ptr<FadeOut>::New(10, Tweener::SIMPLE).Get());
 	engine->AddEffect(dieEffect);

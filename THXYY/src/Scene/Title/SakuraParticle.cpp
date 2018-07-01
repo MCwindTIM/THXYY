@@ -13,7 +13,6 @@ SakuraParticle::SakuraParticle(int type)
 
 SakuraParticle::~SakuraParticle()
 {
-
 }
 
 void SakuraParticle::InitWithType(int type)
@@ -38,5 +37,5 @@ void SakuraParticle::InitWithType(int type)
 
 void SakuraParticle::Update()
 {
-	Particle3D::Update();
+	Sprite3D::Update();
 }

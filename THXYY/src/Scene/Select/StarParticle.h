@@ -5,7 +5,7 @@
 
 using namespace THEngine;
 
-class StarParticle : public Particle3D
+class StarParticle : public Sprite3D
 {
 public:
 	StarParticle();

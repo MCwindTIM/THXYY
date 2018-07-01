@@ -68,7 +68,7 @@ private:
 	LinkedList<Ptr<Sprite>> effectList;
 	LinkedList<Ptr<PlayerBullet>> playerBulletList;
 	LinkedList<Ptr<Item>> itemList;
-	LinkedList<Ptr<Particle3D>> particleList;
+	LinkedList<Ptr<Sprite3D>> particleList;
 	LinkedList<Ptr<GameObject>> backgroundList;
 
 	Ptr<STGResources> stgResources = STGResources::GetInstance();
@@ -136,7 +136,7 @@ public:
 	void AddBullet(Ptr<Bullet> bullet);
 	void AddEffect(Ptr<Sprite> effect);
 	void AddItem(Ptr<Item> item);
-	void AddParticle(Ptr<Particle3D> particle);
+	void AddParticle(Ptr<Sprite3D> particle);
 	void AddBackgroundObject(Ptr<GameObject> object);
 
 	void ShootPlayerBullet(Ptr<PlayerBullet> playerBullet);

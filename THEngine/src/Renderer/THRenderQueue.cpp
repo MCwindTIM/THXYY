@@ -1,5 +1,7 @@
 #include "THRenderQueue.h"
 #include "THRenderer.h"
+#include "THRenderPipeline.h"
+#include "THSpriteRenderer.h"
 #include <Core\THGame.h>
 #include <Core\THSprite.h>
 #include <iostream>
@@ -43,31 +45,28 @@ void SpriteRenderQueue::Render()
 	objList.Sort(0, objList.Size(), SpriteRenderQueue::Compare);
 
 	RenderQueue::Render();
+
+	Game::GetInstance()->GetRenderPipeline()->GetSpriteRenderer()->Flush();
 }
 
 /////////////////////////////////////////////
 NormalRenderQueue::NormalRenderQueue()
 {
-
 }
 
 NormalRenderQueue::~NormalRenderQueue()
 {
-
 }
 
 /////////////////////////////////////////////
 GlobalRenderQueue::GlobalRenderQueue()
 {
-
 }
 
 GlobalRenderQueue::~GlobalRenderQueue()
 {
-
 }
 
 void GlobalRenderQueue::Render()
 {
-
 }

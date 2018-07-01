@@ -6,7 +6,6 @@
 namespace THEngine
 {
 	class SpriteRenderer;
-	class Particle3DRenderer;
 	class MeshRenderer;
 	class SkyBoxRenderer;
 	class ShadowRenderer;
@@ -23,7 +22,6 @@ namespace THEngine
 	{
 	private:
 		Ptr<SpriteRenderer> spriteRenderer;
-		Ptr<Particle3DRenderer> particle3DRenderer = nullptr;
 		Ptr<MeshRenderer> meshRenderer = nullptr;
 		Ptr<SkyBoxRenderer> skyBoxRenderer = nullptr;
 		Ptr<DirLightShadowRenderer> dirShadowRenderer = nullptr;
@@ -56,7 +54,6 @@ namespace THEngine
 		void SendToRenderQueue(RenderQueueType type, GameObject* obj);
 
 		inline Ptr<SpriteRenderer> GetSpriteRenderer() const { return spriteRenderer; }
-		inline Ptr<Particle3DRenderer> GetParticle3DRenderer() const { return particle3DRenderer; }
 		inline Ptr<MeshRenderer> GetMeshRenderer() const { return meshRenderer; }
 		inline Ptr<SkyBoxRenderer> GetSkyBoxRenderer() const { return skyBoxRenderer; }
 		Ptr<TerrainRenderer> GetTerrainRenderer() const { return terrainRenderer; }

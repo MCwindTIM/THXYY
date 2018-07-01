@@ -77,6 +77,6 @@ void Sprite::GetWorldMatrix(Matrix* matrix)
 	Matrix::RotateZ(&temp, this->rotation);
 	*matrix *= temp;
 
-	Matrix::Translate(&temp, this->position.x, this->position.y, 0.0f);
+	Matrix::Translate(&temp, this->position.x, this->position.y, this->position.z);
 	*matrix *= temp;
 }

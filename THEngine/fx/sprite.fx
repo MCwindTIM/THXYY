@@ -1,4 +1,4 @@
-matrix world, projection, view;
+matrix projection, view;
 
 Texture2D tex;
 
@@ -12,8 +12,9 @@ SamplerState TextureSampler
 struct VertexIn
 {
 	float3 position : POSITION;
-	float4 color : COLOR0;
 	float2 texCoord : TEXCOORD0;
+	float4 color : COLOR0;
+	row_major matrix world: WORLD;
 };
 
 struct VertexOut
@@ -26,9 +27,9 @@ struct VertexOut
 VertexOut VSFunc(VertexIn input)
 {
 	VertexOut output;
-	matrix transform;
 
-	transform = mul(world, view);
+	matrix world = input.world;
+	matrix transform = mul(world, view);
 
 	output.position.xyz = input.position;
 	output.position.w = 1.0f;

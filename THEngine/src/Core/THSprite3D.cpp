@@ -1,32 +1,32 @@
-#include "THParticle3D.h"
+#include "THSprite3D.h"
 #include "THGame.h"
 #include <Asset\THTexture.h>
 #include <Renderer\THRenderPipeline.h>
-#include <Renderer\THParticle3DRenderer.h>
+#include <Renderer\THSpriteRenderer.h>
 
 namespace THEngine
 {
-	Particle3D::Particle3D()
+	Sprite3D::Sprite3D()
 	{
 	}
 
-	Particle3D::~Particle3D()
+	Sprite3D::~Sprite3D()
 	{
 	}
 
-	void Particle3D::SendToRenderQueue()
+	void Sprite3D::SendToRenderQueue()
 	{
 		Game::GetInstance()->GetRenderPipeline()->SendToRenderQueue(RenderPipeline::SPRITE, this);
 	}
 
-	void Particle3D::RotateByAxis(const Vector3f& axis, float degree)
+	void Sprite3D::RotateByAxis(const Vector3f& axis, float degree)
 	{
 		Quaternion temp;
 		Quaternion::RotateAngleAxis(&temp, Vector3f(axis.x, axis.y, axis.z), degree);
 		rotation3D *= temp;
 	}
 
-	void Particle3D::Update()
+	void Sprite3D::Update()
 	{
 		GameObject::Update();
 
@@ -41,12 +41,12 @@ namespace THEngine
 		}
 	}
 
-	void Particle3D::Draw()
+	void Sprite3D::Draw()
 	{
-		Game::GetInstance()->GetRenderPipeline()->GetParticle3DRenderer()->Render(this);
+		Game::GetInstance()->GetRenderPipeline()->GetSpriteRenderer()->Render(this);
 	}
 
-	void Particle3D::GetWorldMatrix(Matrix* matrix)
+	void Sprite3D::GetWorldMatrix(Matrix* matrix)
 	{
 		Matrix& transform = *matrix;
 		Matrix::Identity(&transform);

@@ -74,7 +74,7 @@ void SelectScene::Update()
 		if (frame_nowLoading == 4)
 		{
 			frame_nowLoading = 0;
-			Ptr<Particle3D> particle = Ptr<Particle3D>::New();
+			Ptr<Sprite3D> particle = Ptr<Sprite3D>::New();
 			particle->SetTexture(this->texLoading);
 			particle->SetTexRect(Rect(32, 64, 96, 128));
 			particle->SetPosition(Vector3f(Math::Random(416, 640), 128, 50));

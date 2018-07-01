@@ -17,7 +17,6 @@ namespace THEngine
 	static Map<CompareOp, D3D11_COMPARISON_FUNC> __device_compare_op_map;
 	static Map<StencilOp, D3D11_STENCIL_OP> __device_stencil_op_map;
 
-	static Map<Semantic, char*> __device_semantic_map;
 	static Map<DataType, DXGI_FORMAT> __device_data_format_map;
 
 	static Map<PrimitiveType, D3D11_PRIMITIVE_TOPOLOGY> __device_primitive_type_map;
@@ -66,11 +65,6 @@ namespace THEngine
 		__device_stencil_op_map.Put(StencilOp::DEC, D3D11_STENCIL_OP_DECR);
 		__device_stencil_op_map.Put(StencilOp::INC_SAT, D3D11_STENCIL_OP_INCR_SAT);
 		__device_stencil_op_map.Put(StencilOp::DEC_SAT, D3D11_STENCIL_OP_DECR_SAT);
-
-		__device_semantic_map.Put(Semantic::POSITION, "POSITION");
-		__device_semantic_map.Put(Semantic::NORMAL, "NORMAL");
-		__device_semantic_map.Put(Semantic::COLOR, "COLOR");
-		__device_semantic_map.Put(Semantic::TEXCOORD, "TEXCOORD");
 
 		__device_data_format_map.Put(DataType::INT, DXGI_FORMAT_R32_SINT);
 		__device_data_format_map.Put(DataType::FLOAT, DXGI_FORMAT_R32_FLOAT);
@@ -803,13 +797,13 @@ namespace THEngine
 		for (const VertexFormatItem& item : items)
 		{
 			D3D11_INPUT_ELEMENT_DESC desc;
-			desc.SemanticName = __device_semantic_map.Get(item.semantic);
+			desc.SemanticName = item.semantic;
 			desc.SemanticIndex = item.semanticIndex;
-			desc.AlignedByteOffset = item.offset;
+			desc.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 			desc.Format = __device_data_format_map.Get(item.dataType);
 			desc.InputSlot = item.stream;
-			desc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-			desc.InstanceDataStepRate = 0;
+			desc.InputSlotClass = item.isInstanceData ? D3D11_INPUT_PER_INSTANCE_DATA : D3D11_INPUT_PER_VERTEX_DATA;
+			desc.InstanceDataStepRate = item.isInstanceData ? 1 : 0;
 			descs.push_back(desc);
 		}
 
@@ -861,5 +855,18 @@ namespace THEngine
 		}
 
 		this->context->DrawIndexed(indicesCount, startIndex, startVertex);
+	}
+
+	void Device::DrawInstanced(PrimitiveType primitiveType, size_t verticesCount, size_t startVertex, size_t instanceCount, size_t startInstance)
+	{
+		SetupRenderState();
+
+		if (renderState->primitiveType != primitiveType)
+		{
+			renderState->primitiveType = primitiveType;
+			this->context->IASetPrimitiveTopology(__device_primitive_type_map.Get(primitiveType));
+		}
+
+		this->context->DrawInstanced(verticesCount, instanceCount, startVertex, startInstance);
 	}
 }

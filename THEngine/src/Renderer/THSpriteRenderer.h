@@ -18,23 +18,27 @@ namespace THEngine
 		struct SpriteVertex
 		{
 			float x, y, z;
-			float r, g, b, a;
 			float u, v;
 			SpriteVertex() {}
-			SpriteVertex(float x, float y, float z, float r, float g, float b, float a, float u, float v)
-				:x(x), y(y), z(z), r(r), g(g), b(b), a(a), u(u), v(v)
+			SpriteVertex(float x, float y, float z, float u, float v)
+				:x(x), y(y), z(z), u(u), v(v)
 			{
 			}
 		};
 
-		/*struct SpriteBatch
+		struct SpriteInstance
 		{
-			SpriteVertex vertices[MAX_SPRITE][6];
-			int spriteCount = 0;
-			Texture* texture;
-		};*/
+			Vector4f color;
+			Vector4f world1;
+			Vector4f world2;
+			Vector4f world3;
+			Vector4f world4;
+		};
+
+		std::vector<Ptr<Sprite>> spriteBatch;
 
 		Ptr<DynamicVertexBuffer> vb;
+		Ptr<DynamicVertexBuffer> instanceBuffer;
 		Ptr<VertexFormat> format;
 		//SpriteBatch spriteBatch;
 
@@ -54,6 +58,8 @@ namespace THEngine
 		static Ptr<SpriteRenderer> Create();
 
 		virtual void Render(Ptr<GameObject> obj) override;
+
+		void Flush();
 
 		friend class SpriteRenderQueue;
 	};

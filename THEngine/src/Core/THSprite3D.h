@@ -1,5 +1,5 @@
-#ifndef THPARTICLE3D_H
-#define THPARTICLE3D_H
+#ifndef THSPRITE3D_H
+#define THSPRITE3D_H
 
 #include <Common\THCommon.h>
 #include "THGameObject.h"
@@ -8,7 +8,7 @@ namespace THEngine
 {
 	class Texture;
 
-	class Particle3D : public GameObject
+	class Sprite3D : public GameObject
 	{
 	protected:
 		Ptr<Texture> texture;
@@ -29,8 +29,8 @@ namespace THEngine
 		virtual void GetWorldMatrix(Matrix* matrix);
 
 	public:
-		Particle3D();
-		virtual ~Particle3D();
+		Sprite3D();
+		virtual ~Sprite3D();
 
 		virtual void Update() override;
 

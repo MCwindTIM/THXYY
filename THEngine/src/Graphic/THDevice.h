@@ -132,6 +132,7 @@ namespace THEngine
 
 		void Draw(PrimitiveType primitiveType, size_t verticesCount, size_t startVertex);
 		void DrawIndexed(PrimitiveType primitiveType, size_t indicesCount, size_t startIndex, size_t startVertex);
+		void DrawInstanced(PrimitiveType primitiveType, size_t verticesCount, size_t startVertex, size_t instanceCount, size_t startInstance);
 
 		friend class AssetManager;
 		friend class Shader;
