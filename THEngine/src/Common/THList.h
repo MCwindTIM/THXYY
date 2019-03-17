@@ -15,7 +15,7 @@ namespace THEngine
 	template <class T> class ArrayListIterator;
 
 	template <class T>
-	class Iterator
+	class Iterator : public Object
 	{
 	public:
 		virtual bool HasNext() = 0;
@@ -39,7 +39,7 @@ namespace THEngine
 		virtual void Remove(const T& obj) = 0;
 		virtual void RemoveAt(int index) = 0;
 		virtual void Clear() = 0;
-		virtual Iterator<T>* GetIterator() = 0;
+		virtual Ptr<Iterator<T>> GetIterator() = 0;
 	};
 
 	template <class T>
@@ -57,7 +57,6 @@ namespace THEngine
 		ListNode<T>* head;
 		ListNode<T>* rear;
 		int size;
-		LinkedListIterator<T>* iter;
 
 	public:
 		LinkedList()
@@ -67,7 +66,6 @@ namespace THEngine
 			head->prior = NULL;
 			rear = head;
 			size = 0;
-			iter = NULL;
 		}
 
 		LinkedList(const LinkedList<T>& list)
@@ -90,7 +88,6 @@ namespace THEngine
 
 			rear = p;
 			size = list.size;
-			iter = nullptr;
 		}
 
 		virtual ~LinkedList()
@@ -101,8 +98,6 @@ namespace THEngine
 				iter->Next();
 				iter->Remove();
 			}
-
-			TH_SAFE_DELETE(iter);
 
 			delete head;
 		}
@@ -121,7 +116,7 @@ namespace THEngine
 		virtual void AddAt(const T& obj, int index) override
 		{
 			ASSERT(index < size);
-			auto iter = (LinkedListIterator<T>*)GetIterator();
+			auto iter = GetIterator();
 			int i = 0;
 			while (iter->HasNext() && i < index)
 			{
@@ -139,7 +134,7 @@ namespace THEngine
 		virtual void Set(const T& obj, int index) override
 		{
 			ASSERT(index < size);
-			auto iter = (LinkedListIterator<T>*)GetIterator();
+			auto iter = GetIterator();
 			int i = 0;
 			while (iter->HasNext() && i < index)
 			{
@@ -153,7 +148,7 @@ namespace THEngine
 		virtual T& Get(int index) override
 		{
 			ASSERT(index < size);
-			auto iter = (LinkedListIterator<T>*)GetIterator();
+			auto iter = GetIterator();
 			int i = 0;
 			while (iter->HasNext() && i < index)
 			{
@@ -226,14 +221,9 @@ namespace THEngine
 			}
 		}
 
-		virtual Iterator<T>* GetIterator() override
+		virtual Ptr<Iterator<T>> GetIterator() override
 		{
-			if (iter)
-			{
-				delete iter;
-			}
-			iter = new LinkedListIterator<T>(this);
-			return iter;
+			return new LinkedListIterator<T>(this);
 		}
 
 		friend class LinkedListIterator<T>;
@@ -326,7 +316,6 @@ namespace THEngine
 		int size = 0;
 		int capacity = 0;
 		int baseSize = 100;
-		ArrayListIterator<T>* iter = nullptr;
 
 		typedef bool CompareFunc(T a, T b);
 
@@ -340,7 +329,6 @@ namespace THEngine
 			size = list.size;
 			capacity = list.capacity;
 			baseSize = list.baseSize;
-			iter = nullptr;
 			elements = (T*)malloc(list.capacity);
 
 			for (int i = 0; i < size; i++)
@@ -360,10 +348,6 @@ namespace THEngine
 			if (elements)
 			{
 				free(elements);
-			}
-			if (iter)
-			{
-				delete iter;
 			}
 		}
 
@@ -454,14 +438,9 @@ namespace THEngine
 			std::stable_sort(elements + begin, elements + end, compare);
 		}
 
-		virtual Iterator<T>* GetIterator() override
+		virtual Ptr<Iterator<T>> GetIterator() override
 		{
-			if (iter)
-			{
-				delete iter;
-			}
-			iter = new ArrayListIterator<T>(this);
-			return iter;
+			return new ArrayListIterator<T>(this);
 		}
 
 		inline void SetBaseSize(int baseSize)

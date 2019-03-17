@@ -64,7 +64,7 @@ namespace THEngine
 		static Ptr<T> Create_NoRetain(T* rhs)
 		{
 			Ptr ret;
-			ret.obj_ = rhs;
+			ret.Assign(rhs);
 			return ret;
 		}
 
@@ -73,7 +73,6 @@ namespace THEngine
 		{
 			Ptr ret(new T(std::forward<Args>(args)...));
 			Object* obj = reinterpret_cast<Object*>(ret.obj_);
-			obj->Release();   //destroy the reference owned by the raw pointer
 			return ret;
 		}
 

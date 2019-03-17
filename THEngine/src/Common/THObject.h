@@ -18,11 +18,6 @@ namespace THEngine
 		Object& operator=(const Object& obj);
 		Object& operator=(Object&& rhs) = default;
 
-		void* operator new(size_t count, void* ptr) { return ::operator new(count, ptr); }
-		void* operator new[](size_t count, void* ptr) { return ::operator new[](count, ptr); }
-		void operator delete(void* ptr, void* place) { return ::operator delete(ptr, place); }
-		void operator delete[](void* ptr, void* place) { return ::operator delete(ptr, place); }
-
 		int RefCount() const { return this->refCount_; }
 
 	protected:
@@ -31,17 +26,11 @@ namespace THEngine
 		Object(Object&& rhs) = default;
 		virtual ~Object();
 
-	private:
-		void* operator new(size_t size) { return ::operator new(size); }
-		void* operator new[](size_t size) { return ::operator new[](size); }
-		void operator delete(void* data) { ::operator delete(data); }
-		void operator delete[](void* data) { ::operator delete[](data); }
-
-		void Retain();
+		void Retain() { refCount_++; }
 		void Release();
 
 	private:
-		std::atomic_int refCount_ = 1;    //when constructed, raw pointer owns a reference
+		std::atomic_int refCount_ = 0;
 		bool alive = true;
 
 		template<class T>

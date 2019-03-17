@@ -90,6 +90,7 @@ namespace THEngine
 
 	public:
 		Mesh(bool dynamic = false);
+		virtual ~Mesh() = default;
 
 		static Ptr<Mesh> CreateMeshFromFile(const String& filePath);
 

@@ -16,6 +16,7 @@
 #include <Asset\THShaderStock.h>
 #include <UI\THEventSystem.h>
 #include <Async\THAsyncLoader.h>
+#include <Script\LuaEngine.h>
 
 using namespace THEngine;
 
@@ -143,6 +144,8 @@ bool Game::CreateGame(const Config& config, int bigIcon, int smallIcon)
 	}
 
 	dataStack = DataStack::GetInstance();
+
+	_luaEngine = LuaEngine::Create();
 
 	LARGE_INTEGER frequency;
 	QueryPerformanceFrequency(&frequency);
@@ -400,6 +403,10 @@ void Game::Shutdown()
 	audio = nullptr;
 	app = nullptr;
 	dataStack = nullptr;
+
+	_luaEngine->Shutdown();
+	_luaEngine = nullptr;
+	
 
 	EventSystem::DestroyInstance();
 	Input::DestroyInstance();

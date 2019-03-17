@@ -25,5 +25,5 @@ Logger* Logger::GetInstance()
 void Logger::WriteLine(String message)
 {
 	logFile.write((char*)message.GetBuffer(), message.GetLength() * 2);
-	logFile.write((char*)TEXT("\r\n"), 4);
+	logFile.write((char*)L"\r\n", 4);
 }

@@ -38,7 +38,7 @@ namespace THEngine
 	{
 		EngineObject::OnLoad(info);
 
-		Iterator<Ptr<GameObject>>* iter = children.GetIterator();
+		auto iter = children.GetIterator();
 		while (iter->HasNext())
 		{
 			iter->Next()->OnLoad(info);
@@ -54,16 +54,16 @@ namespace THEngine
 	{
 		auto iter = children.GetIterator();
 
-		SendToRenderQueue();
+		if(started)
+			SendToRenderQueue();
 
 		WriteRenderData();
 		PushDataStack();
 
 		OnVisit();
 		while (iter->HasNext())
-		{
 			iter->Next()->Visit();
-		}
+		
 		PopDataStack();
 	}
 

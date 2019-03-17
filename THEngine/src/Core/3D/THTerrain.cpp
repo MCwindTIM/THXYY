@@ -8,6 +8,17 @@
 
 namespace THEngine
 {
+	struct TerrainVertex
+	{
+		float x, y, z;
+		float u, v;
+		TerrainVertex() {}
+		TerrainVertex(float x, float y, float z, float u, float v) :
+			x(x), y(y), z(z), u(u), v(v)
+		{
+		}
+	};
+
 	Terrain::Terrain()
 	{
 		auto device = Device::GetInstance();
@@ -22,7 +33,7 @@ namespace THEngine
 	void Terrain::GenerateBuffers()
 	{
 		auto device = Device::GetInstance();
-		std::vector<MeshVertex> vertices(this->xResolution * this->yResolution);
+		std::vector<TerrainVertex> vertices(this->xResolution * this->yResolution);
 		float left = -this->xWidth / 2;
 		float bottom = -this->yWidth / 2;
 		float xWidthPerCell = this->xWidth / (this->xResolution - 1);
@@ -41,7 +52,7 @@ namespace THEngine
 				vertices[index].v = dv * j;
 			}
 		}
-		this->vb = device->CreateStaticVertexBuffer(sizeof(MeshVertex) * vertices.size(), &vertices[0]);
+		this->vb = device->CreateStaticVertexBuffer(sizeof(TerrainVertex) * vertices.size(), &vertices[0]);
 
 		std::vector<uint32_t> indices;
 		for (size_t i = 0; i < this->xResolution - 1; i++)
@@ -79,7 +90,7 @@ namespace THEngine
 		}
 
 		device->SetVertexFormat(this->vertexFormat);
-		device->SetVertexBuffer(this->vb.Get(), sizeof(MeshVertex), 0);
+		device->SetVertexBuffer(this->vb.Get(), sizeof(TerrainVertex), 0);
 		device->SetIndexBuffer(this->ib.Get());
 		device->GetRenderState()->GetCurrentShader()->CommitChanges();
 		device->DrawIndexed(PrimitiveType::TRIANGLE_LIST,

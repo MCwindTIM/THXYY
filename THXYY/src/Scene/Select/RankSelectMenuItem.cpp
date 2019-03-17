@@ -7,6 +7,10 @@ Ptr<Texture> RankSelectMenuItem::texRank;
 
 RankSelectMenuItem::RankSelectMenuItem()
 {
+}
+
+void RankSelectMenuItem::OnStart()
+{
 	SetTexture(texRank);
 	SetAlpha(0.0f);
 	AddTween(Ptr<FadeTo>::New(1.0f, FADE_TIME, Tweener::SIMPLE).Get());

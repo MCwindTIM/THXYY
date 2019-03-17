@@ -4,6 +4,10 @@ Ptr<Texture> StarParticle::tex;
 
 StarParticle::StarParticle()
 {
+}
+
+void StarParticle::OnStart()
+{
 	SetTexture(tex);
 	SetTexRect(Rect(0, 32, 96, 128));
 

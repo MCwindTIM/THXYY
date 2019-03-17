@@ -6,6 +6,17 @@
 
 RankSelectMenu::RankSelectMenu()
 {
+}
+
+RankSelectMenu::~RankSelectMenu()
+{
+	RankSelectMenuItem::texRank = nullptr;
+}
+
+void RankSelectMenu::OnStart()
+{
+	Menu::OnStart();
+
 	auto assetManager = AssetManager::GetInstance();
 	RankSelectMenuItem::texRank = assetManager->CreateTextureFromFile("res/menu/rank.png");
 
@@ -29,11 +40,6 @@ RankSelectMenu::RankSelectMenu()
 
 	SetSoundOK(stgResources->soundMenuOK);
 	SetSoundSelect(stgResources->soundMenuSelect);
-}
-
-RankSelectMenu::~RankSelectMenu()
-{
-	RankSelectMenuItem::texRank = nullptr;
 }
 
 void RankSelectMenu::OnMenuItemClicked(int item)

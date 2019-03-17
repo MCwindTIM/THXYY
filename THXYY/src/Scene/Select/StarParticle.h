@@ -12,6 +12,8 @@ public:
 	virtual ~StarParticle() = default;
 
 	static Ptr<Texture> tex;
+
+	virtual void OnStart() override;
 };
 
 #endif

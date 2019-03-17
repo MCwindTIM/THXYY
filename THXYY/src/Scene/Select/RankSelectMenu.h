@@ -19,6 +19,8 @@ public:
 	RankSelectMenu();
 	virtual ~RankSelectMenu();
 
+	virtual void OnStart() override;
+
 	virtual void OnMenuItemClicked(int item) override;
 
 	virtual bool OnKeyDown(Ptr<EngineObject> sender, int key) override;

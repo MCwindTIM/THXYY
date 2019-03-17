@@ -25,6 +25,8 @@ public:
 	RankSelectMenuItem();
 	virtual ~RankSelectMenuItem() = default;
 
+	virtual void OnStart() override;
+
 	void SetType(Type type);
 
 	void Enter();

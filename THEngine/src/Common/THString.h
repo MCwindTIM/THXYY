@@ -1,7 +1,6 @@
 #ifndef THSTRING_H
 #define THSTRING_H
 
-#include <Windows.h>
 #include <string>
 
 namespace THEngine
@@ -36,7 +35,7 @@ namespace THEngine
 		String operator +(const String& str) const;
 		String operator +(int number) const;
 		void operator =(const String& str);
-		const TCHAR& operator[](int number) const;
+		const wchar_t& operator[](int number) const;
 		bool operator ==(const String& str) const;
 	};
 }

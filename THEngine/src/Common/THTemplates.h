@@ -23,15 +23,8 @@ namespace THEngine
 	private:
 		static Ptr<T>& _GetInstance()
 		{
-			static Ptr<T> instance = Ptr<T>::Create_NoRetain(_CreateInstance());
+			static Ptr<T> instance = new T();
 			return instance;
-		}
-
-		static T* _CreateInstance()
-		{
-			T* inst = (T*)malloc(sizeof(T));
-			new(inst) T();
-			return inst;
 		}
 
 	public:

@@ -15,10 +15,12 @@
 #include <Asset\THAssetManager.h>
 #include <Asset\THMesh.h>
 #include <Platform\THApplication.h>
+#include <Platform\THSystemClock.h>
 #include <Graphic\THDevice.h>
 #include <Platform\THAudio.h>
 #include <Platform\THInput.h>
 #include <Scheduling\THScheduler.h>
 #include <Util\THFirstPersonCamera.h>
+#include <Script\LuaEngine.h>
 
 #endif

@@ -22,6 +22,7 @@ namespace THEngine
 	class RenderPipeline;
 	class AsyncInfo;
 	struct Config;
+	class LuaEngine;
 
 	class Game : public EngineObject
 	{
@@ -61,6 +62,7 @@ namespace THEngine
 		Ptr<Audio> audio;
 		Ptr<ExceptionManager> exceptionManager;
 		Ptr<DataStack> dataStack;
+		Ptr<LuaEngine> _luaEngine;
 
 	protected:
 		void CalcFPS();
@@ -115,6 +117,8 @@ namespace THEngine
 		{
 			return assetManager;
 		}
+
+		inline Ptr<LuaEngine> GetLuaEngine() const { return _luaEngine; }
 
 		int GetWidth() const;
 		int GetHeight() const;

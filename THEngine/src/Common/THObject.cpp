@@ -6,7 +6,7 @@ namespace THEngine
 {
 	Object::Object(const Object& object)
 	{
-		refCount_ = 1;
+		refCount_ = 0;
 	}
 
 	Object::~Object()
@@ -22,11 +22,6 @@ namespace THEngine
 	Ptr<Object> Object::Clone() const
 	{
 		throw std::runtime_error("trying to clone a non clonable object!");
-	}
-
-	void Object::Retain()
-	{
-		refCount_++;
 	}
 
 	void Object::Release()

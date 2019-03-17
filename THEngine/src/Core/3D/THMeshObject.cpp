@@ -61,6 +61,6 @@ namespace THEngine
 
 	Ptr<Object> MeshObject::Clone() const
 	{
-		return Ptr<MeshObject>::New(*this).Get();
+		return new MeshObject(*this);
 	}
 }
